@@ -3,29 +3,17 @@
 //
 
 #include "planner.h"
-#include "priority_queue.h"
 #include "structs.h"
 
 namespace planner {
 
-
-    template<typename Graph, typename Model, typename Frontier, typename Location>
-    cPlanner<Graph, Model, Frontier, Location>::cPlanner(
-            Graph &i_oGraph,
-            Model &i_oTransitionModel,
-            Frontier &i_oFrontier,
-            Location &i_oStart, Location &i_oGoal) : cPlannerInterface<Graph, Location, Model, Frontier>(
-            i_oGraph,
-            i_oTransitionModel,
-            i_oFrontier,
-            i_oStart, i_oGoal) {
+    cPlanner::cPlanner(tGraph &i_oGraph, tFrontier &i_oFrontier) : cPlannerInterface(i_oGraph, i_oFrontier) {
 
     }
 
-    template<typename Graph, typename Model, typename Frontier, typename Location>
-    void cPlanner<Graph, Model, Frontier, Location>::Plan(Location& i_oStart, Location& i_oGoal,
-            std::unordered_map<Location, Location>& i_oPredecessors,
-            std::unordered_map<Location, double>& i_oPathCost) {
+    void cPlanner::AStar(Location& i_oStart, Location& i_oGoal,
+                                                    std::unordered_map<Location, Location>& i_oPredecessors,
+                                                    std::unordered_map<Location, double>& i_oPathCost) {
 
         /// Initialize the frontier using the initial state of the problem
         Frontier oFrontier;
@@ -54,6 +42,7 @@ namespace planner {
             }
         }
     }
+
 
 
 }

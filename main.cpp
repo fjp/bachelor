@@ -4,6 +4,16 @@
 #include <vector>
 #include <exception>
 
+
+
+
+#include "planner.h"
+#include "structs.h"
+#include "priority_queue.h"
+#include "audi_rover.h"
+
+using namespace planner;
+
 #ifdef _MSC_VER
 static const char* PATH_SEP = "\\";
 #else
@@ -79,7 +89,21 @@ int main(int argc, char** argv)
     auto elevation = loadFile(anchor + "assets" + PATH_SEP + "elevation.data", expectedFileSize);
     auto overrides = loadFile(anchor + "assets" + PATH_SEP + "overrides.data", expectedFileSize);
     std::ofstream of("pic.bmp", std::ofstream::binary);
-    
+
+
+    ////////////////////////////
+
+    //cAudiRover<const uint8_t* > oAudiRover(&elevation[0], &overrides[0]);
+    cAudiRover oAudiRover(elevation, overrides);
+
+    tGraph sGraph;
+    //sGraph.
+    //cPlanner<tGraph, int, tPriorityQueue<tLocation, double>, tLocation>()
+
+
+
+    ////////////////////////////
+
     visualizer::writeBMP(
         of,
         &elevation[0],

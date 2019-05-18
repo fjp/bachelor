@@ -1,9 +1,11 @@
 file(GLOB SRC
-        *.cpp
-        ../include/*.h
+        "*.cpp"
+        "../include/*.h"
         )
 
 add_library(planner ${SRC})
+
+#message(${SRC})
 
 target_include_directories(planner PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
