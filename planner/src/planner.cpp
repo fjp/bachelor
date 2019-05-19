@@ -16,7 +16,7 @@ namespace planner {
 
 
 
-    cPlanner::cPlanner(cRoverInterface *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize) : cPlannerInterface(static_cast<cAudiRover*>(i_oRover), i_oMap) {
+    cPlanner::cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize) : cPlannerInterface(static_cast<cAudiRover*>(i_oRover), i_oMap) {
 
         m_nStepSize = i_oStepSize;
         GenerateHeuristic();
@@ -113,7 +113,7 @@ namespace planner {
                 sort(open.begin(), open.end());
                 reverse(open.begin(), open.end());
                 std::vector<double> next;
-                // Stored the poped value into next
+                // Stored the popped value into next
                 next = open.back();
                 open.pop_back();
 
@@ -135,9 +135,10 @@ namespace planner {
 
                     //else expand new elements
                 else {
-                    for (int i = 0; i < m_oRover->m_mnMovements.size(); i++) {
-                        x2 = x + m_oRover->m_mnMovements[i][0] * nStepSize;
-                        y2 = y + m_oRover->m_mnMovements[i][1] * nStepSize;
+                    for (int i = 0; i < m_oRover->m_mnMovements.size(); ++i) {
+                        auto direction = m_oRover->m_mnMovements[i];
+                        x2 = x + direction[0] * nStepSize;
+                        y2 = y + direction[1] * nStepSize;
                         if (x2 >= 0 && x2 < m_oMap.Width() && y2 >= 0 && y2 < m_oMap.Height()) {
                             bool bWater = m_oMap.Water(x, y, x2, y2);
                             if (closed[x2][y2] == 0 and not bWater) {

@@ -6,22 +6,36 @@
 #define BACHELOR_ROVER_INTERFACE_H
 
 #include <vector>
-
-
-#include "planner_interface.h"
-
-#include <vector>
+#include <array>
 
 #include <string>
 
 namespace planner {
 
 
-    class cRoverInterface {
+    /// Forward declaration of planner interface
+    template <size_t Directions>
+    class cPlannerInterface;
+
+
+    template <size_t Directions>
+    class cRoverInterface  {
 
 
     public:
-        cRoverInterface();
+        cRoverInterface() : m_astrMovementArrows{ "E", "NE", "N", "NW", "W", "SW", "S", "SE" },
+                            m_mnMovements{
+                                    { 1, 0 },   // E
+                                    { 1, -1 },  // NE
+                                    { 0, -1 },  // N
+                                    { -1, -1 }, // NW
+                                    { -1, 0 },  // W
+                                    { -1, 1 },  // SW
+                                    { 0, 1 },   // S
+                                    { 1, 1 },   // SE
+                            } {
+
+        };
 
 
 
@@ -30,7 +44,8 @@ namespace planner {
         double m_fCostStraight;
         double m_fCostDiagonal;
 
-        std::string m_astrMovementArrows[8];
+        std::string m_astrMovementArrows[Directions];
+
 
         std::vector<std::vector<int> > m_mnMovements;
 

@@ -26,4 +26,12 @@ enum {
 };
 
 
+struct tDirection
+{
+    int nX, nY;
+};
+
+#define NUM_DIRECTIONS 8
+
+
 #endif //BACHELOR_DEFINITIONS_H

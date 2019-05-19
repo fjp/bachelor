@@ -12,11 +12,10 @@
 
 #include "graph.h"
 
-
 namespace planner {
 
 
-    class cAudiRover : public cRoverInterface {
+    class cAudiRover : public cRoverInterface<8> {
 
     public:
         cAudiRover(uint8_t* i_oElevation,
@@ -36,7 +35,7 @@ namespace planner {
 
 
     private:
-        cPlannerInterface *m_oPlanner;
+        cPlannerInterface<8> *m_oPlanner;
 
         cGraph *m_oMap;
 
