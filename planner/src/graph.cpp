@@ -16,25 +16,37 @@ namespace planner
         m_mnHeuristic = GenerateHeuristic();
     }
 
+    int planner::cGraph::Height() const {
+        return m_nHeight;
+    }
+
+    int planner::cGraph::Width() const {
+        return m_nWidth;
+    }
+
+    bool planner::cGraph::Water(int i_nX, int i_nY) {
+        bool bWater = ((Overrides(i_nX, i_nY) & (OF_WATER_BASIN | OF_RIVER_MARSH)) || Elevation(i_nX, i_nY) == 0);
+        return bWater;
+    }
 
     uint8_t cGraph::Elevation(int i_nX, int i_nY)
     {
         // TODO check bounds
-        uint8_t nElevation = m_oElevation[(i_nY * m_nWidth) + i_nX];
+        uint8_t nElevation = m_oElevation[i_nY * m_nWidth + i_nX];
         return nElevation;
     }
 
     uint8_t cGraph::Overrides(int i_nX, int i_nY)
     {
         // TODO check bounds
-        uint8_t nOverrides = m_oOverrides[(i_nY * m_nWidth) + i_nX];
+        uint8_t nOverrides = m_oOverrides[i_nY * m_nWidth + i_nX];
         return nOverrides;
     }
 
     // Generate a Manhattan Heuristic Vector
-    vector<vector<int> > GenerateHeuristic()
+    std::vector<std::vector<int> > cGraph::GenerateHeuristic()
     {
-        std::vector<std::vector<int> > heuristic(mapHeight, std::vector<int>(mapWidth));
+        std::vector<std::vector<int> > heuristic(m_nHeight, std::vector<int>(m_nWidth));
         int goal[2] = { 60, 50 };
         for (int i = 0; i < heuristic.size(); i++) {
             for (int j = 0; j < heuristic[0].size(); j++) {
@@ -52,24 +64,4 @@ namespace planner
         return heuristic;
     }
 
-    int planner::cGraph::Height() const {
-        return m_nHeight;
-    }
-
-    int planner::cGraph::Width() const {
-        return m_nWidth;
-    }
-
-    bool planner::cGraph::Water(int i_nX, int i_nY) {
-        bool bWater = ((m_oOverrides[i_nY * m_nWidth + i_nX] & (OF_WATER_BASIN | OF_RIVER_MARSH)) || Elevation(i_nX, i_nY) == 0);
-        return
-    }
-
-    uint8_t planner::cGraph::Elevation(int i_nX, int i_nY) {
-        return nullptr;
-    }
-
-    uint8_t planner::cGraph::Overrides(int i_nX, int i_nY) {
-        return nullptr;
-    }
 }

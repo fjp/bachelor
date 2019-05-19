@@ -10,10 +10,6 @@
 
 #include "planner.h"
 
-#include "priority_queue.h"
-
-#include "structs.h"
-
 
 
 namespace planner {
@@ -29,10 +25,12 @@ namespace planner {
 
         void SetGoal(int i_nX, int i_nY);
 
+        void Summon();
+
         void SetCost(double i_nStraight, double i_nDiagonal);
 
-    public:
 
+    private:
         cPlanner *m_oPlanner;
 
 

@@ -46,6 +46,10 @@ namespace planner
         m_fCostDiagonal = i_nDiagonal;
     }
 
+    void cAudiRover::Summon() {
+
+    }
+
 }
 
 

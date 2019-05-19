@@ -5,6 +5,8 @@
 #ifndef BACHELOR_GRAPH_H
 #define BACHELOR_GRAPH_H
 
+#include <vector>
+
 namespace planner {
 
 
@@ -13,12 +15,6 @@ namespace planner {
         cGraph(std::vector<uint8_t> &i_oElevation,
                std::vector<uint8_t> &i_oOverrides,
                int i_nHeight, int i_nWidth);
-
-
-    public:
-        std::vector<uint8_t> &m_oElevation;
-        std::vector<uint8_t> &m_oOverrides;
-
 
 
         uint8_t Elevation(int i_nX, int i_nY);
@@ -36,11 +32,11 @@ namespace planner {
         int Width() const;
 
     private:
+        std::vector<uint8_t> &m_oElevation;
+        std::vector<uint8_t> &m_oOverrides;
+
         int m_nHeight;
         int m_nWidth;
-
-
-        void SetMap(std::vector<uint8_t> &i_oElevation, std::vector<uint8_t> &i_oOverrides);
 
 
         // Generate a Manhattan Heuristic Vector
