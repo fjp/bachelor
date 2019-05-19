@@ -16,8 +16,8 @@ namespace planner
             int i_nHeight, int i_nWidth) : cRoverInterface(), m_oElevation(i_oElevation), m_oOverrides(i_oOverrides) {
 
 
-        m_oMap = new cGraph(m_oElevation, m_oOverrides, i_nHeight, i_nWidth);
-        m_oPlanner = new cPlanner(this, *m_oMap);
+        m_oMap = new cGraph(m_oElevation, m_oOverrides, i_nHeight, i_nWidth); // TODO make unique and delete
+
 
         SetCost(1.0, std::sqrt(2));
 
@@ -47,6 +47,7 @@ namespace planner
 
     void cAudiRover::Summon() {
 
+        m_oPlanner = new cPlanner(this, *m_oMap); // TODO make unique and delete
 
         m_oPlanner->Plan();
 

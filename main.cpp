@@ -20,6 +20,8 @@ static const char* PATH_SEP = "\\";
 static const char* PATH_SEP = "/";
 #endif
 
+#define DEBUG_FILES
+
 // Bits used in the overrides image bytes
 enum OverrideFlags
 {
@@ -80,10 +82,10 @@ bool donut(int x, int y, int x1, int y1)
 bool path(int x, int y, uint8_t* overrides)
 {
 
-    for (int i = -5; i < 5; ++i)
+    for (int i = -3; i < 3; ++i)
     {
         int dx = x - i;
-        for (int j = -5; j < 5; ++j)
+        for (int j = -3; j < 3; ++j)
         {
             int dy = y - j;
             if ((dx >= 0 && dx < IMAGE_DIM) && (dy >= 0 && dy < IMAGE_DIM) && (overrides[dy * IMAGE_DIM + dx] & (OF_PATH)))
@@ -116,11 +118,20 @@ int main(int argc, char** argv)
 
     //cAudiRover<const uint8_t* > oAudiRover(&elevation[0], &overrides[0]);
     cAudiRover oAudiRover(&elevation[0], &overrides[0], IMAGE_DIM, IMAGE_DIM);
+
+
     oAudiRover.SetStart(ROVER_X, ROVER_Y);
     oAudiRover.SetGoal(BACHELOR_X, BACHELOR_Y);
 
 
     oAudiRover.Summon();
+
+
+    //oAudiRover.SetStart(BACHELOR_X, BACHELOR_Y);
+    //oAudiRover.SetGoal(WEDDING_X, WEDDING_Y);
+
+
+    //oAudiRover.Summon();
 
 
 

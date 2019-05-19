@@ -18,15 +18,18 @@ namespace planner {
 
     class cPlanner : public cPlannerInterface {
     public:
-        cPlanner(cRoverInterface *i_oRover, cGraph &i_oMap);
+        cPlanner(cRoverInterface *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize = 5);
 
         void Plan() override;
 
+        std::vector<std::vector<int> > m_mnHeuristic;
 
         // Generate a octile distance heuristic Vector
         void GenerateHeuristic();
 
-        std::vector<std::vector<int> > m_mnHeuristic;
+    private:
+        uint8_t m_nStepSize;
+
 
 
     };

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
+#include <cmath>
 
 #include "audi_rover.h"
 
@@ -15,28 +16,51 @@ namespace planner {
 
 
 
-    cPlanner::cPlanner(cRoverInterface *i_oRover, cGraph &i_oMap) : cPlannerInterface(static_cast<cAudiRover*>(i_oRover), i_oMap) {
+    cPlanner::cPlanner(cRoverInterface *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize) : cPlannerInterface(static_cast<cAudiRover*>(i_oRover), i_oMap) {
 
+        m_nStepSize = i_oStepSize;
         GenerateHeuristic();
+
     }
 
     // Generate a Manhattan Heuristic Vector
     void cPlanner::GenerateHeuristic()
     {
+
+        int nD1 = m_nStepSize;
+        int nD2 = sqrt(2*nD1);
+
         m_mnHeuristic = std::vector<std::vector<int> >(m_oMap.Height(), std::vector<int>(m_oMap.Width()));
         for (int i = 0; i < m_mnHeuristic.size(); i++) {
             for (int j = 0; j < m_mnHeuristic[0].size(); j++) {
                 int nDeltaX = m_oRover->m_afGoal[0] - i;
                 int nDeltaY = m_oRover->m_afGoal[1] - j;
                 // Manhattan Distance
-                int d = std::abs(nDeltaX) + std::abs(nDeltaY);
+                //int nHeuristicValue = std::abs(nDeltaX) + std::abs(nDeltaY);
                 // Euclidian Distance
-                // double d = sqrt(xd * xd + yd * yd);
+                // double fHeuristicValue = sqrt(xd * xd + yd * yd);
                 // Chebyshev distance
-                // int d = max(abs(xd), abs(yd));
-                m_mnHeuristic[i][j] = d;
+                // int nHeuristicValue = max(abs(xd), abs(yd));
+                // Octile distance
+                int nHeuristicValue = nD1 * (nDeltaX + nDeltaY) + (nD2 - 2*nD1) * std::min(nDeltaX, nDeltaY);
+                m_mnHeuristic[i][j] = nHeuristicValue;
             }
         }
+
+#ifdef DEBUG_FILES
+        std::ofstream myfile;
+        myfile.open ("heuristic.txt");
+        // Print the robot path
+        //cout << endl;
+        for (int i = 0; i < m_mnHeuristic.size(); ++i) {
+            for (int j = 0; j < m_mnHeuristic[0].size(); ++j) {
+                myfile << m_mnHeuristic[i][j] << ' ';
+            }
+            myfile << std::endl;
+        }
+        myfile.close();
+#endif
+
     }
 
 
@@ -74,7 +98,7 @@ namespace planner {
         int x2;
         int y2;
 
-        int nStepSize = 6;
+        int nStepSize = 4;
 
         // While I am still searching for the goal and the problem is solvable
         while (!found && !resign) {
@@ -102,9 +126,9 @@ namespace planner {
                 count += 1;
 
 
-                // Check if we reached the goal:
+                /// Check if we reached the goal:
                 //if (x == m_oRover->m_afGoal[0] && y == m_oRover->m_afGoal[1]) {
-                if (abs(x - m_oRover->m_afGoal[0]) < (nStepSize+1) && abs(y - m_oRover->m_afGoal[1]) < (nStepSize+1)) {
+                if (std::abs(x - m_oRover->m_afGoal[0]) <= (nStepSize) && std::abs(y - m_oRover->m_afGoal[1]) <= (nStepSize)) {
                     found = true;
                     //cout << "[" << g << ", " << x << ", " << y << "]" << endl;
                 }
@@ -132,13 +156,21 @@ namespace planner {
         // Print the expansion List
         //print2DVector(expand);
 
-        // Find the path with robot orientation
+
+
+
+        /// Find the path including the robot direction
         std::vector<std::vector<std::string> > policy(m_oMap.Height(), std::vector<std::string>(m_oMap.Width(), "-"));
 
 
-        // Going backward
-        x = m_oRover->m_afGoal[0]-4;
-        y = m_oRover->m_afGoal[1]-5;
+        /// Going backward
+
+        /// Find the goal position if the step size is greater than one
+        //x = m_oRover->m_afGoal[0];
+        //y = m_oRover->m_afGoal[1];
+
+        //x = nOffsetX;//m_oRover->m_afGoal[0]-4;
+        //y = nOffsetY;//m_oRover->m_afGoal[1]-5;
         policy[x][y] = '*';
 
         while (x != m_oRover->m_afStart[0] or y != m_oRover->m_afStart[1]) {
