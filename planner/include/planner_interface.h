@@ -5,11 +5,13 @@
 #ifndef BACHELOR_PLANNERINTERFACE_H
 #define BACHELOR_PLANNERINTERFACE_H
 
-#include <unordered_map>
-#include "priority_queue.h"
-#include "structs.h"
+#include "graph.h"
+
+#include <vector>
 
 namespace planner {
+
+    class cRoverInterface;
 
 /**
  * \brief cPlannerInterface is an interface which servers other planners as blue print
@@ -17,11 +19,16 @@ namespace planner {
     class cPlannerInterface {
 
     public:
-        cPlannerInterface();
 
+        explicit cPlannerInterface(cRoverInterface *i_oRover, cGraph &i_oMap) : m_oRover(i_oRover), m_oMap(i_oMap) {};
 
+        virtual void Plan() = 0;
 
-        //virtual void Plan(tLocation &i_oStart, tLocation &i_oGoal) = 0;
+    protected:
+        cRoverInterface *m_oRover;
+        cGraph &m_oMap;
+
+        std::vector<std::vector<std::string> > *m_oPolicy;
 
     };
 

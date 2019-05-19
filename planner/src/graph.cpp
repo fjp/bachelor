@@ -2,6 +2,8 @@
 // Created by Franz Pucher on 2019-05-19.
 //
 
+
+#include <algorithm>
 #include "graph.h"
 
 #include "definitions.h"
@@ -9,11 +11,15 @@
 namespace planner
 {
 
-    cGraph::cGraph(std::vector<uint8_t> &i_oElevation,
-                   std::vector<uint8_t> &i_oOverrides,
-                   int i_nHeight, int i_nWidth) : m_oElevation(i_oElevation), m_oOverrides(i_oOverrides)
+    cGraph::cGraph(uint8_t* i_oElevation,
+                   uint8_t* i_oOverrides,
+                   int i_nHeight, int i_nWidth)
+                   : m_oElevation(i_oElevation),
+                   m_oOverrides(i_oOverrides),
+                   m_nHeight(i_nHeight), m_nWidth(i_nWidth)
+
     {
-        m_mnHeuristic = GenerateHeuristic();
+
     }
 
     int planner::cGraph::Height() const {
@@ -27,6 +33,32 @@ namespace planner
     bool planner::cGraph::Water(int i_nX, int i_nY) {
         bool bWater = ((Overrides(i_nX, i_nY) & (OF_WATER_BASIN | OF_RIVER_MARSH)) || Elevation(i_nX, i_nY) == 0);
         return bWater;
+    }
+
+    bool cGraph::Water(int i_nX0, int i_nY0, int i_nX1, int i_nY1) {
+        int dx = i_nX1 - i_nX0;
+        int dy = i_nY1 - i_nY0;
+
+        int dxNorm = dx / std::max(std::abs(dx), 1);
+        int dyNorm = dy / std::max(std::abs(dy), 1);
+
+        int nSteps = std::max(std::abs(dx), 1) * std::max(std::abs(dy), 1);
+
+        int nX = i_nX0;
+        int nY = i_nY0;
+
+        for (int i = 0; i <= nSteps; ++i)
+        {
+            if (Water(nX, nY))
+            {
+                return true;
+            }
+
+            nX += dxNorm;
+            nY += dyNorm;
+        }
+
+        return false;
     }
 
     uint8_t cGraph::Elevation(int i_nX, int i_nY)
@@ -43,25 +75,10 @@ namespace planner
         return nOverrides;
     }
 
-    // Generate a Manhattan Heuristic Vector
-    std::vector<std::vector<int> > cGraph::GenerateHeuristic()
-    {
-        std::vector<std::vector<int> > heuristic(m_nHeight, std::vector<int>(m_nWidth));
-        int goal[2] = { 60, 50 };
-        for (int i = 0; i < heuristic.size(); i++) {
-            for (int j = 0; j < heuristic[0].size(); j++) {
-                int xd = goal[0] - i;
-                int yd = goal[1] - j;
-                // Manhattan Distance
-                int d = abs(xd) + abs(yd);
-                // Euclidian Distance
-                // double d = sqrt(xd * xd + yd * yd);
-                // Chebyshev distance
-                // int d = max(abs(xd), abs(yd));
-                heuristic[i][j] = d;
-            }
-        }
-        return heuristic;
+    void cGraph::SetOverrides(int i_nX, int i_nY, uint8_t value) {
+        m_oOverrides[i_nY * m_nWidth + i_nX] |= value;
     }
+
+
 
 }

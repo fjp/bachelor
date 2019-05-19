@@ -10,6 +10,7 @@
 
 #include "planner.h"
 
+#include "graph.h"
 
 
 namespace planner {
@@ -18,12 +19,16 @@ namespace planner {
     class cAudiRover : public cRoverInterface {
 
     public:
-        cAudiRover(std::vector<uint8_t> &i_oElevation,
-                std::vector<uint8_t> &i_oOverrides);
+        cAudiRover(uint8_t* i_oElevation,
+                   uint8_t* i_oOverrides,
+                   int i_nHeight, int i_nWidth);
+
 
         void SetStart(int i_nX, int i_nY);
 
         void SetGoal(int i_nX, int i_nY);
+
+
 
         void Summon();
 
@@ -31,7 +36,12 @@ namespace planner {
 
 
     private:
-        cPlanner *m_oPlanner;
+        cPlannerInterface *m_oPlanner;
+
+        cGraph *m_oMap;
+
+        uint8_t* m_oElevation;
+        uint8_t* m_oOverrides;
 
 
 

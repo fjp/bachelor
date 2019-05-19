@@ -7,27 +7,32 @@
 
 
 #include "planner_interface.h"
-#include <unordered_map>
 
 #include "graph.h"
 
-#include "rover_interface.h"
+#include <vector>
+#include <iostream> // TODO remove
 
 namespace planner {
 
 
     class cPlanner : public cPlannerInterface {
-
     public:
-        //cPlanner(cGraph *i_oGraph, tPriorityQueue<tLocation, double> *i_oFrontier);
+        cPlanner(cRoverInterface *i_oRover, cGraph &i_oMap);
+
+        void Plan() override;
 
 
-        void Plan(cGraph &i_oMap, cRoverInterface &i_oRover);
+        // Generate a octile distance heuristic Vector
+        void GenerateHeuristic();
 
-        //void AStar(tLocation &i_oStart, tLocation &i_oGoal, std::unordered_map<tLocation, tLocation> &i_oPredecessors,
-        //           std::unordered_map<tLocation, double> &i_oPathCost);
+        std::vector<std::vector<int> > m_mnHeuristic;
+
 
     };
+
+
+
 
 
 }

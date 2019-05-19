@@ -2,26 +2,25 @@
 // Created by Franz Pucher on 2019-05-18.
 //
 
+#include <cmath>
 #include "audi_rover.h"
 
+#include "planner.h"
 
 namespace planner
 {
 
     cAudiRover::cAudiRover(
-            std::vector<uint8_t> &i_oElevation,
-            std::vector<uint8_t> &i_oOverrides) : cRoverInterface() {
-
-        m_fCostStraight = 1.0;
-        m_fCostDiagonal = 1.4;
+            uint8_t* i_oElevation,
+            uint8_t* i_oOverrides,
+            int i_nHeight, int i_nWidth) : cRoverInterface(), m_oElevation(i_oElevation), m_oOverrides(i_oOverrides) {
 
 
-        //m_astrMovementArrows[0] = "<";
-        //m_astrMovementArrows{ "^", "<", "v", ">" },
+        m_oMap = new cGraph(m_oElevation, m_oOverrides, i_nHeight, i_nWidth);
+        m_oPlanner = new cPlanner(this, *m_oMap);
 
+        SetCost(1.0, std::sqrt(2));
 
-
-        SetCost(1.0, 1.4);
 
         SetStart(0, 0);
         SetGoal(10, 10);
@@ -47,6 +46,9 @@ namespace planner
     }
 
     void cAudiRover::Summon() {
+
+
+        m_oPlanner->Plan();
 
     }
 

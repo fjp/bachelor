@@ -23,8 +23,6 @@ namespace planner {
     public:
         cRoverInterface();
 
-        //virtual void SetLocation(tLocation i_oLocation) = 0;
-        //virtual void SetLocation(uint32_t i_x, uint32_t i_y) = 0;
 
 
         int m_afStart[2];
@@ -32,7 +30,7 @@ namespace planner {
         double m_fCostStraight;
         double m_fCostDiagonal;
 
-        std::string m_astrMovementArrows[4];
+        std::string m_astrMovementArrows[8];
 
         std::vector<std::vector<int> > m_mnMovements;
 

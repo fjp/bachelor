@@ -25,7 +25,8 @@ enum OverrideFlags
 {
     OF_RIVER_MARSH = 0x10,
     OF_INLAND = 0x20,
-    OF_WATER_BASIN = 0x40
+    OF_WATER_BASIN = 0x40,
+    OF_PATH = 0x01,
 };
 
 // Some constants
@@ -75,6 +76,26 @@ bool donut(int x, int y, int x1, int y1)
     return r2 >= 150 && r2 <= 400;
 }
 
+
+bool path(int x, int y, uint8_t* overrides)
+{
+
+    for (int i = -5; i < 5; ++i)
+    {
+        int dx = x - i;
+        for (int j = -5; j < 5; ++j)
+        {
+            int dy = y - j;
+            if ((dx >= 0 && dx < IMAGE_DIM) && (dy >= 0 && dy < IMAGE_DIM) && (overrides[dy * IMAGE_DIM + dx] & (OF_PATH)))
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 int main(int argc, char** argv)
 {
     const size_t expectedFileSize = IMAGE_DIM * IMAGE_DIM;
@@ -94,11 +115,12 @@ int main(int argc, char** argv)
     ////////////////////////////
 
     //cAudiRover<const uint8_t* > oAudiRover(&elevation[0], &overrides[0]);
-    cAudiRover oAudiRover(elevation, overrides);
+    cAudiRover oAudiRover(&elevation[0], &overrides[0], IMAGE_DIM, IMAGE_DIM);
+    oAudiRover.SetStart(ROVER_X, ROVER_Y);
+    oAudiRover.SetGoal(BACHELOR_X, BACHELOR_Y);
 
-    tGraph sGraph;
-    //sGraph.
-    //cPlanner<tGraph, int, tPriorityQueue<tLocation, double>, tLocation>()
+
+    oAudiRover.Summon();
 
 
 
@@ -115,6 +137,11 @@ int main(int argc, char** argv)
             if (donut(x, y, ROVER_X, ROVER_Y) ||
                 donut(x, y, BACHELOR_X, BACHELOR_Y) ||
                 donut(x, y, WEDDING_X, WEDDING_Y))
+            {
+                return uint8_t(visualizer::IPV_PATH);
+            }
+
+            if (path(x, y, &overrides[0]))
             {
                 return uint8_t(visualizer::IPV_PATH);
             }
