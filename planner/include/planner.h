@@ -9,20 +9,23 @@
 #include "planner_interface.h"
 #include <unordered_map>
 
-#include "structs.h"
-#include "priority_queue.h"
+#include "graph.h"
+
+#include "rover_interface.h"
 
 namespace planner {
 
-    typedef tPriorityQueue<tLocation, double> tFrontier;
-    class cPlanner : public cPlannerInterface<tGraph, tFrontier, tLocation> {
+
+    class cPlanner : public cPlannerInterface {
 
     public:
-        cPlanner(tGraph &i_oGraph, tFrontier &i_oFrontier);
+        //cPlanner(cGraph *i_oGraph, tPriorityQueue<tLocation, double> *i_oFrontier);
 
-        void AStar(tLocation &i_oStart, tLocation &i_oGoal, std::unordered_map<tLocation, tLocation> &i_oPredecessors,
-                   std::unordered_map<tLocation, double> &i_oPathCost) override;
 
+        void Plan(cGraph &i_oMap, cRoverInterface &i_oRover);
+
+        //void AStar(tLocation &i_oStart, tLocation &i_oGoal, std::unordered_map<tLocation, tLocation> &i_oPredecessors,
+        //           std::unordered_map<tLocation, double> &i_oPathCost);
 
     };
 

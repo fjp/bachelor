@@ -14,19 +14,28 @@
 
 #include "structs.h"
 
-#include <vector>
+
 
 namespace planner {
 
 
-    //template <typename T>
-    class cAudiRover : public cRoverInterface<std::vector<uint8_t>, cPlanner, tLocation > {
+    class cAudiRover : public cRoverInterface {
 
     public:
-        cAudiRover(std::vector<uint8_t> &i_oElevation, std::vector<uint8_t> &i_oOverrides,
-                cPlanner& i_oPlanner);
+        cAudiRover(std::vector<uint8_t> &i_oElevation,
+                std::vector<uint8_t> &i_oOverrides);
 
-        void SetLocation(tLocation i_x, tLocation i_y) override;
+        void SetStart(int i_nX, int i_nY);
+
+        void SetGoal(int i_nX, int i_nY);
+
+        void SetCost(double i_nStraight, double i_nDiagonal);
+
+    public:
+
+        cPlanner *m_oPlanner;
+
+
 
     };
 

@@ -21,6 +21,8 @@ namespace planner {
     struct tLocation {
         int nX, nY;
     };
+
+
 }
 
 #endif //BACHELOR_STRUCTS_H

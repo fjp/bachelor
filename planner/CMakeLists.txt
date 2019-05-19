@@ -10,7 +10,7 @@ add_subdirectory(src)
 #
 ##add_library(planner ${SRC})
 #add_library(planner
-#        src/rover_interface.tpp
+#        src/rover_interface.cpp
 #        src/audi_rover.cpp
 #        include/rover_interface.h
 #        include/audi_rover.h)
