@@ -26,6 +26,7 @@ namespace planner {
 
         virtual void Plan() = 0;
 
+
     protected:
         cRoverInterface<Directions> *m_oRover;
         cGraph &m_oMap;

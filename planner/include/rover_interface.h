@@ -10,6 +10,8 @@
 
 #include <string>
 
+#include "action.h"
+
 namespace planner {
 
 
@@ -23,7 +25,7 @@ namespace planner {
 
 
     public:
-        cRoverInterface() : m_astrMovementArrows{ "E", "NE", "N", "NW", "W", "SW", "S", "SE" },
+        cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(1.4), m_astrMovementArrows{ "E", "NE", "N", "NW", "W", "SW", "S", "SE" },
                             m_mnMovements{
                                     { 1, 0 },   // E
                                     { 1, -1 },  // NE
@@ -33,7 +35,8 @@ namespace planner {
                                     { -1, 1 },  // SW
                                     { 0, 1 },   // S
                                     { 1, 1 },   // SE
-                            } {
+                            }  {
+
 
         };
 
@@ -45,6 +48,8 @@ namespace planner {
         double m_fCostDiagonal;
 
         std::string m_astrMovementArrows[Directions];
+
+        std::array<tAction, Directions> m_asActions;
 
 
         std::vector<std::vector<int> > m_mnMovements;

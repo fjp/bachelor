@@ -98,7 +98,7 @@ namespace planner {
         int x2;
         int y2;
 
-        int nStepSize = 4;
+        int nStepSize = 2;
 
         // While I am still searching for the goal and the problem is solvable
         while (!found && !resign) {
@@ -135,14 +135,14 @@ namespace planner {
 
                     //else expand new elements
                 else {
-                    for (int i = 0; i < m_oRover->m_mnMovements.size(); ++i) {
-                        auto direction = m_oRover->m_mnMovements[i];
-                        x2 = x + direction[0] * nStepSize;
-                        y2 = y + direction[1] * nStepSize;
+                    for (int i = 0; i < m_oRover->m_asActions.size(); ++i) {
+                        auto direction = m_oRover->m_asActions[i];
+                        x2 = x + direction.nX * nStepSize;
+                        y2 = y + direction.nY * nStepSize;
                         if (x2 >= 0 && x2 < m_oMap.Width() && y2 >= 0 && y2 < m_oMap.Height()) {
                             bool bWater = m_oMap.Water(x, y, x2, y2);
                             if (closed[x2][y2] == 0 and not bWater) {
-                                double g2 = g + m_oRover->m_fCostStraight;
+                                double g2 = g + direction.fCost; // TODO height cost
                                 f = g2 + m_mnHeuristic[x2][y2];
                                 open.push_back({ f, g2, (double)x2, (double)y2 });
                                 closed[x2][y2] = 1;
@@ -156,9 +156,6 @@ namespace planner {
 
         // Print the expansion List
         //print2DVector(expand);
-
-
-
 
         /// Find the path including the robot direction
         std::vector<std::vector<std::string> > policy(m_oMap.Height(), std::vector<std::string>(m_oMap.Width(), "-"));
@@ -176,9 +173,9 @@ namespace planner {
 
         while (x != m_oRover->m_afStart[0] or y != m_oRover->m_afStart[1]) {
             int nAction = action[x][y];
-            x2 = x - m_oRover->m_mnMovements[nAction][0] * nStepSize;
-            y2 = y - m_oRover->m_mnMovements[nAction][1] * nStepSize;
-            // Store the  Path in a vector
+            x2 = x - m_oRover->m_asActions[nAction].nX * nStepSize;
+            y2 = y - m_oRover->m_asActions[nAction].nY * nStepSize;
+            /// Store the  Path in a vector // TODO not really needed
             m_oRover->m_mnPath.push_back({ x2, y2 });
             policy[x2][y2] = m_oRover->m_astrMovementArrows[action[x][y]];
             x = x2;
@@ -189,6 +186,7 @@ namespace planner {
             m_oMap.SetOverrides(x2, y2, 0x01);
         }
 
+#ifdef DEBUG_FILES
         std::ofstream myfile;
         myfile.open ("result.txt");
         // Print the robot path
@@ -200,8 +198,8 @@ namespace planner {
             myfile << std::endl;
         }
 
-
         myfile.close();
+#endif // DEBUG_FILES
 
         //return policy; // TODO return plan
     }
