@@ -21,6 +21,41 @@ namespace planner {
         m_nStepSize = i_oStepSize;
         GenerateHeuristic();
 
+
+        /// Calculate maximum elevation gradient of the map
+        m_nMaxGradient = 0;
+        for (int nY = 0; nY < m_oMap.Height(); ++nY)
+        {
+            for (int nX = 0; nX < m_oMap.Width(); ++nX)
+            {
+                int nGradX = GradX(nX, nY);
+                int nGradY = GradY(nX, nY);
+                uint8_t nCurrentMaxGradient = std::max(std::abs(nGradX), std::abs(nGradY));
+                if (m_nMaxGradient < nCurrentMaxGradient)
+                {
+                    m_nMaxGradient = nCurrentMaxGradient;
+                }
+            }
+        }
+
+        std::cout << "Max gradient " << (int)m_nMaxGradient << std::endl;
+
+    }
+
+
+    int cPlanner::GradX(int i_nX, int i_nY) {
+        if(i_nX == m_nStepSize) {
+            return m_oMap.Elevation(i_nX, i_nY);
+        }
+        return m_oMap.Elevation(i_nX, i_nY) - m_oMap.Elevation(i_nX-m_nStepSize, i_nY);
+    }
+
+
+    int cPlanner::GradY(int i_nX, int i_nY) {
+        if(i_nY < m_nStepSize) {
+            return m_oMap.Elevation(i_nX, i_nY);
+        }
+        return m_oMap.Elevation(i_nX, i_nY) - m_oMap.Elevation(i_nX, i_nY-m_nStepSize);
     }
 
     // Generate a Manhattan Heuristic Vector
@@ -35,14 +70,14 @@ namespace planner {
             for (int j = 0; j < m_mnHeuristic[0].size(); j++) {
                 int nDeltaX = m_oRover->m_afGoal[0] - i;
                 int nDeltaY = m_oRover->m_afGoal[1] - j;
-                // Manhattan Distance
-                //int nHeuristicValue = std::abs(nDeltaX) + std::abs(nDeltaY);
-                // Euclidian Distance
-                // double fHeuristicValue = sqrt(xd * xd + yd * yd);
-                // Chebyshev distance
-                // int nHeuristicValue = max(abs(xd), abs(yd));
                 // Octile distance
                 int nHeuristicValue = nD1 * (nDeltaX + nDeltaY) + (nD2 - 2*nD1) * std::min(nDeltaX, nDeltaY);
+                // Manhattan Distance
+                //int nHeuristicValue = std::abs(nDeltaX) + std::abs(nDeltaY);
+                // Chebyshev distance
+                // int nHeuristicValue = std::max(std::abs(nDeltaX), std::abs(nDeltaY));
+                // Euclidian Distance
+                // double fHeuristicValue = sqrt(nDeltaX * nDeltaX + nDeltaY * nDeltaY);
                 m_mnHeuristic[i][j] = nHeuristicValue;
             }
         }
@@ -94,11 +129,10 @@ namespace planner {
         bool found = false;
         bool resign = false;
         int count = 0;
+        int nIslandSeconds = 0;
 
         int x2;
         int y2;
-
-        int nStepSize = 2;
 
         // While I am still searching for the goal and the problem is solvable
         while (!found && !resign) {
@@ -128,7 +162,7 @@ namespace planner {
 
                 /// Check if we reached the goal:
                 //if (x == m_oRover->m_afGoal[0] && y == m_oRover->m_afGoal[1]) {
-                if (std::abs(x - m_oRover->m_afGoal[0]) <= (nStepSize) && std::abs(y - m_oRover->m_afGoal[1]) <= (nStepSize)) {
+                if (std::abs(x - m_oRover->m_afGoal[0]) <= (m_nStepSize) && std::abs(y - m_oRover->m_afGoal[1]) <= (m_nStepSize)) {
                     found = true;
                     //cout << "[" << g << ", " << x << ", " << y << "]" << endl;
                 }
@@ -137,12 +171,16 @@ namespace planner {
                 else {
                     for (int i = 0; i < m_oRover->m_asActions.size(); ++i) {
                         auto direction = m_oRover->m_asActions[i];
-                        x2 = x + direction.nX * nStepSize;
-                        y2 = y + direction.nY * nStepSize;
+                        x2 = x + direction.nX * m_nStepSize;
+                        y2 = y + direction.nY * m_nStepSize;
                         if (x2 >= 0 && x2 < m_oMap.Width() && y2 >= 0 && y2 < m_oMap.Height()) {
                             bool bWater = m_oMap.Water(x, y, x2, y2);
                             if (closed[x2][y2] == 0 and not bWater) {
-                                double g2 = g + direction.fCost; // TODO height cost
+                                /// Calculate current gradient in step direction and normalize it
+                                double fHeightCost = (m_oMap.Elevation(x2, y2) - m_oMap.Elevation(x, y)) / m_nMaxGradient;
+                                //std::cout << fHeightCost << std::endl;
+                                double g2 = g + direction.fCost*m_nStepSize + fHeightCost; // TODO height cost
+                                nIslandSeconds += g2; // TODO fix island seconds calculation; must be outside of this loop
                                 f = g2 + m_mnHeuristic[x2][y2];
                                 open.push_back({ f, g2, (double)x2, (double)y2 });
                                 closed[x2][y2] = 1;
@@ -154,8 +192,12 @@ namespace planner {
             }
         }
 
+        std::cout << "Travelling will take " << nIslandSeconds << " island seconds on the shortes path." << std::endl;
+        std::cout << "Travelling will take " << (double)nIslandSeconds/60.0 << " island mins on the shortes path." << std::endl;
+        std::cout << "Travelling will take " << (double)nIslandSeconds/60.0/60.0 << " island hours on the shortes path." << std::endl;
+
         // Print the expansion List
-        //print2DVector(expand);
+        //Print2DVector(expand);
 
         /// Find the path including the robot direction
         std::vector<std::vector<std::string> > policy(m_oMap.Height(), std::vector<std::string>(m_oMap.Width(), "-"));
@@ -173,8 +215,8 @@ namespace planner {
 
         while (x != m_oRover->m_afStart[0] or y != m_oRover->m_afStart[1]) {
             int nAction = action[x][y];
-            x2 = x - m_oRover->m_asActions[nAction].nX * nStepSize;
-            y2 = y - m_oRover->m_asActions[nAction].nY * nStepSize;
+            x2 = x - m_oRover->m_asActions[nAction].nX * m_nStepSize;
+            y2 = y - m_oRover->m_asActions[nAction].nY * m_nStepSize;
             /// Store the  Path in a vector // TODO not really needed
             m_oRover->m_mnPath.push_back({ x2, y2 });
             policy[x2][y2] = m_oRover->m_astrMovementArrows[action[x][y]];
