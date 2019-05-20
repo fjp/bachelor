@@ -129,7 +129,7 @@ namespace planner {
         bool found = false;
         bool resign = false;
         int count = 0;
-        int nIslandSeconds = 0;
+
 
         int x2;
         int y2;
@@ -180,7 +180,7 @@ namespace planner {
                                 double fHeightCost = (m_oMap.Elevation(x2, y2) - m_oMap.Elevation(x, y)) / m_nMaxGradient;
                                 //std::cout << fHeightCost << std::endl;
                                 double g2 = g + direction.fCost*m_nStepSize + fHeightCost; // TODO height cost
-                                nIslandSeconds += g2; // TODO fix island seconds calculation; must be outside of this loop
+                                //nIslandSeconds += g2; // TODO fix island seconds calculation; must be outside of this loop
                                 f = g2 + m_mnHeuristic[x2][y2];
                                 open.push_back({ f, g2, (double)x2, (double)y2 });
                                 closed[x2][y2] = 1;
@@ -192,6 +192,7 @@ namespace planner {
             }
         }
 
+        int nIslandSeconds = 0; // TODO island seconds calculation
         std::cout << "Travelling will take " << nIslandSeconds << " island seconds on the shortes path." << std::endl;
         std::cout << "Travelling will take " << (double)nIslandSeconds/60.0 << " island mins on the shortes path." << std::endl;
         std::cout << "Travelling will take " << (double)nIslandSeconds/60.0/60.0 << " island hours on the shortes path." << std::endl;

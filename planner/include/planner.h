@@ -19,7 +19,7 @@ namespace planner {
 
     class cPlanner : public cPlannerInterface<8> {
     public:
-        cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize = 3);
+        cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize = 2);
 
         void Plan() override;
 
