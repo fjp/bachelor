@@ -118,7 +118,9 @@ namespace planner {
         sNext.sAction = i_sAction;
 
         sNext.g = i_sParent.g + i_sAction.fCost * m_nStepSize;
-
+        
+        /// Calculate hash of node 
+        sNext.nId = NodeHash(sNext);
 
         return sNext;
     }
