@@ -1,0 +1,8 @@
+//
+// Created by Franz Pucher on 2019-05-22.
+//
+
+#ifndef BACHELORTEST_UTILITIES_H
+#define BACHELORTEST_UTILITIES_H
+
+#endif //BACHELORTEST_UTILITIES_H

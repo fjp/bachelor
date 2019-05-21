@@ -1,0 +1,8 @@
+//
+// Created by Franz Pucher on 2019-05-22.
+//
+
+#ifndef BACHELORTEST_TEST_FIXTURE_H
+#define BACHELORTEST_TEST_FIXTURE_H
+
+#endif //BACHELORTEST_TEST_FIXTURE_H
