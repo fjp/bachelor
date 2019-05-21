@@ -19,8 +19,8 @@ namespace planner
 
 
         // TODO get start values
-        SetStart(0, 0);
-        SetGoal(10, 10);
+        //SetStart(0, 0);
+        //SetGoal(10, 10);
 
         SetCost(1.0, std::sqrt(2));
 
@@ -35,18 +35,6 @@ namespace planner
 
 
 
-    }
-
-
-    void cAudiRover::SetStart(int i_nX, int i_nY) {
-        m_afStart[0] = i_nX;
-        m_afStart[1] = i_nY;
-
-    }
-
-    void cAudiRover::SetGoal(int i_nX, int i_nY) {
-        m_afGoal[0] = i_nX;
-        m_afGoal[1] = i_nY;
     }
 
     void cAudiRover::SetCost(double i_nStraight, double i_nDiagonal) {

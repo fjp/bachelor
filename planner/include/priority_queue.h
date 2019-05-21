@@ -1,31 +1,36 @@
 //
-// Created by Franz Pucher on 2019-05-18.
+// Created by Franz Pucher on 2019-05-21.
 //
 
 #ifndef BACHELOR_PRIORITY_QUEUE_H
 #define BACHELOR_PRIORITY_QUEUE_H
 
+
 #include <queue>
+#include <tuple>
+#include <algorithm>
 
-namespace planner
-{
-    template<typename Node, typename priority_t>
-    struct tPriorityQueue {
-        typedef std::pair<priority_t, Node> Element;
-        std::priority_queue<Element, std::vector<Element>, std::greater<Element>> oNodes;
+namespace planner {
 
-        inline bool Empty() const {
-            return oNodes.empty();
+
+    template<typename T, typename priority_t>
+    struct PriorityQueue {
+        typedef std::pair<priority_t, T> PQElement;
+        std::priority_queue<PQElement, std::vector<PQElement>,
+                std::greater<PQElement>> elements;
+
+        inline bool empty() const {
+            return elements.empty();
         }
 
-        inline void Put(Node i_oElement, priority_t i_priority) {
-            oNodes.emplace(i_priority, i_oElement);
+        inline void put(T item, priority_t priority) {
+            elements.emplace(priority, item);
         }
 
-        Node Get() {
-            Node oBestNode = oNodes.top().second;
-            oNodes.pop();
-            return oBestNode;
+        T get() {
+            T best_item = elements.top().second;
+            elements.pop();
+            return best_item;
         }
     };
 }

@@ -18,9 +18,7 @@ namespace planner {
         }
     };
 
-    struct tLocation {
-        int nX, nY;
-    };
+
 
 
 }

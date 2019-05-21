@@ -1,6 +1,7 @@
 # AID Coding Challenge Solution
 
-This is my solution for the AID Bachelor Coding Challenge. For the problem description refer to the AID [Coding Challenge.pdf](Coding Challenge.pdf).
+This is my solution for the AID Bachelor Coding Challenge. 
+For the problem description refer to the AID [Coding Challenge.pdf](Coding Challenge.pdf).
 
 # Algorithm Choice
 

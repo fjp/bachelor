@@ -23,9 +23,9 @@ namespace planner {
                    int i_nHeight, int i_nWidth);
 
 
-        void SetStart(int i_nX, int i_nY);
+        //void SetStart(int i_nX, int i_nY);
 
-        void SetGoal(int i_nX, int i_nY);
+        //void SetGoal(int i_nX, int i_nY);
 
 
 

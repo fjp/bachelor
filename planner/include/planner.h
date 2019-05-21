@@ -19,11 +19,12 @@ namespace planner {
 
     class cPlanner : public cPlannerInterface<8> {
     public:
-        cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize = 2);
+        cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize = 4);
 
         void Plan() override;
+        void PlanClean();
 
-        std::vector<std::vector<int> > m_mnHeuristic;
+
 
         /// \brief Generate distance heuristic vector member, which is inherited from the cPlannerInterface.
         /// \details This implementation calculates the octile distance heuristic because the robot can move in
@@ -33,6 +34,22 @@ namespace planner {
     private:
         uint8_t m_nStepSize;
         uint8_t m_nMaxGradient; ///< Maximum gradient of the map elevation.
+
+        std::vector<std::vector<int> > m_mnHeuristic;
+    public:
+        const int &Heuristic(const uint i_nX, const uint i_nY) const;
+        const int &Heuristic(const tLocation i_sLocation) const;
+
+        //bool GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const override;
+        //tNode Child(tNode &i_sParent, const tAction &i_sAction) override;
+
+        bool WithinMap(const tLocation &i_sLocation) const;
+
+        bool GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const override;
+
+        tNode Child(tNode &i_sParent, const tAction &i_sAction) override;
+
+    private:
 
         int GradX(int i_nX, int i_nY);
         int GradY(int i_nX, int i_nY);

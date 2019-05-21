@@ -6,6 +6,7 @@
 #define BACHELOR_PLANNERINTERFACE_H
 
 #include "graph.h"
+#include "node.h"
 
 #include <vector>
 
@@ -27,11 +28,14 @@ namespace planner {
         virtual void Plan() = 0;
 
 
+        virtual bool GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const = 0;
+        virtual tNode Child(tNode &i_sParent, const tAction &i_sAction) = 0;
+
+
     protected:
         cRoverInterface<Directions> *m_oRover;
         cGraph &m_oMap;
 
-        std::vector<std::vector<std::string> > *m_oPolicy; // TODO remove or use
 
     };
 

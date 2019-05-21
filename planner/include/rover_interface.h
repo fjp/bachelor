@@ -10,6 +10,7 @@
 
 #include <string>
 
+#include "location.h"
 #include "action.h"
 
 namespace planner {
@@ -41,9 +42,6 @@ namespace planner {
         };
 
 
-
-        int m_afStart[2];
-        int m_afGoal[2];
         double m_fCostStraight;
         double m_fCostDiagonal;
 
@@ -55,6 +53,30 @@ namespace planner {
         std::vector<std::vector<int> > m_mnMovements;
 
         std::vector<std::vector<int> > m_mnPath;
+
+
+        tLocation &Start() {
+            return m_sStart;
+        }
+
+        void SetStart(const tLocation &i_sStart) {
+            m_sStart = i_sStart;
+        }
+
+        tLocation &Goal() {
+            return m_sGoal;
+        }
+
+        void SetGoal(const tLocation &i_sGoal) {
+            m_sGoal = i_sGoal;
+        }
+
+    private:
+        /// Start location (x,y) of the rover
+        tLocation m_sStart;
+
+        /// Goal location (x,y) of the rover
+        tLocation m_sGoal;
 
 
     };

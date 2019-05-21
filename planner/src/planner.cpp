@@ -6,10 +6,15 @@
 
 #include <iostream>
 #include <algorithm>
+#include <map>
+
+#include <vector>
 #include <fstream>
 #include <cmath>
 
 #include "audi_rover.h"
+#include "priority_queue.h"
+
 
 
 namespace planner {
@@ -68,8 +73,8 @@ namespace planner {
         m_mnHeuristic = std::vector<std::vector<int> >(m_oMap.Height(), std::vector<int>(m_oMap.Width()));
         for (int i = 0; i < m_mnHeuristic.size(); i++) {
             for (int j = 0; j < m_mnHeuristic[0].size(); j++) {
-                int nDeltaX = m_oRover->m_afGoal[0] - i;
-                int nDeltaY = m_oRover->m_afGoal[1] - j;
+                int nDeltaX = m_oRover->Goal().nX - i;
+                int nDeltaY = m_oRover->Goal().nY - j;
                 // Octile distance
                 int nHeuristicValue = nD1 * (nDeltaX + nDeltaY) + (nD2 - 2*nD1) * std::min(nDeltaX, nDeltaY);
                 // Manhattan Distance
@@ -98,13 +103,143 @@ namespace planner {
 
     }
 
+    bool cPlanner::GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const {
+        uint nDeltaX = std::abs(i_sFirst.sLocation.nX - i_sSecond.sLocation.nX);
+        uint nDeltaY = std::abs(i_sFirst.sLocation.nY - i_sSecond.sLocation.nY);
+        return nDeltaX <= m_nStepSize && nDeltaY <= m_nStepSize;
+    }
+
+    tNode cPlanner::Child(tNode &i_sParent, const tAction &i_sAction)
+    {
+        tNode sNext = i_sParent;
+        sNext.psParent = &i_sParent;
+        sNext.sLocation.nX = i_sParent.sLocation.nX + i_sAction.nX * m_nStepSize;
+        sNext.sLocation.nY = i_sParent.sLocation.nY + i_sAction.nY * m_nStepSize;
+        sNext.sAction = i_sAction;
+
+        sNext.g = i_sParent.g + i_sAction.fCost * m_nStepSize;
+
+
+        return sNext;
+    }
+
+
+    bool cPlanner::WithinMap(const tLocation &i_sLocation) const {
+
+        uint nX = i_sLocation.nX;
+        uint nY = i_sLocation.nY;
+
+        return nX >= 0 && nX < m_oMap.Width() && nY >= 0 && nY < m_oMap.Height();
+    }
+
 
     void cPlanner::Plan()
     {
+        /// Define start node
+        tNode sStart;
+        sStart.psParent = NULL;
+        sStart.sLocation = m_oRover->Start();
+        sStart.g = 0;
+        sStart.f = sStart.g + Heuristic(sStart.sLocation);
+
+
+        PriorityQueue<tNode, double> m_oFrontier;
+
+
+
+        m_oFrontier.put(sStart, 0);
+
+        /// Get the goal node
+        tNode sGoal;
+        sGoal.sLocation = m_oRover->Goal();
+
+
+        tNode sCurrent;
+
+        /// Serves as explored (closed) set and cost to reach a node
+        std::map<tNode, double> oCost;
+
+        //
+        oCost[sStart] = 0.0;
+
+        // Flags and Counts
+        bool bFound = false;
+        bool bResign = false;
+        int count = 0;
+
+        tLocation sNextLocation;
+
+        while (!bFound && !bResign) {
+
+            /// Resign if the frontier is empty, which means there are no nodes to expand and the goal has not been found
+            if (m_oFrontier.empty())
+            {
+                bResign = true;
+                std::cout << "Goal location not found." << std::endl;
+                return;
+            }
+
+            sCurrent = m_oFrontier.get();
+
+            if (GoalTest(sCurrent, sGoal))
+            {
+                bFound = true;
+            }
+            else
+            {
+                for (auto sAction : m_oRover->m_asActions) {
+                    tNode sNext = Child(sCurrent, sAction);
+
+                    sNextLocation.nX = sNext.sLocation.nX; //sCurrent.sLocation.nX + sAction.nX * m_nStepSize;
+                    sNextLocation.nY = sNext.sLocation.nY; //sCurrent.sLocation.nY + sAction.nY * m_nStepSize;
+
+                    if (WithinMap(sNextLocation)) {
+                        bool bWater = m_oMap.Water(sCurrent.sLocation.nX, sCurrent.sLocation.nY,
+                                                   sNextLocation.nX, sNextLocation.nY);
+                        if (!bWater) {
+                            /// Calculate current gradient in step direction and normalize it
+                            double fHeightCost =
+                                    (m_oMap.Elevation(sNextLocation.nX, sNextLocation.nY) - m_oMap.Elevation(sCurrent.sLocation.nX, sCurrent.sLocation.nY)) / m_nMaxGradient;
+                            //std::cout << fHeightCost << std::endl;
+                            sNext.g = sNext.g + fHeightCost; // TODO height cost
+                            //nIslandSeconds += g2; // TODO fix island seconds calculation; must be outside of this loop
+
+
+                            if (oCost.find(sNext) == oCost.end() || sNext.g < oCost[sNext]) {
+                                oCost[sNext] = sNext.g;
+
+                                sNext.f = sNext.g + Heuristic(sNextLocation);
+                                m_oFrontier.put(sNext, sNext.f);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        int x, y;
+        /// Check if the current node is the start node, which has no parent and is therefore set to NULL
+        while (sCurrent.psParent != NULL) {
+            x = sCurrent.sLocation.nX;
+            y = sCurrent.sLocation.nY;
+
+            /// Store path in overrides
+            m_oMap.SetOverrides(x, y, 0x01);
+
+            /// Move towards the start
+            sCurrent = *sCurrent.psParent;
+        }
+        //
+
+    }
+
+
+    void cPlanner::PlanClean()
+    {
 
         // Defined the quadruplet values
-        int x = m_oRover->m_afStart[0];
-        int y = m_oRover->m_afStart[1];
+        int x = m_oRover->Start().nX;
+        int y = m_oRover->Start().nY;
         double g = 0;
         double f = g + m_mnHeuristic[x][y]; //TODO use AStar insetead of Dijkstra
 
@@ -162,7 +297,7 @@ namespace planner {
 
                 /// Check if we reached the goal:
                 //if (x == m_oRover->m_afGoal[0] && y == m_oRover->m_afGoal[1]) {
-                if (std::abs(x - m_oRover->m_afGoal[0]) <= (m_nStepSize) && std::abs(y - m_oRover->m_afGoal[1]) <= (m_nStepSize)) {
+                if (std::abs(x - m_oRover->Goal().nX) <= (m_nStepSize) && std::abs(y - m_oRover->Goal().nY) <= (m_nStepSize)) {
                     found = true;
                     //cout << "[" << g << ", " << x << ", " << y << "]" << endl;
                 }
@@ -214,7 +349,7 @@ namespace planner {
         //y = nOffsetY;//m_oRover->m_afGoal[1]-5;
         policy[x][y] = '*';
 
-        while (x != m_oRover->m_afStart[0] or y != m_oRover->m_afStart[1]) {
+        while (x != m_oRover->Start().nX or y != m_oRover->Start().nY) {
             int nAction = action[x][y];
             x2 = x - m_oRover->m_asActions[nAction].nX * m_nStepSize;
             y2 = y - m_oRover->m_asActions[nAction].nY * m_nStepSize;
@@ -247,40 +382,14 @@ namespace planner {
         //return policy; // TODO return plan
     }
 
+    const int &cPlanner::Heuristic(const uint i_nX, const uint i_nY) const {
+        return m_mnHeuristic[i_nX][i_nY];
+    }
+
+    const int &cPlanner::Heuristic(const tLocation i_sLocation) const {
+        return m_mnHeuristic[i_sLocation.nX][i_sLocation.nY];
+    }
 
 
-
-
-    //void cPlanner::AStar(tLocation& i_oStart, tLocation& i_oGoal,
-    //                                                std::unordered_map<tLocation, tLocation>& i_oPredecessors,
-    //                                                std::unordered_map<tLocation, double>& i_oPathCost) {
-    //
-    //    /// Initialize the frontier using the initial state of the problem
-    //    tFrontier oFrontier;
-    //    oFrontier.Put(i_oStart, 0.0);
-    //
-    //    i_oPredecessors[i_oStart] = i_oStart;
-    //
-    //    i_oPathCost[i_oStart] = 0.0;
-    //
-    //    while (!oFrontier.Empty()) {
-    //        tLocation oCurrent = oFrontier.Get();
-    //
-    //        if (oCurrent == i_oGoal) {
-    //            break;
-    //        }
-    //
-    //        for (tLocation oNext : m_oGraph.Neighbors(oCurrent)) {
-    //            double fNewCost = i_oPredecessors[oCurrent] + m_oGraph.Cost(oCurrent, oNext);
-    //            if (i_oPathCost.find(oNext) == i_oPathCost.end()
-    //                || fNewCost < i_oPathCost[oNext]) {
-    //                i_oPathCost[oNext] = fNewCost;
-    //                double priority = fNewCost + heuristic(oNext, i_oGoal);
-    //                oFrontier.Put(oNext, priority);
-    //                i_oPredecessors[oNext] = oCurrent;
-    //            }
-    //        }
-    //    }
-    //}
 
 }

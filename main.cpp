@@ -9,8 +9,9 @@
 
 #include "planner.h"
 #include "structs.h"
-#include "priority_queue.h"
 #include "audi_rover.h"
+
+#include "location.h"
 
 using namespace planner;
 
@@ -120,8 +121,8 @@ int main(int argc, char** argv)
     cAudiRover oAudiRover(&elevation[0], &overrides[0], IMAGE_DIM, IMAGE_DIM);
 
 
-    oAudiRover.SetStart(ROVER_X, ROVER_Y);
-    oAudiRover.SetGoal(BACHELOR_X, BACHELOR_Y);
+    oAudiRover.SetStart(tLocation{ROVER_X, ROVER_Y});
+    oAudiRover.SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
 
 
     oAudiRover.Summon();
