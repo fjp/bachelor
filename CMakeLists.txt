@@ -4,6 +4,7 @@ project(Bachelor)
 add_subdirectory(visualizer)
 add_subdirectory(planner)
 
+
 add_executable(Bachelor main.cpp)
 target_link_libraries(Bachelor visualizer planner)
 
@@ -14,6 +15,14 @@ add_custom_command(
         "${CMAKE_CURRENT_SOURCE_DIR}/assets"
         $<TARGET_FILE_DIR:Bachelor>/assets)
 
+
+
+################################
+# GTest
+################################
+project(BachelorTest)
+add_subdirectory(googletest-1.8.0)
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 
 
