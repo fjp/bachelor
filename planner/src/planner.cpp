@@ -131,6 +131,12 @@ namespace planner {
 
         return nX >= 0 && nX < m_oMap.Width() && nY >= 0 && nY < m_oMap.Height();
     }
+    
+    
+    int cPlanner::NodeHash() 
+    {
+        
+    }
 
 
     void cPlanner::Plan()
