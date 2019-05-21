@@ -103,24 +103,24 @@ namespace planner {
 
     }
 
-    bool cPlanner::GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const {
-        uint nDeltaX = std::abs(i_sFirst.sLocation.nX - i_sSecond.sLocation.nX);
-        uint nDeltaY = std::abs(i_sFirst.sLocation.nY - i_sSecond.sLocation.nY);
+    bool cPlanner::GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const {
+        uint nDeltaX = std::abs(i_sFirst->sLocation.nX - i_sSecond->sLocation.nX);
+        uint nDeltaY = std::abs(i_sFirst->sLocation.nY - i_sSecond->sLocation.nY);
         return nDeltaX <= m_nStepSize && nDeltaY <= m_nStepSize;
     }
 
-    tNode cPlanner::Child(tNode &i_sParent, const tAction &i_sAction)
+    tNode* cPlanner::Child(tNode *i_sParent, const tAction &i_sAction)
     {
-        tNode sNext = i_sParent;
-        sNext.psParent = &i_sParent;
-        sNext.sLocation.nX = i_sParent.sLocation.nX + i_sAction.nX * m_nStepSize;
-        sNext.sLocation.nY = i_sParent.sLocation.nY + i_sAction.nY * m_nStepSize;
-        sNext.sAction = i_sAction;
+        tNode *sNext = new tNode(*i_sParent);
+        sNext->psParent = i_sParent;
+        sNext->sLocation.nX = i_sParent->sLocation.nX + i_sAction.nX * m_nStepSize;
+        sNext->sLocation.nY = i_sParent->sLocation.nY + i_sAction.nY * m_nStepSize;
+        sNext->sAction = i_sAction;
 
-        sNext.g = i_sParent.g + i_sAction.fCost * m_nStepSize;
+        sNext->g = i_sParent->g + i_sAction.fCost * m_nStepSize; /// TODO gradient cost
         
         /// Calculate hash of node 
-        sNext.nId = NodeHash(sNext);
+        sNext->nId = NodeHash(sNext);
 
         return sNext;
     }
@@ -133,42 +133,38 @@ namespace planner {
 
         return nX >= 0 && nX < m_oMap.Width() && nY >= 0 && nY < m_oMap.Height();
     }
-    
-    
-    int cPlanner::NodeHash(const tNode &i_sNode) 
+
+
+    uint32_t cPlanner::NodeHash(const tNode *i_sNode)
     {
-        return i_sNode.nY * m_oMap.Width() + i_sNode.nX;
+        return i_sNode->sLocation.nY * m_oMap.Width() + i_sNode->sLocation.nX;
     }
 
 
     void cPlanner::Plan()
     {
         /// Define start node
-        tNode sStart;
-        sStart.psParent = NULL;
-        sStart.sLocation = m_oRover->Start();
-        sStart.g = 0;
-        sStart.f = sStart.g + Heuristic(sStart.sLocation);
+        tNode *sStart = new tNode(m_oRover->Start());
+        sStart->nId = NodeHash(sStart);
 
 
-        PriorityQueue<tNode, double> m_oFrontier;
+        PriorityQueue<tNode*, double> m_oFrontier;
 
 
 
         m_oFrontier.put(sStart, 0);
 
         /// Get the goal node
-        tNode sGoal;
-        sGoal.sLocation = m_oRover->Goal();
+        tNode *sGoal = new tNode(m_oRover->Goal());
 
 
-        tNode sCurrent;
+        tNode *sCurrent = new tNode();
 
         /// Serves as explored (closed) set and cost to reach a node
         std::map<tNode, double> oCost;
 
         //
-        oCost[sStart] = 0.0;
+        oCost[*sStart] = 0.0;
 
         // Flags and Counts
         bool bFound = false;
@@ -196,28 +192,28 @@ namespace planner {
             else
             {
                 for (auto sAction : m_oRover->m_asActions) {
-                    tNode sNext = Child(sCurrent, sAction);
+                    tNode *sNext = Child(sCurrent, sAction);
 
-                    sNextLocation.nX = sNext.sLocation.nX; //sCurrent.sLocation.nX + sAction.nX * m_nStepSize;
-                    sNextLocation.nY = sNext.sLocation.nY; //sCurrent.sLocation.nY + sAction.nY * m_nStepSize;
+                    sNextLocation.nX = sNext->sLocation.nX; //sCurrent.sLocation.nX + sAction.nX * m_nStepSize;
+                    sNextLocation.nY = sNext->sLocation.nY; //sCurrent.sLocation.nY + sAction.nY * m_nStepSize;
 
                     if (WithinMap(sNextLocation)) {
-                        bool bWater = m_oMap.Water(sCurrent.sLocation.nX, sCurrent.sLocation.nY,
+                        bool bWater = m_oMap.Water(sCurrent->sLocation.nX, sCurrent->sLocation.nY,
                                                    sNextLocation.nX, sNextLocation.nY);
                         if (!bWater) {
                             /// Calculate current gradient in step direction and normalize it
                             double fHeightCost =
-                                    (m_oMap.Elevation(sNextLocation.nX, sNextLocation.nY) - m_oMap.Elevation(sCurrent.sLocation.nX, sCurrent.sLocation.nY)) / m_nMaxGradient;
+                                    (m_oMap.Elevation(sNextLocation.nX, sNextLocation.nY) - m_oMap.Elevation(sCurrent->sLocation.nX, sCurrent->sLocation.nY)) / m_nMaxGradient;
                             //std::cout << fHeightCost << std::endl;
-                            sNext.g = sNext.g + fHeightCost; // TODO height cost
+                            sNext->g = sNext->g + fHeightCost; // TODO height cost
                             //nIslandSeconds += g2; // TODO fix island seconds calculation; must be outside of this loop
 
 
-                            if (oCost.find(sNext) == oCost.end() || sNext.g < oCost[sNext]) {
-                                oCost[sNext] = sNext.g;
-
-                                sNext.f = sNext.g + Heuristic(sNextLocation);
-                                m_oFrontier.put(sNext, sNext.f);
+                            if (oCost.find(*sNext) == oCost.end() || sNext->g < oCost[*sNext]) {
+                                oCost[*sNext] = sNext->g;
+                                const int nHeuristic = Heuristic(sNextLocation);
+                                sNext->f = sNext->g + nHeuristic;
+                                m_oFrontier.put(sNext, sNext->f);
                             }
                         }
                     }
@@ -227,15 +223,15 @@ namespace planner {
 
         int x, y;
         /// Check if the current node is the start node, which has no parent and is therefore set to NULL
-        while (sCurrent.psParent != NULL) {
-            x = sCurrent.sLocation.nX;
-            y = sCurrent.sLocation.nY;
+        while (nullptr != sCurrent->psParent) {
+            x = sCurrent->sLocation.nX;
+            y = sCurrent->sLocation.nY;
 
             /// Store path in overrides
             m_oMap.SetOverrides(x, y, 0x01);
 
             /// Move towards the start
-            sCurrent = *sCurrent.psParent;
+            sCurrent = sCurrent->psParent;
         }
         //
 
@@ -394,7 +390,7 @@ namespace planner {
         return m_mnHeuristic[i_nX][i_nY];
     }
 
-    const int &cPlanner::Heuristic(const tLocation i_sLocation) const {
+    const int &cPlanner::Heuristic(const tLocation &i_sLocation) const {
         return m_mnHeuristic[i_sLocation.nX][i_sLocation.nY];
     }
 

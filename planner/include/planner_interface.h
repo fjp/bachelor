@@ -28,8 +28,8 @@ namespace planner {
         virtual void Plan() = 0;
 
 
-        virtual bool GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const = 0;
-        virtual tNode Child(tNode &i_sParent, const tAction &i_sAction) = 0;
+        virtual bool GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const = 0;
+        virtual tNode* Child(tNode *i_sParent, const tAction &i_sAction) = 0;
 
 
     protected:

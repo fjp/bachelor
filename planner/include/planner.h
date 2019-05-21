@@ -19,7 +19,7 @@ namespace planner {
 
     class cPlanner : public cPlannerInterface<8> {
     public:
-        cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize = 4);
+        cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize = 1);
 
         void Plan() override;
         void PlanClean();
@@ -38,23 +38,23 @@ namespace planner {
         std::vector<std::vector<int> > m_mnHeuristic;
     public:
         const int &Heuristic(const uint i_nX, const uint i_nY) const;
-        const int &Heuristic(const tLocation i_sLocation) const;
+        const int &Heuristic(const tLocation &i_sLocation) const;
 
         //bool GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const override;
         //tNode Child(tNode &i_sParent, const tAction &i_sAction) override;
 
         bool WithinMap(const tLocation &i_sLocation) const;
 
-        bool GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const override;
+        bool GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const override;
 
-        tNode Child(tNode &i_sParent, const tAction &i_sAction) override;
+        tNode* Child(tNode *i_sParent, const tAction &i_sAction) override;
 
     private:
 
         int GradX(int i_nX, int i_nY);
         int GradY(int i_nX, int i_nY);
         
-        int NodeHash(const tNode &i_sNode);
+        uint32_t NodeHash(const tNode *i_sNode);
 
     };
 

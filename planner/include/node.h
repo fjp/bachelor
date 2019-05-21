@@ -14,10 +14,37 @@ namespace planner {
 
     struct tNode {
 
-        tNode() : nId(-1), f(0.0), g(0.0), h(0.0), sLocation{0, 0}, psParent(nullptr), sAction{0, 0, 0.0} {}
+        tNode() : nId(0), f(0.0), g(0.0), h(0.0), sLocation{0, 0}, psParent(nullptr), sAction{0, 0, 0.0} {}
+        tNode(const tLocation &i_sLocation)
+        : tNode()
+        {
+            sLocation = i_sLocation;
+        }
+
+        tNode& operator=(const tNode& i_sNode) {
+            nId = i_sNode.nId;
+            f = i_sNode.f;
+            g = i_sNode.g;
+            h = i_sNode.h;
+            sLocation = i_sNode.sLocation;
+            psParent = i_sNode.psParent;
+            sAction = i_sNode.sAction;
+            return *this;
+        }
+
+        /// Copy constructor
+        tNode(const tNode& i_sNode) {
+            nId = i_sNode.nId;
+            f = i_sNode.f;
+            g = i_sNode.g;
+            h = i_sNode.h;
+            sLocation = i_sNode.sLocation;
+            psParent = i_sNode.psParent;
+            sAction = i_sNode.sAction;
+        }
 
         /// Node id
-        int nId;
+        uint32_t nId;
         
         /// Total cost f(n) = g(n) + h(n)
         double f;
