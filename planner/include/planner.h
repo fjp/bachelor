@@ -53,6 +53,8 @@ namespace planner {
 
         int GradX(int i_nX, int i_nY);
         int GradY(int i_nX, int i_nY);
+        
+        int NodeHash(const tNode &i_sNode);
 
     };
 
