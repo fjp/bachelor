@@ -133,9 +133,9 @@ namespace planner {
     }
     
     
-    int cPlanner::NodeHash() 
+    int cPlanner::NodeHash(const tNode &i_sNode) 
     {
-        
+        return i_sNode.nY * m_oMap.Width() + i_sNode.nX;
     }
 
 
