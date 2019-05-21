@@ -14,8 +14,11 @@ namespace planner {
 
     struct tNode {
 
-        tNode() : f(0.0), g(0.0), h(0.0), sLocation{0, 0}, psParent(nullptr), sAction{0, 0, 0.0} {}
+        tNode() : nId(-1), f(0.0), g(0.0), h(0.0), sLocation{0, 0}, psParent(nullptr), sAction{0, 0, 0.0} {}
 
+        /// Node id
+        int nId;
+        
         /// Total cost f(n) = g(n) + h(n)
         double f;
 
@@ -36,12 +39,12 @@ namespace planner {
 
         bool operator<(const tNode& i_rhs) const
         {
-            return f < i_rhs.f;
+            return nId < i_rhs.nId;
         }
 
         bool operator>(const tNode& i_lhs) const
         {
-            return i_lhs.f < f;
+            return i_lhs.nId < nId;
         }
 
 
