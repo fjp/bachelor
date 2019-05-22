@@ -32,8 +32,9 @@ namespace planner {
         void GenerateHeuristic();
 
 
-        const int32_t &Heuristic(const uint i_nX, const uint i_nY) const;
-        const int32_t &Heuristic(const tLocation &i_sLocation) const;
+        const int32_t &Heuristic(const tLocation &i_sLocation) const {
+            return m_mnHeuristic[i_sLocation.nX][i_sLocation.nY];
+        };
 
         //bool GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const override;
         //tNode Child(tNode &i_sParent, const tAction &i_sAction) override;

@@ -144,7 +144,11 @@ namespace planner {
             /// Check if the intermediate locations moving from current node to next are on mainland or water
             bool bWater = m_oMap.Water(i_sCurrent->sLocation.nX, i_sCurrent->sLocation.nY,
                                        i_sNext->sLocation.nX, i_sNext->sLocation.nY);
-            return bWater;
+            if (bWater)
+            {
+                return false;
+            }
+            return true;
         }
         /// Next location lies outside the map
         return false;
@@ -171,10 +175,10 @@ namespace planner {
         tNode *sCurrent = new tNode();
 
         /// Serves as explored (closed) set and cost to reach a node
-        std::map<tNode, double> oCost;
+        std::map<tNode, double> oPathCost;
 
         /// Initialize start node with cost of zero
-        oCost[*sStart] = 0.0;
+        oPathCost[*sStart] = 0.0;
 
         // Flags and Counts
         bool bFound = false;
@@ -209,11 +213,10 @@ namespace planner {
                                  m_oMap.Elevation(sCurrent->sLocation.nX, sCurrent->sLocation.nY)) / m_nMaxGradient;
                         //std::cout << fHeightCost << std::endl;
                         sNext->g = sNext->g + fHeightCost; // TODO height cost
-                        //nIslandSeconds += g2; // TODO fix island seconds calculation; must be outside of this loop
 
 
-                        if (oCost.find(*sNext) == oCost.end() || sNext->g < oCost[*sNext]) {
-                            oCost[*sNext] = sNext->g;
+                        if (oPathCost.find(*sNext) == oPathCost.end() || sNext->g < oPathCost[*sNext]) {
+                            oPathCost[*sNext] = sNext->g;
                             const int nHeuristic = Heuristic(sNextLocation);
                             sNext->f = sNext->g + nHeuristic;
                             m_oFrontier.put(sNext, sNext->f);
@@ -240,11 +243,17 @@ namespace planner {
 
     void cPlanner::TraversePath(tNode *i_psNode) const
     {
+        int nIslandSeconds = 0; // TODO island seconds calculation
         uint32_t x, y;
         /// Check if the current node is the start node, which has no parent and is therefore set to NULL
         while (nullptr != i_psNode->psParent) {
             x = i_psNode->sLocation.nX;
             y = i_psNode->sLocation.nY;
+
+
+            /// Calculate Island seconds (ds = v0 * t + 1/2 * a * t^2
+            int v0 = i_psNode->sAction.fCost;
+            nIslandSeconds += v0; // TODO fix island seconds calculation; must be outside of this loop
 
             /// Store path in overrides
             m_oMap.SetOverrides(x, y, 0x01);
@@ -253,25 +262,10 @@ namespace planner {
             i_psNode = i_psNode->psParent;
         }
 
-        int nIslandSeconds = 0; // TODO island seconds calculation
+
         std::cout << "Travelling will take " << nIslandSeconds << " island seconds on the shortes path." << std::endl;
-        std::cout << "Travelling will take " << (double)nIslandSeconds/60.0 << " island mins on the shortes path." << std::endl;
+        std::cout << "Travelling will take " << (double)nIslandSeconds/60.0 << " island minutes on the shortes path." << std::endl;
         std::cout << "Travelling will take " << (double)nIslandSeconds/60.0/60.0 << " island hours on the shortes path." << std::endl;
     }
-
-
-
-
-
-    const int &cPlanner::Heuristic(const uint i_nX, const uint i_nY) const {
-        return m_mnHeuristic[i_nX][i_nY];
-    }
-
-    const int &cPlanner::Heuristic(const tLocation &i_sLocation) const {
-        return m_mnHeuristic[i_sLocation.nX][i_sLocation.nY];
-    }
-
-
-
 
 }
