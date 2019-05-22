@@ -139,6 +139,17 @@ namespace planner {
         return i_sNode->sLocation.nY * m_oMap.Width() + i_sNode->sLocation.nX;
     }
 
+    bool cPlanner::Traversable(tNode *i_sCurrent, tNode *i_sNext) const {
+        if (WithinMap(i_sNext->sLocation)) {
+            /// Check if the intermediate locations moving from current node to next are on mainland or water
+            bool bWater = m_oMap.Water(i_sCurrent->sLocation.nX, i_sCurrent->sLocation.nY,
+                                       i_sNext->sLocation.nX, i_sNext->sLocation.nY);
+            return bWater;
+        }
+        /// Next location lies outside the map
+        return false;
+    }
+
 
     bool cPlanner::Plan()
     {
@@ -175,50 +186,42 @@ namespace planner {
         while (!bFound && !bResign) {
 
             /// Resign if the frontier is empty, which means there are no nodes to expand and the goal has not been found
-            if (m_oFrontier.empty())
-            {
+            if (m_oFrontier.empty()) {
                 bResign = true;
                 break;
             }
 
             sCurrent = m_oFrontier.get();
 
-            if (GoalTest(sCurrent, sGoal))
-            {
+            if (GoalTest(sCurrent, sGoal)) {
                 bFound = true;
-            }
-            else
-            {
+            } else {
                 for (auto sAction : m_oRover->m_asActions) {
                     tNode *sNext = Child(sCurrent, sAction);
 
                     sNextLocation.nX = sNext->sLocation.nX; //sCurrent.sLocation.nX + sAction.nX * m_nStepSize;
                     sNextLocation.nY = sNext->sLocation.nY; //sCurrent.sLocation.nY + sAction.nY * m_nStepSize;
 
-                    if (WithinMap(sNextLocation)) {
-                        bool bWater = m_oMap.Water(sCurrent->sLocation.nX, sCurrent->sLocation.nY,
-                                                   sNextLocation.nX, sNextLocation.nY);
-                        if (!bWater) {
-                            /// Calculate current gradient in step direction and normalize it
-                            double fHeightCost =
-                                    (m_oMap.Elevation(sNextLocation.nX, sNextLocation.nY) - m_oMap.Elevation(sCurrent->sLocation.nX, sCurrent->sLocation.nY)) / m_nMaxGradient;
-                            //std::cout << fHeightCost << std::endl;
-                            sNext->g = sNext->g + fHeightCost; // TODO height cost
-                            //nIslandSeconds += g2; // TODO fix island seconds calculation; must be outside of this loop
+                    if (Traversable(sCurrent, sNext)) {
+                        /// Calculate current gradient in step direction and normalize it
+                        double fHeightCost =
+                                (m_oMap.Elevation(sNextLocation.nX, sNextLocation.nY) -
+                                 m_oMap.Elevation(sCurrent->sLocation.nX, sCurrent->sLocation.nY)) / m_nMaxGradient;
+                        //std::cout << fHeightCost << std::endl;
+                        sNext->g = sNext->g + fHeightCost; // TODO height cost
+                        //nIslandSeconds += g2; // TODO fix island seconds calculation; must be outside of this loop
 
 
-                            if (oCost.find(*sNext) == oCost.end() || sNext->g < oCost[*sNext]) {
-                                oCost[*sNext] = sNext->g;
-                                const int nHeuristic = Heuristic(sNextLocation);
-                                sNext->f = sNext->g + nHeuristic;
-                                m_oFrontier.put(sNext, sNext->f);
-                            }
+                        if (oCost.find(*sNext) == oCost.end() || sNext->g < oCost[*sNext]) {
+                            oCost[*sNext] = sNext->g;
+                            const int nHeuristic = Heuristic(sNextLocation);
+                            sNext->f = sNext->g + nHeuristic;
+                            m_oFrontier.put(sNext, sNext->f);
                         }
                     }
                 }
             }
         }
-
 
 
         /// Move from the current node back to the start node
@@ -267,6 +270,7 @@ namespace planner {
     const int &cPlanner::Heuristic(const tLocation &i_sLocation) const {
         return m_mnHeuristic[i_sLocation.nX][i_sLocation.nY];
     }
+
 
 
 

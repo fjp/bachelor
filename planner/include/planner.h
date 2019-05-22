@@ -24,6 +24,7 @@ namespace planner {
         bool Plan() override;
 
 
+    private:
 
         /// \brief Generate distance heuristic vector member, which is inherited from the cPlannerInterface.
         /// \details This implementation calculates the octile distance heuristic because the robot can move in
@@ -57,10 +58,13 @@ namespace planner {
         ///\param[in] i_sAction struct of type tAction that contains the direction and cost of the action.
         tNode* Child(tNode *i_sParent, const tAction &i_sAction) const override;
 
+        ///\brief considers step size of rover and checks if the path is traversable TODO improve comment
+        bool Traversable(tNode *i_sCurrent, tNode *i_sNext) const;
+
 
         void TraversePath(tNode *i_psNode) const override;
 
-    private:
+
 
         uint8_t m_nMaxGradient; ///< Maximum gradient of the map elevation.
 
