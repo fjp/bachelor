@@ -26,17 +26,8 @@ namespace planner {
 
 
     public:
-        cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(1.4), m_astrMovementArrows{ "E", "NE", "N", "NW", "W", "SW", "S", "SE" },
-                            m_mnMovements{
-                                    { 1, 0 },   // E
-                                    { 1, -1 },  // NE
-                                    { 0, -1 },  // N
-                                    { -1, -1 }, // NW
-                                    { -1, 0 },  // W
-                                    { -1, 1 },  // SW
-                                    { 0, 1 },   // S
-                                    { 1, 1 },   // SE
-                            }  {
+        cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(1.4), m_astrMovementArrows{ "E", "NE", "N", "NW", "W", "SW", "S", "SE" }
+        {
 
 
         };
@@ -50,12 +41,7 @@ namespace planner {
         std::array<tAction, Directions> m_asActions;
 
 
-        std::vector<std::vector<int> > m_mnMovements;
-
-        std::vector<std::vector<int> > m_mnPath;
-
-
-        tLocation &Start() {
+        inline tLocation &Start() {
             return m_sStart;
         }
 
@@ -63,12 +49,20 @@ namespace planner {
             m_sStart = i_sStart;
         }
 
-        tLocation &Goal() {
+        inline tLocation &Goal() {
             return m_sGoal;
         }
 
         void SetGoal(const tLocation &i_sGoal) {
             m_sGoal = i_sGoal;
+        }
+
+        uint8_t StepSize() const {
+            return m_nStepSize;
+        }
+
+        void SetStepSize(uint8_t i_nStepSize) {
+            m_nStepSize = i_nStepSize;
         }
 
     private:
@@ -77,6 +71,10 @@ namespace planner {
 
         /// Goal location (x,y) of the rover
         tLocation m_sGoal;
+
+        /// Step size of the rover
+        uint8_t m_nStepSize;
+
 
 
     };

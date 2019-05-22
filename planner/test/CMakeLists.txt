@@ -2,7 +2,7 @@
 # Unit Tests
 ################################
 # Add test cpp file
-add_executable(testPlanner test.cpp test_fixture.h)
+add_executable(testPlanner test_system.cpp test_fixture.h)
 # Link test executable against gtest & gtest_main
 target_include_directories(testPlanner PUBLIC
         ../../)

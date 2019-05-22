@@ -22,8 +22,7 @@ namespace planner
         //SetStart(0, 0);
         //SetGoal(10, 10);
 
-        SetCost(1.0, std::sqrt(2));
-
+        /// Define direction and cost of different possible actions
         m_asActions[0] = tAction{ 1, 0, m_fCostStraight };   // E
         m_asActions[1] = tAction{ 1, -1, m_fCostDiagonal };  // NE
         m_asActions[2] = tAction{ 0, -1, m_fCostStraight };  // N
@@ -33,18 +32,12 @@ namespace planner
         m_asActions[6] = tAction{ 0, 1, m_fCostStraight };   // S
         m_asActions[7] = tAction{ 1, 1, m_fCostDiagonal };   // SE
 
-
-
     }
 
-    void cAudiRover::SetCost(double i_nStraight, double i_nDiagonal) {
+    void cAudiRover::Summon(uint8_t i_nStepSize) {
 
-        // TODO assert input > 0
-        m_fCostStraight = i_nStraight;
-        m_fCostDiagonal = i_nDiagonal;
-    }
 
-    void cAudiRover::Summon() {
+        SetStepSize(i_nStepSize);
 
         m_oPlanner = new cPlanner(this, *m_oMap); // TODO make unique and delete
 

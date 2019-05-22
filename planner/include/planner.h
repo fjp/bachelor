@@ -19,10 +19,9 @@ namespace planner {
 
     class cPlanner : public cPlannerInterface<8> {
     public:
-        cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap, uint8_t i_oStepSize = 1);
+        cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap);
 
-        void Plan() override;
-        void PlanClean();
+        bool Plan() override;
 
 
 
@@ -31,12 +30,7 @@ namespace planner {
         ///          eight directions. Other possible gird map heuristics are Manhatten, Chebyshev and Euclidean.
         void GenerateHeuristic();
 
-    private:
-        uint8_t m_nStepSize;
-        uint8_t m_nMaxGradient; ///< Maximum gradient of the map elevation.
 
-        std::vector<std::vector<int> > m_mnHeuristic;
-    public:
         const int32_t &Heuristic(const uint i_nX, const uint i_nY) const;
         const int32_t &Heuristic(const tLocation &i_sLocation) const;
 
@@ -63,7 +57,14 @@ namespace planner {
         ///\param[in] i_sAction struct of type tAction that contains the direction and cost of the action.
         tNode* Child(tNode *i_sParent, const tAction &i_sAction) const override;
 
+
+        void TraversePath(tNode *i_psNode) const override;
+
     private:
+
+        uint8_t m_nMaxGradient; ///< Maximum gradient of the map elevation.
+
+        std::vector<std::vector<int> > m_mnHeuristic;
 
         ///\brief Calculates the discrete gradient of the map m_poMap in x direction.
         const int32_t GradX(uint32_t i_nX, uint32_t i_nY) const;
@@ -74,7 +75,7 @@ namespace planner {
         ///\brief Calculates the node hash using its location and the width of the map
         ///\details The hash is required to sort the std::map<tNode> oCost of reaching a node,
         ///         which is used in the Astar() search algorithm.
-        uint32_t NodeHash(const tNode *i_sNode);
+        uint32_t NodeHash(const tNode *i_sNode) const;
 
     };
 

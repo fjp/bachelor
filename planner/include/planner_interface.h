@@ -25,11 +25,12 @@ namespace planner {
 
         explicit cPlannerInterface(cRoverInterface<Directions> *i_oRover, cGraph &i_oMap) : m_oRover(i_oRover), m_oMap(i_oMap) {};
 
-        virtual void Plan() = 0;
+        virtual bool Plan() = 0;
+        virtual void TraversePath(tNode *i_psNode) const = 0;
 
 
         virtual bool GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const = 0;
-        virtual tNode* Child(tNode *i_sParent, const tAction &i_sAction) = 0;
+        virtual tNode* Child(tNode *i_sParent, const tAction &i_sAction) const = 0;
 
 
     protected:

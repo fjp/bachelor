@@ -29,15 +29,15 @@ namespace planner {
 
 
 
-        void Summon();
+        ///\brief The summon feature that the Audi rover provides
+        void Summon(uint8_t i_nStepSize = 1);
 
-        void SetCost(double i_nStraight, double i_nDiagonal);
 
 
     private:
         cPlannerInterface<8> *m_oPlanner;
 
-        cGraph *m_oMap;
+        cGraph *m_oMap; // TODO change to cMap
 
         uint8_t* m_oElevation;
         uint8_t* m_oOverrides;
