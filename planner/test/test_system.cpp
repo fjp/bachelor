@@ -12,20 +12,46 @@
 TEST_F(cPlannerTest, step_cost)
 {
 
-    /// Create Audi rover
-    cAudiRover oAudiRover(&m_oElevation[0], &m_oOverrides[0], IMAGE_DIM, IMAGE_DIM);
+    uint8_t nStepSize = 1;
+    uint8_t nVelocity = 1; /// 1 cell per island second
 
-    /// Bachelor calls Audi rover
-    oAudiRover.SetStart(tLocation{ROVER_X, ROVER_Y});
-    oAudiRover.SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
-
-
-    cPlanner *poPlanner = static_cast<cPlanner*>(oAudiRover.GetPlanner());
+    m_poAudiRover->InitializePlanner(nStepSize, nVelocity);
+    cPlanner *poPlanner = static_cast<cPlanner*>(m_poAudiRover->GetPlanner());
 
 
-    tNode *sNode1 = new tNode;
-    tNode *sNode2 = new tNode;
-    bool bGoalReached = poPlanner->GoalTest(sNode1, sNode2);
+    tNode *sStart = new tNode(tLocation{BACHELOR_X, BACHELOR_Y});
+
+    tAction sAction = { 1, 0, m_poAudiRover->m_fCostStraight };
+    tNode *sGoal = poPlanner->Child(sStart, sAction);
+    poPlanner->UpdateCost(sGoal);
+    EXPECT_EQ(sGoal->g, sAction.fCost) << "Step cost is not equal to action cost";
+
+
+    sAction = { 1, 0, m_poAudiRover->m_fCostDiagonal };
+    sGoal = poPlanner->Child(sStart, sAction);
+    poPlanner->UpdateCost(sGoal);
+    EXPECT_EQ(sGoal->g, sAction.fCost) << "Step cost is not equal to action cost";
+
+
+    /// Step size 2
+    m_poAudiRover->InitializePlanner(2, nVelocity);
+    poPlanner = static_cast<cPlanner*>(m_poAudiRover->GetPlanner());
+
+
+    sAction = { 1, 0, m_poAudiRover->m_fCostStraight };
+    sGoal = poPlanner->Child(sStart, sAction);
+    poPlanner->UpdateCost(sGoal);
+    EXPECT_EQ(sGoal->g, sAction.fCost) << "Step cost is not equal to action cost";
+
+
+    sAction = { 1, 0, m_poAudiRover->m_fCostDiagonal };
+    sGoal = poPlanner->Child(sStart, sAction);
+    poPlanner->UpdateCost(sGoal);
+    EXPECT_EQ(sGoal->g, sAction.fCost) << "Step cost is not equal to action cost";
+
+
+    bool bGoalReached = poPlanner->GoalTest(sStart, sGoal);
+    EXPECT_EQ(bGoalReached, false);
 
 
     // TODO assert if path does not match
@@ -76,34 +102,14 @@ TEST_F(cPlannerTest, rover_to_bachelor_to_wedding)
 
 }
 
-TEST_F(cPlannerTest, Heuristic)
+
+TEST_F(cPlannerTest, heuristic)
 {
+    uint8_t nStepSize = 1;
+    uint8_t nVelocity = 1; /// 1 cell per island second
 
+    m_poAudiRover->InitializePlanner(nStepSize, nVelocity);
+    cPlanner *poPlanner = static_cast<cPlanner*>(m_poAudiRover->GetPlanner());
 
-#ifdef DEBUG_FILES
-    std::ofstream myfile;
-        myfile.open ("result.txt");
-        // Print the robot path
-        //cout << endl;
-        for (int i = 0; i < policy.size(); ++i) {
-            for (int j = 0; j < policy[0].size(); ++j) {
-                myfile << policy[i][j] << ' ';
-            }
-            myfile << std::endl;
-        }
-
-        myfile.close();
-#endif // DEBUG_FILES
-}
-
-
-TEST_F(cPlannerTest, aaaa)
-{
-
-
-
-
-    planner::tLocation sLocation{1, 2};
-    std::cout << "Tests work" << std::endl;
-
+    poPlanner->GenerateHeuristic();
 }

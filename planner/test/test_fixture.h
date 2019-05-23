@@ -19,6 +19,8 @@ protected:
 
     cPlannerTest() {
         // You can do set-up work for each test here.
+
+
     }
 
     ~cPlannerTest() override {
@@ -31,8 +33,6 @@ protected:
     void SetUp() override {
         // Code here will be called immediately after the constructor (right
         // before each test).
-        //std::cout << "SetUp Tests" << std::endl;
-
 
 #ifdef WINDOWS
         #include <direct.h>
@@ -72,6 +72,18 @@ protected:
         m_oElevation = loadFile(anchor + "assets" + PATH_SEP + "elevation.data", expectedFileSize);
         m_oOverrides = loadFile(anchor + "assets" + PATH_SEP + "overrides.data", expectedFileSize);
         m_oImage = std::ofstream("pic.bmp", std::ofstream::binary);
+
+
+
+        /// Create Audi rover
+        m_poAudiRover = new cAudiRover(&m_oElevation[0], &m_oOverrides[0], IMAGE_DIM, IMAGE_DIM);
+
+
+        /// Bachelor calls Audi rover
+        m_poAudiRover->SetStart(tLocation{ROVER_X, ROVER_Y});
+        m_poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
+
+
     }
 
     void TearDown() override {
@@ -122,6 +134,7 @@ protected:
     // Objects declared here can be used by all tests in the test case for Foo.
     std::vector<uint8_t> m_oElevation;
     std::vector<uint8_t> m_oOverrides;
+    cAudiRover *m_poAudiRover;
 
     std::ofstream m_oImage;
 };

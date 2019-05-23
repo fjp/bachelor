@@ -26,9 +26,6 @@ namespace planner {
 
     cPlanner::cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap) : cPlannerInterface(static_cast<cAudiRover*>(i_oRover), i_oMap) {
 
-        GenerateHeuristic();
-
-
         /// Calculate maximum elevation gradient of the map
         m_nMaxGradient = 0;
         for (int nY = 0; nY < m_oMap.Height(); ++nY)
@@ -46,6 +43,19 @@ namespace planner {
         }
 
         std::cout << "Max gradient " << (int)m_nMaxGradient << std::endl;
+
+
+        float fAlpha = atan(m_nMaxGradient / static_cast<float>(m_oRover->StepSize()));
+        float fAlphaAbs = fabs(fAlpha);
+
+        float g = 9.81;
+        float fDen = g * sin(2.f * fAlphaAbs);
+        float fDeltaS = std::max(m_oRover->m_fCostStraight, m_oRover->m_fCostDiagonal) * m_oRover->StepSize();
+        m_fConsistencyFactor = m_nMaxGradient + ceil(sqrt(4.f * fDeltaS / fDen));
+
+
+
+        //GenerateHeuristic();
 
     }
 
@@ -65,50 +75,73 @@ namespace planner {
         return m_oMap.Elevation(i_nX, i_nY) - m_oMap.Elevation(i_nX, i_nY - m_oRover->StepSize());
     }
 
-    // Generate a Manhattan Heuristic Vector
-    void cPlanner::GenerateHeuristic()
-    {
-        /// C
-        int nD1 = m_oRover->StepSize() / m_oRover->Velocity();
-        int nD2 = sqrt(2*nD1);
+    float cPlanner::UpdateHeuristic(tNode *i_sNode, const tHeuristic i_eHeuristic) const {
 
-        m_mnHeuristic = std::vector<std::vector<int> >(m_oMap.Height(), std::vector<int>(m_oMap.Width()));
-        for (int i = 0; i < m_mnHeuristic.size(); i++) {
-            for (int j = 0; j < m_mnHeuristic[0].size(); j++) {
-                int nDeltaX = std::abs(m_oRover->Goal().nX - i);
-                int nDeltaY = std::abs(m_oRover->Goal().nY - j);
-                // Octile distance
-                int nHeuristicValue = nD1 * (nDeltaX + nDeltaY) + (nD2 - 2*nD1) * std::min(nDeltaX, nDeltaY);
-                // Manhattan Distance
-                //int nHeuristicValue = nDeltaX + nDeltaY;
-                // Chebyshev distance
-                // int nHeuristicValue = std::max(nDeltaX, nDeltaY);
-                // Euclidian Distance
-                // double fHeuristicValue = sqrt(nDeltaX * nDeltaX + nDeltaY * nDeltaY);
-                if (nHeuristicValue < 0)
-                {
-                    int a = 1;
-                }
-                m_mnHeuristic[i][j] = nHeuristicValue;
+        float fHeuristicValue = UpdateHeuristic(i_sNode->sLocation, i_eHeuristic);
+
+
+        /// Correct heuristic value to get a consistent heuristic. Required because of moving up or down the hill.
+        i_sNode->h = fHeuristicValue / m_fConsistencyFactor;
+
+        return fHeuristicValue;
+    }
+
+    float cPlanner::UpdateHeuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic) const {
+        float fDeltaX = std::fabs(m_oRover->Goal().nX - i_sLocation.nX);
+        float fDeltaY = std::fabs(m_oRover->Goal().nY - i_sLocation.nY);
+
+        float fHeuristicValue = 0.f;
+        switch (i_eHeuristic) {
+            case MANHATTEN: {
+                /// Manhattan Distance
+                fHeuristicValue = fDeltaX + fDeltaY;
+                break;
+            }
+            case EUCLIDEAN: {
+                /// Euclidian Distance
+                fHeuristicValue = sqrt(fDeltaX * fDeltaX + fDeltaY * fDeltaY);
+                break;
+            }
+            case OCTILE: {
+                /// Octile distance
+                float fD1 = static_cast<float>(m_oRover->StepSize()) / static_cast<float>(m_oRover->Velocity());
+                float fD2 = sqrt(2.f); // TODO
+                fHeuristicValue = fD1 * (fDeltaX + fDeltaY) + (fD2 - 2.f * fD1) * std::min(fDeltaX, fDeltaY);
+                break;
+            }
+            case CHEBYSHEV: {
+                /// Euclidian Distance
+                fHeuristicValue = std::max(fDeltaX, fDeltaY);
+                break;
             }
         }
 
-//#ifdef DEBUG_FILES
-        std::ofstream myfile;
-        myfile.open ("heuristic.txt");
-        for (int i = 0; i < m_mnHeuristic.size(); ++i) {
-            for (int j = 0; j < m_mnHeuristic[0].size(); ++j) {
-                myfile << m_mnHeuristic[i][j] << ' ';
-            }
-            myfile << std::endl;
-        }
-        myfile.close();
-//#endif
+
+
+        return fHeuristicValue;
 
     }
 
 
+    void cPlanner::GenerateHeuristic()
+    {
+        std::ofstream oFile;
+        oFile.open ("heuristic.txt");
+        std::vector<std::vector<float> > mfHeuristic(m_oMap.Height(), std::vector<float>(m_oMap.Width()));
+        for (int32_t nX = 0; nX < mfHeuristic.size(); nX++) {
+            for (int32_t nY = 0; nY < mfHeuristic[0].size(); nY++) {
+
+                /// Output octile distance
+                oFile << UpdateHeuristic(tLocation{ nX, nY }, OCTILE) << ' ';
+            }
+            oFile << std::endl;
+        }
+        oFile.close();
+    }
+
+
     bool cPlanner::GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const {
+
         uint nDeltaX = std::abs(i_sFirst->sLocation.nX - i_sSecond->sLocation.nX);
         uint nDeltaY = std::abs(i_sFirst->sLocation.nY - i_sSecond->sLocation.nY);
         return nDeltaX < m_oRover->StepSize() && nDeltaY < m_oRover->StepSize();
@@ -159,7 +192,12 @@ namespace planner {
     }
 
 
-    bool cPlanner::Plan()
+    bool cPlanner::Plan() {
+        return AStar();
+    }
+
+
+    bool cPlanner::AStar()
     {
         /// Define start node
         tNode *sStart = new tNode(m_oRover->Start());
@@ -185,7 +223,6 @@ namespace planner {
         bool bFound = false;
         bool bResign = false;
         int nIteration = 0;
-        int nNumNodes = m_oMap.Width() * m_oMap.Height();
 
 
         while (!bFound && !bResign) {
@@ -193,14 +230,13 @@ namespace planner {
             nIteration++;
             if (nIteration % 100000 == 0)
             {
-                int nMaxNodesToGo = nNumNodes - nIteration;
-                std::cout << "Iteration " << nIteration << ". Maximum nodes to go: " << nMaxNodesToGo
+                std::cout << "Iteration " << nIteration
                 << " Best node location (" << m_oFrontier.pop()->sLocation.nX << "," << m_oFrontier.pop()->sLocation.nY << "), heuristic: " << m_oFrontier.pop()->h
                 << ", step cost: " << m_oFrontier.pop()->g - m_oFrontier.pop()->psParent->g
                 << ", path cost: " << m_oFrontier.pop()->g
                 << ", f cost: " << m_oFrontier.pop()->f
                 << std::endl;
-                Plot();
+                //Plot();
             }
 
             /// Resign if the frontier is empty, which means there are no nodes to expand and the goal has not been found
@@ -221,13 +257,11 @@ namespace planner {
 
                         UpdateCost(sNext);
 
-
                         if (oPathCost.find(*sNext) == oPathCost.end() || sNext->g < oPathCost[*sNext]) {
                             oPathCost[*sNext] = sNext->g;
                             UpdateHeuristic(sNext);
 
                             HeuristicCheck(sNext);
-
 
                             sNext->f = sNext->g + sNext->h;
                             m_oFrontier.put(sNext, sNext->f);
@@ -259,6 +293,8 @@ namespace planner {
     }
 
 
+
+
     void cPlanner::UpdateCost(tNode *i_sNode) const
     {
         tNode *psParent = i_sNode->psParent;
@@ -273,24 +309,18 @@ namespace planner {
 
             /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
             /// Calculate current gradient in step direction
-            int16_t nDeltaHeight =
+            float nDeltaHeight =
                     (m_oMap.Elevation(i_sNode->sLocation.nX, i_sNode->sLocation.nY) -
                      m_oMap.Elevation(psParent->sLocation.nX, psParent->sLocation.nY));
 
-            float fAlpha = atan(nDeltaHeight / m_oRover->StepSize());
+            float fAlpha = atan(nDeltaHeight / static_cast<float>(m_oRover->StepSize()));
             float fAlphaAbs = fabs(fAlpha);
 
             float fHeightCost = 0.f;
-            float fHeightCost2 = 0.f;
             if (fAlphaAbs > 0.f) {
                 float g = 9.81;
                 float fDen = g * sin(2.f * fAlphaAbs);
                 fHeightCost = sqrt(4.f * fDeltaS / fDen);
-                fHeightCost2 = -sqrt(4.f * fDeltaS / fDen);
-                //float fA = 2.f * fV / fDen;
-                //fHeightCost = -fA + sqrt(fA * fA + 4 * fDeltaS / fDen);
-                //fHeightCost2 = -fA - sqrt(fA * fA + 4 * fDeltaS / fDen);
-                //assert(fabs(fHeightCost) >= 1.f);
 
                 if (fAlpha < 0.f) /// Down hill
                 {
@@ -382,5 +412,7 @@ namespace planner {
         //return nIslandSeconds;
 
     }
+
+
 
 }

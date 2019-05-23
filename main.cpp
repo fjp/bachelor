@@ -32,14 +32,14 @@ int main(int argc, char** argv)
     oAudiRover.SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
 
 
-    oAudiRover.Summon(2);
+    //oAudiRover.Summon(1);
 
 
-    //oAudiRover.SetStart({BACHELOR_X, BACHELOR_Y});
-    //oAudiRover.SetGoal({WEDDING_X, WEDDING_Y});
+    oAudiRover.SetStart({BACHELOR_X, BACHELOR_Y});
+    oAudiRover.SetGoal({WEDDING_X, WEDDING_Y});
 
 
-    //oAudiRover.Summon();
+    oAudiRover.Summon(1);
 
 
 

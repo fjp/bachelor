@@ -200,10 +200,11 @@ namespace visualizer {
     bool path(int x, int y, uint8_t* overrides)
     {
 
-        for (int i = -3; i < 3; ++i)
+        int nPenSize = 1;
+        for (int i = -nPenSize; i < nPenSize; ++i)
         {
             int dx = x - i;
-            for (int j = -3; j < 3; ++j)
+            for (int j = -nPenSize; j < nPenSize; ++j)
             {
                 int dy = y - j;
                 if ((dx >= 0 && dx < IMAGE_DIM) && (dy >= 0 && dy < IMAGE_DIM) && (overrides[dy * IMAGE_DIM + dx] & (OF_PATH)))

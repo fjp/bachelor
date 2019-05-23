@@ -34,16 +34,21 @@ namespace planner
 
     }
 
-    void cAudiRover::Summon(uint8_t i_nStepSize, uint8_t i_nVelocity) {
+    void cAudiRover::Summon(const uint8_t i_nStepSize, const uint8_t i_nVelocity) {
 
+        InitializePlanner(i_nStepSize, i_nVelocity);
+
+        m_poPlanner->Plan();
+
+    }
+
+    void cAudiRover::InitializePlanner(const uint8_t &i_nStepSize, const uint8_t &i_nVelocity) {
 
         SetStepSize(i_nStepSize);
 
         SetVelocity(i_nVelocity);
 
-        m_oPlanner = new cPlanner(this, *m_oMap); // TODO make unique and delete
-
-        m_oPlanner->Plan();
+        m_poPlanner = new cPlanner(this, *m_oMap); // TODO make unique and delete
 
     }
 

@@ -26,18 +26,26 @@ namespace planner {
         bool Plan() override;
 
 
-
+        enum tHeuristic { MANHATTEN, EUCLIDEAN, OCTILE, CHEBYSHEV };
 
         /// \brief Generate distance heuristic vector member, which is inherited from the cPlannerInterface.
         /// \details This implementation calculates the octile distance heuristic because the robot can move in
         ///          eight directions. Other possible gird map heuristics are Manhatten, Chebyshev and Euclidean.
         void GenerateHeuristic();
 
+        ///\brief Updates the heuristic value of the node argument i_sNode.
+        ///\details Calcualtes a grid map distance heuristic. Can be one of the heuristics defined in tHeuristic.
+        ///\param[in] i_sNode the node which heuristic is updated
+        ///\param[in] i_eHeuristic the type of heuristic to calculate, see tHeuristic.
+        float UpdateHeuristic(tNode *i_sNode, const tHeuristic i_eHeuristic = OCTILE) const;
 
-        ///\brief
-        void UpdateHeuristic(tNode *i_sNode) const {
-            i_sNode->h = m_mnHeuristic[i_sNode->sLocation.nX][i_sNode->sLocation.nY] * 1.f/m_nMaxGradient;
-        };
+        float UpdateHeuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic = OCTILE) const;
+
+
+
+        //inline void UpdateHeuristic(tNode *i_sNode) const {
+        //    i_sNode->h = m_mfHeuristic[i_sNode->sLocation.nX][i_sNode->sLocation.nY] / static_cast<float>(m_nMaxGradient);
+        //};
 
         void HeuristicCheck(tNode *i_sNode) const {
             float fStepCost = i_sNode->g - i_sNode->psParent->g;
@@ -48,9 +56,9 @@ namespace planner {
             }
         };
 
-        int Heuristic(tNode *i_sNode) const {
-            return m_mnHeuristic[i_sNode->sLocation.nX][i_sNode->sLocation.nY];
-        }
+        //inline float Heuristic(tNode *i_sNode) const {
+        //    return m_mfHeuristic[i_sNode->sLocation.nX][i_sNode->sLocation.nY];
+        //}
 
         void UpdateCost(tNode *i_sNode) const;
 
@@ -91,18 +99,26 @@ namespace planner {
 
         ///\brief Calculates the node hash using its location and the width of the map
         ///\details The hash is required to sort the std::map<tNode> oCost of reaching a node,
-        ///         which is used in the Astar() search algorithm.
+        ///         which is used in the AStar() search algorithm.
         uint32_t NodeHash(const tNode *i_sNode) const;
 
     private:
 
-        uint8_t m_nMaxGradient; ///< Maximum gradient of the map elevation.
+        bool AStar();
 
-        std::vector<std::vector<int> > m_mnHeuristic;
+        ///\brief Maximum gradient of the elevation, used to normalize the heuristic values. See UpdateHeuristic(tNode *i_sNode).
+        uint8_t m_nMaxGradient;
 
+        float m_fConsistencyFactor;
+
+        ///\brief Two by two matrix containing the heuristic values, which are generated in GenerateHeuristic().
+        //std::vector<std::vector<float> > m_mfHeuristic;
+
+        ///\brief Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first.
         PriorityQueue<tNode*, double> m_oFrontier;
 
 
+        ///\brief Debug method to plot intermediate paths during planning. Used in Plan()
         void Plot();
 
 

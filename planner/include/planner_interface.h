@@ -12,17 +12,18 @@
 
 namespace planner {
 
+    /// Forward declaration of interface planner::cRoverInterface.
     template <size_t Directions>
     class cRoverInterface;
 
-/**
- * \brief cPlannerInterface is an interface which servers other planners as blue print
- */
+
+    ///\brief cPlannerInterface is an abstract interface which can be implemented by concrete planners classes.
     template <size_t Directions>
     class cPlannerInterface {
 
     public:
 
+        ///\brief
         explicit cPlannerInterface(cRoverInterface<Directions> *i_oRover, cGraph &i_oMap) : m_oRover(i_oRover), m_oMap(i_oMap) {};
 
         virtual bool Plan() = 0;

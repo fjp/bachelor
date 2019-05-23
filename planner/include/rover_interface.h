@@ -32,6 +32,8 @@ namespace planner {
 
         };
 
+        virtual void InitializePlanner(const uint8_t &i_nStepSize, const uint8_t &i_nVelocity) = 0;
+
 
         float m_fCostStraight;
         float m_fCostDiagonal;
@@ -72,24 +74,26 @@ namespace planner {
         }
 
         cPlannerInterface<Directions> *GetPlanner() const {
-            return m_oPlanner;
+            return m_poPlanner;
         }
 
     protected:
-        cPlannerInterface<Directions> *m_oPlanner;
+        ///\brief Pointer to an abstract planner interface.
+        ///\details A implementation of this interface should initialize m_poPlanner
+        cPlannerInterface<Directions> *m_poPlanner;
 
 
     private:
-        /// Start location (x,y) of the rover
+        ///\brief Start location (x,y) of the rover
         tLocation m_sStart;
 
-        /// Goal location (x,y) of the rover
+        ///\brief Goal location (x,y) of the rover
         tLocation m_sGoal;
 
-        /// Step size of the rover
+        ///\brief Step size of the rover
         uint8_t m_nStepSize;
 
-        /// Speed of the rover
+        ///\brief Speed of the rover
         uint8_t m_nVelocity;
 
 
