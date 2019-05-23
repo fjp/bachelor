@@ -24,7 +24,7 @@ namespace planner {
         bool Plan() override;
 
 
-    private:
+
 
         /// \brief Generate distance heuristic vector member, which is inherited from the cPlannerInterface.
         /// \details This implementation calculates the octile distance heuristic because the robot can move in
@@ -32,8 +32,8 @@ namespace planner {
         void GenerateHeuristic();
 
 
-        const int32_t &Heuristic(const tLocation &i_sLocation) const {
-            return m_mnHeuristic[i_sLocation.nX][i_sLocation.nY];
+        void UpdateHeuristic(tNode &i_sNode) const {
+            i_sNode.h = m_mnHeuristic[i_sNode.sLocation.nX][i_sNode.sLocation.nY];
         };
 
         //bool GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const override;
@@ -62,25 +62,29 @@ namespace planner {
         ///\brief considers step size of rover and checks if the path is traversable TODO improve comment
         bool Traversable(tNode *i_sCurrent, tNode *i_sNext) const;
 
-
+        ///\brief Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path.
+        ///\details Traversing a path takes place using the m_psParent field of the tNode struct. 
+        ///\param[in] i_psNode Goal node or any other which is traversed back
         void TraversePath(tNode *i_psNode) const override;
 
+        ///\brief Calculates the discrete gradient of the map m_poMap in x direction.
+        const int32_t GradX(uint32_t i_nX, uint32_t i_nY) const;
 
+        ///\brief Calculates the discrete gradient of the map m_poMap in y direction.
+        const int32_t GradY(uint32_t i_nX, uint32_t i_nY) const;
+
+        ///\brief Calculates the node hash using its location and the width of the map
+        ///\details The hash is required to sort the std::map<tNode> oCost of reaching a node,
+        ///         which is used in the Astar() search algorithm.
+        uint32_t NodeHash(const tNode *i_sNode) const;
+
+    private:
 
         uint8_t m_nMaxGradient; ///< Maximum gradient of the map elevation.
 
         std::vector<std::vector<int> > m_mnHeuristic;
 
-        ///\brief Calculates the discrete gradient of the map m_poMap in x direction.
-        const int32_t GradX(uint32_t i_nX, uint32_t i_nY) const;
-        
-        ///\brief Calculates the discrete gradient of the map m_poMap in y direction.
-        const int32_t GradY(uint32_t i_nX, uint32_t i_nY) const;
-        
-        ///\brief Calculates the node hash using its location and the width of the map
-        ///\details The hash is required to sort the std::map<tNode> oCost of reaching a node,
-        ///         which is used in the Astar() search algorithm.
-        uint32_t NodeHash(const tNode *i_sNode) const;
+
 
     };
 

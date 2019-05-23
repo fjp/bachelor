@@ -217,7 +217,7 @@ namespace planner {
 
                         if (oPathCost.find(*sNext) == oPathCost.end() || sNext->g < oPathCost[*sNext]) {
                             oPathCost[*sNext] = sNext->g;
-                            const int nHeuristic = Heuristic(sNextLocation);
+                            sNext.h = Heuristic(sNextLocation);
                             sNext->f = sNext->g + nHeuristic;
                             m_oFrontier.put(sNext, sNext->f);
                         }
