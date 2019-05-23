@@ -11,7 +11,7 @@
 #include <stdio.h>  /* defines FILENAME_MAX */
 
 
-// The fixture for testing class Foo.
+///\brief The fixture for testing class cPlannerTest.
 class cPlannerTest : public ::testing::Test {
 protected:
     // You can remove any or all of the following functions if its body

@@ -11,9 +11,9 @@ namespace planner
     struct tAction
     {
         /// Direction of the action TODO use location struct
-        int nX, nY;
+        int32_t nX, nY;
         /// Step cost, which can be different depending on the direction
-        double fCost;
+        float fCost;
     };
 }
 

@@ -34,9 +34,23 @@ namespace planner {
         void GenerateHeuristic();
 
 
+        ///\brief
         void UpdateHeuristic(tNode *i_sNode) const {
-            i_sNode->h = m_mnHeuristic[i_sNode->sLocation.nX][i_sNode->sLocation.nY];
+            i_sNode->h = m_mnHeuristic[i_sNode->sLocation.nX][i_sNode->sLocation.nY] * 1.f/m_nMaxGradient;
         };
+
+        void HeuristicCheck(tNode *i_sNode) const {
+            float fStepCost = i_sNode->g - i_sNode->psParent->g;
+            //if (!(Heuristic(sNext) <= StepCost + Heuristic(sNext->psParent)))
+            if (!(i_sNode->h <= fStepCost + i_sNode->psParent->h))
+            {
+                std::cout << "Heuristic not consistent: " << i_sNode->h << " > " << fStepCost << " + " << i_sNode->psParent->h << std::endl;
+            }
+        };
+
+        int Heuristic(tNode *i_sNode) const {
+            return m_mnHeuristic[i_sNode->sLocation.nX][i_sNode->sLocation.nY];
+        }
 
         void UpdateCost(tNode *i_sNode) const;
 

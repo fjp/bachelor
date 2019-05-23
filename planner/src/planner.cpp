@@ -164,8 +164,9 @@ namespace planner {
         tNode *sStart = new tNode(m_oRover->Start());
         /// Create hash of the node using its position
         sStart->nId = NodeHash(sStart);
+        UpdateHeuristic(sStart);
 
-        m_oFrontier.put(sStart, 0);
+        m_oFrontier.put(sStart, sStart->h);
 
         /// Get the goal node
         tNode *sGoal = new tNode(m_oRover->Goal());
@@ -189,9 +190,16 @@ namespace planner {
         while (!bFound && !bResign) {
 
             nIteration++;
-            if (nIteration % 100 == 0)
+            if (nIteration % 100000 == 0)
             {
-                std::cout << "Maximum nodes to go " << nNumNodes - nIteration << std::endl;
+                int nMaxNodesToGo = nNumNodes - nIteration;
+                std::cout << "Iteration " << nIteration << ". Maximum nodes to go: " << nMaxNodesToGo
+                << " Best node location (" << m_oFrontier.pop()->sLocation.nX << "," << m_oFrontier.pop()->sLocation.nY << "), heuristic: " << m_oFrontier.pop()->h
+                << ", step cost: " << m_oFrontier.pop()->g - m_oFrontier.pop()->psParent->g
+                << ", path cost: " << m_oFrontier.pop()->g
+                << ", f cost: " << m_oFrontier.pop()->f
+                << std::endl;
+                Plot();
             }
 
             /// Resign if the frontier is empty, which means there are no nodes to expand and the goal has not been found
@@ -216,7 +224,11 @@ namespace planner {
                         if (oPathCost.find(*sNext) == oPathCost.end() || sNext->g < oPathCost[*sNext]) {
                             oPathCost[*sNext] = sNext->g;
                             UpdateHeuristic(sNext);
-                            sNext->f = sNext->g + 0.0*sNext->h;
+
+                            HeuristicCheck(sNext);
+
+
+                            sNext->f = sNext->g + sNext->h;
                             m_oFrontier.put(sNext, sNext->f);
                             //std::cout << "Heuristic " << sNext->h << std::endl;
                             //Plot();
@@ -227,17 +239,20 @@ namespace planner {
         }
 
 
-
-
-        /// Move from the current node back to the start node
-        TraversePath(sCurrent);
-
-
         if (bResign)
         {
             std::cout << "Goal location not found." << std::endl;
             return false;
         }
+
+
+        /// Move from the current node back to the start node
+        TraversePath(sCurrent);
+
+        float nIslandSeconds = sCurrent->g;
+        std::cout << "Travelling will take " << nIslandSeconds << " island seconds on the shortes path." << std::endl;
+        std::cout << "Travelling will take " << nIslandSeconds/60.f << " island minutes on the shortes path." << std::endl;
+        std::cout << "Travelling will take " << nIslandSeconds/60.f/60.f << " island hours on the shortes path." << std::endl;
 
         return true;
     }
@@ -255,7 +270,7 @@ namespace planner {
             float fStepCost = fDeltaS / fV;
 
 
-            /// Update height costs
+            /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
             /// Calculate current gradient in step direction
             int16_t nDeltaHeight =
                     (m_oMap.Elevation(i_sNode->sLocation.nX, i_sNode->sLocation.nY) -
@@ -335,15 +350,15 @@ namespace planner {
                 });
         of.flush();
 #if __APPLE__
-        auto res = system("open pic.bmp");
-        (void)res;
+        //auto res = system("open pic.bmp");
+        //(void)res;
 #endif
     }
 
 
     void cPlanner::TraversePath(tNode *i_psNode) const
     {
-        int nIslandSeconds = 0; // TODO island seconds calculation
+        //uint32_t nIslandSeconds = 0; // TODO island seconds calculation
         uint32_t x, y;
         /// Check if the current node is the start node, which has no parent and is therefore set to NULL
         while (nullptr != i_psNode->psParent) {
@@ -352,8 +367,8 @@ namespace planner {
 
 
             /// Calculate Island seconds (ds = v0 * t + 1/2 * a * t^2
-            int v0 = i_psNode->sAction.fCost;
-            nIslandSeconds += v0; // TODO fix island seconds calculation; must be outside of this loop
+            //float v0 = i_psNode->sAction.fCost;
+            //nIslandSeconds += v0; // TODO fix island seconds calculation; must be outside of this loop
 
             /// Store path in overrides
             m_oMap.SetOverrides(x, y, 0x01);
@@ -362,10 +377,8 @@ namespace planner {
             i_psNode = i_psNode->psParent;
         }
 
+        //return nIslandSeconds;
 
-        std::cout << "Travelling will take " << nIslandSeconds << " island seconds on the shortes path." << std::endl;
-        std::cout << "Travelling will take " << (double)nIslandSeconds/60.0 << " island minutes on the shortes path." << std::endl;
-        std::cout << "Travelling will take " << (double)nIslandSeconds/60.0/60.0 << " island hours on the shortes path." << std::endl;
     }
 
 }

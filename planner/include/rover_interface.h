@@ -33,8 +33,8 @@ namespace planner {
         };
 
 
-        double m_fCostStraight;
-        double m_fCostDiagonal;
+        float m_fCostStraight;
+        float m_fCostDiagonal;
 
         std::string m_astrMovementArrows[Directions];
 
