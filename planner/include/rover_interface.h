@@ -65,6 +65,14 @@ namespace planner {
             m_nStepSize = i_nStepSize;
         }
 
+        uint8_t Velocity() const {
+            return m_nVelocity;
+        }
+
+        void SetVelocity(uint8_t i_nVelocity) {
+            m_nVelocity = i_nVelocity;
+        }
+
     private:
         /// Start location (x,y) of the rover
         tLocation m_sStart;
@@ -74,6 +82,9 @@ namespace planner {
 
         /// Step size of the rover
         uint8_t m_nStepSize;
+
+        /// Speed of the rover
+        uint8_t m_nVelocity;
 
 
 

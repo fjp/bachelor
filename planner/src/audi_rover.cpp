@@ -34,10 +34,12 @@ namespace planner
 
     }
 
-    void cAudiRover::Summon(uint8_t i_nStepSize) {
+    void cAudiRover::Summon(uint8_t i_nStepSize, uint8_t i_nVelocity) {
 
 
         SetStepSize(i_nStepSize);
+
+        SetVelocity(i_nVelocity);
 
         m_oPlanner = new cPlanner(this, *m_oMap); // TODO make unique and delete
 

@@ -32,12 +32,12 @@ namespace planner {
         void GenerateHeuristic();
 
 
-        void UpdateHeuristic(tNode &i_sNode) const {
-            i_sNode.h = m_mnHeuristic[i_sNode.sLocation.nX][i_sNode.sLocation.nY];
+        void UpdateHeuristic(tNode *i_sNode) const {
+            i_sNode->h = m_mnHeuristic[i_sNode->sLocation.nX][i_sNode->sLocation.nY];
         };
 
-        //bool GoalTest(const tNode &i_sFirst, const tNode &i_sSecond) const override;
-        //tNode Child(tNode &i_sParent, const tAction &i_sAction) override;
+        void UpdateCost(tNode *i_sNode) const;
+
 
         ///\brief Test if the provided location i_sLocation lies within the map
         ///\details Checks if the provided location lies within the map height and width
@@ -63,7 +63,7 @@ namespace planner {
         bool Traversable(tNode *i_sCurrent, tNode *i_sNext) const;
 
         ///\brief Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path.
-        ///\details Traversing a path takes place using the m_psParent field of the tNode struct. 
+        ///\details Traversing a path takes place using the m_psParent field of the tNode struct.
         ///\param[in] i_psNode Goal node or any other which is traversed back
         void TraversePath(tNode *i_psNode) const override;
 

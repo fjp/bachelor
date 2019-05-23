@@ -30,7 +30,7 @@ namespace planner {
 
 
         ///\brief The summon feature that the Audi rover provides
-        void Summon(uint8_t i_nStepSize = 1);
+        void Summon(uint8_t i_nStepSize = 1, uint8_t i_nVelocity = 1);
 
 
 

@@ -65,8 +65,8 @@ namespace planner {
     // Generate a Manhattan Heuristic Vector
     void cPlanner::GenerateHeuristic()
     {
-
-        int nD1 = m_oRover->StepSize();
+        /// C
+        int nD1 = m_oRover->StepSize() / m_oRover->Velocity();
         int nD2 = sqrt(2*nD1);
 
         m_mnHeuristic = std::vector<std::vector<int> >(m_oMap.Height(), std::vector<int>(m_oMap.Width()));
@@ -115,8 +115,6 @@ namespace planner {
         sNext->sLocation.nX = i_sParent->sLocation.nX + i_sAction.nX * m_oRover->StepSize();
         sNext->sLocation.nY = i_sParent->sLocation.nY + i_sAction.nY * m_oRover->StepSize();
         sNext->sAction = i_sAction;
-
-        sNext->g = i_sParent->g + i_sAction.fCost * m_oRover->StepSize(); /// TODO gradient cost
         
         /// Calculate hash of node using its location
         sNext->nId = NodeHash(sNext);
@@ -207,18 +205,14 @@ namespace planner {
                     sNextLocation.nY = sNext->sLocation.nY; //sCurrent.sLocation.nY + sAction.nY * m_nStepSize;
 
                     if (Traversable(sCurrent, sNext)) {
-                        /// Calculate current gradient in step direction and normalize it
-                        double fHeightCost =
-                                (m_oMap.Elevation(sNextLocation.nX, sNextLocation.nY) -
-                                 m_oMap.Elevation(sCurrent->sLocation.nX, sCurrent->sLocation.nY)) / m_nMaxGradient;
-                        //std::cout << fHeightCost << std::endl;
-                        sNext->g = sNext->g + fHeightCost; // TODO height cost
+
+                        UpdateCost(sNext);
 
 
                         if (oPathCost.find(*sNext) == oPathCost.end() || sNext->g < oPathCost[*sNext]) {
                             oPathCost[*sNext] = sNext->g;
-                            sNext.h = Heuristic(sNextLocation);
-                            sNext->f = sNext->g + nHeuristic;
+                            UpdateHeuristic(sNext);
+                            sNext->f = sNext->g + sNext->h;
                             m_oFrontier.put(sNext, sNext->f);
                         }
                     }
@@ -238,6 +232,53 @@ namespace planner {
         }
 
         return true;
+    }
+
+    void cPlanner::UpdateCost(tNode *i_sNode) const
+    {
+        tNode *psParent = i_sNode->psParent;
+        if (nullptr != psParent) {
+            /// Rover's normal speed is 1 cell per island second
+            float fV = m_oRover->Velocity();
+            float fDeltaS = m_oRover->StepSize();
+
+            /// Add action (step) cost, which is given in island seconds
+            float fStepCost = (i_sNode->sAction.fCost * fDeltaS) / fV;
+
+
+            /// Update height costs
+            /// Calculate current gradient in step direction
+            int16_t nDeltaHeight =
+                    (m_oMap.Elevation(i_sNode->sLocation.nX, i_sNode->sLocation.nY) -
+                     m_oMap.Elevation(psParent->sLocation.nX, psParent->sLocation.nY));
+
+            float fAlpha = atan(nDeltaHeight / m_oRover->StepSize());
+            float fAlphaAbs = fabs(fAlpha);
+
+            float fHeightCost = 0.f;
+            float fHeightCost2 = 0.f;
+            if (fAlphaAbs > 0.f) {
+                float g = 9.81;
+                float fDen = g * sin(2 * fAlphaAbs);
+                float fA = 2.f * fV / fDen;
+                fHeightCost = -fA + sqrt(fA * fA + 4 * fDeltaS / fDen);
+                fHeightCost2 = -fA - sqrt(fA * fA + 4 * fDeltaS / fDen);
+                //assert(fabs(fHeightCost) >= 1.f);
+
+                if (fAlpha < 0.f) /// Down hill
+                {
+                    fHeightCost *= -1.f;
+                }
+
+            }
+
+
+            float fTime = fStepCost + fHeightCost;
+
+            i_sNode->g = psParent->g + fTime;
+
+        }
+
     }
 
 
