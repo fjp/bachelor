@@ -8,6 +8,8 @@
 
 #include "planner_interface.h"
 
+#include "priority_queue.h"
+
 #include "graph.h"
 
 #include <vector>
@@ -83,6 +85,11 @@ namespace planner {
         uint8_t m_nMaxGradient; ///< Maximum gradient of the map elevation.
 
         std::vector<std::vector<int> > m_mnHeuristic;
+
+        PriorityQueue<tNode*, double> m_oFrontier;
+
+
+        void Plot();
 
 
 

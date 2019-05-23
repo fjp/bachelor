@@ -34,6 +34,7 @@ namespace planner {
         void SetOverrides(int i_nX, int i_nY, uint8_t value);
 
     private:
+    public: // TODO
         uint8_t* m_oElevation;
         uint8_t* m_oOverrides;
 

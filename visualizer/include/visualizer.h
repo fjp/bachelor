@@ -5,6 +5,8 @@
 #include <functional>
 #include <ostream>
 
+#include "constants.h"
+
 namespace visualizer {
 
 // Pixel values
@@ -34,6 +36,12 @@ void writeBMP(
     size_t width,
     size_t height,
     std::function<uint8_t(size_t, size_t, uint8_t)> pixelFilter);
+
+
+    bool donut(int x, int y, int x1, int y1);
+
+
+    bool path(int x, int y, uint8_t* overrides);
 
 
 

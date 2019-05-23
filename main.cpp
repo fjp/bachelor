@@ -3,6 +3,7 @@
 #define DEBUG_FILES
 
 #include "utilities.h"
+#include "visualizer.h"
 
 int main(int argc, char** argv)
 {
@@ -18,7 +19,7 @@ int main(int argc, char** argv)
     }
     auto elevation = loadFile(anchor + "assets" + PATH_SEP + "elevation.data", expectedFileSize);
     auto overrides = loadFile(anchor + "assets" + PATH_SEP + "overrides.data", expectedFileSize);
-    std::ofstream of("pic.bmp", std::ofstream::binary);
+
 
 
     ////////////////////////////
@@ -43,7 +44,7 @@ int main(int argc, char** argv)
 
 
     ////////////////////////////
-
+    std::ofstream of("pic.bmp", std::ofstream::binary);
     visualizer::writeBMP(
         of,
         &elevation[0],
@@ -52,14 +53,14 @@ int main(int argc, char** argv)
         [&] (size_t x, size_t y, uint8_t elevation) {
         
             // Marks interesting positions on the map
-            if (donut(x, y, ROVER_X, ROVER_Y) ||
-                donut(x, y, BACHELOR_X, BACHELOR_Y) ||
-                donut(x, y, WEDDING_X, WEDDING_Y))
+            if (visualizer::donut(x, y, ROVER_X, ROVER_Y) ||
+                visualizer::donut(x, y, BACHELOR_X, BACHELOR_Y) ||
+                visualizer::donut(x, y, WEDDING_X, WEDDING_Y))
             {
                 return uint8_t(visualizer::IPV_PATH);
             }
 
-            if (path(x, y, &overrides[0]))
+            if (visualizer::path(x, y, &overrides[0]))
             {
                 return uint8_t(visualizer::IPV_PATH);
             }

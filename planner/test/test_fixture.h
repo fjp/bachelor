@@ -5,6 +5,7 @@
 #ifndef BACHELORTEST_TEST_FIXTURE_H
 #define BACHELORTEST_TEST_FIXTURE_H
 
+#include "visualizer.h"
 #include "utilities.h"
 
 #include <stdio.h>  /* defines FILENAME_MAX */
@@ -84,14 +85,14 @@ protected:
                 [&] (size_t x, size_t y, uint8_t elevation) {
 
                     // Marks interesting positions on the map
-                    if (donut(x, y, ROVER_X, ROVER_Y) ||
-                        donut(x, y, BACHELOR_X, BACHELOR_Y) ||
-                        donut(x, y, WEDDING_X, WEDDING_Y))
+                    if (visualizer::donut(x, y, ROVER_X, ROVER_Y) ||
+                            visualizer::donut(x, y, BACHELOR_X, BACHELOR_Y) ||
+                            visualizer::donut(x, y, WEDDING_X, WEDDING_Y))
                     {
                         return uint8_t(visualizer::IPV_PATH);
                     }
 
-                    if (path(x, y, &m_oOverrides[0]))
+                    if (visualizer::path(x, y, &m_oOverrides[0]))
                     {
                         return uint8_t(visualizer::IPV_PATH);
                     }

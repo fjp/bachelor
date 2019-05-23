@@ -13,7 +13,10 @@
 #include <cmath>
 
 #include "audi_rover.h"
-#include "priority_queue.h"
+
+
+#include "visualizer.h"
+#include "constants.h"
 
 
 
@@ -72,25 +75,27 @@ namespace planner {
         m_mnHeuristic = std::vector<std::vector<int> >(m_oMap.Height(), std::vector<int>(m_oMap.Width()));
         for (int i = 0; i < m_mnHeuristic.size(); i++) {
             for (int j = 0; j < m_mnHeuristic[0].size(); j++) {
-                int nDeltaX = m_oRover->Goal().nX - i;
-                int nDeltaY = m_oRover->Goal().nY - j;
+                int nDeltaX = std::abs(m_oRover->Goal().nX - i);
+                int nDeltaY = std::abs(m_oRover->Goal().nY - j);
                 // Octile distance
                 int nHeuristicValue = nD1 * (nDeltaX + nDeltaY) + (nD2 - 2*nD1) * std::min(nDeltaX, nDeltaY);
                 // Manhattan Distance
-                //int nHeuristicValue = std::abs(nDeltaX) + std::abs(nDeltaY);
+                //int nHeuristicValue = nDeltaX + nDeltaY;
                 // Chebyshev distance
-                // int nHeuristicValue = std::max(std::abs(nDeltaX), std::abs(nDeltaY));
+                // int nHeuristicValue = std::max(nDeltaX, nDeltaY);
                 // Euclidian Distance
                 // double fHeuristicValue = sqrt(nDeltaX * nDeltaX + nDeltaY * nDeltaY);
+                if (nHeuristicValue < 0)
+                {
+                    int a = 1;
+                }
                 m_mnHeuristic[i][j] = nHeuristicValue;
             }
         }
 
-#ifdef DEBUG_FILES
+//#ifdef DEBUG_FILES
         std::ofstream myfile;
         myfile.open ("heuristic.txt");
-        // Print the robot path
-        //cout << endl;
         for (int i = 0; i < m_mnHeuristic.size(); ++i) {
             for (int j = 0; j < m_mnHeuristic[0].size(); ++j) {
                 myfile << m_mnHeuristic[i][j] << ' ';
@@ -98,7 +103,7 @@ namespace planner {
             myfile << std::endl;
         }
         myfile.close();
-#endif
+//#endif
 
     }
 
@@ -160,10 +165,6 @@ namespace planner {
         /// Create hash of the node using its position
         sStart->nId = NodeHash(sStart);
 
-
-        PriorityQueue<tNode*, double> m_oFrontier;
-
-
         m_oFrontier.put(sStart, 0);
 
         /// Get the goal node
@@ -175,17 +176,23 @@ namespace planner {
         /// Serves as explored (closed) set and cost to reach a node
         std::map<tNode, double> oPathCost;
 
-        /// Initialize start node with cost of zero
+        /// Initialize start node with cost of zero because it does not cost anything to go to it
         oPathCost[*sStart] = 0.0;
 
         // Flags and Counts
         bool bFound = false;
         bool bResign = false;
-        //int count = 0;
+        int nIteration = 0;
+        int nNumNodes = m_oMap.Width() * m_oMap.Height();
 
-        tLocation sNextLocation;
 
         while (!bFound && !bResign) {
+
+            nIteration++;
+            if (nIteration % 100 == 0)
+            {
+                std::cout << "Maximum nodes to go " << nNumNodes - nIteration << std::endl;
+            }
 
             /// Resign if the frontier is empty, which means there are no nodes to expand and the goal has not been found
             if (m_oFrontier.empty()) {
@@ -201,9 +208,6 @@ namespace planner {
                 for (auto sAction : m_oRover->m_asActions) {
                     tNode *sNext = Child(sCurrent, sAction);
 
-                    sNextLocation.nX = sNext->sLocation.nX; //sCurrent.sLocation.nX + sAction.nX * m_nStepSize;
-                    sNextLocation.nY = sNext->sLocation.nY; //sCurrent.sLocation.nY + sAction.nY * m_nStepSize;
-
                     if (Traversable(sCurrent, sNext)) {
 
                         UpdateCost(sNext);
@@ -212,13 +216,17 @@ namespace planner {
                         if (oPathCost.find(*sNext) == oPathCost.end() || sNext->g < oPathCost[*sNext]) {
                             oPathCost[*sNext] = sNext->g;
                             UpdateHeuristic(sNext);
-                            sNext->f = sNext->g + sNext->h;
+                            sNext->f = sNext->g + 0.0*sNext->h;
                             m_oFrontier.put(sNext, sNext->f);
+                            //std::cout << "Heuristic " << sNext->h << std::endl;
+                            //Plot();
                         }
                     }
                 }
             }
         }
+
+
 
 
         /// Move from the current node back to the start node
@@ -234,16 +242,17 @@ namespace planner {
         return true;
     }
 
+
     void cPlanner::UpdateCost(tNode *i_sNode) const
     {
         tNode *psParent = i_sNode->psParent;
         if (nullptr != psParent) {
             /// Rover's normal speed is 1 cell per island second
             float fV = m_oRover->Velocity();
-            float fDeltaS = m_oRover->StepSize();
+            float fDeltaS = i_sNode->sAction.fCost * m_oRover->StepSize();
 
             /// Add action (step) cost, which is given in island seconds
-            float fStepCost = (i_sNode->sAction.fCost * fDeltaS) / fV;
+            float fStepCost = fDeltaS / fV;
 
 
             /// Update height costs
@@ -259,10 +268,11 @@ namespace planner {
             float fHeightCost2 = 0.f;
             if (fAlphaAbs > 0.f) {
                 float g = 9.81;
-                float fDen = g * sin(2 * fAlphaAbs);
-                float fA = 2.f * fV / fDen;
-                fHeightCost = -fA + sqrt(fA * fA + 4 * fDeltaS / fDen);
-                fHeightCost2 = -fA - sqrt(fA * fA + 4 * fDeltaS / fDen);
+                float fDen = g * sin(2.f * fAlphaAbs);
+                fHeightCost = sqrt(4.f * fDeltaS / fDen);
+                //float fA = 2.f * fV / fDen;
+                //fHeightCost = -fA + sqrt(fA * fA + 4 * fDeltaS / fDen);
+                //fHeightCost2 = -fA - sqrt(fA * fA + 4 * fDeltaS / fDen);
                 //assert(fabs(fHeightCost) >= 1.f);
 
                 if (fAlpha < 0.f) /// Down hill
@@ -279,6 +289,55 @@ namespace planner {
 
         }
 
+    }
+
+    void cPlanner::Plot()
+    {
+
+        tNode *sNode = m_oFrontier.pop();
+        TraversePath(sNode);
+
+
+        std::ofstream of("pic.bmp", std::ofstream::binary);
+        visualizer::writeBMP(
+                of,
+                &m_oMap.m_oElevation[0],
+                IMAGE_DIM,
+                IMAGE_DIM,
+                [&] (size_t x, size_t y, uint8_t elevation) {
+
+                    // Marks interesting positions on the map
+                    if (visualizer::donut(x, y, ROVER_X, ROVER_Y) ||
+                            visualizer::donut(x, y, BACHELOR_X, BACHELOR_Y) ||
+                            visualizer::donut(x, y, WEDDING_X, WEDDING_Y))
+                    {
+                        return uint8_t(visualizer::IPV_PATH);
+                    }
+
+                    if (visualizer::path(x, y, &m_oMap.m_oOverrides[0]))
+                    {
+                        return uint8_t(visualizer::IPV_PATH);
+                    }
+
+                    // Signifies water
+                    if ((m_oMap.m_oOverrides[y * IMAGE_DIM + x] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
+                        elevation == 0)
+                    {
+                        return uint8_t(visualizer::IPV_WATER);
+                    }
+
+                    // Signifies normal ground color
+                    if (elevation < visualizer::IPV_ELEVATION_BEGIN)
+                    {
+                        elevation = visualizer::IPV_ELEVATION_BEGIN;
+                    }
+                    return elevation;
+                });
+        of.flush();
+#if __APPLE__
+        auto res = system("open pic.bmp");
+        (void)res;
+#endif
     }
 
 

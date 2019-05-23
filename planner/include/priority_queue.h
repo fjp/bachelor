@@ -32,6 +32,11 @@ namespace planner {
             elements.pop();
             return best_item;
         }
+
+        T pop() {
+            T best_item = elements.top().second;
+            return best_item;
+        }
     };
 }
 
