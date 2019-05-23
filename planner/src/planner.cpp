@@ -107,10 +107,11 @@ namespace planner {
 
     }
 
+
     bool cPlanner::GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const {
         uint nDeltaX = std::abs(i_sFirst->sLocation.nX - i_sSecond->sLocation.nX);
         uint nDeltaY = std::abs(i_sFirst->sLocation.nY - i_sSecond->sLocation.nY);
-        return nDeltaX <= m_oRover->StepSize() && nDeltaY <= m_oRover->StepSize();
+        return nDeltaX < m_oRover->StepSize() && nDeltaY < m_oRover->StepSize();
     }
 
     tNode* cPlanner::Child(tNode *i_sParent, const tAction &i_sAction) const
@@ -285,6 +286,7 @@ namespace planner {
                 float g = 9.81;
                 float fDen = g * sin(2.f * fAlphaAbs);
                 fHeightCost = sqrt(4.f * fDeltaS / fDen);
+                fHeightCost2 = -sqrt(4.f * fDeltaS / fDen);
                 //float fA = 2.f * fV / fDen;
                 //fHeightCost = -fA + sqrt(fA * fA + 4 * fDeltaS / fDen);
                 //fHeightCost2 = -fA - sqrt(fA * fA + 4 * fDeltaS / fDen);

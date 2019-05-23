@@ -8,6 +8,32 @@
 
 #include "test_fixture.h"
 
+
+TEST_F(cPlannerTest, step_cost)
+{
+
+    /// Create Audi rover
+    cAudiRover oAudiRover(&m_oElevation[0], &m_oOverrides[0], IMAGE_DIM, IMAGE_DIM);
+
+    /// Bachelor calls Audi rover
+    oAudiRover.SetStart(tLocation{ROVER_X, ROVER_Y});
+    oAudiRover.SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
+
+
+    cPlanner *poPlanner = static_cast<cPlanner*>(oAudiRover.GetPlanner());
+
+
+    tNode *sNode1 = new tNode;
+    tNode *sNode2 = new tNode;
+    bool bGoalReached = poPlanner->GoalTest(sNode1, sNode2);
+
+
+    // TODO assert if path does not match
+
+    // TODO output time it took the rover to get to its goal locations (unit island seconds)
+
+}
+
 TEST_F(cPlannerTest, rover_to_bachelor)
 {
 
@@ -17,7 +43,7 @@ TEST_F(cPlannerTest, rover_to_bachelor)
     /// Bachelor calls Audi rover
     oAudiRover.SetStart(tLocation{ROVER_X, ROVER_Y});
     oAudiRover.SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
-    oAudiRover.Summon();
+    oAudiRover.Summon(2);
     
 
     // TODO assert if path does not match

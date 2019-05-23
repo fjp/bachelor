@@ -35,7 +35,7 @@ namespace planner {
 
 
     private:
-        cPlannerInterface<8> *m_oPlanner;
+        //cPlannerInterface<8> *m_oPlanner;
 
         cGraph *m_oMap; // TODO change to cMap
 

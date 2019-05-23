@@ -65,7 +65,7 @@ namespace planner {
         ///\param[in] i_sFirst could be the current node that needs to be checked.
         ///\param[in] i_sSecond could be the goal node.
         ///\return true or false if the two nodes are equal.
-        bool GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const override;
+        virtual bool GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const override;
 
         ///\brief Generate a successor node state given a node i_sParent and action i_sAction.
         ///\details Overrides method of the base class inteface cPlannerInterface<size_t Directions>.

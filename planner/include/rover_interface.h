@@ -26,7 +26,7 @@ namespace planner {
 
 
     public:
-        cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(1.4), m_astrMovementArrows{ "E", "NE", "N", "NW", "W", "SW", "S", "SE" }
+        cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(1.4) // TODO cost
         {
 
 
@@ -35,8 +35,6 @@ namespace planner {
 
         float m_fCostStraight;
         float m_fCostDiagonal;
-
-        std::string m_astrMovementArrows[Directions];
 
         std::array<tAction, Directions> m_asActions;
 
@@ -72,6 +70,14 @@ namespace planner {
         void SetVelocity(uint8_t i_nVelocity) {
             m_nVelocity = i_nVelocity;
         }
+
+        cPlannerInterface<Directions> *GetPlanner() const {
+            return m_oPlanner;
+        }
+
+    protected:
+        cPlannerInterface<Directions> *m_oPlanner;
+
 
     private:
         /// Start location (x,y) of the rover
