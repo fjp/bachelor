@@ -1,0 +1,12 @@
+\form#0:$f(n) = g(n) + h(n)$
+\form#1:$g(n)$
+\form#2:$f(n)$
+\form#3:$h(n)$
+\form#4:$n$
+\form#5:$g(parent)$
+\form#6:$c(n)$
+\form#7:$ h(n) <= c(n,p) + h(p)$
+\form#8:$F_G$
+\form#9:\[ F_H = F_G \cdot sin\alpha \rightarrow \]
+\form#10:\[ F_H = F_G \cdot sin\alpha \rightarrow a = g \cdot sin\alpha \\ F_{H,x} \]
+\form#11:\begin{eqnarray*} F_H &= F_G \cdot sin\alpha \rightarrow a = g \cdot sin\alpha \\ F_{H,x} &= a \end{eqnarray*}

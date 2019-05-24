@@ -10,7 +10,7 @@
 
 #include "priority_queue.h"
 
-#include "map.h"
+#include "graph.h"
 
 #include <vector>
 #include <iostream> // TODO remove
@@ -21,7 +21,7 @@ namespace planner {
 
     class cPlanner : public cPlannerInterface<8> {
     public:
-        cPlanner(cRoverInterface<8> *i_poRover, cMap &i_oMap);
+        cPlanner(cRoverInterface<8> *i_poRover, cGraph &i_oMap);
 
         ///\brief
         bool Plan() override;

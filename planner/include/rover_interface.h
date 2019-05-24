@@ -84,7 +84,7 @@ namespace planner {
 
     protected:
         ///\brief Pointer to an abstract planner interface.
-        ///\details A implementation of this interface should initialize m_poPlanner
+        ///\details An implementation of this interface should initialize m_poPlanner
         cPlannerInterface<Directions> *m_poPlanner;
 
 

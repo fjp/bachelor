@@ -35,11 +35,11 @@ int main(int argc, char** argv)
     oAudiRover.Summon(1);
 
 
-    oAudiRover.SetStart({BACHELOR_X, BACHELOR_Y});
-    oAudiRover.SetGoal({WEDDING_X, WEDDING_Y});
+    //oAudiRover.SetStart({BACHELOR_X, BACHELOR_Y});
+    //oAudiRover.SetGoal({WEDDING_X, WEDDING_Y});
 
 
-    oAudiRover.Summon(1);
+    //oAudiRover.Summon(1);
 
 
 

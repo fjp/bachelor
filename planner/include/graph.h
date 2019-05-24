@@ -13,12 +13,12 @@ namespace planner {
     ///\brief The map class cMap has pointers to the elevation.data (m_poElevation) and overrides.data (m_poOverrides).
     ///\details This class is used to check for constraints in the map (e.g. water basins, rivers and marsh,
     ///         which cannot be traversed by the robot. The elevation data is used to model the acceleration of the rover.
-    class cMap {
+    class cGraph {
     public:
         ///\brief Initializes the members m_poElevation, m_poOverrides and the maps height m_nHeight and width m_nWidth.
-        cMap(uint8_t* i_oElevation,
-               uint8_t* i_oOverrides,
-               int i_nHeight, int i_nWidth);
+        cGraph(std::vector<uint8_t> &i_oElevation,
+               std::vector<uint8_t> &i_oOverrides,
+               uint32_t i_nHeight, uint32_t i_nWidth);
 
 
         ///\brief Get elevation at provided location
@@ -37,9 +37,9 @@ namespace planner {
         ///\return Elevation at (i_nX, i_nY).
         uint8_t Overrides(const uint32_t i_nX, const uint32_t i_nY);
 
-        bool Water(const uint32_t i_nX, const uint32_t i_nY);
+        bool Water(uint32_t i_nX, uint32_t i_nY);
 
-        bool Water(const uint32_t i_nX0, const uint32_t i_nY0, const uint32_t i_nX1, const uint32_t i_nY1);
+        bool Water(uint32_t i_nX0, uint32_t i_nY0, const uint32_t i_nX1, const uint32_t i_nY1);
 
         ///\brief Getter for the height of the map, stored in m_nHeight.
         ///\return The total height of the map.
@@ -54,7 +54,7 @@ namespace planner {
         ///\param[in] i_nX X location of the overrides m_poOverrides that should be updated.
         ///\param[in] i_nY Y location of the overrides m_poOverrides that should be updated.
         ///\param[in] i_nValue The or operator is applied to this 8 bit mask value and the current overrides value at (i_nX, i_nY).
-        void SetOverrides(const uint32_t i_nX, const uint32_t i_nY, uint8_t i_nValue);
+        void SetOverrides(uint32_t i_nX, uint32_t i_nY, uint8_t i_nValue);
 
     private:
     public: // TODO

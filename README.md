@@ -1,7 +1,8 @@
 # AID Coding Challenge Solution
 
 This is my solution for the AID Bachelor Coding Challenge. 
-For the problem description refer to the AID [Coding Challenge.pdf](Coding Challenge.pdf).
+For the problem description refer to the AID [Coding Challenge.pdf](../../AID Coding Challenge.pdf). The complete doxygen documentation
+can be found in the doc folder.
 
 # Result
 
@@ -61,9 +62,10 @@ between two locations, see planner::cPlanner::UpdateCost(). In this method
 the pitch angle is calculated next, followed by computing the x component of the downhill-slope force using
 the gravitational force \f$F_G\f$. 
 
-\f[
-F_H = F_G \cdot sin\alpha \rightarrow 
-\f]
+\f{eqnarray*}{
+F_H &= F_G \cdot sin\alpha \rightarrow a = g \cdot sin\alpha \\
+F_{H,x} &= a
+\f}
 
 The rover’s speed is lower uphill. It’s part of the task to model in which way it becomes
 slower.
@@ -72,15 +74,22 @@ which way it becomes faster.
 
 # Time and Space Complexity
 
-I tried to avoid alocating two dimensional vectors of the image size. Instead I am using a priority queue 
+I tried to avoid alocating two dimensional vectors of the image size. Instead I am using a std::priority_queue priority_queue.h 
+(planner::cPlanner::m_poFrontier) and a std::map.
+The priority queue is sorted by the score value of the evaluation function \f$f(n)\f$.
 
 
 # Software Organization and Architecture
-
+\section software
 
 The advantage of using interfaces is to get different implementations with different behavior but keep the public
 interface methods the same. I use two interfaces that reference each other, planner::cRoverInterface and planner::cPlannerInterface.
-
+The planner::cAudiRover implements planner::cRoverInterface and acts as a factory, creating planner::cPlanner in 
+planner::cRoverInterface::InitializePlanner(). To start planning the start and goal positions of the rover need to be set,
+planner::cRoverInterface::SetStart() and planner::cRoverInterface::SetGoal() passing a location struct of type tLocation.
+After the initialization, a call to the method planner::cAudiRover::Summon() invokes the planner::cPlannerInterface::Plan().
+Possible parameters to planner::cAudiRover::Summon() are the step size planner::cRoverInterface::m_nStepSize and its velocity
+planner::cRoverInterface::m_nVelocity (not tested \ref testing).
 
 
 
@@ -89,6 +98,32 @@ interface methods the same. I use two interfaces that reference each other, plan
 For the variable naming conventions, I follow the [MISRA C](https://en.wikipedia.org/wiki/MISRA_C) standard. 
 
 
+# Testing
+\section testing
+
+\bold Note The tests are not completely finished because of the limited time.
+
+I added google gTest version 1.8.0 to the zip file and created a test fixture cPlannerTest in test_fixture.h.
+It is used to initialize the test by loading the evaluation.data and overrides.data files. Furthermore, the
+cAudiRover is initialized in the cPlannerTest::SetUp method. 
+
+
+As explained in \ref software the default values for step size and velocity are set to one for both parameters. I tested with 
+different step sizes to reach the goal faster, thereby verifying that the path and island seconds stay the same. 
+
+To get intermediate paths from the planner::cPlanner::AStar() I used the provided visualizer::writeBMP() inside AStar().
+This results in the following output:
+
+
+
+
 # References
 
-\li 
+\li Artificial Intelligence A Modern Approach Third Edition - Stuart Russel, Peter Norvig
+\li Head First Design Patterns - Eric Freeman, Elisabeth Robson
+\li https://autonomous-driving.org/2018/08/15/so-you-want-to-be-a-self-driving-car-engineer/
+\li https://www.linkedin.com/pulse/software-quality-sami-vaaraniemi/
+\li https://en.wikipedia.org/wiki/A*_search_algorithm
+\li https://en.wikipedia.org/wiki/Consistent_heuristic
+\li https://en.wikipedia.org/wiki/Admissible_heuristic
+\li https://www.redblobgames.com/pathfinding/a-star/introduction.html

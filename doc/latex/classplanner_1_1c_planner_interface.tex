@@ -1,0 +1,51 @@
+\hypertarget{classplanner_1_1c_planner_interface}{}\section{planner\+:\+:c\+Planner\+Interface$<$ Directions $>$ Class Template Reference}
+\label{classplanner_1_1c_planner_interface}\index{planner\+::c\+Planner\+Interface$<$ Directions $>$@{planner\+::c\+Planner\+Interface$<$ Directions $>$}}
+
+
+\mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}} is an abstract interface which can be implemented by concrete planner classes.  
+
+
+
+
+{\ttfamily \#include $<$planner\+\_\+interface.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_interface_aa3c1b1467ed9cc94fb293339c04924d1}\label{classplanner_1_1c_planner_interface_aa3c1b1467ed9cc94fb293339c04924d1}} 
+{\bfseries c\+Planner\+Interface} (\mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ Directions $>$ $\ast$i\+\_\+po\+Rover, \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} \&i\+\_\+o\+Map)
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a3af8b639c6fe090f4013ecefaf31ed21}\label{classplanner_1_1c_planner_interface_a3af8b639c6fe090f4013ecefaf31ed21}} 
+virtual bool {\bfseries Plan} ()=0
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a5c30b547b681b04434102fbcc7c72ea3}\label{classplanner_1_1c_planner_interface_a5c30b547b681b04434102fbcc7c72ea3}} 
+virtual void {\bfseries Traverse\+Path} (\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+ps\+Node) const =0
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_interface_aadc6ccb9088f755bd0ec30046bb79e99}\label{classplanner_1_1c_planner_interface_aadc6ccb9088f755bd0ec30046bb79e99}} 
+virtual bool {\bfseries Goal\+Test} (const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+First, const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+Second) const =0
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a499d8d3b81b0090318f4f2ea044c084c}\label{classplanner_1_1c_planner_interface_a499d8d3b81b0090318f4f2ea044c084c}} 
+virtual \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$ {\bfseries Child} (\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+Parent, const \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}} \&i\+\_\+s\+Action) const =0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a1852a0026adea5745fbb6a0d24fc1d89}\label{classplanner_1_1c_planner_interface_a1852a0026adea5745fbb6a0d24fc1d89}} 
+\mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ Directions $>$ $\ast$ {\bfseries m\+\_\+po\+Rover}
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a5879156b36e10ec8941a6d29617ca7be}\label{classplanner_1_1c_planner_interface_a5879156b36e10ec8941a6d29617ca7be}} 
+\mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} \& {\bfseries m\+\_\+o\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$size\+\_\+t Directions$>$\newline
+class planner\+::c\+Planner\+Interface$<$ Directions $>$}
+
+\mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}} is an abstract interface which can be implemented by concrete planner classes. 
+
+Forward declaration of planner interface. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/fjp/git/bachelor/planner/include/planner\+\_\+interface.\+h\end{DoxyCompactItemize}

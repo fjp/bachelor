@@ -24,14 +24,14 @@ namespace planner {
 
 
 
-    cPlanner::cPlanner(cRoverInterface<8> *i_poRover, cMap &i_oMap)
-    : cPlannerInterface(static_cast<cAudiRover*>(i_poRover), i_oMap) {
+    cPlanner::cPlanner(cRoverInterface<8> *i_poRover, cGraph &i_oMap)
+            : cPlannerInterface(static_cast<cAudiRover*>(i_poRover), i_oMap) {
 
         /// Calculate maximum elevation gradient of the map
         m_nMaxGradient = 0;
-        for (int nY = 0; nY < m_oMap.Height(); ++nY)
+        for (uint32_t nY = 0; nY < m_oMap.Height(); ++nY)
         {
-            for (int nX = 0; nX < m_oMap.Width(); ++nX)
+            for (uint32_t nX = 0; nX < m_oMap.Width(); ++nX)
             {
                 int nGradX = GradX(nX, nY);
                 int nGradY = GradY(nX, nY);

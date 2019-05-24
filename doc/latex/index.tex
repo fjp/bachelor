@@ -1,0 +1,63 @@
+This is my solution for the A\+ID Bachelor Coding Challenge. For the problem description refer to the A\+ID \href{../../AID Coding Challenge.pdf}{\tt Coding Challenge.\+pdf}. The complete doxygen documentation can be found in the doc folder.
+
+\section*{Result}
+
+Travelling from the Rover (R\+O\+V\+E\+R\+\_\+X, R\+O\+V\+E\+R\+\_\+Y) to the Bachelor (B\+A\+C\+H\+E\+L\+O\+R\+\_\+X, B\+A\+C\+H\+E\+L\+O\+R\+\_\+Y) will take 2094.\+51 island seconds (34.\+9085 island minutes or 0.\+581809 island hours) on the shortest path.
+
+Travelling from the Bachelor (B\+A\+C\+H\+E\+L\+O\+R\+\_\+X, B\+A\+C\+H\+E\+L\+O\+R\+\_\+Y) to the Wedding (W\+E\+D\+D\+I\+N\+G\+\_\+X, W\+E\+D\+D\+I\+N\+G\+\_\+Y) will take 1283.\+17 island seconds (21.\+3862 island minutes or 0.\+356436 island hours) on the shortes path.
+
+
+
+\section*{Algorithm Choice}
+
+To find the fastest route from a start to a goal location, I considered Gradient Fields, Dynamic Programming and Graph Search. I decided for A$\ast$ graph search algorithm, which uses Dynamic Programming to find the shortest path. Compared to Dijkstra it utilizes a heuristic $h(n)$ which provides an estimate of the minimum cost from any node n to the goal.
+
+Looking at the map, I deceided against Gradient because of the non convex constraints that are imposed by the fjords.
+
+\subsection*{Cost Function}
+
+The evaluation function $f(n) = g(n) + h(n)$ describes the total cost of a node. It consists of the path cost $g(n)$, which describes how long it takes the rover to get to node $n$ from its start location.
+
+The path cost $g(n)$ is calculated using the parent node\textquotesingle{}s path cost $g(parent)$ and the step cost $c(n)$, which is the cost of getting from the parent to the current node. The step cost is described in the next section \mbox{\hyperlink{index_step-cost}{step-\/cost}}.
+
+Because the robot can move in eight directions (straight and diagonal) I use an octile distance heuristic $h(n)$, implemented in c\+Planner\+::\+Update\+Heuristic(). To get a consistent heuristic, I scaled it using the maximum gradient analyzing the elevation of the map and taking the slope into account. The consistency $ h(n) <= c(n,p) + h(p)$ is checked in planner\+::c\+Planner\+::\+Heuristic\+Check(). I exported the calculated heuristic values using \mbox{\hyperlink{classplanner_1_1c_planner_a1a4650050656545744796296a653d388}{planner\+::c\+Planner\+::\+Generate\+Heuristic()}} in the google test T\+E\+S\+T\+\_\+\+F(c\+Planner\+Test, heuristic) (see, test\+\_\+system.\+cpp).
+
+
+
+\subsection*{Step Cost Model}\hypertarget{index_step-cost}{}\section{step-\/cost}\label{index_step-cost}
+Another task was to model the speed of the rover when driving up or downhill. For this I implemented a simple kinematic approach with an inclined plane to model the elevation.
+
+
+
+
+
+The first step is to calculate the descent or ascent using the height difference between two locations, see \mbox{\hyperlink{classplanner_1_1c_planner_a82e45fc2701e90d3fa9df72f475e455e}{planner\+::c\+Planner\+::\+Update\+Cost()}}. In this method the pitch angle is calculated next, followed by computing the x component of the downhill-\/slope force using the gravitational force $F_G$.
+
+\begin{eqnarray*} F_H &= F_G \cdot sin\alpha \rightarrow a = g \cdot sin\alpha \\ F_{H,x} &= a \end{eqnarray*}
+
+The rover’s speed is lower uphill. It’s part of the task to model in which way it becomes slower.  The rover’s speed gets higher when running downhill. It’s part of the task to model in which way it becomes faster.
+
+\section*{Time and Space Complexity}
+
+I tried to avoid alocating two dimensional vectors of the image size. Instead I am using a std\+::priority\+\_\+queue \mbox{\hyperlink{priority__queue_8h_source}{priority\+\_\+queue.\+h}} (planner\+::c\+Planner\+::m\+\_\+po\+Frontier) and a std\+::map. The priority queue is sorted by the score value of the evaluation function $f(n)$.
+
+\section*{Software Organization and Architecture}\hypertarget{index_software}{}\section{software}\label{index_software}
+The advantage of using interfaces is to get different implementations with different behavior but keep the public interface methods the same. I use two interfaces that reference each other, \mbox{\hyperlink{classplanner_1_1c_rover_interface}{planner\+::c\+Rover\+Interface}} and \mbox{\hyperlink{classplanner_1_1c_planner_interface}{planner\+::c\+Planner\+Interface}}. The \mbox{\hyperlink{classplanner_1_1c_audi_rover}{planner\+::c\+Audi\+Rover}} implements \mbox{\hyperlink{classplanner_1_1c_rover_interface}{planner\+::c\+Rover\+Interface}} and acts as a factory, creating \mbox{\hyperlink{classplanner_1_1c_planner}{planner\+::c\+Planner}} in planner\+::c\+Rover\+Interface\+::\+Initialize\+Planner(). To start planning the start and goal positions of the rover need to be set, planner\+::c\+Rover\+Interface\+::\+Set\+Start() and planner\+::c\+Rover\+Interface\+::\+Set\+Goal() passing a location struct of type t\+Location. After the initialization, a call to the method \mbox{\hyperlink{classplanner_1_1c_audi_rover_a52c48afa0829f858c19d3ecf4940db21}{planner\+::c\+Audi\+Rover\+::\+Summon()}} invokes the planner\+::c\+Planner\+Interface\+::\+Plan(). Possible parameters to \mbox{\hyperlink{classplanner_1_1c_audi_rover_a52c48afa0829f858c19d3ecf4940db21}{planner\+::c\+Audi\+Rover\+::\+Summon()}} are the step size planner\+::c\+Rover\+Interface\+::m\+\_\+n\+Step\+Size and its velocity planner\+::c\+Rover\+Interface\+::m\+\_\+n\+Velocity (not tested \mbox{\hyperlink{index_testing}{testing}}).
+
+\section*{Coding Style}
+
+For the variable naming conventions, I follow the \href{https://en.wikipedia.org/wiki/MISRA_C}{\tt M\+I\+S\+RA C} standard.
+
+\section*{Testing}\hypertarget{index_testing}{}\section{testing}\label{index_testing}
+Note The tests are not completely finished because of the limited time.
+
+I added google g\+Test version 1.\+8.\+0 to the zip file and created a test fixture \mbox{\hyperlink{classc_planner_test}{c\+Planner\+Test}} in \mbox{\hyperlink{test__fixture_8h_source}{test\+\_\+fixture.\+h}}. It is used to initialize the test by loading the evaluation.\+data and overrides.\+data files. Furthermore, the c\+Audi\+Rover is initialized in the \mbox{\hyperlink{classc_planner_test_a88ad8b0e63c66a9d94c7606aa67ef20d}{c\+Planner\+Test\+::\+Set\+Up}} method.
+
+As explained in \mbox{\hyperlink{index_software}{software}} the default values for step size and velocity are set to one for both parameters. I tested with different step sizes to reach the goal faster, thereby verifying that the path and island seconds stay the same.
+
+To get intermediate paths from the planner\+::c\+Planner\+::\+A\+Star() I used the provided visualizer\+::write\+B\+M\+P() inside A\+Star(). This results in the following output\+:
+
+\section*{References}
+
+\begin{DoxyItemize}
+\item Artificial Intelligence A Modern Approach Third Edition -\/ Stuart Russel, Peter Norvig \item Head First Design Patterns -\/ Eric Freeman, Elisabeth Robson \item \href{https://autonomous-driving.org/2018/08/15/so-you-want-to-be-a-self-driving-car-engineer/}{\tt https\+://autonomous-\/driving.\+org/2018/08/15/so-\/you-\/want-\/to-\/be-\/a-\/self-\/driving-\/car-\/engineer/} \item \href{https://www.linkedin.com/pulse/software-quality-sami-vaaraniemi/}{\tt https\+://www.\+linkedin.\+com/pulse/software-\/quality-\/sami-\/vaaraniemi/} \item \href{https://en.wikipedia.org/wiki/A}{\tt https\+://en.\+wikipedia.\+org/wiki/A}$\ast$\+\_\+search\+\_\+algorithm \item \href{https://en.wikipedia.org/wiki/Consistent_heuristic}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Consistent\+\_\+heuristic} \item \href{https://en.wikipedia.org/wiki/Admissible_heuristic}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Admissible\+\_\+heuristic} \item \href{https://www.redblobgames.com/pathfinding/a-star/introduction.html}{\tt https\+://www.\+redblobgames.\+com/pathfinding/a-\/star/introduction.\+html} \end{DoxyItemize}

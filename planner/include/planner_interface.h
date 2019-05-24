@@ -5,7 +5,7 @@
 #ifndef BACHELOR_PLANNERINTERFACE_H
 #define BACHELOR_PLANNERINTERFACE_H
 
-#include "map.h"
+#include "graph.h"
 #include "node.h"
 
 #include <vector>
@@ -25,7 +25,7 @@ namespace planner {
     public:
 
         ///\brief
-        explicit cPlannerInterface(cRoverInterface<Directions> *i_poRover, cMap &i_oMap) : m_poRover(i_poRover), m_oMap(i_oMap) {};
+        explicit cPlannerInterface(cRoverInterface<Directions> *i_poRover, cGraph &i_oMap) : m_poRover(i_poRover), m_oMap(i_oMap) {};
 
         virtual ~cPlannerInterface() {
             if (nullptr != m_poRover)
@@ -44,7 +44,7 @@ namespace planner {
 
     protected:
         cRoverInterface<Directions> *m_poRover;
-        cMap &m_oMap;
+        cGraph &m_oMap;
 
 
     };
