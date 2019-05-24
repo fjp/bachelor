@@ -3,12 +3,28 @@
 This is my solution for the AID Bachelor Coding Challenge. 
 For the problem description refer to the AID [Coding Challenge.pdf](Coding Challenge.pdf).
 
+# Result
+
+Travelling from the Rover (ROVER_X, ROVER_Y) to the Bachelor (BACHELOR_X, BACHELOR_Y) will take
+2094.51 island seconds (34.9085 island minutes or 0.581809 island hours) on the shortest path.
+
+
+
+Travelling from the Bachelor (BACHELOR_X, BACHELOR_Y) to the Wedding (WEDDING_X, WEDDING_Y) will
+take 1283.17 island seconds (21.3862 island minutes or 0.356436 island hours) on the shortes path.
+
+<img src="solution_rover_bachelor_wedding1.jpg" alt="Solution Rover Bachelor Wedding" width="500"/>
+
+
 # Algorithm Choice
 
 To find the fastest route from a start to a goal location, I considered Gradient Fields, 
 Dynamic Programming and Graph Search. I decided for A* graph search algorithm, which uses
-Dynamic Programming to find the shortest path. Compared to Dijkstra it uses a heuristic 
-\f$h(n)\f$ which provides an estimate of the minimum cost from any node n to the goal. Because the robot can move in eight directions (North, East, South, West, North East, South West, North West, South East) I use an octile distance heuristic, as explained here. This heuristic speeds up the time to find a solution because the algorithm starts exploring new nodes in the direction towards the goal.
+Dynamic Programming to find the shortest path. Compared to Dijkstra it utilizes a heuristic 
+\f$h(n)\f$ which provides an estimate of the minimum cost from any node n to the goal. 
+Because the robot can move in eight directions (straight and diagonal) I use an octile distance heuristic, 
+implemented in cPlanner::UpdateHeuristic. The get consistent heuristic, I scaled it using the maximum
+ gradient of the elevation. The consistency \f$ h(n) <= c(n,p) + h(p)\f$ is checked in 
 
 Looking at the map, I deceided against Gradient because of the non convex constraints that are
 imposed by the fjords. 

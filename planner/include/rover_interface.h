@@ -29,7 +29,12 @@ namespace planner {
         cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(1.4) // TODO cost
         {
 
+        };
 
+        virtual ~cRoverInterface() {
+            if (nullptr != m_poPlanner)
+                delete m_poPlanner;
+            m_poPlanner = nullptr;
         };
 
         virtual void InitializePlanner(const uint8_t &i_nStepSize, const uint8_t &i_nVelocity) = 0;

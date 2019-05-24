@@ -10,12 +10,12 @@
 
 #include "planner.h"
 
-#include "graph.h"
+#include "map.h"
 
 namespace planner {
 
 
-    class cAudiRover : public cRoverInterface<8> {
+    class cAudiRover : public cRoverInterface<8>, public std::enable_shared_from_this<cAudiRover> {
 
     public:
         cAudiRover(uint8_t* i_oElevation,
@@ -38,7 +38,7 @@ namespace planner {
     private:
         //cPlannerInterface<8> *m_poPlanner;
 
-        cGraph *m_oMap; // TODO change to cMap
+        cMap *m_oMap; // TODO change to cMap
 
         uint8_t* m_oElevation;
         uint8_t* m_oOverrides;

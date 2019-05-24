@@ -32,7 +32,7 @@ int main(int argc, char** argv)
     oAudiRover.SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
 
 
-    //oAudiRover.Summon(1);
+    oAudiRover.Summon(1);
 
 
     oAudiRover.SetStart({BACHELOR_X, BACHELOR_Y});

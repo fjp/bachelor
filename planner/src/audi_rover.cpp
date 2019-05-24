@@ -15,7 +15,7 @@ namespace planner
             uint8_t* i_oOverrides,
             int i_nHeight, int i_nWidth) : cRoverInterface(), m_oElevation(i_oElevation), m_oOverrides(i_oOverrides) {
 
-        m_oMap = new cGraph(m_oElevation, m_oOverrides, i_nHeight, i_nWidth); // TODO make unique and delete
+        m_oMap = new cMap(m_oElevation, m_oOverrides, i_nHeight, i_nWidth); // TODO make unique and delete
 
 
         // TODO get start values
