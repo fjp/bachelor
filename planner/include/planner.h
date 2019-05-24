@@ -21,9 +21,13 @@ namespace planner {
 
     class cPlanner : public cPlannerInterface<8> {
     public:
-        cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap);
+        cPlanner(cRoverInterface<8> *i_poRover, cGraph &i_oMap);
 
+        ///\brief
         bool Plan() override;
+
+
+        ~cPlanner();
 
 
         enum tHeuristic { MANHATTEN, EUCLIDEAN, OCTILE, CHEBYSHEV };
@@ -43,10 +47,6 @@ namespace planner {
 
 
 
-        //inline void UpdateHeuristic(tNode *i_sNode) const {
-        //    i_sNode->h = m_mfHeuristic[i_sNode->sLocation.nX][i_sNode->sLocation.nY] / static_cast<float>(m_nMaxGradient);
-        //};
-
         void HeuristicCheck(tNode *i_sNode) const {
             float fStepCost = i_sNode->g - i_sNode->psParent->g;
             //if (!(Heuristic(sNext) <= StepCost + Heuristic(sNext->psParent)))
@@ -56,10 +56,12 @@ namespace planner {
             }
         };
 
-        //inline float Heuristic(tNode *i_sNode) const {
-        //    return m_mfHeuristic[i_sNode->sLocation.nX][i_sNode->sLocation.nY];
-        //}
-
+        ///\brief Updates the node argument with its path cost \f$g(n)\f$ with island seconds as its unit.
+        ///\details Uses the slope found from the gradient of the elevation map cMap::m_oElevation to calculate
+        ///         an acceleration value, where only its component in the x,y plane is used.
+        ///         The value is added to the time it takes for a straight or diagonal step (depending on the action of the node).
+        ///         The sum is stored in \f$g(n)\f$ of the node planner::tNode i_sNode.
+        ///\param[in] i_sNode The node which path cost is updated.
         void UpdateCost(tNode *i_sNode) const;
 
 
@@ -109,6 +111,7 @@ namespace planner {
         ///\brief Maximum gradient of the elevation, used to normalize the heuristic values. See UpdateHeuristic(tNode *i_sNode).
         uint8_t m_nMaxGradient;
 
+        ///\brief This value is calculated in the constructor of planner::cPlanner and used to scale the heuristic values.
         float m_fConsistencyFactor;
 
         ///\brief Two by two matrix containing the heuristic values, which are generated in GenerateHeuristic().

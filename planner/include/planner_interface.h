@@ -17,14 +17,14 @@ namespace planner {
     class cRoverInterface;
 
 
-    ///\brief cPlannerInterface is an abstract interface which can be implemented by concrete planners classes.
+    ///\brief cPlannerInterface is an abstract interface which can be implemented by concrete planner classes.
     template <size_t Directions>
     class cPlannerInterface {
 
     public:
 
         ///\brief
-        explicit cPlannerInterface(cRoverInterface<Directions> *i_oRover, cGraph &i_oMap) : m_oRover(i_oRover), m_oMap(i_oMap) {};
+        explicit cPlannerInterface(cRoverInterface<Directions> *i_poRover, cGraph &i_oMap) : m_poRover(i_poRover), m_oMap(i_oMap) {};
 
         virtual bool Plan() = 0;
         virtual void TraversePath(tNode *i_psNode) const = 0;
@@ -35,7 +35,7 @@ namespace planner {
 
 
     protected:
-        cRoverInterface<Directions> *m_oRover;
+        cRoverInterface<Directions> *m_poRover;
         cGraph &m_oMap;
 
 

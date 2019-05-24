@@ -24,13 +24,14 @@ namespace planner {
 
 
 
-    cPlanner::cPlanner(cRoverInterface<8> *i_oRover, cGraph &i_oMap) : cPlannerInterface(static_cast<cAudiRover*>(i_oRover), i_oMap) {
+    cPlanner::cPlanner(cRoverInterface<8> *i_poRover, cGraph &i_oMap)
+            : cPlannerInterface(static_cast<cAudiRover*>(i_poRover), i_oMap) {
 
         /// Calculate maximum elevation gradient of the map
         m_nMaxGradient = 0;
-        for (int nY = 0; nY < m_oMap.Height(); ++nY)
+        for (uint32_t nY = 0; nY < m_oMap.Height(); ++nY)
         {
-            for (int nX = 0; nX < m_oMap.Width(); ++nX)
+            for (uint32_t nX = 0; nX < m_oMap.Width(); ++nX)
             {
                 int nGradX = GradX(nX, nY);
                 int nGradY = GradY(nX, nY);
@@ -45,34 +46,30 @@ namespace planner {
         std::cout << "Max gradient " << (int)m_nMaxGradient << std::endl;
 
 
-        float fAlpha = atan(m_nMaxGradient / static_cast<float>(m_oRover->StepSize()));
+        float fAlpha = atan(m_nMaxGradient / static_cast<float>(m_poRover->StepSize()));
         float fAlphaAbs = fabs(fAlpha);
 
         float g = 9.81;
         float fDen = g * sin(2.f * fAlphaAbs);
-        float fDeltaS = std::max(m_oRover->m_fCostStraight, m_oRover->m_fCostDiagonal) * m_oRover->StepSize();
+        float fDeltaS = std::max(m_poRover->m_fCostStraight, m_poRover->m_fCostDiagonal) * m_poRover->StepSize();
         m_fConsistencyFactor = m_nMaxGradient + ceil(sqrt(4.f * fDeltaS / fDen));
-
-
-
-        //GenerateHeuristic();
 
     }
 
 
     const int32_t cPlanner::GradX(uint32_t i_nX, uint32_t i_nY) const {
-        if(i_nX == m_oRover->StepSize()) {
+        if(i_nX == m_poRover->StepSize()) {
             return m_oMap.Elevation(i_nX, i_nY);
         }
-        return m_oMap.Elevation(i_nX, i_nY) - m_oMap.Elevation(i_nX - m_oRover->StepSize(), i_nY);
+        return m_oMap.Elevation(i_nX, i_nY) - m_oMap.Elevation(i_nX - m_poRover->StepSize(), i_nY);
     }
 
 
     const int32_t cPlanner::GradY(uint32_t i_nX, uint32_t i_nY) const {
-        if(i_nY < m_oRover->StepSize()) {
+        if(i_nY < m_poRover->StepSize()) {
             return m_oMap.Elevation(i_nX, i_nY);
         }
-        return m_oMap.Elevation(i_nX, i_nY) - m_oMap.Elevation(i_nX, i_nY - m_oRover->StepSize());
+        return m_oMap.Elevation(i_nX, i_nY) - m_oMap.Elevation(i_nX, i_nY - m_poRover->StepSize());
     }
 
     float cPlanner::UpdateHeuristic(tNode *i_sNode, const tHeuristic i_eHeuristic) const {
@@ -87,8 +84,8 @@ namespace planner {
     }
 
     float cPlanner::UpdateHeuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic) const {
-        float fDeltaX = std::fabs(m_oRover->Goal().nX - i_sLocation.nX);
-        float fDeltaY = std::fabs(m_oRover->Goal().nY - i_sLocation.nY);
+        float fDeltaX = std::fabs(m_poRover->Goal().nX - i_sLocation.nX);
+        float fDeltaY = std::fabs(m_poRover->Goal().nY - i_sLocation.nY);
 
         float fHeuristicValue = 0.f;
         switch (i_eHeuristic) {
@@ -104,7 +101,7 @@ namespace planner {
             }
             case OCTILE: {
                 /// Octile distance
-                float fD1 = static_cast<float>(m_oRover->StepSize()) / static_cast<float>(m_oRover->Velocity());
+                float fD1 = static_cast<float>(m_poRover->StepSize()) / static_cast<float>(m_poRover->Velocity());
                 float fD2 = sqrt(2.f); // TODO
                 fHeuristicValue = fD1 * (fDeltaX + fDeltaY) + (fD2 - 2.f * fD1) * std::min(fDeltaX, fDeltaY);
                 break;
@@ -144,15 +141,15 @@ namespace planner {
 
         uint nDeltaX = std::abs(i_sFirst->sLocation.nX - i_sSecond->sLocation.nX);
         uint nDeltaY = std::abs(i_sFirst->sLocation.nY - i_sSecond->sLocation.nY);
-        return nDeltaX < m_oRover->StepSize() && nDeltaY < m_oRover->StepSize();
+        return nDeltaX < m_poRover->StepSize() && nDeltaY < m_poRover->StepSize();
     }
 
     tNode* cPlanner::Child(tNode *i_sParent, const tAction &i_sAction) const
     {
-        tNode *sNext = new tNode(*i_sParent);
+        tNode* sNext = new tNode(*i_sParent);
         sNext->psParent = i_sParent;
-        sNext->sLocation.nX = i_sParent->sLocation.nX + i_sAction.nX * m_oRover->StepSize();
-        sNext->sLocation.nY = i_sParent->sLocation.nY + i_sAction.nY * m_oRover->StepSize();
+        sNext->sLocation.nX = i_sParent->sLocation.nX + i_sAction.nX * m_poRover->StepSize();
+        sNext->sLocation.nY = i_sParent->sLocation.nY + i_sAction.nY * m_poRover->StepSize();
         sNext->sAction = i_sAction;
         
         /// Calculate hash of node using its location
@@ -200,7 +197,7 @@ namespace planner {
     bool cPlanner::AStar()
     {
         /// Define start node
-        tNode *sStart = new tNode(m_oRover->Start());
+        tNode *sStart = new tNode(m_poRover->Start());
         /// Create hash of the node using its position
         sStart->nId = NodeHash(sStart);
         UpdateHeuristic(sStart);
@@ -208,7 +205,7 @@ namespace planner {
         m_oFrontier.put(sStart, sStart->h);
 
         /// Get the goal node
-        tNode *sGoal = new tNode(m_oRover->Goal());
+        tNode *sGoal = new tNode(m_poRover->Goal());
 
         /// Create current node
         tNode *sCurrent = new tNode();
@@ -231,10 +228,11 @@ namespace planner {
             if (nIteration % 100000 == 0)
             {
                 std::cout << "Iteration " << nIteration
-                << " Best node location (" << m_oFrontier.pop()->sLocation.nX << "," << m_oFrontier.pop()->sLocation.nY << "), heuristic: " << m_oFrontier.pop()->h
-                << ", step cost: " << m_oFrontier.pop()->g - m_oFrontier.pop()->psParent->g
-                << ", path cost: " << m_oFrontier.pop()->g
-                << ", f cost: " << m_oFrontier.pop()->f
+                << ": Best node location (" << m_oFrontier.pop()->sLocation.nX << "," << m_oFrontier.pop()->sLocation.nY
+                << "), \n\t Evaluation function f(n): " << m_oFrontier.pop()->f
+                << ", step cost c(n): " << m_oFrontier.pop()->g - m_oFrontier.pop()->psParent->g
+                << ", path cost g(n): " << m_oFrontier.pop()->g
+                << ", heuristic h(n): " << m_oFrontier.pop()->h
                 << std::endl;
                 //Plot();
             }
@@ -250,7 +248,7 @@ namespace planner {
             if (GoalTest(sCurrent, sGoal)) {
                 bFound = true;
             } else {
-                for (auto sAction : m_oRover->m_asActions) {
+                for (auto sAction : m_poRover->m_asActions) {
                     tNode *sNext = Child(sCurrent, sAction);
 
                     if (Traversable(sCurrent, sNext)) {
@@ -285,14 +283,11 @@ namespace planner {
         TraversePath(sCurrent);
 
         float nIslandSeconds = sCurrent->g;
-        std::cout << "Travelling will take " << nIslandSeconds << " island seconds on the shortes path." << std::endl;
-        std::cout << "Travelling will take " << nIslandSeconds/60.f << " island minutes on the shortes path." << std::endl;
-        std::cout << "Travelling will take " << nIslandSeconds/60.f/60.f << " island hours on the shortes path." << std::endl;
+        std::cout << "Travelling will take " << nIslandSeconds << " island seconds ("
+        << nIslandSeconds/60.0 << " island minutes or " << nIslandSeconds/60.f/60.f << " island hours) on the shortest path. " << std::endl;
 
         return true;
     }
-
-
 
 
     void cPlanner::UpdateCost(tNode *i_sNode) const
@@ -300,8 +295,8 @@ namespace planner {
         tNode *psParent = i_sNode->psParent;
         if (nullptr != psParent) {
             /// Rover's normal speed is 1 cell per island second
-            float fV = m_oRover->Velocity();
-            float fDeltaS = i_sNode->sAction.fCost * m_oRover->StepSize();
+            float fV = m_poRover->Velocity();
+            float fDeltaS = i_sNode->sAction.fCost * m_poRover->StepSize();
 
             /// Add action (step) cost, which is given in island seconds
             float fStepCost = fDeltaS / fV;
@@ -313,7 +308,7 @@ namespace planner {
                     (m_oMap.Elevation(i_sNode->sLocation.nX, i_sNode->sLocation.nY) -
                      m_oMap.Elevation(psParent->sLocation.nX, psParent->sLocation.nY));
 
-            float fAlpha = atan(nDeltaHeight / static_cast<float>(m_oRover->StepSize()));
+            float fAlpha = atan(nDeltaHeight / static_cast<float>(m_poRover->StepSize()));
             float fAlphaAbs = fabs(fAlpha);
 
             float fHeightCost = 0.f;
@@ -413,6 +408,9 @@ namespace planner {
 
     }
 
+    cPlanner::~cPlanner() {
+
+    }
 
 
 }

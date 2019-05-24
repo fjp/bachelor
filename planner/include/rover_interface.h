@@ -29,8 +29,8 @@ namespace planner {
         cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(1.4) // TODO cost
         {
 
-
         };
+
 
         virtual void InitializePlanner(const uint8_t &i_nStepSize, const uint8_t &i_nVelocity) = 0;
 
@@ -79,7 +79,7 @@ namespace planner {
 
     protected:
         ///\brief Pointer to an abstract planner interface.
-        ///\details A implementation of this interface should initialize m_poPlanner
+        ///\details An implementation of this interface should initialize m_poPlanner
         cPlannerInterface<Directions> *m_poPlanner;
 
 

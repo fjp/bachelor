@@ -8,11 +8,12 @@
 
 namespace planner
 {
+    ///\brief Action struct, used to specify the motion direction and the cost it takes to move in that direction.
     struct tAction
     {
-        /// Direction of the action TODO use location struct
+        ///\brief Direction of the action
         int32_t nX, nY;
-        /// Step cost, which can be different depending on the direction
+        ///\brief Step cost, which can be different depending on the direction (straight, diagonal)
         float fCost;
     };
 }

@@ -40,8 +40,8 @@ namespace planner {
 
         cGraph *m_oMap; // TODO change to cMap
 
-        uint8_t* m_oElevation;
-        uint8_t* m_oOverrides;
+        uint8_t* m_poElevation;
+        uint8_t* m_poOverrides;
 
 
 
