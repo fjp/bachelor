@@ -13,14 +13,11 @@ namespace planner
     cAudiRover::cAudiRover(
             uint8_t* i_oElevation,
             uint8_t* i_oOverrides,
-            int i_nHeight, int i_nWidth) : cRoverInterface(), m_poElevation(i_oElevation), m_poOverrides(i_oOverrides) {
+            int i_nHeight, int i_nWidth) : cRoverInterface(), m_oElevation(i_oElevation), m_oOverrides(i_oOverrides)
+            , m_poMap(nullptr), m_fTotalTime(0.f) {
 
-        m_oMap = new cGraph(m_poElevation, m_poOverrides, i_nHeight, i_nWidth); // TODO make unique and delete
+        m_poMap = new cGraph(m_oElevation, m_oOverrides, i_nHeight, i_nWidth);
 
-
-        // TODO get start values
-        //SetStart(0, 0);
-        //SetGoal(10, 10);
 
         /// Define direction and cost of different possible actions
         m_asActions[0] = tAction{ 1, 0, m_fCostStraight };   // E
@@ -34,22 +31,35 @@ namespace planner
 
     }
 
-    void cAudiRover::Summon(const uint8_t i_nStepSize, const uint8_t i_nVelocity) {
+    void cAudiRover::Summon(const int i_nStepSize, const int i_nVelocity) {
 
         InitializePlanner(i_nStepSize, i_nVelocity);
 
-        m_poPlanner->Plan();
+        m_fTotalTime += m_poPlanner->Plan();
 
     }
 
-    void cAudiRover::InitializePlanner(const uint8_t &i_nStepSize, const uint8_t &i_nVelocity) {
+    void cAudiRover::InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) {
 
         SetStepSize(i_nStepSize);
 
         SetVelocity(i_nVelocity);
 
-        m_poPlanner = new cPlanner(this, *m_oMap); // TODO make unique and delete
+        m_poPlanner = new cPlanner(this, *m_poMap);
 
+    }
+
+    cAudiRover::~cAudiRover() {
+        if (nullptr != m_poMap)
+        {
+            delete m_poMap;
+            m_poMap = nullptr;
+        }
+
+    }
+
+    float cAudiRover::TotalTime() const {
+        return m_fTotalTime;
     }
 
 }

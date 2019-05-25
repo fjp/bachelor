@@ -13,48 +13,61 @@
 #include "graph.h"
 
 #include <vector>
-#include <iostream> // TODO remove
 
 
+///\brief Contains the Interfaces and their implementations to solve the Bachelor challenge.
 namespace planner {
 
 
+    ///\brief Implements the planner interface cPlannerInterface<size_t Directions> with an action vector of size eight.
     class cPlanner : public cPlannerInterface<8> {
     public:
+
+        ///\brief Initializes member variables m_poRover and m_oMap and calls CalculateConsistencyFactor().
+        ///\details The
         cPlanner(cRoverInterface<8> *i_poRover, cGraph &i_oMap);
 
-        ///\brief
-        bool Plan() override;
+        ///\brief Destructor to delete the allocated memory.
+        ~cPlanner() {
+
+        };
+
+        ///\brief Override of the base interface cPlannerInterface, which invokes the AStar() search algorithm.
+        ///\returns the time to travel from start to goal if it was found. Otherwise -1 is returned.
+        float Plan() override;
 
 
-        ~cPlanner();
-
-
+        ///\brief Types of heuristics that can be calculated with UpdateHeuristic()
         enum tHeuristic { MANHATTEN, EUCLIDEAN, OCTILE, CHEBYSHEV };
 
-        /// \brief Generate distance heuristic vector member, which is inherited from the cPlannerInterface.
-        /// \details This implementation calculates the octile distance heuristic because the robot can move in
-        ///          eight directions. Other possible gird map heuristics are Manhatten, Chebyshev and Euclidean.
+        /// \brief Output distance heuristic map to file, which is used to generate the Matlab plot.
+        /// \details This implementation calls UpdateHeuristic() to calculate a distance heuristic. Because the robot can move in
+        ///          eight directions the octile distance heuristic is calculated.
+        ///          Other possible gird map heuristics are Manhatten, Chebyshev and Euclidean.
         void GenerateHeuristic();
 
         ///\brief Updates the heuristic value of the node argument i_sNode.
         ///\details Calcualtes a grid map distance heuristic. Can be one of the heuristics defined in tHeuristic.
         ///\param[in] i_sNode the node which heuristic is updated
         ///\param[in] i_eHeuristic the type of heuristic to calculate, see tHeuristic.
+        ///\return The calculated heuristic value.
         float UpdateHeuristic(tNode *i_sNode, const tHeuristic i_eHeuristic = OCTILE) const;
 
+
+        ///\brief Updates the heuristic value of the node located at tlocation i_sLocation.
+        ///\details Calcualtes a grid map distance heuristic. Can be one of the heuristics defined in tHeuristic.
+        ///\param[in] i_sNode the node which heuristic is updated
+        ///\param[in] i_eHeuristic the type of heuristic to calculate, see tHeuristic.
+        ///\return The calculated heuristic value.
         float UpdateHeuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic = OCTILE) const;
 
 
 
-        void HeuristicCheck(tNode *i_sNode) const {
-            float fStepCost = i_sNode->g - i_sNode->psParent->g;
-            //if (!(Heuristic(sNext) <= StepCost + Heuristic(sNext->psParent)))
-            if (!(i_sNode->h <= fStepCost + i_sNode->psParent->h))
-            {
-                std::cout << "Heuristic not consistent: " << i_sNode->h << " > " << fStepCost << " + " << i_sNode->psParent->h << std::endl;
-            }
-        };
+        ///\brief Check if the heuristic of node i_sNode is consistent
+        ///\details Consistency is given if h(n) <= c(n,p) + h(p), where h(p) is the heuristic of the parent node
+        ///         and c(n,p) are the step costs from parent p to node n.
+        ///\param[in] i_sNode the node which heuristic value is tested.
+        void HeuristicCheck(tNode *i_sNode) const;
 
         ///\brief Updates the node argument with its path cost \f$g(n)\f$ with island seconds as its unit.
         ///\details Uses the slope found from the gradient of the elevation map cMap::m_oElevation to calculate
@@ -68,10 +81,13 @@ namespace planner {
         ///\brief Test if the provided location i_sLocation lies within the map
         ///\details Checks if the provided location lies within the map height and width
         ///         and if the location is equal or greater than zero.
+        ///\param[in] i_sLocation the location of type tLocation.
+        ///\returns true if the location i_sLocation lies within the map otherwise false.
         bool WithinMap(const tLocation &i_sLocation) const;
 
         ///\brief Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal.
         ///\details Note that this check takes the step size m_nStepSize of the rover into account.
+        ///         This allows to set a step size greater than one, which can be used for debugging.
         ///\param[in] i_sFirst could be the current node that needs to be checked.
         ///\param[in] i_sSecond could be the goal node.
         ///\return true or false if the two nodes are equal.
@@ -94,10 +110,10 @@ namespace planner {
         void TraversePath(tNode *i_psNode) const override;
 
         ///\brief Calculates the discrete gradient of the map m_poMap in x direction.
-        const int32_t GradX(uint32_t i_nX, uint32_t i_nY) const;
+        const int GradX(int i_nX, int i_nY) const;
 
         ///\brief Calculates the discrete gradient of the map m_poMap in y direction.
-        const int32_t GradY(uint32_t i_nX, uint32_t i_nY) const;
+        const int GradY(int i_nX, int i_nY) const;
 
         ///\brief Calculates the node hash using its location and the width of the map
         ///\details The hash is required to sort the std::map<tNode> oCost of reaching a node,
@@ -106,22 +122,36 @@ namespace planner {
 
     private:
 
-        bool AStar();
+        ///\brief AStar algorithm implementation.
+        ///\details Initializes start, goal and intermediate nodes (sCurrent and sNext). The frontier m_oFrontier
+        ///         is implemented as a priority queue PriorityQueue<tNode*> and initialized with the start node.
+        ///         All other expanded nodes are store in a std::map oPathCost with their currently best g score value.
+        ///         The algorithm makes use of GoalTest(), Child() to generate sucessor nodes given an action,
+        ///         Traversable to check for the constraints imposed by the overrides.data file, cost methods
+        ///         UpdateCost() for the step cost, UpdateHeuristic() while checking for consistency HeuristicCheck().
+        ///         In case the goal node is reached, the method TraversePath() is invoked to move from the goal back
+        ///         to the start node, thereby following the fastest path and setting bit 1 of the overrides map, see
+        ///         planner::cGraph::SetOverrides().
+        ///\returns the time it took to find the fastest path in island seconds.
+        float AStar();
+
+        ///\brief Calculates a consistency factor to get a consistent heuristic h(n) <= c(p,n) + h(p)
+        ///\details Calculates the gradient of the elevation and considers the acceleration on slopes.
+        ///         The result is stored in members m_nMaxGradient and m_fConsistencyFactor.
+        void CalculateConsistencyFactor();
 
         ///\brief Maximum gradient of the elevation, used to normalize the heuristic values. See UpdateHeuristic(tNode *i_sNode).
-        uint8_t m_nMaxGradient;
+        int m_nMaxGradient;
 
-        ///\brief This value is calculated in the constructor of planner::cPlanner and used to scale the heuristic values.
+        ///\brief This value is calculated in the constructor of planner::cPlanner and used to scale the heuristic values to get consistency.
         float m_fConsistencyFactor;
 
-        ///\brief Two by two matrix containing the heuristic values, which are generated in GenerateHeuristic().
-        //std::vector<std::vector<float> > m_mfHeuristic;
 
         ///\brief Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first.
         PriorityQueue<tNode*, double> m_oFrontier;
 
 
-        ///\brief Debug method to plot intermediate paths during planning. Used in Plan()
+        ///\brief Debug method to plot intermediate paths during planning. Used in Plan().
         void Plot();
 
 

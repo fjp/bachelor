@@ -43,6 +43,12 @@ namespace planner {
             T oBestElement = oElements.top().second;
             return oBestElement;
         }
+
+        ///\brief Clear all elements by overriding the struct field oElements.
+        void clear() {
+            oElements = std::priority_queue<PQElement, std::vector<PQElement>,
+                    std::greater<PQElement>>();
+        }
     };
 }
 

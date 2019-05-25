@@ -200,7 +200,7 @@ namespace visualizer {
     bool path(int x, int y, uint8_t* overrides)
     {
 
-        int nPenSize = 1;
+        int nPenSize = 2;
         for (int i = -nPenSize; i < nPenSize; ++i)
         {
             int dx = x - i;

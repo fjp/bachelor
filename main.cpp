@@ -1,9 +1,7 @@
-
-
-#define DEBUG_FILES
-
 #include "utilities.h"
 #include "visualizer.h"
+
+#include <iostream>
 
 int main(int argc, char** argv)
 {
@@ -22,9 +20,8 @@ int main(int argc, char** argv)
 
 
 
-    ////////////////////////////
+    //////////////// Create the Audi rover and use its summon feature ///////////////
 
-    //cAudiRover<const uint8_t* > oAudiRover(&elevation[0], &overrides[0]);
     cAudiRover oAudiRover(&elevation[0], &overrides[0], IMAGE_DIM, IMAGE_DIM);
 
 
@@ -42,8 +39,13 @@ int main(int argc, char** argv)
     oAudiRover.Summon(1);
 
 
+    /// Report the total planning time
 
-    ////////////////////////////
+    float fIslandSeconds = oAudiRover.TotalTime();
+    std::cout << "\nTravelling will take " << fIslandSeconds << " island seconds ("
+              << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
+
+    //////////// Output the found path /////////////////////
     std::ofstream of("pic.bmp", std::ofstream::binary);
     visualizer::writeBMP(
         of,

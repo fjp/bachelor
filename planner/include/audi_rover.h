@@ -15,34 +15,47 @@
 namespace planner {
 
 
+    ///\brief The concrete cAudiRover class implementation of the interface cRoverInterface<size_t Direction>.
+    ///\details Provides eight actions and a summon feature.
     class cAudiRover : public cRoverInterface<8> {
 
     public:
+        ///\brief Receives the map data such as elevation and overrides and generates a map stored in m_oMap.
+        ///\details The action struct array of the interface m_asActions is initialized here together with
+        ///         the individual cost values.
         cAudiRover(uint8_t* i_oElevation,
                    uint8_t* i_oOverrides,
                    int i_nHeight, int i_nWidth);
 
 
-        //void SetStart(int i_nX, int i_nY);
-
-        //void SetGoal(int i_nX, int i_nY);
-
-
 
         ///\brief The summon feature that the Audi rover provides
-        void Summon(uint8_t i_nStepSize = 1, uint8_t i_nVelocity = 1);
+        void Summon(const int i_nStepSize = 1, const int i_nVelocity = 1);
 
-        void InitializePlanner(const uint8_t &i_nStepSize, const uint8_t &i_nVelocity) override;
+        ///\brief Initializes the reference to the planner which is located in the inherited interface.
+        ///\details
+        void InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) override;
+
+
+        ///\brief Destructor to delete the allocated memory of the map.
+        ~cAudiRover();
+
 
 
     private:
-        //cPlannerInterface<8> *m_poPlanner;
+        ///\brief Reference to the map of type cGraph.
+        cGraph *m_poMap;
 
-        cGraph *m_oMap; // TODO change to cMap
+        ///\brief Pointer to the elevation data (rather redundant because it is stored in the map)
+        uint8_t* m_oElevation;
+        ///\brief Pointer to the overrides data, which will also be stored in the map m_oMap.
+        uint8_t* m_oOverrides;
 
-        uint8_t* m_poElevation;
-        uint8_t* m_poOverrides;
-
+        ///\brief Used to calculate the total traveling time, depending on how often the Summon() method gets called.
+        float m_fTotalTime;
+    public:
+        ///\brief Total time in island seconds to travel on the fastest found path by AStar().
+        float TotalTime() const;
 
 
     };

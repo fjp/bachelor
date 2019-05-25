@@ -7,9 +7,10 @@
 
 #include "constants.h"
 
+///\brief Contains functions for plotting overrides data and elevation.
 namespace visualizer {
 
-// Pixel values
+/// Pixel values
 enum ImagePixelValues
 {
     IPV_PATH = 0,               // Results in red in the BMP
@@ -38,9 +39,10 @@ void writeBMP(
     std::function<uint8_t(size_t, size_t, uint8_t)> pixelFilter);
 
 
+    ///\brief Used in the functional from writeBMP to mark a node given its location.
     bool donut(int x, int y, int x1, int y1);
 
-
+    ///\brief Used in the functional from writeBMP to plot the fastest path found by AStar() in cPlanner.
     bool path(int x, int y, uint8_t* overrides);
 
 

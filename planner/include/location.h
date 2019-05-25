@@ -7,6 +7,7 @@
 
 namespace planner
 {
+    ///\brief Data structure used as location information for nodes.
     struct tLocation {
         int nX, nY;
     };

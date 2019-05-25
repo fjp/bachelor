@@ -12,7 +12,7 @@ namespace planner
     struct tAction
     {
         ///\brief Direction of the action
-        int32_t nX, nY;
+        int nX, nY;
         ///\brief Step cost, which can be different depending on the direction (straight, diagonal)
         float fCost;
     };

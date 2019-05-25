@@ -26,19 +26,36 @@ namespace planner {
 
 
     public:
-        cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(1.4) // TODO cost
+        cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(1.4f), m_nStepSize(1), m_nVelocity(1)
         {
 
         };
 
 
-        virtual void InitializePlanner(const uint8_t &i_nStepSize, const uint8_t &i_nVelocity) = 0;
+        ///\brief
+        virtual void InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) = 0;
 
-
-        float m_fCostStraight;
-        float m_fCostDiagonal;
-
+        ///\brief Array that contains the number of actions in which the robot can move. It has a template size parameter Directions.
         std::array<tAction, Directions> m_asActions;
+
+
+        /// Getter and Setter for the private member varialbes
+
+        float CostStraight() const {
+            return m_fCostStraight;
+        }
+
+        float CostDiagonal() const {
+            return m_fCostDiagonal;
+        }
+
+        void SetCostStraight(float i_fCostStraight) {
+            m_fCostStraight = i_fCostStraight;
+        }
+
+        void SetCostDiagonal(float i_fCostDiagonal) {
+            m_fCostDiagonal = i_fCostDiagonal;
+        }
 
 
         inline tLocation &Start() {
@@ -57,19 +74,19 @@ namespace planner {
             m_sGoal = i_sGoal;
         }
 
-        uint8_t StepSize() const {
+        int StepSize() const {
             return m_nStepSize;
         }
 
-        void SetStepSize(uint8_t i_nStepSize) {
+        void SetStepSize(int i_nStepSize) {
             m_nStepSize = i_nStepSize;
         }
 
-        uint8_t Velocity() const {
+        int Velocity() const {
             return m_nVelocity;
         }
 
-        void SetVelocity(uint8_t i_nVelocity) {
+        void SetVelocity(int i_nVelocity) {
             m_nVelocity = i_nVelocity;
         }
 
@@ -79,22 +96,27 @@ namespace planner {
 
     protected:
         ///\brief Pointer to an abstract planner interface.
-        ///\details An implementation of this interface should initialize m_poPlanner
+        ///\details An implementation of this interface should initialize m_poPlanner.
         cPlannerInterface<Directions> *m_poPlanner;
 
 
-    private:
-        ///\brief Start location (x,y) of the rover
+        ///\brief Start location (x,y) of the rover.
         tLocation m_sStart;
 
-        ///\brief Goal location (x,y) of the rover
+        ///\brief Goal location (x,y) of the rover.
         tLocation m_sGoal;
 
-        ///\brief Step size of the rover
-        uint8_t m_nStepSize;
+        ///\brief Step size of the rover, varied to get to the goal quicker.
+        int m_nStepSize;
 
-        ///\brief Speed of the rover
-        uint8_t m_nVelocity;
+        ///\brief Speed of the rover (always set to one, not tested).
+        int m_nVelocity;
+
+        ///\brief Cost to move straight.
+        float m_fCostStraight;
+
+        ///\brief Cost to move diagonal.
+        float m_fCostDiagonal;
 
 
 

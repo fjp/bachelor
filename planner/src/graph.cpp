@@ -6,7 +6,7 @@
 #include <algorithm>
 #include "graph.h"
 
-#include "definitions.h"
+#include "constants.h"
 
 namespace planner
 {

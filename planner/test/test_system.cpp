@@ -21,13 +21,13 @@ TEST_F(cPlannerTest, step_cost)
 
     tNode *sStart = new tNode(tLocation{BACHELOR_X, BACHELOR_Y});
 
-    tAction sAction = { 1, 0, m_poAudiRover->m_fCostStraight };
+    tAction sAction = { 1, 0, m_poAudiRover->CostStraight() };
     tNode *sGoal = poPlanner->Child(sStart, sAction);
     poPlanner->UpdateCost(sGoal);
     EXPECT_EQ(sGoal->g, sAction.fCost) << "Step cost is not equal to action cost";
 
 
-    sAction = { 1, 0, m_poAudiRover->m_fCostDiagonal };
+    sAction = { 1, 0, m_poAudiRover->CostDiagonal() };
     sGoal = poPlanner->Child(sStart, sAction);
     poPlanner->UpdateCost(sGoal);
     EXPECT_EQ(sGoal->g, sAction.fCost) << "Step cost is not equal to action cost";
@@ -38,13 +38,13 @@ TEST_F(cPlannerTest, step_cost)
     poPlanner = static_cast<cPlanner*>(m_poAudiRover->GetPlanner());
 
 
-    sAction = { 1, 0, m_poAudiRover->m_fCostStraight };
+    sAction = { 1, 0, m_poAudiRover->CostStraight() };
     sGoal = poPlanner->Child(sStart, sAction);
     poPlanner->UpdateCost(sGoal);
     EXPECT_EQ(sGoal->g, sAction.fCost) << "Step cost is not equal to action cost";
 
 
-    sAction = { 1, 0, m_poAudiRover->m_fCostDiagonal };
+    sAction = { 1, 0, m_poAudiRover->CostDiagonal() };
     sGoal = poPlanner->Child(sStart, sAction);
     poPlanner->UpdateCost(sGoal);
     EXPECT_EQ(sGoal->g, sAction.fCost) << "Step cost is not equal to action cost";

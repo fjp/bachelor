@@ -15,7 +15,6 @@
 
 
 #include "planner.h"
-#include "structs.h"
 #include "audi_rover.h"
 
 #include "location.h"
