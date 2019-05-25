@@ -1,0 +1,90 @@
+\hypertarget{structplanner_1_1t_node}{}\section{planner\+:\+:t\+Node Struct Reference}
+\label{structplanner_1_1t_node}\index{planner\+::t\+Node@{planner\+::t\+Node}}
+
+
+Node gets expanded while searching for the shortest path.  
+
+
+
+
+{\ttfamily \#include $<$node.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structplanner_1_1t_node_a83ff217ef060b93698045b2357999594}{t\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor which initializes its members to define a start node. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_a6728fd921145674d77dec553aad10824}\label{structplanner_1_1t_node_a6728fd921145674d77dec553aad10824}} 
+\mbox{\hyperlink{structplanner_1_1t_node_a6728fd921145674d77dec553aad10824}{t\+Node}} (const \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \&i\+\_\+s\+Location)
+\begin{DoxyCompactList}\small\item\em Allows to set a location and calls the default constructor (c++11) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_abcbfb81ac371e43234f66072547af049}\label{structplanner_1_1t_node_abcbfb81ac371e43234f66072547af049}} 
+\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} \& \mbox{\hyperlink{structplanner_1_1t_node_abcbfb81ac371e43234f66072547af049}{operator=}} (const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} \&i\+\_\+s\+Node)
+\begin{DoxyCompactList}\small\item\em Assignment operator of the node struct. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_a18891f54e73f974f1142fba95887de98}\label{structplanner_1_1t_node_a18891f54e73f974f1142fba95887de98}} 
+\mbox{\hyperlink{structplanner_1_1t_node_a18891f54e73f974f1142fba95887de98}{t\+Node}} (const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} \&i\+\_\+s\+Node)
+\begin{DoxyCompactList}\small\item\em Copy constructor of the node struct. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structplanner_1_1t_node_a5085f3fcf4a960ed9fe14068f1b5e950}{operator$<$}} (const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} \&i\+\_\+rhs) const
+\begin{DoxyCompactList}\small\item\em Overloads less than operator to provide hasing for this node. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_ad0d6e37475fe4a78abb8f271220c999e}\label{structplanner_1_1t_node_ad0d6e37475fe4a78abb8f271220c999e}} 
+bool \mbox{\hyperlink{structplanner_1_1t_node_ad0d6e37475fe4a78abb8f271220c999e}{operator$>$}} (const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} \&i\+\_\+lhs) const
+\begin{DoxyCompactList}\small\item\em Overloads greater than operator to provide using node identifier n\+Id. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_ae4b20cbcf754ea9e73e8ddc6044db0b2}\label{structplanner_1_1t_node_ae4b20cbcf754ea9e73e8ddc6044db0b2}} 
+uint32\+\_\+t \mbox{\hyperlink{structplanner_1_1t_node_ae4b20cbcf754ea9e73e8ddc6044db0b2}{n\+Id}}
+\begin{DoxyCompactList}\small\item\em Node identifier describes its location and updated with \mbox{\hyperlink{classplanner_1_1c_planner_a5ae4464a4d418cda71f4a8133d592c93}{c\+Planner\+::\+Node\+Hash()}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_ad02a69af312bcc43a9487d2ee09bb2a0}\label{structplanner_1_1t_node_ad02a69af312bcc43a9487d2ee09bb2a0}} 
+float \mbox{\hyperlink{structplanner_1_1t_node_ad02a69af312bcc43a9487d2ee09bb2a0}{f}}
+\begin{DoxyCompactList}\small\item\em Evaluation function $f(n) = g(n) + h(n)$. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_a1cb2b4b2b8eb500d015d1aebd37499ae}\label{structplanner_1_1t_node_a1cb2b4b2b8eb500d015d1aebd37499ae}} 
+float \mbox{\hyperlink{structplanner_1_1t_node_a1cb2b4b2b8eb500d015d1aebd37499ae}{g}}
+\begin{DoxyCompactList}\small\item\em Cost to reach this node $g(n)$, also known as path cost. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_afabc13f803a1548f5875467350666168}\label{structplanner_1_1t_node_afabc13f803a1548f5875467350666168}} 
+float \mbox{\hyperlink{structplanner_1_1t_node_afabc13f803a1548f5875467350666168}{h}}
+\begin{DoxyCompactList}\small\item\em Heuristic value h(n) of this node. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_af13cb3b665f2c03c8b9c764d3fd42b4b}\label{structplanner_1_1t_node_af13cb3b665f2c03c8b9c764d3fd42b4b}} 
+\mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \mbox{\hyperlink{structplanner_1_1t_node_af13cb3b665f2c03c8b9c764d3fd42b4b}{s\+Location}}
+\begin{DoxyCompactList}\small\item\em (x,y) location of the node in the grid map c\+Map. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_aa0d83ee95132d2d2af6a794189411fab}\label{structplanner_1_1t_node_aa0d83ee95132d2d2af6a794189411fab}} 
+\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$ \mbox{\hyperlink{structplanner_1_1t_node_aa0d83ee95132d2d2af6a794189411fab}{ps\+Parent}}
+\begin{DoxyCompactList}\small\item\em Pointer to the parent of the node, which is required to find the best path by traversing back from the goal node. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structplanner_1_1t_node_ad64b2f4aead654e8e187a9bbb0be483c}\label{structplanner_1_1t_node_ad64b2f4aead654e8e187a9bbb0be483c}} 
+\mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}} \mbox{\hyperlink{structplanner_1_1t_node_ad64b2f4aead654e8e187a9bbb0be483c}{s\+Action}}
+\begin{DoxyCompactList}\small\item\em The action that lead to this node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Node gets expanded while searching for the shortest path. 
+
+A node has an identifier n\+Id which is defined by its location \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} (see \mbox{\hyperlink{classplanner_1_1c_planner_a5ae4464a4d418cda71f4a8133d592c93}{c\+Planner\+::\+Node\+Hash()}}). Each node has an associated action s\+Action of type \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}} which describes how this node was reached from its parent node ps\+Parent. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structplanner_1_1t_node_a83ff217ef060b93698045b2357999594}\label{structplanner_1_1t_node_a83ff217ef060b93698045b2357999594}} 
+\index{planner\+::t\+Node@{planner\+::t\+Node}!t\+Node@{t\+Node}}
+\index{t\+Node@{t\+Node}!planner\+::t\+Node@{planner\+::t\+Node}}
+\subsubsection{\texorpdfstring{t\+Node()}{tNode()}}
+{\footnotesize\ttfamily planner\+::t\+Node\+::t\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor which initializes its members to define a start node. 
+
+A start node has its parent ps\+Parent set to nullptr and the zero action associated. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structplanner_1_1t_node_a5085f3fcf4a960ed9fe14068f1b5e950}\label{structplanner_1_1t_node_a5085f3fcf4a960ed9fe14068f1b5e950}} 
+\index{planner\+::t\+Node@{planner\+::t\+Node}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!planner\+::t\+Node@{planner\+::t\+Node}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool planner\+::t\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} \&}]{i\+\_\+rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overloads less than operator to provide hasing for this node. 
+
+The hash of a node is calculated using \mbox{\hyperlink{classplanner_1_1c_planner_a5ae4464a4d418cda71f4a8133d592c93}{c\+Planner\+::\+Node\+Hash()}}. Required for the path cost map std\+::map$<$t\+Node$>$ o\+Path\+Cost used in c\+Planner\+::\+A\+Star(). 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/fjp/git/bachelor/planner/include/node.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,166 @@
+\hypertarget{classplanner_1_1c_graph}{}\section{planner\+:\+:c\+Graph Class Reference}
+\label{classplanner_1_1c_graph}\index{planner\+::c\+Graph@{planner\+::c\+Graph}}
+
+
+The map class c\+Map has pointers to the elevation.\+data (m\+\_\+po\+Elevation) and overrides.\+data (m\+\_\+po\+Overrides).  
+
+
+
+
+{\ttfamily \#include $<$graph.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_graph_a189aeb64fe91fd6dd07f4b068d3b791e}\label{classplanner_1_1c_graph_a189aeb64fe91fd6dd07f4b068d3b791e}} 
+\mbox{\hyperlink{classplanner_1_1c_graph_a189aeb64fe91fd6dd07f4b068d3b791e}{c\+Graph}} (uint8\+\_\+t $\ast$i\+\_\+o\+Elevation, uint8\+\_\+t $\ast$i\+\_\+o\+Overrides, int i\+\_\+n\+Height, int i\+\_\+n\+Width)
+\begin{DoxyCompactList}\small\item\em Initializes the members m\+\_\+po\+Elevation, m\+\_\+po\+Overrides and the maps height m\+\_\+n\+Height and width m\+\_\+n\+Width. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classplanner_1_1c_graph_a0e01eaa240f5e4f5020df2d611ab1994}{Elevation}} (int i\+\_\+nX, int i\+\_\+nY)
+\begin{DoxyCompactList}\small\item\em Get elevation at provided location. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_graph_adf0a3350d15819b92ec14c4596ebf702}\label{classplanner_1_1c_graph_adf0a3350d15819b92ec14c4596ebf702}} 
+uint8\+\_\+t {\bfseries Overrides} (int i\+\_\+nX, int i\+\_\+nY)
+\item 
+bool \mbox{\hyperlink{classplanner_1_1c_graph_a97108b0e05fa547c006d76e749d52f27}{Water}} (int i\+\_\+nX, int i\+\_\+nY)
+\begin{DoxyCompactList}\small\item\em Check if the position is on mainland or water. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classplanner_1_1c_graph_a99935ff4c32d229e6006aaa843a685a9}{Water}} (int i\+\_\+n\+X0, int i\+\_\+n\+Y0, int i\+\_\+n\+X1, int i\+\_\+n\+Y1)
+\begin{DoxyCompactList}\small\item\em Check if the position between the two locations is on mainland or water or goes through it. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classplanner_1_1c_graph_a5c163af76e19303794a908304f3b759e}{Height}} () const
+\begin{DoxyCompactList}\small\item\em Getter for the height of the map, stored in m\+\_\+n\+Height. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classplanner_1_1c_graph_a25e3f4ee33c86a8a0c3a31c42dac7607}{Width}} () const
+\begin{DoxyCompactList}\small\item\em Getter for the width of the map, stored in m\+\_\+n\+Width. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classplanner_1_1c_graph_a6da6e6e269013628aef48245a7787cb9}{Set\+Overrides}} (int i\+\_\+nX, int i\+\_\+nY, uint8\+\_\+t i\+\_\+n\+Value)
+\begin{DoxyCompactList}\small\item\em Sets the provided overrides m\+\_\+po\+Overrides 8 bit value i\+\_\+n\+Value at the provided location while keeping the old value (or operation). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_graph_aea1ab1d83e0e58f454f07a46fc0d40dd}\label{classplanner_1_1c_graph_aea1ab1d83e0e58f454f07a46fc0d40dd}} 
+uint8\+\_\+t $\ast$ \mbox{\hyperlink{classplanner_1_1c_graph_aea1ab1d83e0e58f454f07a46fc0d40dd}{m\+\_\+o\+Elevation}}
+\begin{DoxyCompactList}\small\item\em Elevation over the ground (0-\/255). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_graph_a0794d9865c56cddd3d051e6ea0c1c756}\label{classplanner_1_1c_graph_a0794d9865c56cddd3d051e6ea0c1c756}} 
+uint8\+\_\+t $\ast$ {\bfseries m\+\_\+o\+Overrides}
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_graph_a5bb5ea1aa1709b4530bbf5f931c1f277}\label{classplanner_1_1c_graph_a5bb5ea1aa1709b4530bbf5f931c1f277}} 
+int \mbox{\hyperlink{classplanner_1_1c_graph_a5bb5ea1aa1709b4530bbf5f931c1f277}{m\+\_\+n\+Height}}
+\begin{DoxyCompactList}\small\item\em Stores the height of the map. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_graph_a91f89c2fde0344dc74060297b2d5235e}\label{classplanner_1_1c_graph_a91f89c2fde0344dc74060297b2d5235e}} 
+int \mbox{\hyperlink{classplanner_1_1c_graph_a91f89c2fde0344dc74060297b2d5235e}{m\+\_\+n\+Width}}
+\begin{DoxyCompactList}\small\item\em Stores the width of the map. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The map class c\+Map has pointers to the elevation.\+data (m\+\_\+po\+Elevation) and overrides.\+data (m\+\_\+po\+Overrides). 
+
+This class is used to check for constraints in the map (e.\+g. water basins, rivers and marsh, which cannot be traversed by the robot. The elevation data is used to model the acceleration of the rover. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classplanner_1_1c_graph_a0e01eaa240f5e4f5020df2d611ab1994}\label{classplanner_1_1c_graph_a0e01eaa240f5e4f5020df2d611ab1994}} 
+\index{planner\+::c\+Graph@{planner\+::c\+Graph}!Elevation@{Elevation}}
+\index{Elevation@{Elevation}!planner\+::c\+Graph@{planner\+::c\+Graph}}
+\subsubsection{\texorpdfstring{Elevation()}{Elevation()}}
+{\footnotesize\ttfamily uint8\+\_\+t planner\+::c\+Graph\+::\+Elevation (\begin{DoxyParamCaption}\item[{int}]{i\+\_\+nX,  }\item[{int}]{i\+\_\+nY }\end{DoxyParamCaption})}
+
+
+
+Get elevation at provided location. 
+
+From the read elevation.\+data the 8 bit value is returned. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+nX} & X location of the elevation. \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+nY} & Y location of the elevation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Elevation at (i\+\_\+nX, i\+\_\+nY). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classplanner_1_1c_graph_a5c163af76e19303794a908304f3b759e}\label{classplanner_1_1c_graph_a5c163af76e19303794a908304f3b759e}} 
+\index{planner\+::c\+Graph@{planner\+::c\+Graph}!Height@{Height}}
+\index{Height@{Height}!planner\+::c\+Graph@{planner\+::c\+Graph}}
+\subsubsection{\texorpdfstring{Height()}{Height()}}
+{\footnotesize\ttfamily int planner\+::c\+Graph\+::\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter for the height of the map, stored in m\+\_\+n\+Height. 
+
+\begin{DoxyReturn}{Returns}
+The total height of the map. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classplanner_1_1c_graph_a6da6e6e269013628aef48245a7787cb9}\label{classplanner_1_1c_graph_a6da6e6e269013628aef48245a7787cb9}} 
+\index{planner\+::c\+Graph@{planner\+::c\+Graph}!Set\+Overrides@{Set\+Overrides}}
+\index{Set\+Overrides@{Set\+Overrides}!planner\+::c\+Graph@{planner\+::c\+Graph}}
+\subsubsection{\texorpdfstring{Set\+Overrides()}{SetOverrides()}}
+{\footnotesize\ttfamily void planner\+::c\+Graph\+::\+Set\+Overrides (\begin{DoxyParamCaption}\item[{int}]{i\+\_\+nX,  }\item[{int}]{i\+\_\+nY,  }\item[{uint8\+\_\+t}]{i\+\_\+n\+Value }\end{DoxyParamCaption})}
+
+
+
+Sets the provided overrides m\+\_\+po\+Overrides 8 bit value i\+\_\+n\+Value at the provided location while keeping the old value (or operation). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+nX} & X location of the overrides m\+\_\+po\+Overrides that should be updated. \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+nY} & Y location of the overrides m\+\_\+po\+Overrides that should be updated. \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+n\+Value} & The or operator is applied to this 8 bit mask value and the current overrides value at (i\+\_\+nX, i\+\_\+nY). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classplanner_1_1c_graph_a97108b0e05fa547c006d76e749d52f27}\label{classplanner_1_1c_graph_a97108b0e05fa547c006d76e749d52f27}} 
+\index{planner\+::c\+Graph@{planner\+::c\+Graph}!Water@{Water}}
+\index{Water@{Water}!planner\+::c\+Graph@{planner\+::c\+Graph}}
+\subsubsection{\texorpdfstring{Water()}{Water()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool planner\+::c\+Graph\+::\+Water (\begin{DoxyParamCaption}\item[{int}]{i\+\_\+nX,  }\item[{int}]{i\+\_\+nY }\end{DoxyParamCaption})}
+
+
+
+Check if the position is on mainland or water. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+nX} & X coordinate to be checked for water. \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+nY} & Y coordinate to be checked for water. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the provided position is on water, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classplanner_1_1c_graph_a99935ff4c32d229e6006aaa843a685a9}\label{classplanner_1_1c_graph_a99935ff4c32d229e6006aaa843a685a9}} 
+\index{planner\+::c\+Graph@{planner\+::c\+Graph}!Water@{Water}}
+\index{Water@{Water}!planner\+::c\+Graph@{planner\+::c\+Graph}}
+\subsubsection{\texorpdfstring{Water()}{Water()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool planner\+::c\+Graph\+::\+Water (\begin{DoxyParamCaption}\item[{int}]{i\+\_\+n\+X0,  }\item[{int}]{i\+\_\+n\+Y0,  }\item[{int}]{i\+\_\+n\+X1,  }\item[{int}]{i\+\_\+n\+Y1 }\end{DoxyParamCaption})}
+
+
+
+Check if the position between the two locations is on mainland or water or goes through it. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+nX} & X coordinate to be checked for water. \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+nY} & Y coordinate to be checked for water. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the provided position is on or goes through water, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classplanner_1_1c_graph_a25e3f4ee33c86a8a0c3a31c42dac7607}\label{classplanner_1_1c_graph_a25e3f4ee33c86a8a0c3a31c42dac7607}} 
+\index{planner\+::c\+Graph@{planner\+::c\+Graph}!Width@{Width}}
+\index{Width@{Width}!planner\+::c\+Graph@{planner\+::c\+Graph}}
+\subsubsection{\texorpdfstring{Width()}{Width()}}
+{\footnotesize\ttfamily int planner\+::c\+Graph\+::\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter for the width of the map, stored in m\+\_\+n\+Width. 
+
+\begin{DoxyReturn}{Returns}
+The total width of the map. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/fjp/git/bachelor/planner/include/graph.\+h\item 
+/\+Users/fjp/git/bachelor/planner/src/graph.\+cpp\end{DoxyCompactItemize}

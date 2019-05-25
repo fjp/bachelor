@@ -1,0 +1,78 @@
+\hypertarget{namespacevisualizer}{}\section{visualizer Namespace Reference}
+\label{namespacevisualizer}\index{visualizer@{visualizer}}
+
+
+Contains functions for plotting overrides data and elevation.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structvisualizer_1_1_bitmap}{Bitmap}}
+\item 
+struct \mbox{\hyperlink{structvisualizer_1_1_bitmap_info_header}{Bitmap\+Info\+Header}}
+\item 
+struct \mbox{\hyperlink{structvisualizer_1_1_file_header}{File\+Header}}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacevisualizer_af36cea222d0362709a55b17474afcc8a}\label{namespacevisualizer_af36cea222d0362709a55b17474afcc8a}} 
+enum \mbox{\hyperlink{namespacevisualizer_af36cea222d0362709a55b17474afcc8a}{Image\+Pixel\+Values}} \{ {\bfseries I\+P\+V\+\_\+\+P\+A\+TH} = 0, 
+{\bfseries I\+P\+V\+\_\+\+W\+A\+T\+ER} = 1, 
+{\bfseries I\+P\+V\+\_\+\+E\+L\+E\+V\+A\+T\+I\+O\+N\+\_\+\+B\+E\+G\+IN} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em Pixel values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}{write\+B\+MP}} (std\+::ostream \&out, const uint8\+\_\+t $\ast$elevation\+Data, size\+\_\+t width, size\+\_\+t height, std\+::function$<$ uint8\+\_\+t(size\+\_\+t, size\+\_\+t, uint8\+\_\+t)$>$ pixel\+Filter)
+\item 
+\mbox{\Hypertarget{namespacevisualizer_a54813d6ff1e38d269bf94963e9e51638}\label{namespacevisualizer_a54813d6ff1e38d269bf94963e9e51638}} 
+bool \mbox{\hyperlink{namespacevisualizer_a54813d6ff1e38d269bf94963e9e51638}{donut}} (int x, int y, int x1, int y1)
+\begin{DoxyCompactList}\small\item\em Used in the functional from write\+B\+MP to mark a node given its location. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevisualizer_ab62e3ad6dc8e75a39f1f2927c935948e}\label{namespacevisualizer_ab62e3ad6dc8e75a39f1f2927c935948e}} 
+bool \mbox{\hyperlink{namespacevisualizer_ab62e3ad6dc8e75a39f1f2927c935948e}{path}} (int x, int y, uint8\+\_\+t $\ast$overrides)
+\begin{DoxyCompactList}\small\item\em Used in the functional from write\+B\+MP to plot the fastest path found by A\+Star() in c\+Planner. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevisualizer_a63e82fd57f54a0051c341db82d96b1e4}\label{namespacevisualizer_a63e82fd57f54a0051c341db82d96b1e4}} 
+void {\bfseries write\+B\+MP} (std\+::ostream \&out, size\+\_\+t width, size\+\_\+t height, const uint8\+\_\+t $\ast$pixels, const uint8\+\_\+t $\ast$colormap, size\+\_\+t colormap\+Size, std\+::function$<$ uint8\+\_\+t(size\+\_\+t, size\+\_\+t, uint8\+\_\+t)$>$ pixel\+Filter)
+\item 
+\mbox{\Hypertarget{namespacevisualizer_a9cda773a43b5cf710ef2b1e6db058dab}\label{namespacevisualizer_a9cda773a43b5cf710ef2b1e6db058dab}} 
+uint8\+\_\+t {\bfseries max\+Image} (const uint8\+\_\+t $\ast$pixels, size\+\_\+t width, size\+\_\+t height)
+\item 
+\mbox{\Hypertarget{namespacevisualizer_ac115086a69d45560015dc16c27349a97}\label{namespacevisualizer_ac115086a69d45560015dc16c27349a97}} 
+void {\bfseries set\+Color} (std\+::vector$<$ uint8\+\_\+t $>$ \&vec, size\+\_\+t i, uint8\+\_\+t r, uint8\+\_\+t g, uint8\+\_\+t b)
+\item 
+\mbox{\Hypertarget{namespacevisualizer_a627bff4c6bfe19982566020c2af63497}\label{namespacevisualizer_a627bff4c6bfe19982566020c2af63497}} 
+void {\bfseries blend\+Color} (std\+::vector$<$ uint8\+\_\+t $>$ \&vec, size\+\_\+t start\+Index, size\+\_\+t end\+Index, uint8\+\_\+t start\+Red, uint8\+\_\+t start\+Green, uint8\+\_\+t start\+Blue, uint8\+\_\+t end\+Red, uint8\+\_\+t end\+Green, uint8\+\_\+t end\+Blue)
+\item 
+\mbox{\Hypertarget{namespacevisualizer_a6fd4dbb10bbd0b71f19af0e1806f5836}\label{namespacevisualizer_a6fd4dbb10bbd0b71f19af0e1806f5836}} 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries generate\+Elevation\+Colormap} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains functions for plotting overrides data and elevation. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}\label{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}} 
+\index{visualizer@{visualizer}!write\+B\+MP@{write\+B\+MP}}
+\index{write\+B\+MP@{write\+B\+MP}!visualizer@{visualizer}}
+\subsubsection{\texorpdfstring{write\+B\+M\+P()}{writeBMP()}}
+{\footnotesize\ttfamily void visualizer\+::write\+B\+MP (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const uint8\+\_\+t $\ast$}]{elevation\+Data,  }\item[{size\+\_\+t}]{width,  }\item[{size\+\_\+t}]{height,  }\item[{std\+::function$<$ uint8\+\_\+t(size\+\_\+t, size\+\_\+t, uint8\+\_\+t)$>$}]{pixel\+Filter }\end{DoxyParamCaption})}
+
+A method to write B\+MP file contents to a specified ostream.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & The ostream to use for output. Could be directed into anything \\
+\hline
+{\em elevation\+Data} & Pointer to grid of elevation values. There must be width $\ast$ height such elevation points. \\
+\hline
+{\em width} & The width of the image \\
+\hline
+{\em height} & The height of the image \\
+\hline
+{\em pixel\+Filter} & A passed function or lambda that can change the pixel colormap index at passed x (from the left), and y (from the top) position of the elevation\+Data. See enum Image\+Pixel\+Values above for interesting values to return. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,128 @@
+\hypertarget{classplanner_1_1c_map}{}\section{planner\+:\+:c\+Map Class Reference}
+\label{classplanner_1_1c_map}\index{planner\+::c\+Map@{planner\+::c\+Map}}
+
+
+The map class \mbox{\hyperlink{classplanner_1_1c_map}{c\+Map}} has pointers to the elevation.\+data (m\+\_\+po\+Elevation) and overrides.\+data (m\+\_\+po\+Overrides).  
+
+
+
+
+{\ttfamily \#include $<$map.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_map_aeb77fddb68116b3629ac016ff5e5b1a1}\label{classplanner_1_1c_map_aeb77fddb68116b3629ac016ff5e5b1a1}} 
+\mbox{\hyperlink{classplanner_1_1c_map_aeb77fddb68116b3629ac016ff5e5b1a1}{c\+Map}} (uint8\+\_\+t $\ast$i\+\_\+o\+Elevation, uint8\+\_\+t $\ast$i\+\_\+o\+Overrides, uint32\+\_\+t i\+\_\+n\+Height, uint32\+\_\+t i\+\_\+n\+Width)
+\begin{DoxyCompactList}\small\item\em Initializes the members m\+\_\+po\+Elevation, m\+\_\+po\+Overrides and the maps height m\+\_\+n\+Height and width m\+\_\+n\+Width. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classplanner_1_1c_map_a41c03ff03846e147c24427367b06340e}{Elevation}} (const uint32\+\_\+t i\+\_\+nX, const uint32\+\_\+t i\+\_\+nY)
+\begin{DoxyCompactList}\small\item\em Get elevation at provided location. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_map_a3f73c6d34d454a9c9fc5288e1762e1dc}\label{classplanner_1_1c_map_a3f73c6d34d454a9c9fc5288e1762e1dc}} 
+uint8\+\_\+t {\bfseries Overrides} (const uint32\+\_\+t i\+\_\+nX, const uint32\+\_\+t i\+\_\+nY)
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_map_af3085fcc9b947fe4d4689b7cfe076a14}\label{classplanner_1_1c_map_af3085fcc9b947fe4d4689b7cfe076a14}} 
+bool {\bfseries Water} (uint32\+\_\+t i\+\_\+nX, uint32\+\_\+t i\+\_\+nY)
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_map_a3584f8b50b39db3792497e2f98fb10c4}\label{classplanner_1_1c_map_a3584f8b50b39db3792497e2f98fb10c4}} 
+bool {\bfseries Water} (uint32\+\_\+t i\+\_\+n\+X0, uint32\+\_\+t i\+\_\+n\+Y0, const uint32\+\_\+t i\+\_\+n\+X1, const uint32\+\_\+t i\+\_\+n\+Y1)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classplanner_1_1c_map_a3a2096d9cf11101cca5ff68800a08ae3}{Height}} () const
+\begin{DoxyCompactList}\small\item\em Getter for the height of the map, stored in m\+\_\+n\+Height. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classplanner_1_1c_map_a9bca5070a0adc4101af7e920ff697ecf}{Width}} () const
+\begin{DoxyCompactList}\small\item\em Getter for the width of the map, stored in m\+\_\+n\+Width. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classplanner_1_1c_map_a1f7f25792e872bc588dfd68a60875514}{Set\+Overrides}} (uint32\+\_\+t i\+\_\+nX, uint32\+\_\+t i\+\_\+nY, uint8\+\_\+t i\+\_\+n\+Value)
+\begin{DoxyCompactList}\small\item\em Sets the provided overrides m\+\_\+po\+Overrides 8 bit value i\+\_\+n\+Value at the provided location while keeping the old value (or operation). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_map_afcac1cf385cfe2ba5d4171ede861e71e}\label{classplanner_1_1c_map_afcac1cf385cfe2ba5d4171ede861e71e}} 
+uint8\+\_\+t $\ast$ \mbox{\hyperlink{classplanner_1_1c_map_afcac1cf385cfe2ba5d4171ede861e71e}{m\+\_\+po\+Elevation}}
+\begin{DoxyCompactList}\small\item\em Elevation over the ground (0-\/255). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_map_a2adcce11e9133f25662f1bc3ca00948c}\label{classplanner_1_1c_map_a2adcce11e9133f25662f1bc3ca00948c}} 
+uint8\+\_\+t $\ast$ {\bfseries m\+\_\+po\+Overrides}
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_map_a73e758f9e164dd5d116b1155ad58b40c}\label{classplanner_1_1c_map_a73e758f9e164dd5d116b1155ad58b40c}} 
+uint32\+\_\+t \mbox{\hyperlink{classplanner_1_1c_map_a73e758f9e164dd5d116b1155ad58b40c}{m\+\_\+n\+Height}}
+\begin{DoxyCompactList}\small\item\em Stores the height of the map. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_map_a11b636896573c5fc9088d4ebc8984f28}\label{classplanner_1_1c_map_a11b636896573c5fc9088d4ebc8984f28}} 
+uint32\+\_\+t \mbox{\hyperlink{classplanner_1_1c_map_a11b636896573c5fc9088d4ebc8984f28}{m\+\_\+n\+Width}}
+\begin{DoxyCompactList}\small\item\em Stores the width of the map. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The map class \mbox{\hyperlink{classplanner_1_1c_map}{c\+Map}} has pointers to the elevation.\+data (m\+\_\+po\+Elevation) and overrides.\+data (m\+\_\+po\+Overrides). 
+
+This class is used to check for constraints in the map (e.\+g. water basins, rivers and marsh, which cannot be traversed by the robot. The elevation data is used to model the acceleration of the rover. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classplanner_1_1c_map_a41c03ff03846e147c24427367b06340e}\label{classplanner_1_1c_map_a41c03ff03846e147c24427367b06340e}} 
+\index{planner\+::c\+Map@{planner\+::c\+Map}!Elevation@{Elevation}}
+\index{Elevation@{Elevation}!planner\+::c\+Map@{planner\+::c\+Map}}
+\subsubsection{\texorpdfstring{Elevation()}{Elevation()}}
+{\footnotesize\ttfamily uint8\+\_\+t planner\+::c\+Map\+::\+Elevation (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{i\+\_\+nX,  }\item[{const uint32\+\_\+t}]{i\+\_\+nY }\end{DoxyParamCaption})}
+
+
+
+Get elevation at provided location. 
+
+From the read elevation.\+data the 8 bit value is returned. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+nX} & X location of the elevation. \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+nY} & Y location of the elevation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Elevation at (i\+\_\+nX, i\+\_\+nY). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classplanner_1_1c_map_a3a2096d9cf11101cca5ff68800a08ae3}\label{classplanner_1_1c_map_a3a2096d9cf11101cca5ff68800a08ae3}} 
+\index{planner\+::c\+Map@{planner\+::c\+Map}!Height@{Height}}
+\index{Height@{Height}!planner\+::c\+Map@{planner\+::c\+Map}}
+\subsubsection{\texorpdfstring{Height()}{Height()}}
+{\footnotesize\ttfamily uint32\+\_\+t planner\+::c\+Map\+::\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter for the height of the map, stored in m\+\_\+n\+Height. 
+
+\begin{DoxyReturn}{Returns}
+The total height of the map. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classplanner_1_1c_map_a1f7f25792e872bc588dfd68a60875514}\label{classplanner_1_1c_map_a1f7f25792e872bc588dfd68a60875514}} 
+\index{planner\+::c\+Map@{planner\+::c\+Map}!Set\+Overrides@{Set\+Overrides}}
+\index{Set\+Overrides@{Set\+Overrides}!planner\+::c\+Map@{planner\+::c\+Map}}
+\subsubsection{\texorpdfstring{Set\+Overrides()}{SetOverrides()}}
+{\footnotesize\ttfamily void planner\+::c\+Map\+::\+Set\+Overrides (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{i\+\_\+nX,  }\item[{uint32\+\_\+t}]{i\+\_\+nY,  }\item[{uint8\+\_\+t}]{i\+\_\+n\+Value }\end{DoxyParamCaption})}
+
+
+
+Sets the provided overrides m\+\_\+po\+Overrides 8 bit value i\+\_\+n\+Value at the provided location while keeping the old value (or operation). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+nX} & X location of the overrides m\+\_\+po\+Overrides that should be updated. \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+nY} & Y location of the overrides m\+\_\+po\+Overrides that should be updated. \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+n\+Value} & The or operator is applied to this 8 bit mask value and the current overrides value at (i\+\_\+nX, i\+\_\+nY). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classplanner_1_1c_map_a9bca5070a0adc4101af7e920ff697ecf}\label{classplanner_1_1c_map_a9bca5070a0adc4101af7e920ff697ecf}} 
+\index{planner\+::c\+Map@{planner\+::c\+Map}!Width@{Width}}
+\index{Width@{Width}!planner\+::c\+Map@{planner\+::c\+Map}}
+\subsubsection{\texorpdfstring{Width()}{Width()}}
+{\footnotesize\ttfamily uint32\+\_\+t planner\+::c\+Map\+::\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter for the width of the map, stored in m\+\_\+n\+Width. 
+
+\begin{DoxyReturn}{Returns}
+The total width of the map. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/fjp/git/bachelor/planner/include/map.\+h\item 
+/\+Users/fjp/git/bachelor/planner/src/map.\+cpp\end{DoxyCompactItemize}

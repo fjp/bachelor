@@ -1,0 +1,20 @@
+\form#0:$f(n) = g(n) + h(n)$
+\form#1:$g(n)$
+\form#2:$f(n)$
+\form#3:$h(n)$
+\form#4:$n$
+\form#5:$g(parent)$
+\form#6:$c(n)$
+\form#7:$ h(n) <= c(n,p) + h(p)$
+\form#8:$F_G$
+\form#9:\[ F_H = F_G \cdot sin\alpha \rightarrow \]
+\form#10:\[ F_H = F_G \cdot sin\alpha \rightarrow a = g \cdot sin\alpha \\ F_{H,x} \]
+\form#11:\begin{eqnarray*} F_H &= F_G \cdot sin\alpha \rightarrow a = g \cdot sin\alpha \\ F_{H,x} &= a \end{eqnarray*}
+\form#12:\begin{eqnarray*} F_H &= F_G \cdot sin\alpha \\ a_H &= g \cdot sin\alpha \\ F_{H,x} &= F_H \cdot cos\alpha \\ F_{H,x} = F_H \cdot cos\alpha \cdot sin\alpha = F_G \cdot \frac{1}{2} sin(2\alpha) \\ m \cdot a_x = m \cdot g \cdot \frac{1}{2} sin(2\alpha) \end{eqnarray*}
+\form#13:$a_x$
+\form#14:$\Delta s$
+\form#15:\begin{eqnarray*} \Delta s &= v_0 \cdot t + \frac{1}{2} a_x t^2 \\ \Delta s &= \frac{g}{4} \cdot sin(2\alpha) \cdot t^2 \\ t &= \sqrt(\frac{4 \Delta s}{g \cdot sin(2\alpha}) \end{eqnarray*}
+\form#16:$\sqrt(2)$
+\form#17:$\sqrt 2$
+\form#18:$g$
+\form#19:$ g(n) + h(n) $

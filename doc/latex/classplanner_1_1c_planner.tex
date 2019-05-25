@@ -1,0 +1,309 @@
+\hypertarget{classplanner_1_1c_planner}{}\section{planner\+:\+:c\+Planner Class Reference}
+\label{classplanner_1_1c_planner}\index{planner\+::c\+Planner@{planner\+::c\+Planner}}
+
+
+Implements the planner interface c\+Planner\+Interface$<$size\+\_\+t Directions$>$ with an action vector of size eight.  
+
+
+
+
+{\ttfamily \#include $<$planner.\+h$>$}
+
+Inheritance diagram for planner\+:\+:c\+Planner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classplanner_1_1c_planner}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_a7f6dc4cbb69dd1ede14a67b0a7bd425b}\label{classplanner_1_1c_planner_a7f6dc4cbb69dd1ede14a67b0a7bd425b}} 
+enum \mbox{\hyperlink{classplanner_1_1c_planner_a7f6dc4cbb69dd1ede14a67b0a7bd425b}{t\+Heuristic}} \{ {\bfseries M\+A\+N\+H\+A\+T\+T\+EN}, 
+{\bfseries E\+U\+C\+L\+I\+D\+E\+AN}, 
+{\bfseries O\+C\+T\+I\+LE}, 
+{\bfseries C\+H\+E\+B\+Y\+S\+H\+EV}
+ \}
+\begin{DoxyCompactList}\small\item\em Types of heuristics that can be calculated with \mbox{\hyperlink{classplanner_1_1c_planner_ad32a7c58b885456ced172b66fed854f0}{Update\+Heuristic()}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classplanner_1_1c_planner_a4f425d47b277f000d34df04de9995274}{c\+Planner}} (\mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ 8 $>$ $\ast$i\+\_\+po\+Rover, \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} \&i\+\_\+o\+Map)
+\begin{DoxyCompactList}\small\item\em Initializes member variables m\+\_\+po\+Rover and m\+\_\+o\+Map and calls Calculate\+Consistency\+Factor(). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_aa9ae1109d3c4b7ac19aef2616547654e}\label{classplanner_1_1c_planner_aa9ae1109d3c4b7ac19aef2616547654e}} 
+\mbox{\hyperlink{classplanner_1_1c_planner_aa9ae1109d3c4b7ac19aef2616547654e}{$\sim$c\+Planner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor to delete the allocated memory. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classplanner_1_1c_planner_a7c4defd454429503d4e47b552a5311fb}{Plan}} () override
+\begin{DoxyCompactList}\small\item\em Override of the base interface \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}, which invokes the A\+Star() search algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classplanner_1_1c_planner_a1a4650050656545744796296a653d388}{Generate\+Heuristic}} ()
+\begin{DoxyCompactList}\small\item\em Output distance heuristic map to file, which is used to generate the Matlab plot. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classplanner_1_1c_planner_ad32a7c58b885456ced172b66fed854f0}{Update\+Heuristic}} (\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+Node, const \mbox{\hyperlink{classplanner_1_1c_planner_a7f6dc4cbb69dd1ede14a67b0a7bd425b}{t\+Heuristic}} i\+\_\+e\+Heuristic=O\+C\+T\+I\+LE) const
+\begin{DoxyCompactList}\small\item\em Updates the heuristic value of the node argument i\+\_\+s\+Node. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classplanner_1_1c_planner_a7d5f7f89a10b66f19c0257cbf7f2afbb}{Update\+Heuristic}} (const \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \&i\+\_\+s\+Location, const \mbox{\hyperlink{classplanner_1_1c_planner_a7f6dc4cbb69dd1ede14a67b0a7bd425b}{t\+Heuristic}} i\+\_\+e\+Heuristic=O\+C\+T\+I\+LE) const
+\begin{DoxyCompactList}\small\item\em Updates the heuristic value of the node located at tlocation i\+\_\+s\+Location. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classplanner_1_1c_planner_a8b4f67bd192db4784c6ab95c11e51a16}{Heuristic\+Check}} (\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+Node) const
+\begin{DoxyCompactList}\small\item\em Check if the heuristic of node i\+\_\+s\+Node is consistent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classplanner_1_1c_planner_a82e45fc2701e90d3fa9df72f475e455e}{Update\+Cost}} (\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+Node) const
+\begin{DoxyCompactList}\small\item\em Updates the node argument with its path cost $g(n)$ with island seconds as its unit. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classplanner_1_1c_planner_ac5119e3243d9f6747f1da0ed6d356642}{Within\+Map}} (const \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \&i\+\_\+s\+Location) const
+\begin{DoxyCompactList}\small\item\em Test if the provided location i\+\_\+s\+Location lies within the map. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classplanner_1_1c_planner_a8b241ebd7bb3bde3dd062c50a2a42339}{Goal\+Test}} (const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+First, const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+Second) const override
+\begin{DoxyCompactList}\small\item\em Goal test to check if the two provided nodes i\+\_\+s\+First, i\+\_\+s\+Second are equal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$ \mbox{\hyperlink{classplanner_1_1c_planner_a7ddb18b161e5d59cfe733bce32c31896}{Child}} (\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+Parent, const \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}} \&i\+\_\+s\+Action) const override
+\begin{DoxyCompactList}\small\item\em Generate a successor node state given a node i\+\_\+s\+Parent and action i\+\_\+s\+Action. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classplanner_1_1c_planner_a34b0582ca32cc235837c0b638b39e3af}{Traversable}} (\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+Current, \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+Next) const
+\begin{DoxyCompactList}\small\item\em considers step size of rover and checks if the path is traversable T\+O\+DO improve comment \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classplanner_1_1c_planner_ad9389067cbc3fa6fb1c2efdf3f344664}{Traverse\+Path}} (\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+ps\+Node) const override
+\begin{DoxyCompactList}\small\item\em Given the node i\+\_\+ps\+Node the overrides map m\+\_\+po\+Overrides is updated for displaying the path. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_aa90d751ce544870e4c89494e06fdac6c}\label{classplanner_1_1c_planner_aa90d751ce544870e4c89494e06fdac6c}} 
+const int \mbox{\hyperlink{classplanner_1_1c_planner_aa90d751ce544870e4c89494e06fdac6c}{GradX}} (int i\+\_\+nX, int i\+\_\+nY) const
+\begin{DoxyCompactList}\small\item\em Calculates the discrete gradient of the map m\+\_\+po\+Map in x direction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_a6fd8e8632d78d85ce472322267ba7b36}\label{classplanner_1_1c_planner_a6fd8e8632d78d85ce472322267ba7b36}} 
+const int \mbox{\hyperlink{classplanner_1_1c_planner_a6fd8e8632d78d85ce472322267ba7b36}{GradY}} (int i\+\_\+nX, int i\+\_\+nY) const
+\begin{DoxyCompactList}\small\item\em Calculates the discrete gradient of the map m\+\_\+po\+Map in y direction. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classplanner_1_1c_planner_a5ae4464a4d418cda71f4a8133d592c93}{Node\+Hash}} (const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$i\+\_\+s\+Node) const
+\begin{DoxyCompactList}\small\item\em Calculates the node hash using its location and the width of the map. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Implements the planner interface c\+Planner\+Interface$<$size\+\_\+t Directions$>$ with an action vector of size eight. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classplanner_1_1c_planner_a4f425d47b277f000d34df04de9995274}\label{classplanner_1_1c_planner_a4f425d47b277f000d34df04de9995274}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!c\+Planner@{c\+Planner}}
+\index{c\+Planner@{c\+Planner}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{c\+Planner()}{cPlanner()}}
+{\footnotesize\ttfamily planner\+::c\+Planner\+::c\+Planner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ 8 $>$ $\ast$}]{i\+\_\+po\+Rover,  }\item[{\mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} \&}]{i\+\_\+o\+Map }\end{DoxyParamCaption})}
+
+
+
+Initializes member variables m\+\_\+po\+Rover and m\+\_\+o\+Map and calls Calculate\+Consistency\+Factor(). 
+
+The 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classplanner_1_1c_planner_a7ddb18b161e5d59cfe733bce32c31896}\label{classplanner_1_1c_planner_a7ddb18b161e5d59cfe733bce32c31896}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Child@{Child}}
+\index{Child@{Child}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Child()}{Child()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$ planner\+::c\+Planner\+::\+Child (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$}]{i\+\_\+s\+Parent,  }\item[{const \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}} \&}]{i\+\_\+s\+Action }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate a successor node state given a node i\+\_\+s\+Parent and action i\+\_\+s\+Action. 
+
+Overrides method of the base class inteface c\+Planner\+Interface$<$size\+\_\+t Directions$>$. Defines a new node on the heap and initializes it according to the given action.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+s\+Parent} & node which becomes the parent of the new node. \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+s\+Action} & struct of type \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}} that contains the direction and cost of the action. \\
+\hline
+\end{DoxyParams}
+Calculate hash of node using its location 
+
+Implements \mbox{\hyperlink{classplanner_1_1c_planner_interface_a499d8d3b81b0090318f4f2ea044c084c}{planner\+::c\+Planner\+Interface$<$ 8 $>$}}.
+
+\mbox{\Hypertarget{classplanner_1_1c_planner_a1a4650050656545744796296a653d388}\label{classplanner_1_1c_planner_a1a4650050656545744796296a653d388}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Generate\+Heuristic@{Generate\+Heuristic}}
+\index{Generate\+Heuristic@{Generate\+Heuristic}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Generate\+Heuristic()}{GenerateHeuristic()}}
+{\footnotesize\ttfamily void planner\+::c\+Planner\+::\+Generate\+Heuristic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Output distance heuristic map to file, which is used to generate the Matlab plot. 
+
+This implementation calls \mbox{\hyperlink{classplanner_1_1c_planner_ad32a7c58b885456ced172b66fed854f0}{Update\+Heuristic()}} to calculate a distance heuristic. Because the robot can move in eight directions the octile distance heuristic is calculated. Other possible gird map heuristics are Manhatten, Chebyshev and Euclidean. Output octile distance \mbox{\Hypertarget{classplanner_1_1c_planner_a8b241ebd7bb3bde3dd062c50a2a42339}\label{classplanner_1_1c_planner_a8b241ebd7bb3bde3dd062c50a2a42339}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Goal\+Test@{Goal\+Test}}
+\index{Goal\+Test@{Goal\+Test}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Goal\+Test()}{GoalTest()}}
+{\footnotesize\ttfamily bool planner\+::c\+Planner\+::\+Goal\+Test (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$}]{i\+\_\+s\+First,  }\item[{const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$}]{i\+\_\+s\+Second }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Goal test to check if the two provided nodes i\+\_\+s\+First, i\+\_\+s\+Second are equal. 
+
+Note that this check takes the step size m\+\_\+n\+Step\+Size of the rover into account. This allows to set a step size greater than one, which can be used for debugging. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+s\+First} & could be the current node that needs to be checked. \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+s\+Second} & could be the goal node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false if the two nodes are equal. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classplanner_1_1c_planner_interface_aadc6ccb9088f755bd0ec30046bb79e99}{planner\+::c\+Planner\+Interface$<$ 8 $>$}}.
+
+\mbox{\Hypertarget{classplanner_1_1c_planner_a8b4f67bd192db4784c6ab95c11e51a16}\label{classplanner_1_1c_planner_a8b4f67bd192db4784c6ab95c11e51a16}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Heuristic\+Check@{Heuristic\+Check}}
+\index{Heuristic\+Check@{Heuristic\+Check}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Heuristic\+Check()}{HeuristicCheck()}}
+{\footnotesize\ttfamily void planner\+::c\+Planner\+::\+Heuristic\+Check (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$}]{i\+\_\+s\+Node }\end{DoxyParamCaption}) const}
+
+
+
+Check if the heuristic of node i\+\_\+s\+Node is consistent. 
+
+Consistency is given if h(n) $<$= c(n,p) + h(p), where h(p) is the heuristic of the parent node and c(n,p) are the step costs from parent p to node n. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+s\+Node} & the node which heuristic value is tested. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classplanner_1_1c_planner_a5ae4464a4d418cda71f4a8133d592c93}\label{classplanner_1_1c_planner_a5ae4464a4d418cda71f4a8133d592c93}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Node\+Hash@{Node\+Hash}}
+\index{Node\+Hash@{Node\+Hash}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Node\+Hash()}{NodeHash()}}
+{\footnotesize\ttfamily uint32\+\_\+t planner\+::c\+Planner\+::\+Node\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$}]{i\+\_\+s\+Node }\end{DoxyParamCaption}) const}
+
+
+
+Calculates the node hash using its location and the width of the map. 
+
+The hash is required to sort the std\+::map$<$t\+Node$>$ o\+Cost of reaching a node, which is used in the A\+Star() search algorithm. \mbox{\Hypertarget{classplanner_1_1c_planner_a7c4defd454429503d4e47b552a5311fb}\label{classplanner_1_1c_planner_a7c4defd454429503d4e47b552a5311fb}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Plan@{Plan}}
+\index{Plan@{Plan}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Plan()}{Plan()}}
+{\footnotesize\ttfamily float planner\+::c\+Planner\+::\+Plan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Override of the base interface \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}, which invokes the A\+Star() search algorithm. 
+
+\begin{DoxyReturn}{Returns}
+the time to travel from start to goal if it was found. Otherwise -\/1 is returned. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classplanner_1_1c_planner_interface_a4d8effce5ee5d097a30465280e9416d6}{planner\+::c\+Planner\+Interface$<$ 8 $>$}}.
+
+\mbox{\Hypertarget{classplanner_1_1c_planner_a34b0582ca32cc235837c0b638b39e3af}\label{classplanner_1_1c_planner_a34b0582ca32cc235837c0b638b39e3af}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Traversable@{Traversable}}
+\index{Traversable@{Traversable}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Traversable()}{Traversable()}}
+{\footnotesize\ttfamily bool planner\+::c\+Planner\+::\+Traversable (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$}]{i\+\_\+s\+Current,  }\item[{\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$}]{i\+\_\+s\+Next }\end{DoxyParamCaption}) const}
+
+
+
+considers step size of rover and checks if the path is traversable T\+O\+DO improve comment 
+
+Check if the intermediate locations moving from current node to next are on mainland or water
+
+Next location lies outside the map \mbox{\Hypertarget{classplanner_1_1c_planner_ad9389067cbc3fa6fb1c2efdf3f344664}\label{classplanner_1_1c_planner_ad9389067cbc3fa6fb1c2efdf3f344664}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Traverse\+Path@{Traverse\+Path}}
+\index{Traverse\+Path@{Traverse\+Path}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Traverse\+Path()}{TraversePath()}}
+{\footnotesize\ttfamily void planner\+::c\+Planner\+::\+Traverse\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$}]{i\+\_\+ps\+Node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Given the node i\+\_\+ps\+Node the overrides map m\+\_\+po\+Overrides is updated for displaying the path. 
+
+Traversing a path takes place using the m\+\_\+ps\+Parent field of the \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} struct. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+ps\+Node} & Goal node or any other which is traversed back \\
+\hline
+\end{DoxyParams}
+Check if the current node is the start node, which has no parent and is therefore set to N\+U\+LL
+
+Store path in overrides
+
+Move towards the start 
+
+Implements \mbox{\hyperlink{classplanner_1_1c_planner_interface_a5c30b547b681b04434102fbcc7c72ea3}{planner\+::c\+Planner\+Interface$<$ 8 $>$}}.
+
+\mbox{\Hypertarget{classplanner_1_1c_planner_a82e45fc2701e90d3fa9df72f475e455e}\label{classplanner_1_1c_planner_a82e45fc2701e90d3fa9df72f475e455e}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Update\+Cost@{Update\+Cost}}
+\index{Update\+Cost@{Update\+Cost}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Update\+Cost()}{UpdateCost()}}
+{\footnotesize\ttfamily void planner\+::c\+Planner\+::\+Update\+Cost (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$}]{i\+\_\+s\+Node }\end{DoxyParamCaption}) const}
+
+
+
+Updates the node argument with its path cost $g(n)$ with island seconds as its unit. 
+
+Uses the slope found from the gradient of the elevation map c\+Map\+::m\+\_\+o\+Elevation to calculate an acceleration value, where only its component in the x,y plane is used. The value is added to the time it takes for a straight or diagonal step (depending on the action of the node). The sum is stored in $g(n)$ of the node \mbox{\hyperlink{structplanner_1_1t_node}{planner\+::t\+Node}} i\+\_\+s\+Node. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+s\+Node} & The node which path cost is updated. \\
+\hline
+\end{DoxyParams}
+Rover\textquotesingle{}s normal speed is 1 cell per island second
+
+Add action (step) cost, which is given in island seconds
+
+If the rover is going up or down hill, calculate the acceleration on the inclined plane Calculate current gradient in step direction ~\newline
+ Down hill \mbox{\Hypertarget{classplanner_1_1c_planner_ad32a7c58b885456ced172b66fed854f0}\label{classplanner_1_1c_planner_ad32a7c58b885456ced172b66fed854f0}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Update\+Heuristic@{Update\+Heuristic}}
+\index{Update\+Heuristic@{Update\+Heuristic}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Update\+Heuristic()}{UpdateHeuristic()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float planner\+::c\+Planner\+::\+Update\+Heuristic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $\ast$}]{i\+\_\+s\+Node,  }\item[{const \mbox{\hyperlink{classplanner_1_1c_planner_a7f6dc4cbb69dd1ede14a67b0a7bd425b}{t\+Heuristic}}}]{i\+\_\+e\+Heuristic = {\ttfamily OCTILE} }\end{DoxyParamCaption}) const}
+
+
+
+Updates the heuristic value of the node argument i\+\_\+s\+Node. 
+
+Calcualtes a grid map distance heuristic. Can be one of the heuristics defined in t\+Heuristic. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+s\+Node} & the node which heuristic is updated \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+e\+Heuristic} & the type of heuristic to calculate, see t\+Heuristic. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The calculated heuristic value. 
+\end{DoxyReturn}
+Correct heuristic value to get a consistent heuristic. Required because of moving up or down the hill. \mbox{\Hypertarget{classplanner_1_1c_planner_a7d5f7f89a10b66f19c0257cbf7f2afbb}\label{classplanner_1_1c_planner_a7d5f7f89a10b66f19c0257cbf7f2afbb}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Update\+Heuristic@{Update\+Heuristic}}
+\index{Update\+Heuristic@{Update\+Heuristic}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Update\+Heuristic()}{UpdateHeuristic()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float planner\+::c\+Planner\+::\+Update\+Heuristic (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \&}]{i\+\_\+s\+Location,  }\item[{const \mbox{\hyperlink{classplanner_1_1c_planner_a7f6dc4cbb69dd1ede14a67b0a7bd425b}{t\+Heuristic}}}]{i\+\_\+e\+Heuristic = {\ttfamily OCTILE} }\end{DoxyParamCaption}) const}
+
+
+
+Updates the heuristic value of the node located at tlocation i\+\_\+s\+Location. 
+
+Calcualtes a grid map distance heuristic. Can be one of the heuristics defined in t\+Heuristic. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+s\+Node} & the node which heuristic is updated \\
+\hline
+\mbox{\tt in}  & {\em i\+\_\+e\+Heuristic} & the type of heuristic to calculate, see t\+Heuristic. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The calculated heuristic value. 
+\end{DoxyReturn}
+Manhattan Distance
+
+Euclidian Distance
+
+Octile distance
+
+Euclidian Distance \mbox{\Hypertarget{classplanner_1_1c_planner_ac5119e3243d9f6747f1da0ed6d356642}\label{classplanner_1_1c_planner_ac5119e3243d9f6747f1da0ed6d356642}} 
+\index{planner\+::c\+Planner@{planner\+::c\+Planner}!Within\+Map@{Within\+Map}}
+\index{Within\+Map@{Within\+Map}!planner\+::c\+Planner@{planner\+::c\+Planner}}
+\subsubsection{\texorpdfstring{Within\+Map()}{WithinMap()}}
+{\footnotesize\ttfamily bool planner\+::c\+Planner\+::\+Within\+Map (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \&}]{i\+\_\+s\+Location }\end{DoxyParamCaption}) const}
+
+
+
+Test if the provided location i\+\_\+s\+Location lies within the map. 
+
+Checks if the provided location lies within the map height and width and if the location is equal or greater than zero. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+s\+Location} & the location of type \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the location i\+\_\+s\+Location lies within the map otherwise false. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/fjp/git/bachelor/planner/include/planner.\+h\item 
+/\+Users/fjp/git/bachelor/planner/src/planner.\+cpp\end{DoxyCompactItemize}
