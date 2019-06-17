@@ -12,6 +12,7 @@
 
 #include "location.h"
 #include "action.h"
+#include <cmath>
 
 namespace planner {
 
@@ -26,7 +27,7 @@ namespace planner {
 
 
     public:
-        cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(1.4f), m_nStepSize(1), m_nVelocity(1)
+        cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(sqrt(2)), m_nStepSize(1), m_nVelocity(1)
         {
 
         };
