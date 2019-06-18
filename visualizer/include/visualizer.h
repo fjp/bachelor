@@ -43,7 +43,7 @@ void writeBMP(
     bool donut(int x, int y, int x1, int y1);
 
     ///\brief Used in the functional from writeBMP to plot the fastest path found by AStar() in cPlanner.
-    bool path(int x, int y, uint8_t* overrides);
+    bool path(int x, int y, uint8_t* overrides, int i_nImageDim = IMAGE_DIM);
 
 
 
