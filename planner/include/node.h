@@ -5,6 +5,7 @@
 #ifndef BACHELOR_NODE_H
 #define BACHELOR_NODE_H
 
+#include <memory>
 #include "action.h"
 #include "location.h"
 
@@ -67,7 +68,7 @@ namespace planner {
         tLocation sLocation;
 
         ///\brief Pointer to the parent of the node, which is required to find the best path by traversing back from the goal node.
-        tNode *psParent;
+        std::shared_ptr<tNode> psParent;
 
         /// The action that lead to this node
         tAction sAction;

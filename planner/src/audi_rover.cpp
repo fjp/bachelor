@@ -45,7 +45,7 @@ namespace planner
 
         SetVelocity(i_nVelocity);
 
-        m_poPlanner = new cPlanner(this, *m_poMap);
+        m_poPlanner = std::make_shared<cPlanner>(cPlanner(this, *m_poMap));
 
     }
 

@@ -71,6 +71,7 @@ TEST_F(cPlannerTest, simple_map)
     oImage.flush();
 }
 
+/*
 TEST_F(cPlannerTest, step_cost)
 {
 
@@ -175,3 +176,4 @@ TEST_F(cPlannerTest, heuristic)
 
     poPlanner->GenerateHeuristic();
 }
+*/

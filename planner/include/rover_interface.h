@@ -13,6 +13,7 @@
 #include "location.h"
 #include "action.h"
 #include <cmath>
+#include <memory>
 
 namespace planner {
 
@@ -27,7 +28,7 @@ namespace planner {
 
 
     public:
-        cRoverInterface() : m_fCostStraight(1.0), m_fCostDiagonal(sqrt(2)), m_nStepSize(1), m_nVelocity(1)
+        cRoverInterface() : m_fCostStraight(1.f), m_fCostDiagonal(sqrt(2.f)), m_nStepSize(1), m_nVelocity(1)
         {
 
         };
@@ -91,14 +92,14 @@ namespace planner {
             m_nVelocity = i_nVelocity;
         }
 
-        cPlannerInterface<Directions> *GetPlanner() const {
+        std::shared_ptr<cPlannerInterface<Directions>> GetPlanner() const {
             return m_poPlanner;
         }
 
     protected:
         ///\brief Pointer to an abstract planner interface.
         ///\details An implementation of this interface should initialize m_poPlanner.
-        cPlannerInterface<Directions> *m_poPlanner;
+        std::shared_ptr<cPlannerInterface<Directions>> m_poPlanner;
 
 
         ///\brief Start location (x,y) of the rover.

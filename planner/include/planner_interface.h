@@ -11,6 +11,7 @@
 #include <vector>
 
 #include <cstddef>
+#include <memory>
 
 namespace planner {
 
@@ -37,22 +38,22 @@ namespace planner {
         ///         the start node, which has its parent pointer set to nullptr.
         ///         This method is also used in planner::cPlanner::Plot() to output intermediate paths on an output image.
         ///\param[in] The node which on which we walk back. Usually the goal node.
-        virtual void TraversePath(tNode *i_psNode) const = 0;
+        virtual void TraversePath(std::shared_ptr<tNode> i_psNode) const = 0;
 
 
         ///\brief Test if two nodes are the same, which means the goal is reached.
         ///\details Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface.
-        virtual bool GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const = 0;
+        virtual bool GoalTest(std::shared_ptr<tNode>& i_sFirst, std::shared_ptr<tNode>& i_sSecond) const = 0;
 
         ///\brief Given the action i_sAction and the parent node i_sParent a new node of type tNode is created.
         ///\details Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface.
-        virtual tNode* Child(tNode *i_sParent, const tAction &i_sAction) const = 0;
+        virtual std::shared_ptr<tNode> Child(std::shared_ptr<tNode> i_sParent, const tAction &i_sAction) const = 0;
 
 
         virtual ~cPlannerInterface() {
-            if (nullptr != m_poRover)
-                delete m_poRover;
-            m_poRover = nullptr;
+            //if (nullptr != m_poRover)
+            //    delete m_poRover;
+            //m_poRover = nullptr;
         }
 
 

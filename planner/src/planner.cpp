@@ -42,7 +42,7 @@ namespace planner {
             {
                 int nGradX = GradX(nX, nY);
                 int nGradY = GradY(nX, nY);
-                uint8_t nCurrentMaxGradient = std::max(std::abs(nGradX), std::abs(nGradY));
+                int nCurrentMaxGradient = std::max(std::abs(nGradX), std::abs(nGradY));
                 if (m_nMaxGradient < nCurrentMaxGradient)
                 {
                     m_nMaxGradient = nCurrentMaxGradient;
@@ -65,7 +65,7 @@ namespace planner {
 
 
     const int cPlanner::GradX(int i_nX, int i_nY) const {
-        if(i_nX == m_poRover->StepSize()) {
+        if(i_nX == m_poRover->StepSize() || i_nX == 0) {
             return m_oMap.Elevation(i_nX, i_nY);
         }
         return m_oMap.Elevation(i_nX, i_nY) - m_oMap.Elevation(i_nX - m_poRover->StepSize(), i_nY);
@@ -79,7 +79,7 @@ namespace planner {
         return m_oMap.Elevation(i_nX, i_nY) - m_oMap.Elevation(i_nX, i_nY - m_poRover->StepSize());
     }
 
-    float cPlanner::UpdateHeuristic(tNode *i_sNode, const tHeuristic i_eHeuristic) const {
+    float cPlanner::UpdateHeuristic(std::shared_ptr<tNode> i_sNode, const tHeuristic i_eHeuristic) const {
 
         float fHeuristicValue = UpdateHeuristic(i_sNode->sLocation, i_eHeuristic);
 
@@ -91,8 +91,8 @@ namespace planner {
     }
 
     float cPlanner::UpdateHeuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic) const {
-        float fDeltaX = std::fabs(m_poRover->Goal().nX - i_sLocation.nX);
-        float fDeltaY = std::fabs(m_poRover->Goal().nY - i_sLocation.nY);
+        int fDeltaX = std::abs(m_poRover->Goal().nX - i_sLocation.nX);
+        int fDeltaY = std::abs(m_poRover->Goal().nY - i_sLocation.nY);
 
         float fHeuristicValue = 0.f;
         switch (i_eHeuristic) {
@@ -124,14 +124,81 @@ namespace planner {
 
     }
 
-    void cPlanner::HeuristicCheck(tNode *i_sNode) const {
+    void cPlanner::HeuristicCheck(std::shared_ptr<tNode>& i_sNode) const {
         float fStepCost = i_sNode->g - i_sNode->psParent->g;
         //if (!(Heuristic(sNext) <= StepCost + Heuristic(sNext->psParent)))
-        if (!(i_sNode->h <= fStepCost + i_sNode->psParent->h))
+        //if (!(i_sNode->h <= fStepCost + i_sNode->psParent->h))
+        if (!(i_sNode->psParent->h <= fStepCost + i_sNode->h))
         {
-            std::cout << "Heuristic not consistent: " << i_sNode->h << " > " << fStepCost << " + " << i_sNode->psParent->h << std::endl;
+            //std::cout << "Heuristic not consistent: " << i_sNode->h << " > " << fStepCost << " + " << i_sNode->psParent->h << " = " << fStepCost + i_sNode->psParent->h << std::endl;
+            std::cout << "Heuristic not consistent: " << i_sNode->psParent->h << " > " << fStepCost << " + " << i_sNode->h << " = " << fStepCost + i_sNode->h << std::endl;
         }
-    };
+    }
+
+
+    void cPlanner::UpdateCost(std::shared_ptr<tNode> i_sNode) const
+    {
+        auto psParent = i_sNode->psParent;
+        if (nullptr != psParent) {
+            /// Rover's normal speed is 1 cell per island second
+            float fV = m_poRover->Velocity();
+            float fDeltaS = i_sNode->sAction.fCost * m_poRover->StepSize();
+
+            /// Add action (step) cost, which is given in island seconds
+            float fStepCost = i_sNode->sAction.fCost; //fDeltaS / fV;
+
+
+            /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
+            /// Calculate current gradient in step direction
+            float fDeltaHeight =
+                    (m_oMap.Elevation(i_sNode->sLocation.nX, i_sNode->sLocation.nY) -
+                     m_oMap.Elevation(psParent->sLocation.nX, psParent->sLocation.nY));
+
+
+            /*
+            float fAlpha = atan(static_cast<float>(fDeltaHeight) / static_cast<float>(m_poRover->StepSize()));
+            float fAlphaAbs = fabs(fAlpha);
+
+            float fHeightCost = 0.f;
+
+            if (fAlphaAbs > 0.f) {
+                float g = 9.81;
+                float fDen = g * sin(2.f * fAlphaAbs);
+                fHeightCost = sqrt(4.f * fDeltaS / fDen);
+
+                if (fAlpha < 0.f) /// Down hill
+                {
+                    fHeightCost *= -1.f;
+                }
+
+            }
+             */
+
+
+            float fHeightCost = 0.f;
+
+            if (fDeltaHeight > 0)
+            {
+                fHeightCost = i_sNode->sAction.fCost * 1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
+            }
+            else if (fDeltaHeight < 0)
+            {
+                fHeightCost = -i_sNode->sAction.fCost * 0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
+            }
+            else
+            {
+                fHeightCost = 0.f;
+            }
+
+
+
+            float fTime = fStepCost + fHeightCost;
+
+            i_sNode->g = psParent->g + fTime;
+
+        }
+
+    }
 
 
     void cPlanner::GenerateHeuristic()
@@ -151,16 +218,16 @@ namespace planner {
     }
 
 
-    bool cPlanner::GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const {
+    bool cPlanner::GoalTest(std::shared_ptr<tNode>& i_sFirst, std::shared_ptr<tNode>& i_sSecond) const {
 
-        uint nDeltaX = std::abs(i_sFirst->sLocation.nX - i_sSecond->sLocation.nX);
-        uint nDeltaY = std::abs(i_sFirst->sLocation.nY - i_sSecond->sLocation.nY);
+        int nDeltaX = std::abs(i_sFirst->sLocation.nX - i_sSecond->sLocation.nX);
+        int nDeltaY = std::abs(i_sFirst->sLocation.nY - i_sSecond->sLocation.nY);
         return nDeltaX < m_poRover->StepSize() && nDeltaY < m_poRover->StepSize();
     }
 
-    tNode* cPlanner::Child(tNode *i_sParent, const tAction &i_sAction) const
+    std::shared_ptr<tNode> cPlanner::Child(std::shared_ptr<tNode> i_sParent, const tAction &i_sAction) const
     {
-        auto sNext = new tNode(*i_sParent);
+        auto sNext = std::make_shared<tNode>(tNode(*i_sParent));
         sNext->psParent = i_sParent;
         sNext->sLocation.nX = i_sParent->sLocation.nX + i_sAction.nX * m_poRover->StepSize();
         sNext->sLocation.nY = i_sParent->sLocation.nY + i_sAction.nY * m_poRover->StepSize();
@@ -175,19 +242,19 @@ namespace planner {
 
     bool cPlanner::WithinMap(const tLocation &i_sLocation) const {
 
-        uint nX = i_sLocation.nX;
-        uint nY = i_sLocation.nY;
+        int nX = i_sLocation.nX;
+        int nY = i_sLocation.nY;
 
         return nX >= 0 && nX < m_oMap.Width() && nY >= 0 && nY < m_oMap.Height();
     }
 
 
-    uint32_t cPlanner::NodeHash(const tNode *i_sNode) const
+    uint32_t cPlanner::NodeHash(std::shared_ptr<tNode>& i_sNode) const
     {
         return i_sNode->sLocation.nY * m_oMap.Width() + i_sNode->sLocation.nX;
     }
 
-    bool cPlanner::Traversable(tNode *i_sCurrent, tNode *i_sNext) const {
+    bool cPlanner::Traversable(std::shared_ptr<tNode> i_sCurrent, std::shared_ptr<tNode> i_sNext) const {
         if (WithinMap(i_sNext->sLocation)) {
             /// Check if the intermediate locations moving from current node to next are on mainland or water
             bool bWater = m_oMap.Water(i_sCurrent->sLocation.nX, i_sCurrent->sLocation.nY,
@@ -211,7 +278,7 @@ namespace planner {
     float cPlanner::AStar()
     {
         /// Define start node
-        auto sStart = new tNode(m_poRover->Start());
+        auto sStart = std::make_shared<tNode>(tNode(m_poRover->Start()));
         /// Create hash of the node using its position
         sStart->nId = NodeHash(sStart);
         UpdateHeuristic(sStart);
@@ -219,10 +286,10 @@ namespace planner {
         m_oFrontier.put(sStart, sStart->h);
 
         /// Get the goal node
-        auto sGoal = new tNode(m_poRover->Goal());
+        auto sGoal = std::make_shared<tNode>(tNode(m_poRover->Goal()));
 
         /// Create current node
-        auto sCurrent = new tNode();
+        auto sCurrent = std::make_shared<tNode>(tNode());
 
         /// Serves as explored (closed) set and cost to reach a node
         std::map<tNode, double> oPathCost;
@@ -311,53 +378,12 @@ namespace planner {
     }
 
 
-    void cPlanner::UpdateCost(tNode *i_sNode) const
-    {
-        tNode *psParent = i_sNode->psParent;
-        if (nullptr != psParent) {
-            /// Rover's normal speed is 1 cell per island second
-            float fV = m_poRover->Velocity();
-            float fDeltaS = i_sNode->sAction.fCost * m_poRover->StepSize();
 
-            /// Add action (step) cost, which is given in island seconds
-            float fStepCost = fDeltaS / fV;
-
-
-            /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
-            /// Calculate current gradient in step direction
-            float fDeltaHeight =
-                    (m_oMap.Elevation(i_sNode->sLocation.nX, i_sNode->sLocation.nY) -
-                     m_oMap.Elevation(psParent->sLocation.nX, psParent->sLocation.nY));
-
-            float fAlpha = atan(static_cast<float>(fDeltaHeight) / static_cast<float>(m_poRover->StepSize()));
-            float fAlphaAbs = fabs(fAlpha);
-
-            float fHeightCost = 0.f;
-            if (fAlphaAbs > 0.f) {
-                float g = 9.81;
-                float fDen = g * sin(2.f * fAlphaAbs);
-                fHeightCost = sqrt(4.f * fDeltaS / fDen);
-
-                if (fAlpha < 0.f) /// Down hill
-                {
-                    fHeightCost *= -1.f;
-                }
-
-            }
-
-
-            float fTime = fStepCost + fHeightCost;
-
-            i_sNode->g = psParent->g + fTime;
-
-        }
-
-    }
 
     void cPlanner::Plot()
     {
 
-        tNode *sNode = m_oFrontier.pop();
+        auto sNode = m_oFrontier.pop();
         TraversePath(sNode);
 
 
@@ -404,7 +430,7 @@ namespace planner {
     }
 
 
-    void cPlanner::TraversePath(tNode *i_psNode) const
+    void cPlanner::TraversePath(std::shared_ptr<tNode> i_psNode) const
     {
         uint32_t nX, nY;
         /// Check if the current node is the start node, which has no parent and is therefore set to NULL

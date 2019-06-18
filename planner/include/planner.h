@@ -51,7 +51,7 @@ namespace planner {
         ///\param[in] i_sNode the node which heuristic is updated
         ///\param[in] i_eHeuristic the type of heuristic to calculate, see tHeuristic.
         ///\return The calculated heuristic value.
-        float UpdateHeuristic(tNode *i_sNode, const tHeuristic i_eHeuristic = OCTILE) const;
+        float UpdateHeuristic(std::shared_ptr<tNode> i_sNode, const tHeuristic i_eHeuristic = OCTILE) const;
 
 
         ///\brief Updates the heuristic value of the node located at tlocation i_sLocation.
@@ -67,7 +67,7 @@ namespace planner {
         ///\details Consistency is given if h(n) <= c(n,p) + h(p), where h(p) is the heuristic of the parent node
         ///         and c(n,p) are the step costs from parent p to node n.
         ///\param[in] i_sNode the node which heuristic value is tested.
-        void HeuristicCheck(tNode *i_sNode) const;
+        void HeuristicCheck(std::shared_ptr<tNode>& i_sNode) const;
 
         ///\brief Updates the node argument with its path cost \f$g(n)\f$ with island seconds as its unit.
         ///\details Uses the slope found from the gradient of the elevation map cMap::m_oElevation to calculate
@@ -75,7 +75,7 @@ namespace planner {
         ///         The value is added to the time it takes for a straight or diagonal step (depending on the action of the node).
         ///         The sum is stored in \f$g(n)\f$ of the node planner::tNode i_sNode.
         ///\param[in] i_sNode The node which path cost is updated.
-        void UpdateCost(tNode *i_sNode) const;
+        void UpdateCost(std::shared_ptr<tNode> i_sNode) const;
 
 
         ///\brief Test if the provided location i_sLocation lies within the map
@@ -91,7 +91,7 @@ namespace planner {
         ///\param[in] i_sFirst could be the current node that needs to be checked.
         ///\param[in] i_sSecond could be the goal node.
         ///\return true or false if the two nodes are equal.
-        virtual bool GoalTest(const tNode *i_sFirst, const tNode *i_sSecond) const override;
+        virtual bool GoalTest(std::shared_ptr<tNode>& i_sFirst, std::shared_ptr<tNode>& i_sSecond) const override;
 
         ///\brief Generate a successor node state given a node i_sParent and action i_sAction.
         ///\details Overrides method of the base class inteface cPlannerInterface<size_t Directions>.
@@ -99,15 +99,15 @@ namespace planner {
         ///
         ///\param[in] i_sParent node which becomes the parent of the new node.
         ///\param[in] i_sAction struct of type tAction that contains the direction and cost of the action.
-        tNode* Child(tNode *i_sParent, const tAction &i_sAction) const override;
+        std::shared_ptr<tNode> Child(std::shared_ptr<tNode> i_sParent, const tAction &i_sAction) const override;
 
         ///\brief considers step size of rover and checks if the path is traversable TODO improve comment
-        bool Traversable(tNode *i_sCurrent, tNode *i_sNext) const;
+        bool Traversable(std::shared_ptr<tNode> i_sCurrent, std::shared_ptr<tNode> i_sNext) const;
 
         ///\brief Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path.
         ///\details Traversing a path takes place using the m_psParent field of the tNode struct.
         ///\param[in] i_psNode Goal node or any other which is traversed back
-        void TraversePath(tNode *i_psNode) const override;
+        void TraversePath(std::shared_ptr<tNode> i_psNode) const override;
 
         ///\brief Calculates the discrete gradient of the map m_poMap in x direction.
         const int GradX(int i_nX, int i_nY) const;
@@ -118,7 +118,7 @@ namespace planner {
         ///\brief Calculates the node hash using its location and the width of the map
         ///\details The hash is required to sort the std::map<tNode> oCost of reaching a node,
         ///         which is used in the AStar() search algorithm.
-        uint32_t NodeHash(const tNode *i_sNode) const;
+        uint32_t NodeHash(std::shared_ptr<tNode>& i_sNode) const;
 
     private:
 
@@ -148,7 +148,7 @@ namespace planner {
 
 
         ///\brief Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first.
-        PriorityQueue<tNode*, double> m_oFrontier;
+        PriorityQueue<std::shared_ptr<tNode>, double> m_oFrontier;
 
 
         ///\brief Debug method to plot intermediate paths during planning. Used in Plan().
