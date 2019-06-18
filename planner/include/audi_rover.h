@@ -17,7 +17,7 @@ namespace planner {
 
     ///\brief The concrete cAudiRover class implementation of the interface cRoverInterface<size_t Direction>.
     ///\details Provides eight actions and a summon feature.
-    class cAudiRover : public cRoverInterface<8> {
+    class cAudiRover : public cRoverInterface<8>, public std::enable_shared_from_this<cAudiRover> {
 
     public:
         ///\brief Receives the map data such as elevation and overrides and generates a map stored in m_oMap.
@@ -44,7 +44,7 @@ namespace planner {
 
     private:
         ///\brief Reference to the map of type cGraph.
-        std::unique_ptr<cGraph> m_poMap;
+        std::shared_ptr<cGraph> m_poMap;
 
         ///\brief Pointer to the elevation data (rather redundant because it is stored in the map)
         uint8_t* m_oElevation;

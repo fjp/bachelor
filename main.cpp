@@ -22,26 +22,26 @@ int main(int argc, char** argv)
 
     //////////////// Create the Audi rover and use its summon feature ///////////////
 
-    cAudiRover oAudiRover(&elevation[0], &overrides[0], IMAGE_DIM, IMAGE_DIM);
+    auto poAudiRover = std::make_shared<cAudiRover>(cAudiRover(&elevation[0], &overrides[0], IMAGE_DIM, IMAGE_DIM));
 
 
-    oAudiRover.SetStart(tLocation{ROVER_X, ROVER_Y});
-    oAudiRover.SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
+    poAudiRover->SetStart(tLocation{ROVER_X, ROVER_Y});
+    poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
 
 
-    oAudiRover.Summon(1);
+    poAudiRover->Summon(1);
 
 
-    oAudiRover.SetStart({BACHELOR_X, BACHELOR_Y});
-    oAudiRover.SetGoal({WEDDING_X, WEDDING_Y});
+    poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
+    poAudiRover->SetGoal({WEDDING_X, WEDDING_Y});
 
 
-    oAudiRover.Summon(1);
+    poAudiRover->Summon(1);
 
 
     /// Report the total planning time
 
-    float fIslandSeconds = oAudiRover.TotalTime();
+    float fIslandSeconds = poAudiRover->TotalTime();
     std::cout << "\nTravelling will take " << fIslandSeconds << " island seconds ("
               << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 

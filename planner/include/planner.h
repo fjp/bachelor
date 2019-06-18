@@ -25,7 +25,7 @@ namespace planner {
 
         ///\brief Initializes member variables m_poRover and m_oMap and calls CalculateConsistencyFactor().
         ///\details The
-        cPlanner(cRoverInterface<8> *i_poRover, cGraph &i_oMap);
+        cPlanner(std::shared_ptr<cRoverInterface<8>> i_poRover, std::shared_ptr<cGraph> i_oMap);
 
         ///\brief Destructor to delete the allocated memory.
         ~cPlanner() {
@@ -75,7 +75,7 @@ namespace planner {
         ///         The value is added to the time it takes for a straight or diagonal step (depending on the action of the node).
         ///         The sum is stored in \f$g(n)\f$ of the node planner::tNode i_sNode.
         ///\param[in] i_sNode The node which path cost is updated.
-        void UpdateCost(std::shared_ptr<tNode> i_sNode) const;
+        void UpdateCost(std::shared_ptr<tNode> io_sNode) const;
 
 
         ///\brief Test if the provided location i_sLocation lies within the map

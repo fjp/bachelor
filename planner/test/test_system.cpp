@@ -11,7 +11,7 @@
 TEST_F(cPlannerTest, simple_map)
 {
     /// Prepare to read elevation and overrides data
-    size_t nImageDim = 1000;
+    size_t nImageDim = 600;
     const size_t expectedFileSize = nImageDim * nImageDim;
 
     std::vector<uint8_t> data_elevation(expectedFileSize, 1);
@@ -24,14 +24,15 @@ TEST_F(cPlannerTest, simple_map)
 
 
     /// Create Audi rover
-    cAudiRover oAudiRover(&oElevation[0], &oOverrides[0], nImageDim, nImageDim);
+    //cAudiRover oAudiRover(&oElevation[0], &oOverrides[0], nImageDim, nImageDim);
+    auto poAudiRover = std::make_shared<cAudiRover>(cAudiRover(&oElevation[0], &oOverrides[0], nImageDim, nImageDim));
 
     /// Bachelor calls Audi rover
     int nStartX = 20; int nStartY = 20;
     int nGoalX = 500; int nGoalY = 500;
-    oAudiRover.SetStart(tLocation{nStartX, nStartY});
-    oAudiRover.SetGoal(tLocation{nGoalX, nGoalY});
-    oAudiRover.Summon(1);
+    poAudiRover->SetStart(tLocation{nStartX, nStartY});
+    poAudiRover->SetGoal(tLocation{nGoalX, nGoalY});
+    poAudiRover->Summon(1);
 
 
     auto oImage = std::ofstream("test_pic.bmp", std::ofstream::binary);
@@ -72,7 +73,7 @@ TEST_F(cPlannerTest, simple_map)
 }
 
 /*
-TEST_F(cPlannerTest, step_cost)
+TEST_F(cPlannerTest, DISABLED_step_cost)
 {
 
     uint8_t nStepSize = 1;
@@ -122,17 +123,18 @@ TEST_F(cPlannerTest, step_cost)
     // TODO output time it took the rover to get to its goal locations (unit island seconds)
 
 }
+ */
 
 TEST_F(cPlannerTest, rover_to_bachelor)
 {
 
     /// Create Audi rover
-    cAudiRover oAudiRover(&m_oElevation[0], &m_oOverrides[0], IMAGE_DIM, IMAGE_DIM);
+    auto poAudiRover = std::make_shared<cAudiRover>(cAudiRover(&m_oElevation[0], &m_oOverrides[0], IMAGE_DIM, IMAGE_DIM));
 
     /// Bachelor calls Audi rover
-    oAudiRover.SetStart(tLocation{ROVER_X, ROVER_Y});
-    oAudiRover.SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
-    oAudiRover.Summon(2);
+    poAudiRover->SetStart(tLocation{ROVER_X, ROVER_Y});
+    poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
+    poAudiRover->Summon(2);
     
 
     // TODO assert if path does not match
@@ -141,7 +143,7 @@ TEST_F(cPlannerTest, rover_to_bachelor)
 
 }
 
-
+/*
 TEST_F(cPlannerTest, rover_to_bachelor_to_wedding)
 {
 

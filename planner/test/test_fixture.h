@@ -76,7 +76,7 @@ protected:
 
 
         /// Create Audi rover
-        m_poAudiRover = std::unique_ptr<cAudiRover>(new cAudiRover(&m_oElevation[0], &m_oOverrides[0], IMAGE_DIM, IMAGE_DIM));
+        m_poAudiRover = std::make_shared<cAudiRover>(cAudiRover(&m_oElevation[0], &m_oOverrides[0], IMAGE_DIM, IMAGE_DIM));
 
 
         /// Bachelor calls Audi rover
@@ -134,7 +134,7 @@ protected:
     // Objects declared here can be used by all tests in the test case for Foo.
     std::vector<uint8_t> m_oElevation;
     std::vector<uint8_t> m_oOverrides;
-    std::unique_ptr<cAudiRover> m_poAudiRover;
+    std::shared_ptr<cAudiRover> m_poAudiRover;
 
     std::ofstream m_oImage;
 };

@@ -27,7 +27,7 @@ namespace planner {
     public:
 
         ///\brief The constructor of the interface which initializes its members m_poRover and m_oMap.
-        explicit cPlannerInterface(cRoverInterface<Directions> *i_poRover, cGraph &i_oMap) : m_poRover(i_poRover), m_oMap(i_oMap) {};
+        explicit cPlannerInterface(std::shared_ptr<cRoverInterface<Directions>> i_poRover, std::shared_ptr<cGraph> i_oMap) : m_poRover(i_poRover), m_oMap(i_oMap) {};
 
         ///\brief Virtual abstract method of the base interface, which must be implemented to perform a search algorithm.
         ///\returns The cost to move from start to goal if it was found. Otherwise -1 is returned.
@@ -51,18 +51,16 @@ namespace planner {
 
 
         virtual ~cPlannerInterface() {
-            //if (nullptr != m_poRover)
-            //    delete m_poRover;
-            //m_poRover = nullptr;
+
         }
 
 
     protected:
         ///\brief Reference pointer to the interface of the rover class planner::cRoverInterface<Directions>.
-        cRoverInterface<Directions> *m_poRover;
+        std::shared_ptr<cRoverInterface<Directions>> m_poRover;
 
         ///\brief Provides the subclasses with important map information such as terrain and elevation maps.
-        cGraph &m_oMap;
+        std::shared_ptr<cGraph> m_oMap;
 
 
     };
