@@ -197,7 +197,7 @@ namespace visualizer {
     }
 
 
-    bool path(int x, int y, uint8_t* overrides)
+    bool path(int x, int y, uint8_t* overrides, int i_nImageDim)
     {
 
         int nPenSize = 2;
@@ -207,7 +207,7 @@ namespace visualizer {
             for (int j = -nPenSize; j < nPenSize; ++j)
             {
                 int dy = y - j;
-                if ((dx >= 0 && dx < IMAGE_DIM) && (dy >= 0 && dy < IMAGE_DIM) && (overrides[dy * IMAGE_DIM + dx] & (OF_PATH)))
+                if ((dx >= 0 && dx < i_nImageDim) && (dy >= 0 && dy < i_nImageDim) && (overrides[dy * i_nImageDim + dx] & (OF_PATH)))
                 {
                     return true;
                 }
