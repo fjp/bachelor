@@ -8,6 +8,68 @@
 
 #include "test_fixture.h"
 
+TEST_F(cPlannerTest, simple_map)
+{
+    /// Prepare to read elevation and overrides data
+    size_t nImageDim = 1000;
+    const size_t expectedFileSize = nImageDim * nImageDim;
+
+    std::vector<uint8_t> data_elevation(expectedFileSize, 1);
+    writeFile("../../../assets/test_elevation.data", data_elevation, expectedFileSize);
+    std::vector<uint8_t> dataOverrides(expectedFileSize, 0);
+    writeFile("../../../assets/test_overrides.data", dataOverrides, expectedFileSize);
+
+    auto oElevation = loadFile("../../../assets/test_elevation.data", expectedFileSize);
+    auto oOverrides = loadFile("../../../assets/test_overrides.data", expectedFileSize);
+
+
+    /// Create Audi rover
+    cAudiRover oAudiRover(&oElevation[0], &oOverrides[0], nImageDim, nImageDim);
+
+    /// Bachelor calls Audi rover
+    int nStartX = 20; int nStartY = 20;
+    int nGoalX = 500; int nGoalY = 500;
+    oAudiRover.SetStart(tLocation{nStartX, nStartY});
+    oAudiRover.SetGoal(tLocation{nGoalX, nGoalY});
+    oAudiRover.Summon(1);
+
+
+    auto oImage = std::ofstream("test_pic.bmp", std::ofstream::binary);
+    visualizer::writeBMP(
+            oImage,
+            &oElevation[0],
+            nImageDim,
+            nImageDim,
+            [&] (size_t x, size_t y, uint8_t elevation) {
+
+                // Marks interesting positions on the map
+                if (visualizer::donut(x, y, nStartX, nStartY) ||
+                    visualizer::donut(x, y, nGoalX, nGoalY))
+                {
+                    return uint8_t(visualizer::IPV_PATH);
+                }
+
+                if (visualizer::path(x, y, &oOverrides[0], nImageDim))
+                {
+                    return uint8_t(visualizer::IPV_PATH);
+                }
+
+                // Signifies water
+                if ((oOverrides[y * nImageDim + x] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
+                    elevation == 0)
+                {
+                    return uint8_t(visualizer::IPV_WATER);
+                }
+
+                // Signifies normal ground color
+                if (elevation < visualizer::IPV_ELEVATION_BEGIN)
+                {
+                    elevation = visualizer::IPV_ELEVATION_BEGIN;
+                }
+                return elevation;
+            });
+    oImage.flush();
+}
 
 TEST_F(cPlannerTest, step_cost)
 {
