@@ -56,5 +56,18 @@ std::vector<uint8_t> loadFile(const std::string& filename, size_t expectedFileSi
     return data;
 }
 
+void writeFile(const std::string& filename, std::vector<uint8_t> &data, size_t expectedFileSize)
+{
+    std::ofstream ofile(filename, std::ofstream::binary);
+
+    if (!ofile.good())
+    {
+        throw std::exception();
+    }
+    ofile.write((char*)&data[0], expectedFileSize);
+
+    ofile.close();
+}
+
 
 #endif //BACHELORTEST_UTILITIES_H
