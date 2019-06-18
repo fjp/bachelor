@@ -16,7 +16,7 @@ namespace planner
             int i_nHeight, int i_nWidth) : cRoverInterface(), m_oElevation(i_oElevation), m_oOverrides(i_oOverrides)
             , m_poMap(nullptr), m_fTotalTime(0.f) {
 
-        m_poMap = new cGraph(m_oElevation, m_oOverrides, i_nHeight, i_nWidth);
+        m_poMap = std::unique_ptr<cGraph>(new cGraph(m_oElevation, m_oOverrides, i_nHeight, i_nWidth));
 
 
         /// Define direction and cost of different possible actions
@@ -50,11 +50,6 @@ namespace planner
     }
 
     cAudiRover::~cAudiRover() {
-        if (nullptr != m_poMap)
-        {
-            delete m_poMap;
-            m_poMap = nullptr;
-        }
 
     }
 

@@ -44,7 +44,7 @@ namespace planner {
 
     private:
         ///\brief Reference to the map of type cGraph.
-        cGraph *m_poMap;
+        std::unique_ptr<cGraph> m_poMap;
 
         ///\brief Pointer to the elevation data (rather redundant because it is stored in the map)
         uint8_t* m_oElevation;
