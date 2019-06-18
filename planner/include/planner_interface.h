@@ -10,6 +10,8 @@
 
 #include <vector>
 
+#include <cstddef>
+
 namespace planner {
 
     /// Forward declaration of interface planner::cRoverInterface.
