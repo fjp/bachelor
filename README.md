@@ -1,8 +1,8 @@
 # AID Coding Challenge Solution
 
 This is my solution for the AID Bachelor Coding Challenge. 
-For the problem description refer to the AID [Coding Challenge.pdf](../../AID Coding Challenge.pdf). 
-The complete doxygen documentation can be found in the doc folder, see [index.html](../../doc/html/index.html)
+For the problem description refer to the [AID Coding Challenge.pdf](AID_Coding_Challenge.pdf). 
+The complete doxygen documentation can be found in the doc folder, see [index.html](doc/html/index.html)
 
 # Result Preview
 
@@ -16,6 +16,9 @@ In total the Audi rover requires 3377.68 island seconds (56.2947 island minutes 
 Details are explained at the end in section Results. To plot the path I added another path() function to the visualizer.cpp.
 
 image html solution_rover_bachelor_wedding.jpg
+
+![solution rover bachelor wedding](doc/images/solution_rover_bachelor_wedding.bmp)
+<img src="doc/images/solution_rover_bachelor_wedding.bmp" alt="Solution Rover Bachelor Wedding" width="200"/>
 
 <img src="solution_rover_bachelor_wedding.jpg" alt="Solution Rover Bachelor Wedding" width="800"/>
 
@@ -58,6 +61,8 @@ For this purpose I implemented a simple kinematic approach with an inclined plan
 the elevation of the terrain. 
 
 image html inclined.jpg
+
+![inclinded](doc/images/inclined.jpg)
 
 <img src="inclined.jpg" alt="Inclinde plane of a free body (Wikipedia)" width="500"/>
 
