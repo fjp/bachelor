@@ -18,8 +18,6 @@
 #include "visualizer.h"
 #include "constants.h"
 
-
-
 namespace planner {
 
 
@@ -274,6 +272,112 @@ namespace planner {
 
     float cPlanner::Plan() {
         return AStar();
+        //return AStar2();
+    }
+
+    float cPlanner::AStar2()
+    {
+        using namespace std;
+        // Create a closed 2 array filled with 0s and first element 1
+        vector<vector<int> > closed(m_oMap->Height(), vector<int>(m_oMap->Width()));
+        closed[m_poRover->Start().nX][m_poRover->Start().nY] = 1;
+
+        // Create expand array filled with -1
+        vector<vector<int> > expand(m_oMap->Height(), vector<int>(m_oMap->Width(), -1));
+
+        // Create action array filled with -1
+        vector<vector<int> > action(m_oMap->Height(), vector<int>(m_oMap->Width(), -1));
+
+        // Defined the quadruplet values
+        int x = m_poRover->Start().nX;
+        int y = m_poRover->Start().nY;
+        int g = 0;
+        int f = g + UpdateHeuristic(m_poRover->Start());
+
+        // Store the expansions
+        vector<vector<int> > open;
+        open.push_back({ f, g, x, y });
+
+        // Flags and Counts
+        bool found = false;
+        bool resign = false;
+        int count = 0;
+
+        int x2;
+        int y2;
+
+        // While I am still searching for the goal and the problem is solvable
+        while (!found && !resign) {
+            // Resign if no values in the open list and you can't expand anymore
+            if (open.size() == 0) {
+                resign = true;
+                cout << "Failed to reach a goal" << endl;
+            }
+                // Keep expanding
+            else {
+                // Remove quadruplets from the open list
+                sort(open.begin(), open.end());
+                reverse(open.begin(), open.end());
+                vector<int> next;
+                // Stored the poped value into next
+                next = open.back();
+                open.pop_back();
+
+                x = next[2];
+                y = next[3];
+                g = next[1];
+
+                // Fill the expand vectors with count
+                expand[x][y] = count;
+                count += 1;
+
+
+                // Check if we reached the goal:
+                if (x == m_poRover->Goal().nX && y == m_poRover->Goal().nY) {
+                    found = true;
+                    //cout << "[" << g << ", " << x << ", " << y << "]" << endl;
+                }
+
+                    //else expand new elements
+                else {
+                    for (int i = 0; i < m_poRover->m_asActions.size(); i++) {
+                        x2 = x + m_poRover->m_asActions[i].nX;
+                        y2 = y + m_poRover->m_asActions[i].nY;
+                        tLocation sLocation{x2, y2};
+                        if (WithinMap(sLocation)) {
+                            if (closed[x2][y2] == 0 and !m_oMap->Water(x2, y2)) {
+                                int g2 = g + m_poRover->m_asActions[i].fCost;
+                                f = g2 + UpdateHeuristic(sLocation);
+                                open.push_back({ f, g2, x2, y2 });
+                                closed[x2][y2] = 1;
+                                action[x2][y2] = i;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Print the expansion List
+        //print2DVector(expand);
+
+        // Find the path with robot orientation
+
+        // Going backward
+        x = m_poRover->Goal().nX;
+        y = m_poRover->Goal().nY;
+
+        while (x != m_poRover->Start().nX or y != m_poRover->Start().nY) {
+            x2 = x - m_poRover->m_asActions[action[x][y]].nX;
+            y2 = y - m_poRover->m_asActions[action[x][y]].nY;
+            // Store the  Path in a vector
+            m_oMap->SetOverrides(x2, y2, 0x01);
+
+            x = x2;
+            y = y2;
+        }
+
+        return 0;
     }
 
 

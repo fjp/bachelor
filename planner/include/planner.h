@@ -135,6 +135,8 @@ namespace planner {
         ///\returns the time it took to find the fastest path in island seconds.
         float AStar();
 
+        float AStar2();
+
         ///\brief Calculates a consistency factor to get a consistent heuristic h(n) <= c(p,n) + h(p)
         ///\details Calculates the gradient of the elevation and considers the acceleration on slopes.
         ///         The result is stored in members m_nMaxGradient and m_fConsistencyFactor.
