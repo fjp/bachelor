@@ -1,8 +1,8 @@
 # AID Coding Challenge Solution
 
 This is my solution for the AID Bachelor Coding Challenge. 
-For the problem description refer to the AID [Coding Challenge.pdf](../../AID Coding Challenge.pdf). 
-The complete doxygen documentation can be found in the doc folder, see [index.html](../../doc/html/index.html)
+For the problem description refer to the [AID Coding Challenge.pdf](AID Coding Challenge.pdf). 
+The complete doxygen documentation can be found in the doc folder, see [index.html](doc/html/index.html)
 
 # Result Preview
 
@@ -58,6 +58,8 @@ For this purpose I implemented a simple kinematic approach with an inclined plan
 the elevation of the terrain. 
 
 image html inclined.jpg
+
+![inclinded](doc/images/inclined.jpg)
 
 <img src="inclined.jpg" alt="Inclinde plane of a free body (Wikipedia)" width="500"/>
 
