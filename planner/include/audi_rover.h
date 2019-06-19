@@ -34,11 +34,15 @@ namespace planner {
 
         ///\brief Initializes the reference to the planner which is located in the inherited interface.
         ///\details
-        void InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) override;
+        std::shared_ptr<cPlannerInterface<8>> InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) override;
 
 
         ///\brief Destructor to delete the allocated memory of the map.
-        ~cAudiRover();
+        ~cAudiRover() {
+            std::cout << "~cAudiRover" << std::endl;
+        };
+
+        void countPlanner();
 
 
 

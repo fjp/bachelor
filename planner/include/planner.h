@@ -29,7 +29,7 @@ namespace planner {
 
         ///\brief Destructor to delete the allocated memory.
         ~cPlanner() {
-
+            std::cout << "~cPlanner" << std::endl;
         };
 
         ///\brief Override of the base interface cPlannerInterface, which invokes the AStar() search algorithm.

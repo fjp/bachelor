@@ -27,6 +27,8 @@ namespace planner {
     cPlanner::cPlanner(std::shared_ptr<cRoverInterface<8>> i_poRover, std::shared_ptr<cGraph> i_oMap)
             : cPlannerInterface(std::static_pointer_cast<cAudiRover>(i_poRover), i_oMap), m_nMaxGradient(0), m_fConsistencyFactor(0.f) {
 
+        std::cout << "cPlanner" << std::endl;
+
         // TODO consider check if value is already calculated.
         CalculateConsistencyFactor();
 
@@ -227,7 +229,7 @@ namespace planner {
 
     std::shared_ptr<tNode> cPlanner::Child(std::shared_ptr<tNode> i_sParent, const tAction &i_sAction) const
     {
-        auto sNext = std::make_shared<tNode>(tNode(*i_sParent));
+        auto sNext = std::make_shared<tNode>(*i_sParent);
         sNext->psParent = i_sParent;
         sNext->sLocation.nX = i_sParent->sLocation.nX + i_sAction.nX * m_poRover->StepSize();
         sNext->sLocation.nY = i_sParent->sLocation.nY + i_sAction.nY * m_poRover->StepSize();
@@ -278,7 +280,7 @@ namespace planner {
     float cPlanner::AStar()
     {
         /// Define start node
-        auto sStart = std::make_shared<tNode>(tNode(m_poRover->Start()));
+        auto sStart = std::make_shared<tNode>(m_poRover->Start());
         /// Create hash of the node using its position
         sStart->nId = NodeHash(sStart);
         UpdateHeuristic(sStart);
@@ -286,10 +288,10 @@ namespace planner {
         m_oFrontier.put(sStart, sStart->h);
 
         /// Get the goal node
-        auto sGoal = std::make_shared<tNode>(tNode(m_poRover->Goal()));
+        auto sGoal = std::make_shared<tNode>(m_poRover->Goal());
 
         /// Create current node
-        auto sCurrent = std::make_shared<tNode>(tNode());
+        auto sCurrent = std::make_shared<tNode>();
 
         /// Serves as explored (closed) set and cost to reach a node
         std::map<tNode, double> oPathCost;

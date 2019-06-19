@@ -16,7 +16,9 @@ namespace planner
             int i_nHeight, int i_nWidth) : cRoverInterface(), m_oElevation(i_oElevation), m_oOverrides(i_oOverrides)
             , m_poMap(nullptr), m_fTotalTime(0.f) {
 
-        m_poMap = std::make_shared<cGraph>(cGraph(m_oElevation, m_oOverrides, i_nHeight, i_nWidth));
+        std::cout << "cAudiRover" << std::endl;
+
+        m_poMap = std::make_shared<cGraph>(m_oElevation, m_oOverrides, i_nHeight, i_nWidth);
 
 
         /// Define direction and cost of different possible actions
@@ -33,25 +35,42 @@ namespace planner
 
     void cAudiRover::Summon(const int i_nStepSize, const int i_nVelocity) {
 
-        InitializePlanner(i_nStepSize, i_nVelocity);
+        auto poPlanner = InitializePlanner(i_nStepSize, i_nVelocity);
 
-        m_fTotalTime += m_poPlanner->Plan();
+        //m_fTotalTime += m_poPlanner->Plan();
+        countPlanner();
+        //std::shared_ptr<cPlanner> poPlanner = std::static_pointer_cast<cPlanner>(m_poPlanner.lock());
+        countPlanner();
+        if (poPlanner)
+        {
+            countPlanner();
+            m_fTotalTime += poPlanner->Plan();
+        }
 
     }
 
-    void cAudiRover::InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) {
+    std::shared_ptr<cPlannerInterface<8>> cAudiRover::InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) {
 
         SetStepSize(i_nStepSize);
 
         SetVelocity(i_nVelocity);
 
-        m_poPlanner = std::make_shared<cPlanner>(cPlanner(shared_from_this(), m_poMap));
+        //m_poPlanner = std::make_shared<cPlanner>(shared_from_this(), m_poMap);
+        auto poPlanner = std::make_shared<cPlanner>(shared_from_this(), m_poMap);
+        m_poPlanner = poPlanner;
+        //m_poPlanner = std::static_pointer_cast<cPlanner>(std::make_shared<cPlanner>(shared_from_this(), m_poMap));
+
+        countPlanner();
+
+        return poPlanner;
 
     }
 
-    cAudiRover::~cAudiRover() {
-
+    void cAudiRover::countPlanner()
+    {
+        std::cout << "      m_poPlanner.use_count() == " << m_poPlanner.use_count() << ", expired: " << m_poPlanner.expired() << std::endl;
     }
+
 
     float cAudiRover::TotalTime() const {
         return m_fTotalTime;

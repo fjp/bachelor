@@ -76,7 +76,7 @@ protected:
 
 
         /// Create Audi rover
-        m_poAudiRover = std::make_shared<cAudiRover>(cAudiRover(&m_oElevation[0], &m_oOverrides[0], IMAGE_DIM, IMAGE_DIM));
+        m_poAudiRover = std::make_shared<cAudiRover>(&m_oElevation[0], &m_oOverrides[0], IMAGE_DIM, IMAGE_DIM);
 
 
         /// Bachelor calls Audi rover

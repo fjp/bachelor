@@ -15,6 +15,8 @@
 #include <cmath>
 #include <memory>
 
+#include <iostream>
+
 namespace planner {
 
 
@@ -30,12 +32,18 @@ namespace planner {
     public:
         cRoverInterface() : m_fCostStraight(1.f), m_fCostDiagonal(sqrt(2.f)), m_nStepSize(1), m_nVelocity(1)
         {
-
+            std::cout << "cRoverInterface" << std::endl;
         };
+
+        virtual ~cRoverInterface() {
+            std::cout << "~cRoverInterface" << std::endl;
+
+            std::cout << "     destructor ~cRoverInterface: m_poPlanner.use_count() == " << m_poPlanner.use_count() << std::endl;
+        }
 
 
         ///\brief
-        virtual void InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) = 0;
+        virtual std::shared_ptr<cPlannerInterface<Directions>> InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) = 0;
 
         ///\brief Array that contains the number of actions in which the robot can move. It has a template size parameter Directions.
         std::array<tAction, Directions> m_asActions;
@@ -99,7 +107,8 @@ namespace planner {
     protected:
         ///\brief Pointer to an abstract planner interface.
         ///\details An implementation of this interface should initialize m_poPlanner.
-        std::shared_ptr<cPlannerInterface<Directions>> m_poPlanner;
+        //std::shared_ptr<cPlannerInterface<Directions>> m_poPlanner;
+        std::weak_ptr<cPlannerInterface<Directions>> m_poPlanner;
 
 
         ///\brief Start location (x,y) of the rover.

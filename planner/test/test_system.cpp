@@ -25,11 +25,11 @@ TEST_F(cPlannerTest, simple_map)
 
     /// Create Audi rover
     //cAudiRover oAudiRover(&oElevation[0], &oOverrides[0], nImageDim, nImageDim);
-    auto poAudiRover = std::make_shared<cAudiRover>(cAudiRover(&oElevation[0], &oOverrides[0], nImageDim, nImageDim));
+    auto poAudiRover = std::make_shared<cAudiRover>(&oElevation[0], &oOverrides[0], nImageDim, nImageDim);
 
     /// Bachelor calls Audi rover
     int nStartX = 20; int nStartY = 20;
-    int nGoalX = 500; int nGoalY = 500;
+    int nGoalX = 100; int nGoalY = 100;
     poAudiRover->SetStart(tLocation{nStartX, nStartY});
     poAudiRover->SetGoal(tLocation{nGoalX, nGoalY});
     poAudiRover->Summon(1);
@@ -70,6 +70,9 @@ TEST_F(cPlannerTest, simple_map)
                 return elevation;
             });
     oImage.flush();
+
+    poAudiRover->countPlanner();
+
 }
 
 /*
@@ -124,8 +127,8 @@ TEST_F(cPlannerTest, DISABLED_step_cost)
 
 }
  */
-
-TEST_F(cPlannerTest, rover_to_bachelor)
+/*
+TEST_F(cPlannerTest, DISABLED_rover_to_bachelor)
 {
 
     /// Create Audi rover
@@ -142,7 +145,7 @@ TEST_F(cPlannerTest, rover_to_bachelor)
     // TODO output time it took the rover to get to its goal locations (unit island seconds)
 
 }
-
+*/
 /*
 TEST_F(cPlannerTest, rover_to_bachelor_to_wedding)
 {
