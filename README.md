@@ -17,7 +17,7 @@ Details are explained at the end in section Results. To plot the path I added an
 
 image html solution_rover_bachelor_wedding.jpg
 
-![solution rover bachelor wedding](doc/images/solution_rover_bachelor_wedding.bmp | width=800)
+![solution rover bachelor wedding](doc/images/solution_rover_bachelor_wedding.bmp =250x250)
 
 <img src="solution_rover_bachelor_wedding.jpg" alt="Solution Rover Bachelor Wedding" width="800"/>
 
