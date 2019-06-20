@@ -11,10 +11,23 @@
 TEST_F(cPlannerTest, simple_map)
 {
     /// Prepare to read elevation and overrides data
-    size_t nImageDim = 600;
+    size_t nImageDim = 330;
     const size_t expectedFileSize = nImageDim * nImageDim;
 
     std::vector<uint8_t> data_elevation(expectedFileSize, 1);
+    for (int y = 100; y <= 110; ++y)
+    {
+        for (int x = 50; x <= 100; ++x) {
+            data_elevation[y * nImageDim + x] = 0;
+        }
+    }
+
+    for (int y = 50; y <= 100; ++y)
+    {
+        for (int x = 100; x <= 110; ++x) {
+            data_elevation[y * nImageDim + x] = 0;
+        }
+    }
     writeFile("../../../assets/test_elevation.data", data_elevation, expectedFileSize);
     std::vector<uint8_t> dataOverrides(expectedFileSize, 0);
     writeFile("../../../assets/test_overrides.data", dataOverrides, expectedFileSize);
@@ -28,8 +41,8 @@ TEST_F(cPlannerTest, simple_map)
     auto poAudiRover = std::make_shared<cAudiRover>(&oElevation[0], &oOverrides[0], nImageDim, nImageDim);
 
     /// Bachelor calls Audi rover
-    int nStartX = 20; int nStartY = 20;
-    int nGoalX = 100; int nGoalY = 100;
+    int nStartX = 30; int nStartY = 30;
+    int nGoalX = 300; int nGoalY = 300;
     poAudiRover->SetStart(tLocation{nStartX, nStartY});
     poAudiRover->SetGoal(tLocation{nGoalX, nGoalY});
     poAudiRover->Summon(1);
@@ -38,6 +51,44 @@ TEST_F(cPlannerTest, simple_map)
     asLocation.push_back(tLocation{nStartX, nStartY});
     asLocation.push_back(tLocation{nGoalX, nGoalY});
     visualizer::write("test_pic.bmp", &oElevation[0], &oOverrides[0], asLocation, nImageDim);
+
+/*
+    auto oImage = std::ofstream("test_pic.bmp", std::ofstream::binary);
+    visualizer::writeBMP(
+            oImage,
+            &oElevation[0],
+            nImageDim,
+            nImageDim,
+            [&] (size_t x, size_t y, uint8_t elevation) {
+
+                // Marks interesting positions on the map
+                if (visualizer::donut(x, y, nStartX, nStartY) ||
+                    visualizer::donut(x, y, nGoalX, nGoalY))
+                {
+                    return uint8_t(visualizer::IPV_PATH);
+                }
+
+                if (visualizer::path(x, y, &oOverrides[0], nImageDim))
+                {
+                    return uint8_t(visualizer::IPV_PATH);
+                }
+
+                // Signifies water
+                if ((oOverrides[y * nImageDim + x] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
+                    elevation == 0)
+                {
+                    return uint8_t(visualizer::IPV_WATER);
+                }
+
+                // Signifies normal ground color
+                if (elevation < visualizer::IPV_ELEVATION_BEGIN)
+                {
+                    elevation = visualizer::IPV_ELEVATION_BEGIN;
+                }
+                return elevation;
+            });
+    oImage.flush();
+    */
 
     poAudiRover->countPlanner();
 

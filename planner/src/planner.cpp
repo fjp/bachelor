@@ -278,8 +278,8 @@ namespace planner {
 
 
     float cPlanner::Plan() {
-        //return AStar();
-        return AStarOptimized();
+        return AStar();
+        //return AStarOptimized();
         //return AStarCheck();
     }
 

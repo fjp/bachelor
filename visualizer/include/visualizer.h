@@ -64,7 +64,7 @@ enum ImagePixelValues
                 i_nImageDim,
                 [&] (size_t x, size_t y, uint8_t elevation) {
 
-                    // Marks interesting positions on the map
+                    /// Marks interesting positions on the map
                     for (auto sLocation : i_asLocation)
                     {
                         if (visualizer::donut(x, y, sLocation.nX, sLocation.nY))
@@ -73,36 +73,25 @@ enum ImagePixelValues
                         }
                     }
 
-
-                    /*
-                    if (visualizer::donut(x, y, 20, 20) ||
-                        visualizer::donut(x, y, 50, 50) ||
-                        visualizer::donut(x, y, 100, 100))
-                    {
-                        return uint8_t(visualizer::IPV_PATH);
-                    }
-                     */
-
-
                     if (visualizer::path(x, y, i_oOverrides, i_nImageDim))
                     {
                         return uint8_t(visualizer::IPV_PATH);
                     }
 
-
-                    // Signifies water
+                    /// Signifies water
                     if ((i_oOverrides[y * i_nImageDim + x] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
                         elevation == 0)
                     {
                         return uint8_t(visualizer::IPV_WATER);
                     }
 
-                    if (visualizer::visited(x, y, i_oOverrides))
+                    /// Signifies visited locations
+                    if (visualizer::visited(x, y, i_oOverrides, i_nImageDim))
                     {
                         return uint8_t(visualizer::IPV_VISITED);
                     }
 
-                    // Signifies normal ground color
+                    /// Signifies normal ground color
                     if (elevation < visualizer::IPV_ELEVATION_BEGIN)
                     {
                         elevation = visualizer::IPV_ELEVATION_BEGIN;
