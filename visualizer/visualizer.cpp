@@ -158,11 +158,14 @@ namespace visualizer {
         // Water value
         setColor(result, 1, 53, 160, 198);
 
+        // Visited value
+        setColor(result, 2, 255, 200, 130);
+
 
         // Sand to forest, levels 2 to 127
         blendColor(
                 result,
-                2, 128,
+                3, 128,
                 204, 201, 55,
                 26, 130, 41);
 
@@ -212,6 +215,17 @@ namespace visualizer {
                     return true;
                 }
             }
+        }
+
+        return false;
+    }
+
+    bool visited(int x, int y, uint8_t* overrides, int i_nImageDim)
+    {
+
+        if (overrides[y * i_nImageDim + x] & (OF_VISITED))
+        {
+            return true;
         }
 
         return false;

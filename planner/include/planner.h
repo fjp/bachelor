@@ -135,7 +135,9 @@ namespace planner {
         ///\returns the time it took to find the fastest path in island seconds.
         float AStar();
 
-        float AStar2();
+        float AStarOptimized();
+
+        float AStarCheck();
 
         ///\brief Calculates a consistency factor to get a consistent heuristic h(n) <= c(p,n) + h(p)
         ///\details Calculates the gradient of the elevation and considers the acceleration on slopes.
@@ -150,7 +152,8 @@ namespace planner {
 
 
         ///\brief Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first.
-        PriorityQueue<std::shared_ptr<tNode>, double> m_oFrontier;
+        //PriorityQueue<std::shared_ptr<tNode>, float> m_oFrontier;
+        PriorityQueue<std::shared_ptr<tNode>, float> m_oFrontier;
 
 
         ///\brief Debug method to plot intermediate paths during planning. Used in Plan().

@@ -15,7 +15,8 @@ enum ImagePixelValues
 {
     IPV_PATH = 0,               // Results in red in the BMP
     IPV_WATER = 1,              // Results in the water color in the BMP
-    IPV_ELEVATION_BEGIN = 2     // 2-255
+    IPV_VISITED = 2,
+    IPV_ELEVATION_BEGIN = 3     // 2-255
 };
 
 
@@ -44,6 +45,9 @@ void writeBMP(
 
     ///\brief Used in the functional from writeBMP to plot the fastest path found by AStar() in cPlanner.
     bool path(int x, int y, uint8_t* overrides, int i_nImageDim = IMAGE_DIM);
+
+    ///\brief Used in the functional from writeBMP to plot the visited nodes found by AStar() in cPlanner.
+    bool visited(int x, int y, uint8_t* overrides, int i_nImageDim = IMAGE_DIM);
 
 
 

@@ -12,6 +12,7 @@ enum OverrideFlags
     OF_INLAND = 0x20,
     OF_WATER_BASIN = 0x40,
     OF_PATH = 0x01,
+    OF_VISITED = 0x02,
 };
 
 // Some constants

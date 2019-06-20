@@ -18,6 +18,8 @@
 #include "visualizer.h"
 #include "constants.h"
 
+#include <map>
+
 namespace planner {
 
 
@@ -109,7 +111,7 @@ namespace planner {
             case OCTILE: {
                 /// Octile distance
                 float fD1 = static_cast<float>(m_poRover->StepSize()) / static_cast<float>(m_poRover->Velocity());
-                float fD2 = sqrt(2.f); // TODO
+                float fD2 = m_poRover->CostDiagonal();
                 fHeuristicValue = fD1 * (fDeltaX + fDeltaY) + (fD2 - 2.f * fD1) * std::min(fDeltaX, fDeltaY);
                 break;
             }
@@ -176,7 +178,6 @@ namespace planner {
 
 
             float fHeightCost = 0.f;
-
             if (fDeltaHeight > 0)
             {
                 fHeightCost = io_sNode->sAction.fCost * 1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
@@ -184,10 +185,6 @@ namespace planner {
             else if (fDeltaHeight < 0)
             {
                 fHeightCost = -io_sNode->sAction.fCost * 0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
-            }
-            else
-            {
-                fHeightCost = 0.f;
             }
 
 
@@ -272,10 +269,113 @@ namespace planner {
 
     float cPlanner::Plan() {
         return AStar();
-        //return AStar2();
+        //return AStarOptimized();
+        //return AStarCheck();
     }
 
-    float cPlanner::AStar2()
+    float cPlanner::AStarCheck() {
+        struct tSimpleLocation {
+            int nId;
+            int nX, nY;
+
+            bool operator<(const tSimpleLocation &i_rhs) const {
+                return nId < i_rhs.nId;
+            }
+        };
+        std::map<tSimpleLocation, tSimpleLocation> came_from;
+        std::map<tSimpleLocation, float> cost_so_far;
+
+        /// Start
+        int nX = m_poRover->Start().nX;
+        int nY = m_poRover->Start().nY;
+        int nId = nY * m_oMap->Width() + nX;
+        tSimpleLocation sStart{nId, nX, nY};
+
+
+        PriorityQueue<tSimpleLocation, float> frontier;
+        frontier.put(sStart, 0.f);
+
+        came_from[sStart] = sStart;
+        cost_so_far[sStart] = 0.f;
+
+
+        tSimpleLocation sCurrent;
+
+        // While I am still searching for the goal and the problem is solvable
+        while (!frontier.empty()) {
+
+
+            // Remove quadruplets from the open list
+            sCurrent = frontier.get();
+
+            // Check if we reached the goal:
+            if (sCurrent.nX == m_poRover->Goal().nX && sCurrent.nY == m_poRover->Goal().nY) {
+                break;
+            }
+
+            for (int i = 0; i < m_poRover->m_asActions.size(); i++) {
+
+                int nXNext = sCurrent.nX + m_poRover->m_asActions[i].nX;
+                int nYNext = sCurrent.nY + m_poRover->m_asActions[i].nY;
+                int nIdNext = nYNext * m_oMap->Width() + nXNext;
+                tSimpleLocation sNext{nIdNext, nXNext, nYNext};
+
+                tLocation sLocation{nXNext, nYNext};
+                if (WithinMap(sLocation) && !m_oMap->Water(nXNext, nYNext)) {
+
+                    float fDeltaHeight =
+                            (m_oMap->Elevation(sNext.nX, sNext.nY) -
+                             m_oMap->Elevation(sCurrent.nX, sCurrent.nY));
+
+                    float fHeightCost = 0.f;
+
+                    if (fDeltaHeight > 0) {
+                        fHeightCost = m_poRover->m_asActions[i].fCost *
+                                      1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
+                    } else if (fDeltaHeight < 0) {
+                        fHeightCost = -m_poRover->m_asActions[i].fCost *
+                                      0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
+                    }
+
+                    float new_cost = cost_so_far[sCurrent] + m_poRover->m_asActions[i].fCost + fHeightCost;
+                    if (cost_so_far.find(sNext) == cost_so_far.end()
+                        || new_cost < cost_so_far[sNext]) {
+                        cost_so_far[sNext] = new_cost;
+                        float h = UpdateHeuristic(sLocation);
+                        float priority = new_cost + h;
+                        frontier.put(sNext, priority);
+                        came_from[sNext] = sCurrent;
+
+                        /// Mark visited nodes
+                        m_oMap->SetOverrides(sNext.nX, sNext.nY, 0x02);
+
+                        /// Check that heuristic never overestimates the true distance:
+                        /// Priority of a new node should never be lower than the priority of its parent.
+                        //if (f < fparent) {
+                        //    std::cout << "Heuristic overestimates true distance" << std::endl;
+                        //}
+                    }
+                }
+            }
+        }
+
+
+        /// Goal
+        nX = m_poRover->Goal().nX;
+        nY = m_poRover->Goal().nY;
+        nId = nY * m_oMap->Width() + nX;
+        tSimpleLocation sGoal{nId, nX, nY};
+        sCurrent = sGoal;
+
+        while (sCurrent.nX != sStart.nX || sCurrent.nY != sStart.nY) {
+            m_oMap->SetOverrides(sCurrent.nX, sCurrent.nY, 0x01);
+            sCurrent = came_from[sCurrent];
+        }
+
+        return 0;
+    }
+
+    float cPlanner::AStarOptimized()
     {
         using namespace std;
         // Create a closed 2 array filled with 0s and first element 1
@@ -291,12 +391,28 @@ namespace planner {
         // Defined the quadruplet values
         int x = m_poRover->Start().nX;
         int y = m_poRover->Start().nY;
-        int g = 0;
-        int f = g + UpdateHeuristic(m_poRover->Start());
+        float g = 0;
+        float h = UpdateHeuristic(m_poRover->Start());
+        float f = g + h;
 
         // Store the expansions
-        vector<vector<int> > open;
-        open.push_back({ f, g, x, y });
+        //vector<vector<float> > open;
+        //open.push_back({ f, g, (float)x, (float)y });
+        struct tSimpleNode {
+            int id;
+            int x, y;
+            float g;
+            float h;
+            float f;
+
+            bool operator<(const tSimpleNode& i_rhs) const
+            {
+                return id < i_rhs.id;
+            }
+        };
+        PriorityQueue<tSimpleNode, float> openprio;
+        tSimpleNode sNode{y * m_oMap->Width() + x, x, y, g, h, f};
+        openprio.put(sNode, f);
 
         // Flags and Counts
         bool found = false;
@@ -309,23 +425,20 @@ namespace planner {
         // While I am still searching for the goal and the problem is solvable
         while (!found && !resign) {
             // Resign if no values in the open list and you can't expand anymore
-            if (open.size() == 0) {
+            if (openprio.empty()) {
                 resign = true;
                 cout << "Failed to reach a goal" << endl;
             }
                 // Keep expanding
             else {
                 // Remove quadruplets from the open list
-                sort(open.begin(), open.end());
-                reverse(open.begin(), open.end());
-                vector<int> next;
-                // Stored the poped value into next
-                next = open.back();
-                open.pop_back();
+                tSimpleNode next;
+                next = openprio.get();
 
-                x = next[2];
-                y = next[3];
-                g = next[1];
+                x = next.x;
+                y = next.y;
+                g = next.g;
+                float fparent = next.f;
 
                 // Fill the expand vectors with count
                 expand[x][y] = count;
@@ -346,22 +459,46 @@ namespace planner {
                         tLocation sLocation{x2, y2};
                         if (WithinMap(sLocation)) {
                             if (closed[x2][y2] == 0 and !m_oMap->Water(x2, y2)) {
-                                int g2 = g + m_poRover->m_asActions[i].fCost;
-                                f = g2 + UpdateHeuristic(sLocation);
-                                open.push_back({ f, g2, x2, y2 });
+
+
+                                float fDeltaHeight =
+                                        (m_oMap->Elevation(x2, y2) -
+                                         m_oMap->Elevation(x, y));
+
+                                float fHeightCost = 0.f;
+
+                                if (fDeltaHeight > 0)
+                                {
+                                    fHeightCost = m_poRover->m_asActions[i].fCost * 1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
+                                }
+                                else if (fDeltaHeight < 0)
+                                {
+                                    fHeightCost = -m_poRover->m_asActions[i].fCost * 0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
+                                }
+
+                                float g2 = g + m_poRover->m_asActions[i].fCost + fHeightCost;
+
+                                h = UpdateHeuristic(sLocation);
+                                f = g2 + h;
+                                openprio.put({ y2 * m_oMap->Width() + x2, x2, y2, g2, h, f }, f);
                                 closed[x2][y2] = 1;
                                 action[x2][y2] = i;
+
+                                /// Mark visited nodes
+                                m_oMap->SetOverrides(x2, y2, 0x02);
+
+                                /// Check that heuristic never overestimates the true distance:
+                                /// Priority of a new node should never be lower than the priority of its parent.
+                                if (f < fparent)
+                                {
+                                    std::cout << "Heuristic overestimates true distance" << std::endl;
+                                }
                             }
                         }
                     }
                 }
             }
         }
-
-        // Print the expansion List
-        //print2DVector(expand);
-
-        // Find the path with robot orientation
 
         // Going backward
         x = m_poRover->Goal().nX;
@@ -398,10 +535,10 @@ namespace planner {
         auto sCurrent = std::make_shared<tNode>();
 
         /// Serves as explored (closed) set and cost to reach a node
-        std::map<tNode, double> oPathCost;
+        std::map<tNode, float> oPathCost;
 
         /// Initialize start node with cost of zero because it does not cost anything to go to it
-        oPathCost[*sStart] = 0.0;
+        oPathCost[*sStart] = 0.f;
 
         // Flags and Counts
         bool bFound = false;
@@ -440,10 +577,31 @@ namespace planner {
 
                     if (Traversable(sCurrent, sNext)) {
 
-                        UpdateCost(sNext);
+                        //UpdateCost(sNext);
+
+                        float fDeltaHeight =
+                                (m_oMap->Elevation(sNext->sLocation.nX, sNext->sLocation.nY) -
+                                 m_oMap->Elevation(sNext->psParent->sLocation.nX, sNext->psParent->sLocation.nY));
+
+                        float fHeightCost = 0.f;
+                        if (fDeltaHeight > 0)
+                        {
+                            fHeightCost = sAction.fCost * 1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
+                        }
+                        else if (fDeltaHeight < 0)
+                        {
+                            fHeightCost = -sAction.fCost * 0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
+                        }
+
+                        float fTime = sAction.fCost + fHeightCost;
+
+                        sNext->g = sNext->psParent->g + fTime;
 
                         /// Check if the node is already explored and if its path cost got smaller (found a better path to it).
-                        if (oPathCost.find(*sNext) == oPathCost.end() || sNext->g < oPathCost[*sNext]) {
+                        if (oPathCost.find(*sNext) == oPathCost.end() ||
+                            sNext->g < oPathCost[*sNext]
+                            )
+                        {
                             oPathCost[*sNext] = sNext->g;
                             UpdateHeuristic(sNext);
 
@@ -452,7 +610,18 @@ namespace planner {
 
                             /// Update the evaluation score value and put it on the frontier.
                             sNext->f = sNext->g + sNext->h;
+
                             m_oFrontier.put(sNext, sNext->f);
+
+                            /// Mark visited nodes
+                            m_oMap->SetOverrides(sNext->sLocation.nX, sNext->sLocation.nY, 0x02);
+
+                            /// Check that heuristic never overestimates the true distance:
+                            /// Priority of a new node should never be lower than the priority of its parent.
+                            if (sNext->psParent && sNext->f < sNext->psParent->f)
+                            {
+                                std::cout << "Heuristic overestimates true distance" << std::endl;
+                            }
                         }
                     }
                 }
@@ -538,7 +707,7 @@ namespace planner {
 
     void cPlanner::TraversePath(std::shared_ptr<tNode> i_psNode) const
     {
-        uint32_t nX, nY;
+        int nX, nY;
         /// Check if the current node is the start node, which has no parent and is therefore set to NULL
         while (nullptr != i_psNode->psParent) {
             nX = i_psNode->sLocation.nX;

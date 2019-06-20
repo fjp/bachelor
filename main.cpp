@@ -29,7 +29,7 @@ int main(int argc, char** argv)
     poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
 
 
-    poAudiRover->Summon(1);
+    //poAudiRover->Summon(1);
 
 
     poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
@@ -72,6 +72,11 @@ int main(int argc, char** argv)
                 elevation == 0)
             {
                 return uint8_t(visualizer::IPV_WATER);
+            }
+
+            if (visualizer::visited(x, y, &overrides[0]))
+            {
+                return uint8_t(visualizer::IPV_VISITED);
             }
             
             // Signifies normal ground color

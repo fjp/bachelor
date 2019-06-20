@@ -129,12 +129,9 @@ namespace planner {
         ///\brief Cost to move diagonal.
         float m_fCostDiagonal;
 
-
-
     };
 
 
 }
-
 
 #endif //BACHELOR_ROVER_INTERFACE_H
