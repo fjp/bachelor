@@ -53,7 +53,7 @@ namespace planner {
         }
 
         ///\brief Node identifier describes its location and updated with cPlanner::NodeHash().
-        uint32_t nId;
+        int nId;
         
         ///\brief Evaluation function \f$f(n) = g(n) + h(n)\f$
         float f;
@@ -79,12 +79,6 @@ namespace planner {
         bool operator<(const tNode& i_rhs) const
         {
             return nId < i_rhs.nId;
-        }
-
-        ///\brief Overloads greater than operator to provide using node identifier nId.
-        bool operator>(const tNode& i_lhs) const
-        {
-            return i_lhs.nId < nId;
         }
 
 

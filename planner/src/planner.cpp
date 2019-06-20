@@ -87,7 +87,7 @@ namespace planner {
 
 
         /// Correct heuristic value to get a consistent heuristic. Required because of moving up or down the hill.
-        i_sNode->h = fHeuristicValue / m_fConsistencyFactor;
+        i_sNode->h = fHeuristicValue; // / m_fConsistencyFactor;
 
         return fHeuristicValue;
     }
@@ -301,8 +301,23 @@ namespace planner {
 
         tSimpleLocation sCurrent;
 
+        int nIteration = 0;
+
         // While I am still searching for the goal and the problem is solvable
         while (!frontier.empty()) {
+
+            nIteration++;
+            if (nIteration % 100000 == 0)
+            {
+                std::cout << "Iteration " << nIteration
+                          //<< ": Best node location (" << m_oFrontier.pop()->sLocation.nX << "," << m_oFrontier.pop()->sLocation.nY
+                          //<< "), \n\t Evaluation function f(n): " << m_oFrontier.pop()->f
+                          //<< ", step cost c(n): " << m_oFrontier.pop()->g - m_oFrontier.pop()->psParent->g
+                          //<< ", path cost g(n): " << m_oFrontier.pop()->g
+                          //<< ", heuristic h(n): " << m_oFrontier.pop()->h
+                          << std::endl;
+                //Plot();
+            }
 
 
             // Remove quadruplets from the open list
@@ -367,10 +382,19 @@ namespace planner {
         tSimpleLocation sGoal{nId, nX, nY};
         sCurrent = sGoal;
 
+        int nElevation = 0;
         while (sCurrent.nX != sStart.nX || sCurrent.nY != sStart.nY) {
             m_oMap->SetOverrides(sCurrent.nX, sCurrent.nY, 0x01);
             sCurrent = came_from[sCurrent];
+
+            nElevation += m_oMap->Elevation(sCurrent.nX, sCurrent.nY);
         }
+
+        std::cout << "Total Elevation: " << nElevation << std::endl;
+
+        float fIslandSeconds = cost_so_far[sGoal];
+        std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
+                  << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 
         return 0;
     }
@@ -422,8 +446,24 @@ namespace planner {
         int x2;
         int y2;
 
+        int nIteration = 0;
+
         // While I am still searching for the goal and the problem is solvable
         while (!found && !resign) {
+
+            nIteration++;
+            if (nIteration % 100000 == 0)
+            {
+                std::cout << "Iteration " << nIteration
+                          //<< ": Best node location (" << m_oFrontier.pop()->sLocation.nX << "," << m_oFrontier.pop()->sLocation.nY
+                          //<< "), \n\t Evaluation function f(n): " << m_oFrontier.pop()->f
+                          //<< ", step cost c(n): " << m_oFrontier.pop()->g - m_oFrontier.pop()->psParent->g
+                          //<< ", path cost g(n): " << m_oFrontier.pop()->g
+                          //<< ", heuristic h(n): " << m_oFrontier.pop()->h
+                          << std::endl;
+                //Plot();
+            }
+
             // Resign if no values in the open list and you can't expand anymore
             if (openprio.empty()) {
                 resign = true;
@@ -504,15 +544,25 @@ namespace planner {
         x = m_poRover->Goal().nX;
         y = m_poRover->Goal().nY;
 
+        int nElevation = 0;
+
         while (x != m_poRover->Start().nX or y != m_poRover->Start().nY) {
             x2 = x - m_poRover->m_asActions[action[x][y]].nX;
             y2 = y - m_poRover->m_asActions[action[x][y]].nY;
             // Store the  Path in a vector
             m_oMap->SetOverrides(x2, y2, 0x01);
 
+            nElevation += m_oMap->Elevation(x2, y2);
+
             x = x2;
             y = y2;
         }
+
+        std::cout << "Total Elevation: " << nElevation << std::endl;
+
+        float fIslandSeconds = g;
+        std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
+                  << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 
         return 0;
     }
@@ -707,6 +757,7 @@ namespace planner {
 
     void cPlanner::TraversePath(std::shared_ptr<tNode> i_psNode) const
     {
+        int nElevation = 0;
         int nX, nY;
         /// Check if the current node is the start node, which has no parent and is therefore set to NULL
         while (nullptr != i_psNode->psParent) {
@@ -716,9 +767,13 @@ namespace planner {
             /// Store path in overrides
             m_oMap->SetOverrides(nX, nY, 0x01);
 
+            nElevation += m_oMap->Elevation(nX, nY);
+
             /// Move towards the start
             i_psNode = i_psNode->psParent;
         }
+
+        std::cout << "Total Elevation: " << nElevation << std::endl;
 
     }
 
