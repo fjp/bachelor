@@ -51,7 +51,7 @@ namespace planner {
         ///\param[in] i_sNode the node which heuristic is updated
         ///\param[in] i_eHeuristic the type of heuristic to calculate, see tHeuristic.
         ///\return The calculated heuristic value.
-        float UpdateHeuristic(std::shared_ptr<tNode> i_sNode, const tHeuristic i_eHeuristic = OCTILE) const;
+        float UpdateHeuristic(std::shared_ptr<tNode> i_psNode, const tHeuristic i_eHeuristic = OCTILE) const;
 
 
         ///\brief Updates the heuristic value of the node located at tlocation i_sLocation.
@@ -59,7 +59,7 @@ namespace planner {
         ///\param[in] i_sNode the node which heuristic is updated
         ///\param[in] i_eHeuristic the type of heuristic to calculate, see tHeuristic.
         ///\return The calculated heuristic value.
-        float UpdateHeuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic = OCTILE) const;
+        float Heuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic = OCTILE) const;
 
 
 
@@ -75,7 +75,10 @@ namespace planner {
         ///         The value is added to the time it takes for a straight or diagonal step (depending on the action of the node).
         ///         The sum is stored in \f$g(n)\f$ of the node planner::tNode i_sNode.
         ///\param[in] i_sNode The node which path cost is updated.
-        void UpdateCost(std::shared_ptr<tNode> io_sNode) const;
+        void UpdateCost(std::shared_ptr<tNode> io_psNode) const;
+
+        template<typename TLocation>
+        float HeightCost(TLocation& i_sCurrent, TLocation& i_sNext, tAction& i_sAction) const;
 
 
         ///\brief Test if the provided location i_sLocation lies within the map
@@ -118,7 +121,7 @@ namespace planner {
         ///\brief Calculates the node hash using its location and the width of the map
         ///\details The hash is required to sort the std::map<tNode> oCost of reaching a node,
         ///         which is used in the AStar() search algorithm.
-        uint32_t NodeHash(std::shared_ptr<tNode>& i_sNode) const;
+        int NodeHash(std::shared_ptr<tNode>& i_sNode) const;
 
     private:
 

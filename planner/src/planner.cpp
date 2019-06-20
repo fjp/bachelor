@@ -81,18 +81,17 @@ namespace planner {
         return m_oMap->Elevation(i_nX, i_nY) - m_oMap->Elevation(i_nX, i_nY - m_poRover->StepSize());
     }
 
-    float cPlanner::UpdateHeuristic(std::shared_ptr<tNode> i_sNode, const tHeuristic i_eHeuristic) const {
+    float cPlanner::UpdateHeuristic(std::shared_ptr<tNode> i_psNode, const tHeuristic i_eHeuristic) const {
 
-        float fHeuristicValue = UpdateHeuristic(i_sNode->sLocation, i_eHeuristic);
-
+        float fHeuristicValue = Heuristic(i_psNode->sLocation, i_eHeuristic);
 
         /// Correct heuristic value to get a consistent heuristic. Required because of moving up or down the hill.
-        i_sNode->h = fHeuristicValue; // / m_fConsistencyFactor;
+        i_psNode->h = fHeuristicValue; // / m_fConsistencyFactor;
 
         return fHeuristicValue;
     }
 
-    float cPlanner::UpdateHeuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic) const {
+    float cPlanner::Heuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic) const {
         int fDeltaX = std::abs(m_poRover->Goal().nX - i_sLocation.nX);
         int fDeltaY = std::abs(m_poRover->Goal().nY - i_sLocation.nY);
 
@@ -137,27 +136,51 @@ namespace planner {
         }
     }
 
-
-    void cPlanner::UpdateCost(std::shared_ptr<tNode> io_sNode) const
+    template<typename TLocation>
+    float cPlanner::HeightCost(TLocation& i_sCurrent, TLocation& i_sNext, tAction& i_sAction) const
     {
-        auto psParent = io_sNode->psParent;
+        /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
+        /// Calculate current gradient in step direction
+        float fDeltaHeight =
+                (m_oMap->Elevation(i_sNext.nX, i_sNext.nY) -
+                 m_oMap->Elevation(i_sCurrent.nX, i_sCurrent.nY));
+
+
+        float fHeightCost = 0.f;
+        if (fDeltaHeight > 0)
+        {
+            fHeightCost = i_sAction.fCost * 1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
+        }
+        else if (fDeltaHeight < 0)
+        {
+            fHeightCost = -i_sAction.fCost * 0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
+        }
+
+        return fHeightCost;
+
+    }
+
+
+    void cPlanner::UpdateCost(std::shared_ptr<tNode> io_psNode) const
+    {
+        auto psParent = io_psNode->psParent;
         if (nullptr != psParent) {
             /// Rover's normal speed is 1 cell per island second
-            float fV = m_poRover->Velocity();
-            float fDeltaS = io_sNode->sAction.fCost * m_poRover->StepSize();
+            //float fV = m_poRover->Velocity();
+            //float fDeltaS = io_psNode->sAction.fCost * m_poRover->StepSize();
 
             /// Add action (step) cost, which is given in island seconds
-            float fStepCost = io_sNode->sAction.fCost; //fDeltaS / fV;
+            float fStepCost = io_psNode->sAction.fCost; //fDeltaS / fV;
 
-
+            /*
             /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
             /// Calculate current gradient in step direction
             float fDeltaHeight =
-                    (m_oMap->Elevation(io_sNode->sLocation.nX, io_sNode->sLocation.nY) -
+                    (m_oMap->Elevation(io_psNode->sLocation.nX, io_psNode->sLocation.nY) -
                      m_oMap->Elevation(psParent->sLocation.nX, psParent->sLocation.nY));
 
 
-            /*
+
             float fAlpha = atan(static_cast<float>(fDeltaHeight) / static_cast<float>(m_poRover->StepSize()));
             float fAlphaAbs = fabs(fAlpha);
 
@@ -176,25 +199,12 @@ namespace planner {
             }
              */
 
-
-            float fHeightCost = 0.f;
-            if (fDeltaHeight > 0)
-            {
-                fHeightCost = io_sNode->sAction.fCost * 1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
-            }
-            else if (fDeltaHeight < 0)
-            {
-                fHeightCost = -io_sNode->sAction.fCost * 0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
-            }
-
-
+            float fHeightCost = HeightCost(io_psNode->sLocation, psParent->sLocation, io_psNode->sAction);
 
             float fTime = fStepCost + fHeightCost;
 
-            io_sNode->g = psParent->g + fTime;
-
+            io_psNode->g = psParent->g + fTime;
         }
-
     }
 
 
@@ -207,7 +217,7 @@ namespace planner {
             for (int32_t nY = 0; nY < mfHeuristic[0].size(); nY++) {
 
                 /// Output octile distance
-                oFile << UpdateHeuristic(tLocation{ nX, nY }, OCTILE) << ' ';
+                oFile << Heuristic(tLocation{ nX, nY }, OCTILE) << ' ';
             }
             oFile << std::endl;
         }
@@ -246,7 +256,7 @@ namespace planner {
     }
 
 
-    uint32_t cPlanner::NodeHash(std::shared_ptr<tNode>& i_sNode) const
+    int cPlanner::NodeHash(std::shared_ptr<tNode>& i_sNode) const
     {
         return i_sNode->sLocation.nY * m_oMap->Width() + i_sNode->sLocation.nX;
     }
@@ -268,8 +278,8 @@ namespace planner {
 
 
     float cPlanner::Plan() {
-        return AStar();
-        //return AStarOptimized();
+        //return AStar();
+        return AStarOptimized();
         //return AStarCheck();
     }
 
@@ -328,35 +338,23 @@ namespace planner {
                 break;
             }
 
-            for (int i = 0; i < m_poRover->m_asActions.size(); i++) {
+            for (tAction sAction : m_poRover->m_asActions) {
 
-                int nXNext = sCurrent.nX + m_poRover->m_asActions[i].nX;
-                int nYNext = sCurrent.nY + m_poRover->m_asActions[i].nY;
+                int nXNext = sCurrent.nX + sAction.nX;
+                int nYNext = sCurrent.nY + sAction.nY;
                 int nIdNext = nYNext * m_oMap->Width() + nXNext;
                 tSimpleLocation sNext{nIdNext, nXNext, nYNext};
 
                 tLocation sLocation{nXNext, nYNext};
                 if (WithinMap(sLocation) && !m_oMap->Water(nXNext, nYNext)) {
 
-                    float fDeltaHeight =
-                            (m_oMap->Elevation(sNext.nX, sNext.nY) -
-                             m_oMap->Elevation(sCurrent.nX, sCurrent.nY));
+                    float fHeightCost = HeightCost(sCurrent, sNext, sAction);
 
-                    float fHeightCost = 0.f;
-
-                    if (fDeltaHeight > 0) {
-                        fHeightCost = m_poRover->m_asActions[i].fCost *
-                                      1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
-                    } else if (fDeltaHeight < 0) {
-                        fHeightCost = -m_poRover->m_asActions[i].fCost *
-                                      0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
-                    }
-
-                    float new_cost = cost_so_far[sCurrent] + m_poRover->m_asActions[i].fCost + fHeightCost;
-                    if (cost_so_far.find(sNext) == cost_so_far.end()
-                        || new_cost < cost_so_far[sNext]) {
+                    float new_cost = cost_so_far[sCurrent] + sAction.fCost + fHeightCost;
+                    if (cost_so_far.find(sNext) == cost_so_far.end() || new_cost < cost_so_far[sNext])
+                    {
                         cost_so_far[sNext] = new_cost;
-                        float h = UpdateHeuristic(sLocation);
+                        float h = Heuristic(sLocation);
                         float priority = new_cost + h;
                         frontier.put(sNext, priority);
                         came_from[sNext] = sCurrent;
@@ -373,7 +371,6 @@ namespace planner {
                 }
             }
         }
-
 
         /// Goal
         nX = m_poRover->Goal().nX;
@@ -396,7 +393,7 @@ namespace planner {
         std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
                   << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 
-        return 0;
+        return fIslandSeconds;
     }
 
     float cPlanner::AStarOptimized()
@@ -416,7 +413,7 @@ namespace planner {
         int x = m_poRover->Start().nX;
         int y = m_poRover->Start().nY;
         float g = 0;
-        float h = UpdateHeuristic(m_poRover->Start());
+        float h = Heuristic(m_poRover->Start());
         float f = g + h;
 
         // Store the expansions
@@ -518,7 +515,7 @@ namespace planner {
 
                                 float g2 = g + m_poRover->m_asActions[i].fCost + fHeightCost;
 
-                                h = UpdateHeuristic(sLocation);
+                                h = Heuristic(sLocation);
                                 f = g2 + h;
                                 openprio.put({ y2 * m_oMap->Width() + x2, x2, y2, g2, h, f }, f);
                                 closed[x2][y2] = 1;
@@ -564,7 +561,7 @@ namespace planner {
         std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
                   << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 
-        return 0;
+        return fIslandSeconds;
     }
 
 
@@ -629,28 +626,14 @@ namespace planner {
 
                         //UpdateCost(sNext);
 
-                        float fDeltaHeight =
-                                (m_oMap->Elevation(sNext->sLocation.nX, sNext->sLocation.nY) -
-                                 m_oMap->Elevation(sNext->psParent->sLocation.nX, sNext->psParent->sLocation.nY));
-
-                        float fHeightCost = 0.f;
-                        if (fDeltaHeight > 0)
-                        {
-                            fHeightCost = sAction.fCost * 1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
-                        }
-                        else if (fDeltaHeight < 0)
-                        {
-                            fHeightCost = -sAction.fCost * 0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
-                        }
+                        float fHeightCost = HeightCost(sCurrent->sLocation, sNext->sLocation, sAction);
 
                         float fTime = sAction.fCost + fHeightCost;
 
                         sNext->g = sNext->psParent->g + fTime;
 
                         /// Check if the node is already explored and if its path cost got smaller (found a better path to it).
-                        if (oPathCost.find(*sNext) == oPathCost.end() ||
-                            sNext->g < oPathCost[*sNext]
-                            )
+                        if (oPathCost.find(*sNext) == oPathCost.end() || sNext->g < oPathCost[*sNext])
                         {
                             oPathCost[*sNext] = sNext->g;
                             UpdateHeuristic(sNext);
@@ -693,61 +676,20 @@ namespace planner {
         std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
         << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 
-
         /// Free memory
         oPathCost.clear();
         m_oFrontier.clear();
-
 
         return fIslandSeconds;
     }
 
 
-
-
     void cPlanner::Plot()
     {
-
         auto sNode = m_oFrontier.pop();
         TraversePath(sNode);
 
-
-        std::ofstream of("pic.bmp", std::ofstream::binary);
-        visualizer::writeBMP(
-                of,
-                &m_oMap->m_oElevation[0],
-                IMAGE_DIM,
-                IMAGE_DIM,
-                [&] (size_t x, size_t y, uint8_t elevation) {
-
-                    // Marks interesting positions on the map
-                    if (visualizer::donut(x, y, ROVER_X, ROVER_Y) ||
-                            visualizer::donut(x, y, BACHELOR_X, BACHELOR_Y) ||
-                            visualizer::donut(x, y, WEDDING_X, WEDDING_Y))
-                    {
-                        return uint8_t(visualizer::IPV_PATH);
-                    }
-
-                    if (visualizer::path(x, y, &m_oMap->m_oOverrides[0]))
-                    {
-                        return uint8_t(visualizer::IPV_PATH);
-                    }
-
-                    // Signifies water
-                    if ((m_oMap->m_oOverrides[y * IMAGE_DIM + x] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
-                        elevation == 0)
-                    {
-                        return uint8_t(visualizer::IPV_WATER);
-                    }
-
-                    // Signifies normal ground color
-                    if (elevation < visualizer::IPV_ELEVATION_BEGIN)
-                    {
-                        elevation = visualizer::IPV_ELEVATION_BEGIN;
-                    }
-                    return elevation;
-                });
-        of.flush();
+        //visualizer::write("pic_intermediate.bmp", &m_oMap->m_oElevation[0], &m_oMap->m_oOverrides[0], IMAGE_DIM);
 #if __APPLE__
         //auto res = system("open pic.bmp");
         //(void)res;

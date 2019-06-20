@@ -71,7 +71,6 @@ protected:
         anchor += PATH_SEP;
         m_oElevation = loadFile(anchor + "assets" + PATH_SEP + "elevation.data", expectedFileSize);
         m_oOverrides = loadFile(anchor + "assets" + PATH_SEP + "overrides.data", expectedFileSize);
-        m_oImage = std::ofstream("pic.bmp", std::ofstream::binary);
 
 
 
@@ -89,45 +88,12 @@ protected:
     void TearDown() override {
         // Code here will be called immediately after each test (right
         // before the destructor).
-        visualizer::writeBMP(
-                m_oImage,
-                &m_oElevation[0],
-                IMAGE_DIM,
-                IMAGE_DIM,
-                [&] (size_t x, size_t y, uint8_t elevation) {
+        std::vector<tLocation> asLocation;
+        asLocation.push_back(tLocation{ROVER_X, ROVER_Y});
+        asLocation.push_back(tLocation{BACHELOR_X, BACHELOR_Y});
+        asLocation.push_back(tLocation{WEDDING_X, WEDDING_Y});
+        visualizer::write("test_pic2.bmp", &m_oElevation[0], &m_oOverrides[0], asLocation, IMAGE_DIM);
 
-                    // Marks interesting positions on the map
-                    if (visualizer::donut(x, y, ROVER_X, ROVER_Y) ||
-                            visualizer::donut(x, y, BACHELOR_X, BACHELOR_Y) ||
-                            visualizer::donut(x, y, WEDDING_X, WEDDING_Y))
-                    {
-                        return uint8_t(visualizer::IPV_PATH);
-                    }
-
-                    if (visualizer::path(x, y, &m_oOverrides[0]))
-                    {
-                        return uint8_t(visualizer::IPV_PATH);
-                    }
-
-                    // Signifies water
-                    if ((m_oOverrides[y * IMAGE_DIM + x] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
-                        elevation == 0)
-                    {
-                        return uint8_t(visualizer::IPV_WATER);
-                    }
-
-                    // Signifies normal ground color
-                    if (elevation < visualizer::IPV_ELEVATION_BEGIN)
-                    {
-                        elevation = visualizer::IPV_ELEVATION_BEGIN;
-                    }
-                    return elevation;
-                });
-        m_oImage.flush();
-#if __APPLE__
-        auto res = system("open pic.bmp");
-        (void)res;
-#endif
 
     }
 
@@ -135,8 +101,6 @@ protected:
     std::vector<uint8_t> m_oElevation;
     std::vector<uint8_t> m_oOverrides;
     std::shared_ptr<cAudiRover> m_poAudiRover;
-
-    std::ofstream m_oImage;
 };
 
 #endif //BACHELORTEST_TEST_FIXTURE_H

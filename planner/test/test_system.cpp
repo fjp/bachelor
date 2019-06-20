@@ -34,42 +34,10 @@ TEST_F(cPlannerTest, simple_map)
     poAudiRover->SetGoal(tLocation{nGoalX, nGoalY});
     poAudiRover->Summon(1);
 
-
-    auto oImage = std::ofstream("test_pic.bmp", std::ofstream::binary);
-    visualizer::writeBMP(
-            oImage,
-            &oElevation[0],
-            nImageDim,
-            nImageDim,
-            [&] (size_t x, size_t y, uint8_t elevation) {
-
-                // Marks interesting positions on the map
-                if (visualizer::donut(x, y, nStartX, nStartY) ||
-                    visualizer::donut(x, y, nGoalX, nGoalY))
-                {
-                    return uint8_t(visualizer::IPV_PATH);
-                }
-
-                if (visualizer::path(x, y, &oOverrides[0], nImageDim))
-                {
-                    return uint8_t(visualizer::IPV_PATH);
-                }
-
-                // Signifies water
-                if ((oOverrides[y * nImageDim + x] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
-                    elevation == 0)
-                {
-                    return uint8_t(visualizer::IPV_WATER);
-                }
-
-                // Signifies normal ground color
-                if (elevation < visualizer::IPV_ELEVATION_BEGIN)
-                {
-                    elevation = visualizer::IPV_ELEVATION_BEGIN;
-                }
-                return elevation;
-            });
-    oImage.flush();
+    std::vector<tLocation> asLocation;
+    asLocation.push_back(tLocation{nStartX, nStartY});
+    asLocation.push_back(tLocation{nGoalX, nGoalY});
+    visualizer::write("test_pic.bmp", &oElevation[0], &oOverrides[0], asLocation, nImageDim);
 
     poAudiRover->countPlanner();
 
