@@ -338,7 +338,7 @@ namespace planner {
                 break;
             }
 
-            for (tAction sAction : m_poRover->m_asActions) {
+            for (auto sAction : m_poRover->m_asActions) {
 
                 int nXNext = sCurrent.nX + sAction.nX;
                 int nYNext = sCurrent.nY + sAction.nY;
@@ -491,27 +491,16 @@ namespace planner {
                     //else expand new elements
                 else {
                     for (int i = 0; i < m_poRover->m_asActions.size(); i++) {
-                        x2 = x + m_poRover->m_asActions[i].nX;
-                        y2 = y + m_poRover->m_asActions[i].nY;
+                        auto sAction = m_poRover->m_asActions[i];
+                        x2 = x + sAction.nX;
+                        y2 = y + sAction.nY;
                         tLocation sLocation{x2, y2};
                         if (WithinMap(sLocation)) {
                             if (closed[x2][y2] == 0 and !m_oMap->Water(x2, y2)) {
 
 
-                                float fDeltaHeight =
-                                        (m_oMap->Elevation(x2, y2) -
-                                         m_oMap->Elevation(x, y));
-
-                                float fHeightCost = 0.f;
-
-                                if (fDeltaHeight > 0)
-                                {
-                                    fHeightCost = m_poRover->m_asActions[i].fCost * 1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
-                                }
-                                else if (fDeltaHeight < 0)
-                                {
-                                    fHeightCost = -m_poRover->m_asActions[i].fCost * 0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
-                                }
+                                tLocation sCurrent{x, y};
+                                float fHeightCost = HeightCost(sCurrent, sLocation, sAction);
 
                                 float g2 = g + m_poRover->m_asActions[i].fCost + fHeightCost;
 
