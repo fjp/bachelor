@@ -8,89 +8,47 @@
 
 #include "test_fixture.h"
 
+
+
 TEST_F(cPlannerTest, simple_map)
 {
-    /// Prepare to read elevation and overrides data
-    size_t nImageDim = 330;
-    const size_t expectedFileSize = nImageDim * nImageDim;
+    InitSimpleMap();
 
-    std::vector<uint8_t> data_elevation(expectedFileSize, 1);
-    for (int y = 100; y <= 110; ++y)
-    {
-        for (int x = 50; x <= 100; ++x) {
-            data_elevation[y * nImageDim + x] = 0;
-        }
-    }
-
-    for (int y = 50; y <= 100; ++y)
-    {
-        for (int x = 100; x <= 110; ++x) {
-            data_elevation[y * nImageDim + x] = 0;
-        }
-    }
-    writeFile("../../../assets/test_elevation.data", data_elevation, expectedFileSize);
-    std::vector<uint8_t> dataOverrides(expectedFileSize, 0);
-    writeFile("../../../assets/test_overrides.data", dataOverrides, expectedFileSize);
-
-    auto oElevation = loadFile("../../../assets/test_elevation.data", expectedFileSize);
-    auto oOverrides = loadFile("../../../assets/test_overrides.data", expectedFileSize);
-
-
-    /// Create Audi rover
-    //cAudiRover oAudiRover(&oElevation[0], &oOverrides[0], nImageDim, nImageDim);
-    auto poAudiRover = std::make_shared<cAudiRover>(&oElevation[0], &oOverrides[0], nImageDim, nImageDim);
-
-    /// Bachelor calls Audi rover
     int nStartX = 30; int nStartY = 30;
     int nGoalX = 300; int nGoalY = 300;
-    poAudiRover->SetStart(tLocation{nStartX, nStartY});
-    poAudiRover->SetGoal(tLocation{nGoalX, nGoalY});
-    poAudiRover->Summon(1);
+    CreateRover(tLocation{nStartX, nStartY}, tLocation{nGoalX, nGoalY});
+
+    m_poAudiRover->Summon(1);
+    m_poAudiRover->Summon(1, 1, ASTAR_OPT);
 
     std::vector<tLocation> asLocation;
     asLocation.push_back(tLocation{nStartX, nStartY});
     asLocation.push_back(tLocation{nGoalX, nGoalY});
-    visualizer::write("test_pic.bmp", &oElevation[0], &oOverrides[0], asLocation, nImageDim);
+    visualizer::write("simple_map.bmp", &m_oElevation[0], &m_oOverrides[0], asLocation, m_nImageDim);
 
-/*
-    auto oImage = std::ofstream("test_pic.bmp", std::ofstream::binary);
-    visualizer::writeBMP(
-            oImage,
-            &oElevation[0],
-            nImageDim,
-            nImageDim,
-            [&] (size_t x, size_t y, uint8_t elevation) {
+    m_poAudiRover->countPlanner();
+}
 
-                // Marks interesting positions on the map
-                if (visualizer::donut(x, y, nStartX, nStartY) ||
-                    visualizer::donut(x, y, nGoalX, nGoalY))
-                {
-                    return uint8_t(visualizer::IPV_PATH);
-                }
 
-                if (visualizer::path(x, y, &oOverrides[0], nImageDim))
-                {
-                    return uint8_t(visualizer::IPV_PATH);
-                }
 
-                // Signifies water
-                if ((oOverrides[y * nImageDim + x] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
-                    elevation == 0)
-                {
-                    return uint8_t(visualizer::IPV_WATER);
-                }
+TEST_F(cPlannerTest, island_map)
+{
+    InitIslandMap();
 
-                // Signifies normal ground color
-                if (elevation < visualizer::IPV_ELEVATION_BEGIN)
-                {
-                    elevation = visualizer::IPV_ELEVATION_BEGIN;
-                }
-                return elevation;
-            });
-    oImage.flush();
-    */
+    CreateRover(tLocation{ROVER_X, ROVER_Y}, tLocation{BACHELOR_X, BACHELOR_Y});
 
-    poAudiRover->countPlanner();
+
+    m_poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
+    m_poAudiRover->SetGoal({WEDDING_X, WEDDING_Y});
+
+    m_poAudiRover->Summon(1);
+
+    std::vector<tLocation> asLocation;
+    asLocation.push_back(tLocation{ROVER_X, ROVER_Y});
+    asLocation.push_back(tLocation{BACHELOR_X, BACHELOR_Y});
+    asLocation.push_back(tLocation{WEDDING_X, WEDDING_Y});
+
+    visualizer::write("island.bmp", &m_oElevation[0], &m_oOverrides[0], asLocation, IMAGE_DIM);
 
 }
 

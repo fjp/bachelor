@@ -123,6 +123,7 @@ namespace planner {
         ///         which is used in the AStar() search algorithm.
         int NodeHash(std::shared_ptr<tNode>& i_sNode) const;
 
+
     private:
 
         ///\brief AStar algorithm implementation.

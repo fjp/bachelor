@@ -33,7 +33,7 @@ namespace planner
 
     }
 
-    void cAudiRover::Summon(const int i_nStepSize, const int i_nVelocity) {
+    void cAudiRover::Summon(const int i_nStepSize, const int i_nVelocity, const tAlgorithm i_eAlgorithm) {
 
         auto poPlanner = InitializePlanner(i_nStepSize, i_nVelocity);
 
@@ -43,6 +43,7 @@ namespace planner
         countPlanner();
         if (poPlanner)
         {
+            poPlanner->SetAlgorithm(i_eAlgorithm);
             countPlanner();
             m_fTotalTime += poPlanner->Plan();
         }

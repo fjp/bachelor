@@ -25,7 +25,9 @@ namespace planner {
 
 
     cPlanner::cPlanner(std::shared_ptr<cRoverInterface<8>> i_poRover, std::shared_ptr<cGraph> i_oMap)
-            : cPlannerInterface(std::static_pointer_cast<cAudiRover>(i_poRover), i_oMap), m_nMaxGradient(0), m_fConsistencyFactor(0.f) {
+            : cPlannerInterface(std::static_pointer_cast<cAudiRover>(i_poRover), i_oMap)
+            , m_nMaxGradient(0)
+            , m_fConsistencyFactor(0.f) {
 
         std::cout << "cPlanner" << std::endl;
 
@@ -278,9 +280,18 @@ namespace planner {
 
 
     float cPlanner::Plan() {
-        return AStar();
-        //return AStarOptimized();
-        //return AStarCheck();
+
+        switch (m_eAlgorithm)
+        {
+            case ASTAR:
+                return AStar();
+
+            case ASTAR_OPT:
+                return AStarOptimized();
+
+            case ASTAR_CK:
+                return AStarCheck();
+        }
     }
 
     float cPlanner::AStarCheck() {

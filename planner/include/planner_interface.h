@@ -17,6 +17,12 @@
 
 namespace planner {
 
+    enum tAlgorithm {
+        ASTAR,
+        ASTAR_OPT,
+        ASTAR_CK
+    };
+
     /// Forward declaration of interface planner::cRoverInterface.
     template <size_t Directions>
     class cRoverInterface;
@@ -29,7 +35,10 @@ namespace planner {
     public:
 
         ///\brief The constructor of the interface which initializes its members m_poRover and m_oMap.
-        explicit cPlannerInterface(std::shared_ptr<cRoverInterface<Directions>> i_poRover, std::shared_ptr<cGraph> i_oMap) : m_poRover(i_poRover), m_oMap(i_oMap) {
+        explicit cPlannerInterface(std::shared_ptr<cRoverInterface<Directions>> i_poRover, std::shared_ptr<cGraph> i_oMap) :
+            m_poRover(i_poRover)
+            , m_oMap(i_oMap)
+            , m_eAlgorithm(ASTAR) {
             std::cout << "cPlannerInterface" << std::endl;
         };
 
@@ -58,8 +67,13 @@ namespace planner {
             std::cout << "~cPlannerInterface" << std::endl;
         }
 
+        void SetAlgorithm(const tAlgorithm i_eAlgorithm = ASTAR) { m_eAlgorithm = i_eAlgorithm; };
+        tAlgorithm Algorithm() { return m_eAlgorithm; };
+
 
     protected:
+        tAlgorithm m_eAlgorithm;
+
         ///\brief Reference pointer to the interface of the rover class planner::cRoverInterface<Directions>.
         std::shared_ptr<cRoverInterface<Directions>> m_poRover;
 

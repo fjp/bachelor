@@ -30,7 +30,7 @@ namespace planner {
 
 
         ///\brief The summon feature that the Audi rover provides
-        void Summon(const int i_nStepSize = 1, const int i_nVelocity = 1);
+        void Summon(const int i_nStepSize = 1, const int i_nVelocity = 1, const tAlgorithm i_eAlgorithm = ASTAR);
 
         ///\brief Initializes the reference to the planner which is located in the inherited interface.
         ///\details
@@ -43,7 +43,6 @@ namespace planner {
         };
 
         void countPlanner();
-
 
 
     private:
