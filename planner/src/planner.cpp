@@ -87,8 +87,7 @@ namespace planner {
 
         float fHeuristicValue = Heuristic(i_psNode->sLocation, i_eHeuristic);
 
-        /// Correct heuristic value to get a consistent heuristic. Required because of moving up or down the hill.
-        i_psNode->h = fHeuristicValue * 0.99; // / m_fConsistencyFactor;
+        i_psNode->h = fHeuristicValue;
 
         return fHeuristicValue;
     }
@@ -123,7 +122,8 @@ namespace planner {
             }
         }
 
-        return fHeuristicValue;
+        /// Correct heuristic value to get a consistent heuristic. Required because of moving up or down the hill.
+        return fHeuristicValue - sqrt(2.f)*0.2;//0.99; // / m_fConsistencyFactor;
 
     }
 
@@ -415,7 +415,7 @@ namespace planner {
         closed[m_poRover->Start().nX][m_poRover->Start().nY] = 1;
 
         // Create expand array filled with -1
-        vector<vector<int> > expand(m_oMap->Height(), vector<int>(m_oMap->Width(), -1));
+        vector<vector<float> > gScore(m_oMap->Height(), vector<float>(m_oMap->Width(), std::numeric_limits<float>::max()));
 
         // Create action array filled with -1
         vector<vector<int> > action(m_oMap->Height(), vector<int>(m_oMap->Width(), -1));
@@ -426,6 +426,8 @@ namespace planner {
         float g = 0;
         float h = Heuristic(m_poRover->Start());
         float f = g + h;
+
+        gScore[x][y] = 0.f;
 
         // Store the expansions
         //vector<vector<float> > open;
@@ -489,7 +491,7 @@ namespace planner {
                 float fparent = next.f;
 
                 // Fill the expand vectors with count
-                expand[x][y] = count;
+                //expand[x][y] = count;
                 count += 1;
 
 
@@ -501,24 +503,46 @@ namespace planner {
 
                     //else expand new elements
                 else {
+
+
+                    //openSet.Remove(current)
+                    //closedSet.Add(current)
+                    closed[x][y] = 1;
+
                     for (int i = 0; i < m_poRover->m_asActions.size(); i++) {
                         auto sAction = m_poRover->m_asActions[i];
                         x2 = x + sAction.nX;
                         y2 = y + sAction.nY;
                         tLocation sLocation{x2, y2};
+                        tSimpleNode sNext{y2 * m_oMap->Width() + x2, x2, y2};
+
+
                         if (WithinMap(sLocation)) {
                             if (closed[x2][y2] == 0 and !m_oMap->Water(x2, y2)) {
 
-
                                 tLocation sCurrent{x, y};
                                 float fHeightCost = HeightCost(sCurrent, sLocation, sAction);
+                                float g2 = g + sAction.fCost + fHeightCost;
 
-                                float g2 = g + m_poRover->m_asActions[i].fCost + fHeightCost;
+                                // The distance from start to a neighbor
+                                float tentative_gScore = gScore[x][y] + sAction.fCost + fHeightCost;
+
+                                if (tentative_gScore >= gScore[x2][y2]) {
+                                    std::cout << "x2, y2" << std::endl;
+                                    continue;
+                                }
+
+                                gScore[x2][y2] = tentative_gScore;
 
                                 h = Heuristic(sLocation);
                                 f = g2 + h;
-                                openprio.put({ y2 * m_oMap->Width() + x2, x2, y2, g2, h, f }, f);
-                                closed[x2][y2] = 1;
+
+                                sNext.g = g2;
+                                sNext.h = h;
+                                sNext.f = f;
+
+                                openprio.put(sNext, f);
+                                //closed[x2][y2] = 1;
                                 action[x2][y2] = i;
 
                                 /// Mark visited nodes
