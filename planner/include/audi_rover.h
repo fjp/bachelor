@@ -60,6 +60,8 @@ namespace planner {
         ///\brief Total time in island seconds to travel on the fastest found path by AStar().
         float TotalTime() const;
 
+        ///\brief Resets the total planning time to zero island seconds.
+        void ResetTime();
 
     };
 

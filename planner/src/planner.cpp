@@ -88,7 +88,7 @@ namespace planner {
         float fHeuristicValue = Heuristic(i_psNode->sLocation, i_eHeuristic);
 
         /// Correct heuristic value to get a consistent heuristic. Required because of moving up or down the hill.
-        i_psNode->h = fHeuristicValue; // / m_fConsistencyFactor;
+        i_psNode->h = fHeuristicValue * 0.99; // / m_fConsistencyFactor;
 
         return fHeuristicValue;
     }
@@ -131,7 +131,7 @@ namespace planner {
         float fStepCost = i_sNode->g - i_sNode->psParent->g;
         //if (!(Heuristic(sNext) <= StepCost + Heuristic(sNext->psParent)))
         //if (!(i_sNode->h <= fStepCost + i_sNode->psParent->h))
-        if (!(i_sNode->psParent->h <= fStepCost + i_sNode->h))
+        if (!(i_sNode->psParent->h <= fStepCost + i_sNode->h + 1e-4))
         {
             //std::cout << "Heuristic not consistent: " << i_sNode->h << " > " << fStepCost << " + " << i_sNode->psParent->h << " = " << fStepCost + i_sNode->psParent->h << std::endl;
             std::cout << "Heuristic not consistent: " << i_sNode->psParent->h << " > " << fStepCost << " + " << i_sNode->h << " = " << fStepCost + i_sNode->h << std::endl;

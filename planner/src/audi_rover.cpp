@@ -77,6 +77,10 @@ namespace planner
         return m_fTotalTime;
     }
 
+    void cAudiRover::ResetTime() {
+        m_fTotalTime = 0.f;
+    }
+
 }
 
 

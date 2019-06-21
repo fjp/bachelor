@@ -19,7 +19,12 @@ TEST_F(cPlannerTest, simple_map)
     CreateRover(tLocation{nStartX, nStartY}, tLocation{nGoalX, nGoalY});
 
     m_poAudiRover->Summon(1);
-    m_poAudiRover->Summon(1, 1, ASTAR_OPT);
+    float fTimeAStar = m_poAudiRover->TotalTime();
+    m_poAudiRover->ResetTime();
+    //m_poAudiRover->Summon(1, 1, ASTAR_OPT);
+    //float fTimeAStarOpt = m_poAudiRover->TotalTime();
+    m_poAudiRover->Summon(1, 1, ASTAR_CK);
+    float fTimeAStarCk = m_poAudiRover->TotalTime();
 
     std::vector<tLocation> asLocation;
     asLocation.push_back(tLocation{nStartX, nStartY});
