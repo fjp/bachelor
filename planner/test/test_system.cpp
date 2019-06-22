@@ -10,6 +10,32 @@
 
 
 
+TEST_F(cPlannerTest, simple_map_with_elevation)
+{
+    InitSimpleMapWithElevation();
+
+    int nStartX = 0; int nStartY = 0;
+    //int nGoalX = 300; int nGoalY = 30;
+    int nGoalX = m_nImageDim - 1; int nGoalY = m_nImageDim - 1;
+    CreateRover(tLocation{nStartX, nStartY}, tLocation{nGoalX, nGoalY});
+
+
+
+    m_poAudiRover->Summon(1, 1, ASTAR);
+    float fTimeAStar = m_poAudiRover->TotalTime();
+    m_poAudiRover->ResetTime();
+
+    //EXPECT_FLOAT_EQ(fTimeAStar, fTimeAStarCk);
+
+    std::vector<tLocation> asLocation;
+    asLocation.push_back(tLocation{nStartX, nStartY});
+    asLocation.push_back(tLocation{nGoalX, nGoalY});
+    visualizer::write("simple_map_with_elevation.bmp", &m_oElevation[0], &m_oOverrides[0], asLocation, m_nImageDim);
+
+    m_poAudiRover->countPlanner();
+}
+
+
 TEST_F(cPlannerTest, simple_map)
 {
     InitSimpleMap();

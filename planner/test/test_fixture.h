@@ -121,6 +121,45 @@ protected:
         ReadData("test_elevation.data", "test_overrides.data");
     }
 
+    void CreateSimpleMapWithElevation()
+    {
+        /// Prepare to read elevation and overrides data
+        m_nImageDim = 4;
+        const size_t expectedFileSize = m_nImageDim * m_nImageDim;
+
+        std::vector<uint8_t> data_elevation(expectedFileSize, 1);
+        /*
+        for (int y = 0; y < m_nImageDim; ++y)
+        {
+            for (int x = 150; x <= 150; ++x) {
+                data_elevation[y * m_nImageDim + x] = 255;
+            }
+        }
+         */
+
+        for (int y = 0; y < m_nImageDim; ++y)
+        {
+            for (int x = 0; x < m_nImageDim; ++x) {
+                if (m_nImageDim - 2 <= x + y && x + y <= m_nImageDim) {
+                    data_elevation[y * m_nImageDim + x] = 255;
+                }
+            }
+        }
+
+        writeFile("../../../assets/elevation_simple_map_with_elevation.data", data_elevation, expectedFileSize);
+
+        std::vector<uint8_t> dataOverrides(expectedFileSize, 0);
+        writeFile("../../../assets/overrides_simple_map_with_elevation.data", dataOverrides, expectedFileSize);
+
+    }
+
+    void InitSimpleMapWithElevation()
+    {
+        CreateSimpleMapWithElevation();
+
+        ReadData("elevation_simple_map_with_elevation.data", "overrides_simple_map_with_elevation.data");
+    }
+
 
     void CreateRover(const tLocation& i_sStart, const tLocation& i_sGoal)
     {

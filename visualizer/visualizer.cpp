@@ -260,24 +260,31 @@ namespace visualizer {
         int dx = x - x1;
         int dy = y - y1;
         int r2 = dx * dx + dy * dy;
-        return r2 >= 150 && r2 <= 400;
+        //return r2 >= 150 && r2 <= 400;
+        return false;
     }
 
 
     bool path(int x, int y, uint8_t* overrides, int i_nImageDim)
     {
 
-        int nPenSize = 2;
-        for (int i = -nPenSize; i < nPenSize; ++i)
-        {
-            int dx = x - i;
-            for (int j = -nPenSize; j < nPenSize; ++j)
-            {
-                int dy = y - j;
-                if ((dx >= 0 && dx < i_nImageDim) && (dy >= 0 && dy < i_nImageDim) && (overrides[dy * i_nImageDim + dx] & (OF_PATH)))
-                {
-                    return true;
+        int nPenSize = 1;
+        if (nPenSize > 1) {
+            for (int i = -nPenSize; i < nPenSize; ++i) {
+                int dx = x - i;
+                for (int j = -nPenSize; j < nPenSize; ++j) {
+                    int dy = y - j;
+                    if ((dx >= 0 && dx < i_nImageDim) && (dy >= 0 && dy < i_nImageDim) &&
+                        (overrides[dy * i_nImageDim + dx] & (OF_PATH))) {
+                        return true;
+                    }
                 }
+            }
+        }
+        else {
+            if (overrides[y * i_nImageDim + x] & (OF_PATH))
+            {
+                return true;
             }
         }
 
@@ -289,7 +296,8 @@ namespace visualizer {
 
         if (overrides[y * i_nImageDim + x] & (OF_VISITED))
         {
-            return true;
+            //return true;
+            return false;
         }
 
         return false;

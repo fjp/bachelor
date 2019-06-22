@@ -34,7 +34,7 @@ int main(int argc, char** argv)
     poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
 
 
-    //poAudiRover->Summon(1);
+    poAudiRover->Summon(1);
 
 
     poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});

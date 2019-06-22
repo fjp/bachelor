@@ -62,7 +62,6 @@ namespace planner {
         float Heuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic = OCTILE) const;
 
 
-
         ///\brief Check if the heuristic of node i_sNode is consistent
         ///\details Consistency is given if h(n) <= c(n,p) + h(p), where h(p) is the heuristic of the parent node
         ///         and c(n,p) are the step costs from parent p to node n.
