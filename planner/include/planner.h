@@ -34,7 +34,7 @@ namespace planner {
 
         ///\brief Override of the base interface cPlannerInterface, which invokes the AStar() search algorithm.
         ///\returns the time to travel from start to goal if it was found. Otherwise -1 is returned.
-        float Plan() override;
+        double Plan() override;
 
 
         ///\brief Types of heuristics that can be calculated with UpdateHeuristic()
@@ -51,7 +51,7 @@ namespace planner {
         ///\param[in] i_sNode the node which heuristic is updated
         ///\param[in] i_eHeuristic the type of heuristic to calculate, see tHeuristic.
         ///\return The calculated heuristic value.
-        float UpdateHeuristic(std::shared_ptr<tNode> i_psNode, const tHeuristic i_eHeuristic = OCTILE) const;
+        double UpdateHeuristic(std::shared_ptr<tNode> i_psNode, const tHeuristic i_eHeuristic = OCTILE) const;
 
 
         ///\brief Updates the heuristic value of the node located at tlocation i_sLocation.
@@ -59,7 +59,7 @@ namespace planner {
         ///\param[in] i_sNode the node which heuristic is updated
         ///\param[in] i_eHeuristic the type of heuristic to calculate, see tHeuristic.
         ///\return The calculated heuristic value.
-        float Heuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic = OCTILE) const;
+        double Heuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic = OCTILE) const;
 
 
         ///\brief Check if the heuristic of node i_sNode is consistent
@@ -77,7 +77,7 @@ namespace planner {
         void UpdateCost(std::shared_ptr<tNode> io_psNode) const;
 
         template<typename TLocation>
-        float HeightCost(TLocation& i_sCurrent, TLocation& i_sNext, tAction& i_sAction) const;
+        double HeightCost(TLocation& i_sCurrent, TLocation& i_sNext, tAction& i_sAction) const;
 
 
         ///\brief Test if the provided location i_sLocation lies within the map
@@ -136,11 +136,11 @@ namespace planner {
         ///         to the start node, thereby following the fastest path and setting bit 1 of the overrides map, see
         ///         planner::cGraph::SetOverrides().
         ///\returns the time it took to find the fastest path in island seconds.
-        float AStar();
+        double AStar();
 
-        float AStarOptimized();
+        double AStarOptimized();
 
-        float AStarCheck();
+        double AStarCheck();
 
         ///\brief Calculates a consistency factor to get a consistent heuristic h(n) <= c(p,n) + h(p)
         ///\details Calculates the gradient of the elevation and considers the acceleration on slopes.
@@ -151,12 +151,12 @@ namespace planner {
         int m_nMaxGradient;
 
         ///\brief This value is calculated in the constructor of planner::cPlanner and used to scale the heuristic values to get consistency.
-        float m_fConsistencyFactor;
+        double m_fConsistencyFactor;
 
 
         ///\brief Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first.
-        //PriorityQueue<std::shared_ptr<tNode>, float> m_oFrontier;
-        PriorityQueue<std::shared_ptr<tNode>, float> m_oFrontier;
+        //PriorityQueue<std::shared_ptr<tNode>, double> m_oFrontier;
+        PriorityQueue<std::shared_ptr<tNode>, double> m_oFrontier;
 
 
         ///\brief Debug method to plot intermediate paths during planning. Used in Plan().

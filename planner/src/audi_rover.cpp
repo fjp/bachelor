@@ -73,7 +73,7 @@ namespace planner
     }
 
 
-    float cAudiRover::TotalTime() const {
+    double cAudiRover::TotalTime() const {
         return m_fTotalTime;
     }
 

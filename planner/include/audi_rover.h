@@ -55,10 +55,10 @@ namespace planner {
         uint8_t* m_oOverrides;
 
         ///\brief Used to calculate the total traveling time, depending on how often the Summon() method gets called.
-        float m_fTotalTime;
+        double m_fTotalTime;
     public:
         ///\brief Total time in island seconds to travel on the fastest found path by AStar().
-        float TotalTime() const;
+        double TotalTime() const;
 
         ///\brief Resets the total planning time to zero island seconds.
         void ResetTime();

@@ -22,10 +22,10 @@ TEST_F(cPlannerTest, simple_map_with_elevation)
 
 
     m_poAudiRover->Summon(1, 1, ASTAR);
-    float fTimeAStar = m_poAudiRover->TotalTime();
+    double fTimeAStar = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
-    //EXPECT_FLOAT_EQ(fTimeAStar, fTimeAStarCk);
+    //EXPECT_DOUBLE_EQ(fTimeAStar, fTimeAStarCk);
 
     std::vector<tLocation> asLocation;
     asLocation.push_back(tLocation{nStartX, nStartY});
@@ -46,17 +46,17 @@ TEST_F(cPlannerTest, simple_map)
 
 
     m_poAudiRover->Summon(1, 1, ASTAR_OPT);
-    float fTimeAStarOpt = m_poAudiRover->TotalTime();
+    double fTimeAStarOpt = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
     m_poAudiRover->Summon(1, 1, ASTAR);
-    float fTimeAStar = m_poAudiRover->TotalTime();
+    double fTimeAStar = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
     m_poAudiRover->Summon(1, 1, ASTAR_CK);
-    float fTimeAStarCk = m_poAudiRover->TotalTime();
+    double fTimeAStarCk = m_poAudiRover->TotalTime();
 
-    EXPECT_FLOAT_EQ(fTimeAStar, fTimeAStarCk);
+    EXPECT_DOUBLE_EQ(fTimeAStar, fTimeAStarCk);
 
     std::vector<tLocation> asLocation;
     asLocation.push_back(tLocation{nStartX, nStartY});

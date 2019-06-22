@@ -14,7 +14,7 @@ namespace planner
         ///\brief Direction of the action
         int nX, nY;
         ///\brief Step cost, which can be different depending on the direction (straight, diagonal)
-        float fCost;
+        double fCost;
     };
 }
 

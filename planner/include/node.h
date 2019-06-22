@@ -56,13 +56,13 @@ namespace planner {
         int nId;
         
         ///\brief Evaluation function \f$f(n) = g(n) + h(n)\f$
-        float f;
+        double f;
 
         ///\brief Cost to reach this node \f$g(n)\f$, also known as path cost.
-        float g;
+        double g;
 
         ///\brief Heuristic value h(n) of this node.
-        float h;
+        double h;
 
         ///\brief (x,y) location of the node in the grid map cMap.
         tLocation sLocation;

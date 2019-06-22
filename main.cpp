@@ -34,24 +34,24 @@ int main(int argc, char** argv)
     poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
 
 
-    poAudiRover->Summon(1);
+    poAudiRover->Summon(1, 1, ASTAR_OPT);
 
 
     poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
     poAudiRover->SetGoal({WEDDING_X, WEDDING_Y});
 
 
-    poAudiRover->Summon(1);
+    poAudiRover->Summon(1, 1, ASTAR_OPT);
 
 
     /// Report the total planning time
 
-    float fIslandSeconds = poAudiRover->TotalTime();
+    double fIslandSeconds = poAudiRover->TotalTime();
     std::cout << "\nTravelling will take " << fIslandSeconds << " island seconds ("
               << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 
     //////////// Output the found path /////////////////////
-    visualizer::write("pic.bmp", &elevation[0], &overrides[0], asLocation, IMAGE_DIM);
+    visualizer::write("pic_final.bmp", &elevation[0], &overrides[0], asLocation, IMAGE_DIM);
     /*
     visualizer::writeBMP(
         of,

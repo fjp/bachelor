@@ -51,19 +51,19 @@ namespace planner {
 
         /// Getter and Setter for the private member varialbes
 
-        float CostStraight() const {
+        double CostStraight() const {
             return m_fCostStraight;
         }
 
-        float CostDiagonal() const {
+        double CostDiagonal() const {
             return m_fCostDiagonal;
         }
 
-        void SetCostStraight(float i_fCostStraight) {
+        void SetCostStraight(double i_fCostStraight) {
             m_fCostStraight = i_fCostStraight;
         }
 
-        void SetCostDiagonal(float i_fCostDiagonal) {
+        void SetCostDiagonal(double i_fCostDiagonal) {
             m_fCostDiagonal = i_fCostDiagonal;
         }
 
@@ -124,10 +124,10 @@ namespace planner {
         int m_nVelocity;
 
         ///\brief Cost to move straight.
-        float m_fCostStraight;
+        double m_fCostStraight;
 
         ///\brief Cost to move diagonal.
-        float m_fCostDiagonal;
+        double m_fCostDiagonal;
 
     };
 

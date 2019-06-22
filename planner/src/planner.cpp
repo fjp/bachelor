@@ -55,12 +55,12 @@ namespace planner {
         }
 
 
-        float fAlpha = atan(m_nMaxGradient / static_cast<float>(m_poRover->StepSize()));
-        float fAlphaAbs = fabs(fAlpha);
+        double fAlpha = atan(m_nMaxGradient / static_cast<double>(m_poRover->StepSize()));
+        double fAlphaAbs = fabs(fAlpha);
 
-        float g = 9.81;
-        float fDen = g * sin(2.f * fAlphaAbs);
-        float fDeltaS = std::max(m_poRover->CostStraight(), m_poRover->CostDiagonal()) * m_poRover->StepSize();
+        double g = 9.81;
+        double fDen = g * sin(2.f * fAlphaAbs);
+        double fDeltaS = std::max(m_poRover->CostStraight(), m_poRover->CostDiagonal()) * m_poRover->StepSize();
         m_fConsistencyFactor = m_nMaxGradient + ceil(sqrt(4.f * fDeltaS / fDen));
 
         std::cout << "Max gradient: " << (int)m_nMaxGradient << ", Consistency factor: " << m_fConsistencyFactor << std::endl;
@@ -83,20 +83,20 @@ namespace planner {
         return m_oMap->Elevation(i_nX, i_nY) - m_oMap->Elevation(i_nX, i_nY - m_poRover->StepSize());
     }
 
-    float cPlanner::UpdateHeuristic(std::shared_ptr<tNode> i_psNode, const tHeuristic i_eHeuristic) const {
+    double cPlanner::UpdateHeuristic(std::shared_ptr<tNode> i_psNode, const tHeuristic i_eHeuristic) const {
 
-        float fHeuristicValue = Heuristic(i_psNode->sLocation, i_eHeuristic);
+        double fHeuristicValue = Heuristic(i_psNode->sLocation, i_eHeuristic);
 
         i_psNode->h = fHeuristicValue;
 
         return fHeuristicValue;
     }
 
-    float cPlanner::Heuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic) const {
+    double cPlanner::Heuristic(const tLocation &i_sLocation, const tHeuristic i_eHeuristic) const {
         int fDeltaX = std::abs(m_poRover->Goal().nX - i_sLocation.nX);
         int fDeltaY = std::abs(m_poRover->Goal().nY - i_sLocation.nY);
 
-        float fHeuristicValue = 0.f;
+        double fHeuristicValue = 0.f;
         switch (i_eHeuristic) {
             case MANHATTEN: {
                 /// Manhattan Distance
@@ -110,8 +110,8 @@ namespace planner {
             }
             case OCTILE: {
                 /// Octile distance
-                float fD1 = static_cast<float>(m_poRover->StepSize()) / static_cast<float>(m_poRover->Velocity());
-                float fD2 = m_poRover->CostDiagonal();
+                double fD1 = static_cast<double>(m_poRover->StepSize()) / static_cast<double>(m_poRover->Velocity());
+                double fD2 = m_poRover->CostDiagonal();
                 fHeuristicValue = fD1 * (fDeltaX + fDeltaY) + (fD2 - 2.f * fD1) * std::min(fDeltaX, fDeltaY);
                 break;
             }
@@ -128,13 +128,14 @@ namespace planner {
     }
 
     void cPlanner::HeuristicCheck(std::shared_ptr<tNode>& i_sNode) const {
-        float fStepCost = i_sNode->g - i_sNode->psParent->g;
+        double fStepCost = i_sNode->g - i_sNode->psParent->g;
         //if (!(Heuristic(sNext) <= StepCost + Heuristic(sNext->psParent)))
         //if (!(i_sNode->h <= fStepCost + i_sNode->psParent->h))
-        if (!(i_sNode->psParent->h <= fStepCost + i_sNode->h))// + 1e-4))
+        double epsilon = std::numeric_limits<double>::epsilon();
+        if (!(i_sNode->psParent->h <= fStepCost + i_sNode->h + 1e-8f))//std::numeric_limits<double>::epsilon()))
         {
 
-            float fDeltaHeight =
+            double fDeltaHeight =
                     (m_oMap->Elevation(i_sNode->sLocation.nX, i_sNode->sLocation.nY) -
                      m_oMap->Elevation(i_sNode->psParent->sLocation.nX, i_sNode->psParent->sLocation.nY));
 
@@ -148,23 +149,23 @@ namespace planner {
     }
 
     template<typename TLocation>
-    float cPlanner::HeightCost(TLocation& i_sCurrent, TLocation& i_sNext, tAction& i_sAction) const
+    double cPlanner::HeightCost(TLocation& i_sCurrent, TLocation& i_sNext, tAction& i_sAction) const
     {
         /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
         /// Calculate current gradient in step direction
-        float fDeltaHeight =
+        double fDeltaHeight =
                 (m_oMap->Elevation(i_sNext.nX, i_sNext.nY) -
                  m_oMap->Elevation(i_sCurrent.nX, i_sCurrent.nY));
 
 
-        float fHeightCost = 0.f;
+        double fHeightCost = 0.f;
         if (fDeltaHeight > 0)
         {
-            fHeightCost = i_sAction.fCost * 1.f; //fDeltaHeight / (float)m_nMaxGradient; //10.f;
+            fHeightCost = i_sAction.fCost * 1.f; //fDeltaHeight / (double)m_nMaxGradient; //10.f;
         }
         else if (fDeltaHeight < 0)
         {
-            fHeightCost = -i_sAction.fCost * 0.2f; //fDeltaHeight / (float)m_nMaxGradient;//0.2f;
+            fHeightCost = -i_sAction.fCost * 0.2f; //fDeltaHeight / (double)m_nMaxGradient;//0.2f;
         }
 
         return fHeightCost;
@@ -177,29 +178,29 @@ namespace planner {
         auto psParent = io_psNode->psParent;
         if (nullptr != psParent) {
             /// Rover's normal speed is 1 cell per island second
-            //float fV = m_poRover->Velocity();
-            //float fDeltaS = io_psNode->sAction.fCost * m_poRover->StepSize();
+            //double fV = m_poRover->Velocity();
+            //double fDeltaS = io_psNode->sAction.fCost * m_poRover->StepSize();
 
             /// Add action (step) cost, which is given in island seconds
-            float fStepCost = io_psNode->sAction.fCost; //fDeltaS / fV;
+            double fStepCost = io_psNode->sAction.fCost; //fDeltaS / fV;
 
             /*
             /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
             /// Calculate current gradient in step direction
-            float fDeltaHeight =
+            double fDeltaHeight =
                     (m_oMap->Elevation(io_psNode->sLocation.nX, io_psNode->sLocation.nY) -
                      m_oMap->Elevation(psParent->sLocation.nX, psParent->sLocation.nY));
 
 
 
-            float fAlpha = atan(static_cast<float>(fDeltaHeight) / static_cast<float>(m_poRover->StepSize()));
-            float fAlphaAbs = fabs(fAlpha);
+            double fAlpha = atan(static_cast<double>(fDeltaHeight) / static_cast<double>(m_poRover->StepSize()));
+            double fAlphaAbs = fabs(fAlpha);
 
-            float fHeightCost = 0.f;
+            double fHeightCost = 0.f;
 
             if (fAlphaAbs > 0.f) {
-                float g = 9.81;
-                float fDen = g * sin(2.f * fAlphaAbs);
+                double g = 9.81;
+                double fDen = g * sin(2.f * fAlphaAbs);
                 fHeightCost = sqrt(4.f * fDeltaS / fDen);
 
                 if (fAlpha < 0.f) /// Down hill
@@ -210,9 +211,9 @@ namespace planner {
             }
              */
 
-            float fHeightCost = HeightCost(io_psNode->sLocation, psParent->sLocation, io_psNode->sAction);
+            double fHeightCost = HeightCost(io_psNode->sLocation, psParent->sLocation, io_psNode->sAction);
 
-            float fTime = fStepCost + fHeightCost;
+            double fTime = fStepCost + fHeightCost;
 
             io_psNode->g = psParent->g + fTime;
         }
@@ -223,7 +224,7 @@ namespace planner {
     {
         std::ofstream oFile;
         oFile.open ("heuristic.txt");
-        std::vector<std::vector<float> > mfHeuristic(m_oMap->Height(), std::vector<float>(m_oMap->Width()));
+        std::vector<std::vector<double> > mfHeuristic(m_oMap->Height(), std::vector<double>(m_oMap->Width()));
         for (int32_t nX = 0; nX < mfHeuristic.size(); nX++) {
             for (int32_t nY = 0; nY < mfHeuristic[0].size(); nY++) {
 
@@ -288,7 +289,7 @@ namespace planner {
     }
 
 
-    float cPlanner::Plan() {
+    double cPlanner::Plan() {
 
         switch (m_eAlgorithm)
         {
@@ -303,7 +304,7 @@ namespace planner {
         }
     }
 
-    float cPlanner::AStarCheck() {
+    double cPlanner::AStarCheck() {
         struct tSimpleLocation {
             int nId;
             int nX, nY;
@@ -313,7 +314,7 @@ namespace planner {
             }
         };
         std::map<tSimpleLocation, tSimpleLocation> came_from;
-        std::map<tSimpleLocation, float> cost_so_far;
+        std::map<tSimpleLocation, double> cost_so_far;
 
         /// Start
         int nX = m_poRover->Start().nX;
@@ -322,7 +323,7 @@ namespace planner {
         tSimpleLocation sStart{nId, nX, nY};
 
 
-        PriorityQueue<tSimpleLocation, float> frontier;
+        PriorityQueue<tSimpleLocation, double> frontier;
         frontier.put(sStart, 0.f);
 
         came_from[sStart] = sStart;
@@ -368,14 +369,14 @@ namespace planner {
                 tLocation sLocation{nXNext, nYNext};
                 if (WithinMap(sLocation) && !m_oMap->Water(nXNext, nYNext)) {
 
-                    float fHeightCost = HeightCost(sCurrent, sNext, sAction);
+                    double fHeightCost = HeightCost(sCurrent, sNext, sAction);
 
-                    float new_cost = cost_so_far[sCurrent] + sAction.fCost + fHeightCost;
+                    double new_cost = cost_so_far[sCurrent] + sAction.fCost + fHeightCost;
                     if (cost_so_far.find(sNext) == cost_so_far.end() || new_cost < cost_so_far[sNext])
                     {
                         cost_so_far[sNext] = new_cost;
-                        float h = Heuristic(sLocation);
-                        float priority = new_cost + h;
+                        double h = Heuristic(sLocation);
+                        double priority = new_cost + h;
                         frontier.put(sNext, priority);
                         came_from[sNext] = sCurrent;
 
@@ -409,14 +410,14 @@ namespace planner {
 
         std::cout << "Total Elevation: " << nElevation << std::endl;
 
-        float fIslandSeconds = cost_so_far[sGoal];
+        double fIslandSeconds = cost_so_far[sGoal];
         std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
                   << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 
         return fIslandSeconds;
     }
 
-    float cPlanner::AStarOptimized()
+    double cPlanner::AStarOptimized()
     {
         using namespace std;
         // Create a closed 2 array filled with 0s and first element 1
@@ -424,7 +425,7 @@ namespace planner {
         closed[m_poRover->Start().nX][m_poRover->Start().nY] = 1;
 
         // Create expand array filled with -1
-        vector<vector<float> > gScore(m_oMap->Height(), vector<float>(m_oMap->Width(), std::numeric_limits<float>::max()));
+        vector<vector<double> > gScore(m_oMap->Height(), vector<double>(m_oMap->Width(), std::numeric_limits<double>::max()));
 
         // Create action array filled with -1
         vector<vector<int> > action(m_oMap->Height(), vector<int>(m_oMap->Width(), -1));
@@ -432,28 +433,28 @@ namespace planner {
         // Defined the quadruplet values
         int x = m_poRover->Start().nX;
         int y = m_poRover->Start().nY;
-        float g = 0;
-        float h = Heuristic(m_poRover->Start());
-        float f = g + h;
+        double g = 0;
+        double h = Heuristic(m_poRover->Start());
+        double f = g + h;
 
         gScore[x][y] = 0.f;
 
         // Store the expansions
-        //vector<vector<float> > open;
-        //open.push_back({ f, g, (float)x, (float)y });
+        //vector<vector<double> > open;
+        //open.push_back({ f, g, (double)x, (double)y });
         struct tSimpleNode {
             int id;
             int x, y;
-            float g;
-            float h;
-            float f;
+            double g;
+            double h;
+            double f;
 
             bool operator<(const tSimpleNode& i_rhs) const
             {
                 return id < i_rhs.id;
             }
         };
-        PriorityQueue<tSimpleNode, float> openprio;
+        PriorityQueue<tSimpleNode, double> openprio;
         tSimpleNode sNode{y * m_oMap->Width() + x, x, y, g, h, f};
         openprio.put(sNode, f);
 
@@ -497,7 +498,7 @@ namespace planner {
                 x = next.x;
                 y = next.y;
                 g = next.g;
-                float fparent = next.f;
+                double fparent = next.f;
 
                 // Fill the expand vectors with count
                 //expand[x][y] = count;
@@ -507,7 +508,6 @@ namespace planner {
                 // Check if we reached the goal:
                 if (x == m_poRover->Goal().nX && y == m_poRover->Goal().nY) {
                     found = true;
-                    //cout << "[" << g << ", " << x << ", " << y << "]" << endl;
                 }
 
                     //else expand new elements
@@ -530,14 +530,14 @@ namespace planner {
                             if (closed[x2][y2] == 0 and !m_oMap->Water(x2, y2)) {
 
                                 tLocation sCurrent{x, y};
-                                float fHeightCost = HeightCost(sCurrent, sLocation, sAction);
-                                float g2 = g + sAction.fCost + fHeightCost;
+                                double fHeightCost = HeightCost(sCurrent, sLocation, sAction);
+                                double g2 = g + sAction.fCost + fHeightCost;
 
                                 // The distance from start to a neighbor
-                                float tentative_gScore = gScore[x][y] + sAction.fCost + fHeightCost;
+                                double tentative_gScore = gScore[x][y] + sAction.fCost + fHeightCost;
 
                                 if (tentative_gScore >= gScore[x2][y2]) {
-                                    std::cout << "x2, y2" << std::endl;
+                                    //std::cout << "x2, y2" << std::endl;
                                     continue;
                                 }
 
@@ -559,7 +559,7 @@ namespace planner {
 
                                 /// Check that heuristic never overestimates the true distance:
                                 /// Priority of a new node should never be lower than the priority of its parent.
-                                if (f < fparent)
+                                if (f < fparent - 1e-8f)
                                 {
                                     std::cout << "Heuristic overestimates true distance" << std::endl;
                                 }
@@ -590,7 +590,7 @@ namespace planner {
 
         std::cout << "Total Elevation: " << nElevation << std::endl;
 
-        float fIslandSeconds = g;
+        double fIslandSeconds = g;
         std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
                   << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 
@@ -598,7 +598,7 @@ namespace planner {
     }
 
 
-    float cPlanner::AStar()
+    double cPlanner::AStar()
     {
         /// Define start node
         auto sStart = std::make_shared<tNode>(m_poRover->Start());
@@ -615,7 +615,7 @@ namespace planner {
         auto sCurrent = std::make_shared<tNode>();
 
         /// Serves as explored (closed) set and cost to reach a node
-        std::map<tNode, float> oPathCost;
+        std::map<tNode, double> oPathCost;
 
         /// Initialize start node with cost of zero because it does not cost anything to go to it
         oPathCost[*sStart] = 0.f;
@@ -659,9 +659,9 @@ namespace planner {
 
                         //UpdateCost(sNext);
 
-                        float fHeightCost = HeightCost(sCurrent->sLocation, sNext->sLocation, sAction);
+                        double fHeightCost = HeightCost(sCurrent->sLocation, sNext->sLocation, sAction);
 
-                        float fTime = sAction.fCost + fHeightCost;
+                        double fTime = sAction.fCost + fHeightCost;
 
                         sNext->g = sNext->psParent->g + fTime;
 
@@ -684,7 +684,7 @@ namespace planner {
 
                             /// Check that heuristic never overestimates the true distance:
                             /// Priority of a new node should never be lower than the priority of its parent.
-                            if (sNext->psParent && sNext->f < sNext->psParent->f)
+                            if (sNext->psParent && sNext->f < sNext->psParent->f - 1e-8f)
                             {
                                 std::cout << "Heuristic overestimates true distance" << std::endl;
                             }
@@ -705,7 +705,7 @@ namespace planner {
         /// Move from the current node back to the start node
         TraversePath(sCurrent);
 
-        float fIslandSeconds = sCurrent->g;
+        double fIslandSeconds = sCurrent->g;
         std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
         << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 

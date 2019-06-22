@@ -44,7 +44,7 @@ namespace planner {
 
         ///\brief Virtual abstract method of the base interface, which must be implemented to perform a search algorithm.
         ///\returns The cost to move from start to goal if it was found. Otherwise -1 is returned.
-        virtual float Plan() = 0;
+        virtual double Plan() = 0;
 
         ///\brief Virtual abstract method of the base interface, which must be implemented to output the best found path.
         ///\details The nodes in the best path contain a field tNode::psParent which makes it possible to move back to
