@@ -38,8 +38,9 @@ namespace planner {
 
     void cPlanner::CalculateConsistencyFactor()
     {
-        /// Calculate maximum elevation gradient of the map
+        /// Calculate maximum elevation gradient of the map and find its maximum elevation
         m_nMaxGradient = 0;
+        int nMaxElevation = 0;
         for (int nY = 0; nY < m_oMap->Height(); ++nY)
         {
             for (int nX = 0; nX < m_oMap->Width(); ++nX)
@@ -51,19 +52,28 @@ namespace planner {
                 {
                     m_nMaxGradient = nCurrentMaxGradient;
                 }
+                if (nMaxElevation < m_oMap->Elevation(nX, nY))
+                {
+                    nMaxElevation = m_oMap->Elevation(nX, nY);
+                }
             }
         }
 
+        m_fConsistencyFactor = 1.f - static_cast<double>(m_nMaxGradient) / 255.f;
 
-        double fAlpha = atan(m_nMaxGradient / static_cast<double>(m_poRover->StepSize()));
-        double fAlphaAbs = fabs(fAlpha);
 
-        double g = 9.81;
-        double fDen = g * sin(2.f * fAlphaAbs);
-        double fDeltaS = std::max(m_poRover->CostStraight(), m_poRover->CostDiagonal()) * m_poRover->StepSize();
-        m_fConsistencyFactor = m_nMaxGradient + ceil(sqrt(4.f * fDeltaS / fDen));
+        //double fAlpha = atan(m_nMaxGradient / static_cast<double>(m_poRover->StepSize()));
+        //double fAlphaAbs = fabs(fAlpha);
 
-        std::cout << "Max gradient: " << (int)m_nMaxGradient << ", Consistency factor: " << m_fConsistencyFactor << std::endl;
+        //double g = 9.81;
+        //double fDen = g * sin(2.f * fAlphaAbs);
+        //double fDeltaS = std::max(m_poRover->CostStraight(), m_poRover->CostDiagonal()) * m_poRover->StepSize();
+        //m_fConsistencyFactor = m_nMaxGradient + ceil(sqrt(4.f * fDeltaS / fDen));
+
+        std::cout << "Analyzing map: \n"
+            << "    Max elevation:      " << static_cast<int>(nMaxElevation) << "\n"
+            << "    Max gradient:       " << static_cast<int>(m_nMaxGradient) << "\n"
+            << "    Consistency factor: " << m_fConsistencyFactor << std::endl;
 
     }
 
@@ -123,7 +133,7 @@ namespace planner {
         }
 
         /// Correct heuristic value to get a consistent heuristic. Required because of moving up or down the hill.
-        return fHeuristicValue * 0.8; // / m_fConsistencyFactor;
+        return fHeuristicValue * m_fConsistencyFactor; //0.8; // / m_fConsistencyFactor;
 
     }
 
@@ -158,15 +168,15 @@ namespace planner {
                  m_oMap->Elevation(i_sCurrent.nX, i_sCurrent.nY));
 
 
-        double fHeightCost = 0.f;
-        if (fDeltaHeight > 0)
-        {
-            fHeightCost = i_sAction.fCost * 1.f; //fDeltaHeight / (double)m_nMaxGradient; //10.f;
-        }
-        else if (fDeltaHeight < 0)
-        {
-            fHeightCost = -i_sAction.fCost * 0.2f; //fDeltaHeight / (double)m_nMaxGradient;//0.2f;
-        }
+        double fHeightCost;// = 0.f;
+        //if (fDeltaHeight > 0)
+        //{
+            fHeightCost = i_sAction.fCost * fDeltaHeight / 255.f; //static_cast<double>(m_nMaxGradient + 1); //10.f;
+        //}
+        //else if (fDeltaHeight < 0)
+        //{
+        //    fHeightCost = -i_sAction.fCost * fDeltaHeight / static_cast<double>(m_nMaxGradient); //0.2f;
+        //}
 
         return fHeightCost;
 
