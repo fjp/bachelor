@@ -34,14 +34,14 @@ int main(int argc, char** argv)
     poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
 
 
-    poAudiRover->Summon(1, 1, ASTAR_OPT);
+    poAudiRover->Summon(1, 1, ASTAR);
 
 
     poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
     poAudiRover->SetGoal({WEDDING_X, WEDDING_Y});
 
 
-    poAudiRover->Summon(1, 1, ASTAR_OPT);
+    poAudiRover->Summon(1, 1, ASTAR);
 
 
     /// Report the total planning time
