@@ -63,10 +63,11 @@ namespace planner {
 
 
         ///\brief Check if the heuristic of node i_sNode is consistent
-        ///\details Consistency is given if h(n) <= c(n,p) + h(p), where h(p) is the heuristic of the parent node
-        ///         and c(n,p) are the step costs from parent p to node n.
+        ///\details Consistency is given if h(x) <= d(x,y) + h(y), where h(x) is the heuristic of the parent node
+        ///         and d(x,y) are the step costs from parent x to node y.
+        ///         In case the heuristic is not consistent the member m_sResult.bConsistentHeuristic is set to false.
         ///\param[in] i_sNode the node which heuristic value is tested.
-        void HeuristicCheck(std::shared_ptr<tNode>& i_sNode) const;
+        void HeuristicCheck(std::shared_ptr<tNode>& i_sNode);
 
         ///\brief Updates the node argument with its path cost \f$g(n)\f$ with island seconds as its unit.
         ///\details Uses the slope found from the gradient of the elevation map cMap::m_oElevation to calculate
@@ -76,6 +77,22 @@ namespace planner {
         ///\param[in] i_sNode The node which path cost is updated.
         void UpdateCost(std::shared_ptr<tNode> io_psNode) const;
 
+        ///\brief Calculates the height cost which is added or subtracted from the step cost.
+        ///\details In case the rover is moving uphill, this method calculates a height cost which is a percentage value
+        ///         of the step cost of the current action. When the rover moves downhill, it is faster and therefore
+        ///         the height cost is a negative value which is also a result of a percentage value of the step cost.
+        ///         The percentage model uses the height difference while moving from i_sCurrent to i_sNext location.
+        ///         This delta height, eigher positive or negative, is then normalized by the maximum height difference
+        ///         the rover is able to move (climb or fall), which is defined to be 255 (max evlevation of a map).
+        ///         \code{.cpp}
+        ///         fHeightCost = i_sAction.fCost * fDeltaHeight / 255.f;
+        ///         \endcode
+        ///
+        /// \tparam TLocation Location type that should contain two integer members nX and nY that describe the location.
+        /// \param[in] i_sCurrent Location of the current node.
+        /// \param[in] i_sNext Location of the node where the rover is moving to.
+        /// \param[in] i_sAction the action the rover takes to get from i_sCurrent to i_sNext. Contains the step cost, which is used to calculate a percentage height cost.
+        /// \return The height cost of moving from i_sCurrent to i_sNext. Will be less than or equal to the action cost, which is required to ensure a consistent heuristic.
         template<typename TLocation>
         double HeightCost(TLocation& i_sCurrent, TLocation& i_sNext, tAction& i_sAction) const;
 

@@ -137,7 +137,7 @@ namespace planner {
 
     }
 
-    void cPlanner::HeuristicCheck(std::shared_ptr<tNode>& i_sNode) const {
+    void cPlanner::HeuristicCheck(std::shared_ptr<tNode>& i_sNode) {
         double fStepCost = i_sNode->g - i_sNode->psParent->g;
         //if (!(Heuristic(sNext) <= StepCost + Heuristic(sNext->psParent)))
         //if (!(i_sNode->h <= fStepCost + i_sNode->psParent->h))
@@ -155,6 +155,10 @@ namespace planner {
                 << "; " << (fDeltaHeight > 0.f ? "Moving uphill" : "Moving downhill")
                 << " at location " << "(" << i_sNode->psParent->sLocation.nX << "," << i_sNode->psParent->sLocation.nY << ")"
                 << " -> " << "(" << i_sNode->sLocation.nX << "," << i_sNode->sLocation.nY << ")" << std::endl;
+
+
+            /// Store this incident in the result struct of the planner interface
+            m_sResult.bConsistentHeuristic = false;
         }
     }
 
@@ -181,71 +185,6 @@ namespace planner {
         return fHeightCost;
 
     }
-
-
-    void cPlanner::UpdateCost(std::shared_ptr<tNode> io_psNode) const
-    {
-        auto psParent = io_psNode->psParent;
-        if (nullptr != psParent) {
-            /// Rover's normal speed is 1 cell per island second
-            //double fV = m_poRover->Velocity();
-            //double fDeltaS = io_psNode->sAction.fCost * m_poRover->StepSize();
-
-            /// Add action (step) cost, which is given in island seconds
-            double fStepCost = io_psNode->sAction.fCost; //fDeltaS / fV;
-
-            /*
-            /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
-            /// Calculate current gradient in step direction
-            double fDeltaHeight =
-                    (m_oMap->Elevation(io_psNode->sLocation.nX, io_psNode->sLocation.nY) -
-                     m_oMap->Elevation(psParent->sLocation.nX, psParent->sLocation.nY));
-
-
-
-            double fAlpha = atan(static_cast<double>(fDeltaHeight) / static_cast<double>(m_poRover->StepSize()));
-            double fAlphaAbs = fabs(fAlpha);
-
-            double fHeightCost = 0.f;
-
-            if (fAlphaAbs > 0.f) {
-                double g = 9.81;
-                double fDen = g * sin(2.f * fAlphaAbs);
-                fHeightCost = sqrt(4.f * fDeltaS / fDen);
-
-                if (fAlpha < 0.f) /// Down hill
-                {
-                    fHeightCost *= -1.f;
-                }
-
-            }
-             */
-
-            double fHeightCost = HeightCost(io_psNode->sLocation, psParent->sLocation, io_psNode->sAction);
-
-            double fTime = fStepCost + fHeightCost;
-
-            io_psNode->g = psParent->g + fTime;
-        }
-    }
-
-
-    void cPlanner::GenerateHeuristic()
-    {
-        std::ofstream oFile;
-        oFile.open ("heuristic.txt");
-        std::vector<std::vector<double> > mfHeuristic(m_oMap->Height(), std::vector<double>(m_oMap->Width()));
-        for (int32_t nX = 0; nX < mfHeuristic.size(); nX++) {
-            for (int32_t nY = 0; nY < mfHeuristic[0].size(); nY++) {
-
-                /// Output octile distance
-                oFile << Heuristic(tLocation{ nX, nY }, OCTILE) << ' ';
-            }
-            oFile << std::endl;
-        }
-        oFile.close();
-    }
-
 
     bool cPlanner::GoalTest(std::shared_ptr<tNode>& i_sFirst, std::shared_ptr<tNode>& i_sSecond) const {
 
@@ -429,143 +368,144 @@ namespace planner {
 
     double cPlanner::AStarOptimized()
     {
-        using namespace std;
-        // Create a closed 2 array filled with 0s and first element 1
-        vector<vector<int> > closed(m_oMap->Height(), vector<int>(m_oMap->Width()));
-        closed[m_poRover->Start().nX][m_poRover->Start().nY] = 1;
-
-        // Create expand array filled with -1
-        vector<vector<double> > gScore(m_oMap->Height(), vector<double>(m_oMap->Width(), std::numeric_limits<double>::max()));
-
-        // Create action array filled with -1
-        vector<vector<int> > action(m_oMap->Height(), vector<int>(m_oMap->Width(), -1));
-
-        // Defined the quadruplet values
-        int x = m_poRover->Start().nX;
-        int y = m_poRover->Start().nY;
-        double g = 0;
-        double h = Heuristic(m_poRover->Start());
-        double f = g + h;
-
-        gScore[x][y] = 0.f;
-
-        // Store the expansions
-        //vector<vector<double> > open;
-        //open.push_back({ f, g, (double)x, (double)y });
+        /// Simplified node struct without the a pointer to its parent.
         struct tSimpleNode {
-            int id;
-            int x, y;
+            int nId;
+            int nX, nY;
             double g;
             double h;
             double f;
 
             bool operator<(const tSimpleNode& i_rhs) const
             {
-                return id < i_rhs.id;
+                return nId < i_rhs.nId;
             }
         };
-        PriorityQueue<tSimpleNode, double> openprio;
-        tSimpleNode sNode{y * m_oMap->Width() + x, x, y, g, h, f};
-        openprio.put(sNode, f);
 
-        // Flags and Counts
-        bool found = false;
-        bool resign = false;
-        int count = 0;
+        using namespace std;
+        /// The set of nodes already evaluated. Implemented as 2d array filled with 0s and start element set to 1.
+        std::vector<std::vector<int> > closed(m_oMap->Height(), std::vector<int>(m_oMap->Width()));
+        closed[m_poRover->Start().nX][m_poRover->Start().nY] = 1;
 
-        int x2;
-        int y2;
+        /// The set of currently discovered nodes that are not evaluated yet.
+        /// Initially, only the start node is known.
+        PriorityQueue<tSimpleNode, double> oOpenPrioQ;
 
-        int nIteration = 0;
+        /// Defined the simplified start node
+        int nX = m_poRover->Start().nX;
+        int nY = m_poRover->Start().nY;
+        double g = 0;
+        double h = Heuristic(m_poRover->Start());
+        double f = g + h;
+        tSimpleNode sNode{nY * m_oMap->Width() + nX, nX, nY, g, h, f};
+        oOpenPrioQ.put(sNode, f);
 
-        // While I am still searching for the goal and the problem is solvable
-        while (!found && !resign) {
+        /// For each node, which action it can most efficiently be reached from.
+        /// If a node can be reached from many nodes, action will eventually contain the
+        /// most efficient previous step.
+        vector<vector<int> > action(m_oMap->Height(), vector<int>(m_oMap->Width(), -1));
 
-            nIteration++;
-            if (nIteration % 100000 == 0)
+
+        /// For each node, the cost of getting from the start node to that node.
+        vector<vector<double> > gScore(m_oMap->Height(), vector<double>(m_oMap->Width(), std::numeric_limits<double>::max()));
+
+        /// The cost of going from start to start is zero.
+        gScore[nX][nY] = 0.f;
+
+
+        /// Initialize result struct
+        m_sResult.bFoundGoal = false;
+        bool bResign = false;
+        m_sResult.nIterations = 0;
+
+        int nXNext;
+        int nYNext;
+
+        /// While the goal is not found the problem is solvable
+        while (!m_sResult.bFoundGoal && !bResign) {
+
+            m_sResult.nIterations++;
+            if (m_sResult.nIterations % 100000 == 0)
             {
-                std::cout << "Iteration " << nIteration
-                          //<< ": Best node location (" << m_oFrontier.pop()->sLocation.nX << "," << m_oFrontier.pop()->sLocation.nY
-                          //<< "), \n\t Evaluation function f(n): " << m_oFrontier.pop()->f
+                std::cout << "Iteration " << m_sResult.nIterations
+                          << ": Best node location (" << oOpenPrioQ.pop().nX << "," << oOpenPrioQ.pop().nY
+                          << "), \n\t Evaluation function f(n): " << oOpenPrioQ.pop().f
                           //<< ", step cost c(n): " << m_oFrontier.pop()->g - m_oFrontier.pop()->psParent->g
-                          //<< ", path cost g(n): " << m_oFrontier.pop()->g
-                          //<< ", heuristic h(n): " << m_oFrontier.pop()->h
+                          << ", path cost g(n): " << oOpenPrioQ.pop().g
+                          << ", heuristic h(n): " << oOpenPrioQ.pop().h
                           << std::endl;
                 //Plot();
             }
 
             // Resign if no values in the open list and you can't expand anymore
-            if (openprio.empty()) {
-                resign = true;
-                cout << "Failed to reach a goal" << endl;
+            if (oOpenPrioQ.empty()) {
+                bResign = true;
+                std::cout << "Failed to reach goal" << std::endl;
             }
                 // Keep expanding
             else {
-                // Remove quadruplets from the open list
-                tSimpleNode next;
-                next = openprio.get();
+                /// Remove the node from the open priority queue having the lowest fScore value
+                tSimpleNode sCurrent;
+                sCurrent = oOpenPrioQ.get();
 
-                x = next.x;
-                y = next.y;
-                g = next.g;
-                double fparent = next.f;
-
-                // Fill the expand vectors with count
-                //expand[x][y] = count;
-                count += 1;
+                nX = sCurrent.nX;
+                nY = sCurrent.nY;
+                g = sCurrent.g;
+                double fparent = sCurrent.f;
 
 
-                // Check if we reached the goal:
-                if (x == m_poRover->Goal().nX && y == m_poRover->Goal().nY) {
-                    found = true;
+                /// Check if the goal is reached
+                if (nX == m_poRover->Goal().nX && nY == m_poRover->Goal().nY) {
+                    m_sResult.bFoundGoal = true;
                 }
 
-                    //else expand new elements
+                /// Otherwise explore new locations
                 else {
+                    /// Add the current node to the set of nodes already evaluated
+                    closed[nX][nY] = 1;
 
-
-                    //openSet.Remove(current)
-                    //closedSet.Add(current)
-                    closed[x][y] = 1;
-
+                    /// Perform each possible rover action on the current node
                     for (int i = 0; i < m_poRover->m_asActions.size(); i++) {
                         auto sAction = m_poRover->m_asActions[i];
-                        x2 = x + sAction.nX;
-                        y2 = y + sAction.nY;
-                        tLocation sLocation{x2, y2};
-                        tSimpleNode sNext{y2 * m_oMap->Width() + x2, x2, y2};
+                        nXNext = nX + sAction.nX;
+                        nYNext = nY + sAction.nY;
+                        tLocation sNextLocation{nXNext, nYNext};
+                        tSimpleNode sNext{nYNext * m_oMap->Width() + nXNext, nXNext, nYNext};
 
 
-                        if (WithinMap(sLocation)) {
-                            if (closed[x2][y2] == 0 and !m_oMap->Water(x2, y2)) {
+                        /// Check if the location of the next node lies within the map and is not on water.
+                        /// Ignore the neighbors which are already evaluated (closed[nXNext][nYNext] == 0).
+                        if (WithinMap(sNextLocation)) {
+                            if (closed[nXNext][nYNext] == 0 and !m_oMap->Water(nXNext, nYNext)) {
 
-                                tLocation sCurrent{x, y};
-                                double fHeightCost = HeightCost(sCurrent, sLocation, sAction);
+                                tLocation sCurrent{nX, nY};
+                                double fHeightCost = HeightCost(sCurrent, sNextLocation, sAction);
                                 double g2 = g + sAction.fCost + fHeightCost;
 
-                                // The distance from start to a neighbor
-                                double tentative_gScore = gScore[x][y] + sAction.fCost + fHeightCost;
+                                /// The distance from start to a neighbor
+                                double tentative_gScore = gScore[nX][nY] + sAction.fCost + fHeightCost;
 
-                                if (tentative_gScore >= gScore[x2][y2]) {
+                                if (tentative_gScore >= gScore[nXNext][nYNext]) {
                                     //std::cout << "x2, y2" << std::endl;
                                     continue;
                                 }
 
-                                gScore[x2][y2] = tentative_gScore;
+                                gScore[nXNext][nYNext] = tentative_gScore;
 
-                                h = Heuristic(sLocation);
+                                h = Heuristic(sNextLocation);
                                 f = g2 + h;
 
                                 sNext.g = g2;
                                 sNext.h = h;
                                 sNext.f = f;
 
-                                openprio.put(sNext, f);
+                                oOpenPrioQ.put(sNext, f);
                                 //closed[x2][y2] = 1;
-                                action[x2][y2] = i;
+                                action[nXNext][nYNext] = i;
 
                                 /// Mark visited nodes
-                                m_oMap->SetOverrides(x2, y2, 0x02);
+                                m_oMap->SetOverrides(nXNext, nYNext, 0x02);
+                                m_sResult.nNodesExpanded++;
 
                                 /// Check that heuristic never overestimates the true distance:
                                 /// Priority of a new node should never be lower than the priority of its parent.
@@ -580,22 +520,22 @@ namespace planner {
             }
         }
 
-        // Going backward
-        x = m_poRover->Goal().nX;
-        y = m_poRover->Goal().nY;
+        /// Reconstruct the path by going backward
+        nX = m_poRover->Goal().nX;
+        nY = m_poRover->Goal().nY;
 
         int nElevation = 0;
 
-        while (x != m_poRover->Start().nX or y != m_poRover->Start().nY) {
-            x2 = x - m_poRover->m_asActions[action[x][y]].nX;
-            y2 = y - m_poRover->m_asActions[action[x][y]].nY;
+        while (nX != m_poRover->Start().nX or nY != m_poRover->Start().nY) {
+            nXNext = nX - m_poRover->m_asActions[action[nX][nY]].nX;
+            nYNext = nY - m_poRover->m_asActions[action[nX][nY]].nY;
             // Store the  Path in a vector
-            m_oMap->SetOverrides(x2, y2, 0x01);
+            m_oMap->SetOverrides(nXNext, nYNext, 0x01);
 
-            nElevation += m_oMap->Elevation(x2, y2);
+            nElevation += m_oMap->Elevation(nXNext, nYNext);
 
-            x = x2;
-            y = y2;
+            nX = nXNext;
+            nY = nYNext;
         }
 
         std::cout << "Total Elevation: " << nElevation << std::endl;
@@ -603,6 +543,9 @@ namespace planner {
         double fIslandSeconds = g;
         std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
                   << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
+
+
+        m_sResult.fTravellingTime = fIslandSeconds;
 
         return fIslandSeconds;
     }
@@ -760,6 +703,71 @@ namespace planner {
 
         std::cout << "Total Elevation: " << nElevation << std::endl;
 
+    }
+
+
+/// Deprecated methods
+    void cPlanner::UpdateCost(std::shared_ptr<tNode> io_psNode) const
+    {
+        auto psParent = io_psNode->psParent;
+        if (nullptr != psParent) {
+            /// Rover's normal speed is 1 cell per island second
+            //double fV = m_poRover->Velocity();
+            //double fDeltaS = io_psNode->sAction.fCost * m_poRover->StepSize();
+
+            /// Add action (step) cost, which is given in island seconds
+            double fStepCost = io_psNode->sAction.fCost; //fDeltaS / fV;
+
+            /*
+            /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
+            /// Calculate current gradient in step direction
+            double fDeltaHeight =
+                    (m_oMap->Elevation(io_psNode->sLocation.nX, io_psNode->sLocation.nY) -
+                     m_oMap->Elevation(psParent->sLocation.nX, psParent->sLocation.nY));
+
+
+
+            double fAlpha = atan(static_cast<double>(fDeltaHeight) / static_cast<double>(m_poRover->StepSize()));
+            double fAlphaAbs = fabs(fAlpha);
+
+            double fHeightCost = 0.f;
+
+            if (fAlphaAbs > 0.f) {
+                double g = 9.81;
+                double fDen = g * sin(2.f * fAlphaAbs);
+                fHeightCost = sqrt(4.f * fDeltaS / fDen);
+
+                if (fAlpha < 0.f) /// Down hill
+                {
+                    fHeightCost *= -1.f;
+                }
+
+            }
+             */
+
+            double fHeightCost = HeightCost(io_psNode->sLocation, psParent->sLocation, io_psNode->sAction);
+
+            double fTime = fStepCost + fHeightCost;
+
+            io_psNode->g = psParent->g + fTime;
+        }
+    }
+
+
+    void cPlanner::GenerateHeuristic()
+    {
+        std::ofstream oFile;
+        oFile.open ("heuristic.txt");
+        std::vector<std::vector<double> > mfHeuristic(m_oMap->Height(), std::vector<double>(m_oMap->Width()));
+        for (int32_t nX = 0; nX < mfHeuristic.size(); nX++) {
+            for (int32_t nY = 0; nY < mfHeuristic[0].size(); nY++) {
+
+                /// Output octile distance
+                oFile << Heuristic(tLocation{ nX, nY }, OCTILE) << ' ';
+            }
+            oFile << std::endl;
+        }
+        oFile.close();
     }
 
 }

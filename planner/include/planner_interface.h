@@ -7,6 +7,7 @@
 
 #include "graph.h"
 #include "node.h"
+#include "result.h"
 
 #include <vector>
 
@@ -73,6 +74,8 @@ namespace planner {
 
     protected:
         tAlgorithm m_eAlgorithm;
+
+        tResult m_sResult;
 
         ///\brief Reference pointer to the interface of the rover class planner::cRoverInterface<Directions>.
         std::shared_ptr<cRoverInterface<Directions>> m_poRover;
