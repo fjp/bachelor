@@ -175,8 +175,7 @@ namespace planner {
             }
         }
 
-
-
+        
         ReconstructPath(g, action);
         PrintTravelResult();
 
@@ -189,25 +188,29 @@ namespace planner {
         /// Set the cost (time) it takes to get to the goal
         m_sResult.fTravellingTime = i_cost_so_far;
 
-        /// Reconstruct the path by going backward from the goal location
-        int nXCurrent = m_poRover->Goal().nX;
-        int nYCurrent = m_poRover->Goal().nY;
+        /// Reconstruct the path by going backward
+        int nX = m_poRover->Goal().nX;
+        int nY = m_poRover->Goal().nY;
 
         /// Update cumulative elevation
-        m_sResult.nCumulativeElevation += m_oMap->Elevation(nXCurrent, nYCurrent);
+        m_sResult.nCumulativeElevation += m_oMap->Elevation(nX, nY);
         /// Store path in overrides
-        m_oMap->SetOverrides(nXCurrent, nYCurrent, 0x01);
+        m_oMap->SetOverrides(nX, nY, 0x01);
 
         /// Check if the current node is the start node
-        while (nXCurrent != m_poRover->Start().nX || nYCurrent != m_poRover->Start().nY) {
+        int nXNext, nYNext;
+        while (nX != m_poRover->Start().nX || nY != m_poRover->Start().nY) {
             /// Move towards the start
-            nXCurrent = nXCurrent - m_poRover->m_asActions[i_came_from[nXCurrent][nYCurrent]].nX;
-            nYCurrent = nYCurrent - m_poRover->m_asActions[i_came_from[nXCurrent][nYCurrent]].nY;
+            nXNext = nX - m_poRover->m_asActions[i_came_from[nX][nY]].nX;
+            nYNext = nY - m_poRover->m_asActions[i_came_from[nX][nY]].nY;
 
             /// Update cumulative elevation
-            m_sResult.nCumulativeElevation += m_oMap->Elevation(nXCurrent, nYCurrent);
+            m_sResult.nCumulativeElevation += m_oMap->Elevation(nXNext, nYNext);
             /// Store path in overrides
-            m_oMap->SetOverrides(nXCurrent, nYCurrent, 0x01);
+            m_oMap->SetOverrides(nXNext, nYNext, 0x01);
+
+            nX = nXNext;
+            nY = nYNext;
         }
 
     }

@@ -66,8 +66,8 @@ TEST_F(cPlannerTest, simple_map)
     EXPECT_TRUE(sResultAStarRBG.bConsistentHeuristic);
     double fTimeAStarRBG = m_poAudiRover->TotalTime();
 
-    EXPECT_DOUBLE_EQ(fTimeAStar, fTimeAStarWiki);
-    EXPECT_DOUBLE_EQ(fTimeAStarWiki, fTimeAStarRBG);
+    EXPECT_NEAR(fTimeAStar, fTimeAStarWiki, 1.0e-8);
+    EXPECT_NEAR(fTimeAStarWiki, fTimeAStarRBG, 1.0e-8);
 
 
     std::vector<tLocation> asLocation;
