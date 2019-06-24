@@ -476,7 +476,7 @@ namespace planner {
                         /// Check if the location of the next node lies within the map and is not on water.
                         /// Ignore the neighbors which are already evaluated (closed[nXNext][nYNext] == 0).
                         if (WithinMap(sNextLocation)) {
-                            if (closed[nXNext][nYNext] == 0 and !m_oMap->Water(nXNext, nYNext)) {
+                            if (closed[nXNext][nYNext] == 0 && !m_oMap->Water(nXNext, nYNext)) {
 
                                 tLocation sCurrent{nX, nY};
                                 double fHeightCost = HeightCost(sCurrent, sNextLocation, sAction);
