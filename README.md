@@ -26,6 +26,7 @@ The percentage step cost (height cost) is added to the current step cost if the 
 The height cost calculation takes place in planner::cPlanner::HeightCost().
 - Ensures consistent heuristic with the chosen step cost and height cost model. This is achieved by normalizing the 
 calculated octile heuristic value in planner::cPlanner::Heuristic().
+- Fixes calculation of consistency output: h(x) <= d(x,y) + h(y) with x as parent node and y as its successor.
 - In case of an inconsistent heuristic the boolean flag bConsistentHeuristic in the new member struct planner::tResult of cPlannerInterface is set to false.
 - Adds gTests that use a simplified map, including water and elevation transitions. The result struct is used to check the expected results.
 - Refactors visualizer
