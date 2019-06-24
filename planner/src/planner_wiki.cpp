@@ -155,7 +155,6 @@ namespace planner {
                                 sNext.f = f;
 
                                 oOpenPrioQ.put(sNext, f);
-                                //closed[x2][y2] = 1;
                                 action[nXNext][nYNext] = i;
 
                                 /// Mark visited nodes
@@ -175,7 +174,7 @@ namespace planner {
             }
         }
 
-        
+
         ReconstructPath(g, action);
         PrintTravelResult();
 
