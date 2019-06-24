@@ -68,15 +68,20 @@ namespace planner {
             std::cout << "~cPlannerInterface" << std::endl;
         }
 
+        ///\brief Setter to specify the algorithm that should be used to plan a path.
         void SetAlgorithm(const tAlgorithm i_eAlgorithm = ASTAR) { m_eAlgorithm = i_eAlgorithm; };
+        
+        ///\brief Getter to obtain the currently set algorithm.
         tAlgorithm Algorithm() { return m_eAlgorithm; };
 
+        ///\brief Getter to obtain result struct member m_sResult that contains information about the found path.
+        tResult Result() { return m_sResult; };
 
     protected:
-        ///\brief Select which algorithm should be used to plan a path
+        ///\brief Select which algorithm should be used to plan a path.
         tAlgorithm m_eAlgorithm;
 
-        ///\brief Information to store planning results such as travelling time and consistency of heuristic
+        ///\brief Information to store planning results such as travelling time and consistency of heuristic.
         tResult m_sResult;
 
         ///\brief Reference pointer to the interface of the rover class planner::cRoverInterface<Directions>.
