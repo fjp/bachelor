@@ -41,5 +41,10 @@ calculated octile heuristic value in planner::cPlanner::Heuristic().
     - [Lambda expression](https://en.cppreference.com/w/cpp/language/lambda)
     - [List initialization](https://en.cppreference.com/w/cpp/language/list_initialization)
 
+## Possible improvements
+
+- Use std::filesystem C++17 features to read and write elevation and overrides data.
+- std::chrono to time function calls.
+- std::array<int, size> instead of std::vector for the optimized AStar version that allocates the closed set beforehand.
 
 <img src="doc/images/solution_rover_bachelor_wedding.bmp" alt="Solution Rover Bachelor Wedding" width="200"/>
