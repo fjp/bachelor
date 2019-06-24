@@ -1,4 +1,4 @@
-# AID Coding Challenge Solution
+# AID Coding Challenge Solution version 0.0.0
 
 This is my solution for the AID Bachelor Coding Challenge. 
 For the problem description refer to the [AID Coding Challenge.pdf](AID_Coding_Challenge.pdf). 
