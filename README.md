@@ -10,6 +10,7 @@ The complete doxygen documentation can be found in the doc folder, see [index.ht
 
 - Fixes diagonal cost value: uses sqrt(2) for the diagonal cost instead of 1.4f.
 - Fixes memory leaks caused by dangling pointers, mainly in the Child() method of planner.cpp.
+    - Valgrind shows no memory leaks anymore with the use of smart pointers (C++11 feature)
     - Now using smart pointers for the nodes
     - Uses [shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr), [std::weak_ptr](http://en.cppreference.com/w/cpp/memory/weak_ptr) and 
     [std::enable_shared_from_this](http://en.cppreference.com/w/cpp/memory/enable_shared_from_this) and [shared_from_this()](https://en.cppreference.com/w/cpp/memory/enable_shared_from_this/shared_from_this)
