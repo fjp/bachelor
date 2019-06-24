@@ -7,6 +7,7 @@
 #include <location.h>
 
 #include "test_fixture.h"
+#include "result.h"
 
 
 
@@ -21,7 +22,10 @@ TEST_F(cPlannerTest, simple_map_with_elevation)
 
 
 
-    m_poAudiRover->Summon(1, 1, "ASTAR");
+    tResult sResult = m_poAudiRover->Summon(1, 1, "ASTAR");
+    EXPECT_TRUE(sResult.bFoundGoal) << "Goal not found.";
+    EXPECT_TRUE(sResult.bConsistentHeuristic) << "Heuristic not consistent.";
+
     double fTimeAStar = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
@@ -45,25 +49,31 @@ TEST_F(cPlannerTest, simple_map)
     CreateRover(tLocation{nStartX, nStartY}, tLocation{nGoalX, nGoalY});
 
 
-    m_poAudiRover->Summon(1, 1, "ASTAR_WIK");
-    double fTimeAStarOpt = m_poAudiRover->TotalTime();
-    m_poAudiRover->ResetTime();
-
-    m_poAudiRover->Summon(1, 1, "ASTAR");
+    tResult sResultAStar = m_poAudiRover->Summon(1, 1, "ASTAR");
+    EXPECT_TRUE(sResultAStar.bFoundGoal);
+    EXPECT_TRUE(sResultAStar.bConsistentHeuristic);
     double fTimeAStar = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
-    m_poAudiRover->Summon(1, 1, "ASTAR_RBG");
-    double fTimeAStarCk = m_poAudiRover->TotalTime();
+    tResult sResultAStarWiki = m_poAudiRover->Summon(1, 1, "ASTAR_WIKI");
+    EXPECT_TRUE(sResultAStarWiki.bFoundGoal);
+    EXPECT_TRUE(sResultAStarWiki.bConsistentHeuristic);
+    double fTimeAStarWiki = m_poAudiRover->TotalTime();
+    m_poAudiRover->ResetTime();
 
-    EXPECT_DOUBLE_EQ(fTimeAStar, fTimeAStarCk);
+    tResult sResultAStarRBG = m_poAudiRover->Summon(1, 1, "ASTAR_RBG");
+    EXPECT_TRUE(sResultAStarRBG.bFoundGoal);
+    EXPECT_TRUE(sResultAStarRBG.bConsistentHeuristic);
+    double fTimeAStarRBG = m_poAudiRover->TotalTime();
+
+    EXPECT_DOUBLE_EQ(fTimeAStar, fTimeAStarWiki);
+    EXPECT_DOUBLE_EQ(fTimeAStarWiki, fTimeAStarRBG);
+
 
     std::vector<tLocation> asLocation;
     asLocation.push_back(tLocation{nStartX, nStartY});
     asLocation.push_back(tLocation{nGoalX, nGoalY});
     visualizer::write("simple_map.bmp", &m_oElevation[0], &m_oOverrides[0], asLocation, m_nImageDim);
-
-    m_poAudiRover->countPlanner();
 }
 
 
@@ -78,7 +88,25 @@ TEST_F(cPlannerTest, island_map)
     m_poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
     m_poAudiRover->SetGoal({WEDDING_X, WEDDING_Y});
 
-    m_poAudiRover->Summon(1);
+    tResult sResultAStar = m_poAudiRover->Summon(1, 1, "ASTAR");
+    EXPECT_TRUE(sResultAStar.bFoundGoal);
+    EXPECT_TRUE(sResultAStar.bConsistentHeuristic);
+    double fTimeAStar = m_poAudiRover->TotalTime();
+    m_poAudiRover->ResetTime();
+
+    tResult sResultAStarWiki = m_poAudiRover->Summon(1, 1, "ASTAR_WIKI");
+    EXPECT_TRUE(sResultAStarWiki.bFoundGoal);
+    EXPECT_TRUE(sResultAStarWiki.bConsistentHeuristic);
+    double fTimeAStarWiki = m_poAudiRover->TotalTime();
+    m_poAudiRover->ResetTime();
+
+    tResult sResultAStarRBG = m_poAudiRover->Summon(1, 1, "ASTAR_RBG");
+    EXPECT_TRUE(sResultAStarRBG.bFoundGoal);
+    EXPECT_TRUE(sResultAStarRBG.bConsistentHeuristic);
+    double fTimeAStarRBG = m_poAudiRover->TotalTime();
+
+    EXPECT_DOUBLE_EQ(fTimeAStar, fTimeAStarWiki);
+    EXPECT_DOUBLE_EQ(fTimeAStarWiki, fTimeAStarRBG);
 
     std::vector<tLocation> asLocation;
     asLocation.push_back(tLocation{ROVER_X, ROVER_Y});

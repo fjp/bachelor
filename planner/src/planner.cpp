@@ -215,12 +215,12 @@ namespace planner {
     }
 
 
-    double cPlanner::Plan() {
+    tResult cPlanner::Plan() {
         return AStar();
     }
 
 
-    double cPlanner::AStar()
+    tResult cPlanner::AStar()
     {
         /// Define start node
         auto sStart = std::make_shared<tNode>(m_poRover->Start());
@@ -242,18 +242,16 @@ namespace planner {
         /// Initialize start node with cost of zero because it does not cost anything to go to it
         oPathCost[*sStart] = 0.f;
 
-        // Flags and Counts
-        bool bFound = false;
-        bool bResign = false;
-        int nIteration = 0;
+        /// Initialize result struct
+        m_sResult.bFoundGoal = false;
+        m_sResult.nIterations = 0;
 
+        while (!m_sResult.bFoundGoal) {
 
-        while (!bFound) {
-
-            nIteration++;
-            if (nIteration % 100000 == 0)
+            m_sResult.nIterations++;
+            if (m_sResult.nIterations % 100000 == 0)
             {
-                std::cout << "Iteration " << nIteration
+                std::cout << "Iteration " << m_sResult.nIterations
                 << ": Best node location (" << m_oFrontier.pop()->sLocation.nX << "," << m_oFrontier.pop()->sLocation.nY
                 << "), \n\t Evaluation function f(n): " << m_oFrontier.pop()->f
                 << ", step cost c(n): " << m_oFrontier.pop()->g - m_oFrontier.pop()->psParent->g
@@ -265,14 +263,14 @@ namespace planner {
 
             /// Resign if the frontier is empty, which means there are no nodes to expand and the goal has not been found
             if (m_oFrontier.empty()) {
-                bResign = true;
+                m_sResult.bFoundGoal = false;
                 break;
             }
 
             sCurrent = m_oFrontier.get();
 
             if (GoalTest(sCurrent, sGoal)) {
-                bFound = true;
+                m_sResult.bFoundGoal = true;
             } else {
                 for (auto sAction : m_poRover->m_asActions) {
                     auto sNext = Child(sCurrent, sAction);
@@ -303,11 +301,13 @@ namespace planner {
 
                             /// Mark visited nodes
                             m_oMap->SetOverrides(sNext->sLocation.nX, sNext->sLocation.nY, 0x02);
+                            m_sResult.nNodesExpanded++;
 
                             /// Check that heuristic never overestimates the true distance:
                             /// Priority of a new node should never be lower than the priority of its parent.
                             if (sNext->psParent && sNext->f < sNext->psParent->f - 1e-8f)
                             {
+                                m_sResult.bConsistentHeuristic = false;
                                 std::cout << "Heuristic overestimates true distance" << std::endl;
                             }
                         }
@@ -316,26 +316,18 @@ namespace planner {
             }
         }
 
-
-        if (bResign)
-        {
-            std::cout << "Goal location not found." << std::endl;
-            return -1;
-        }
-
-
         /// Move from the current node back to the start node
         TraversePath(sCurrent);
 
-        double fIslandSeconds = sCurrent->g;
-        std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
-        << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
+
+        PrintTravelResult();
 
         /// Free memory
         oPathCost.clear();
         m_oFrontier.clear();
 
-        return fIslandSeconds;
+
+        return m_sResult;
     }
 
 
@@ -351,27 +343,52 @@ namespace planner {
 #endif
     }
 
-
-    void cPlanner::TraversePath(std::shared_ptr<tNode> i_psNode) const
+    void cPlanner::PrintTravelResult()
     {
-        int nElevation = 0;
-        int nX, nY;
+        if (!m_sResult.bFoundGoal)
+        {
+            std::cout << "Failed to find goal location!" << std::endl;
+        }
+        else {
+
+            std::cout << "Travel Results:" << std::endl;
+            double fIslandSeconds = m_sResult.fTravellingTime;
+            std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
+                      << fIslandSeconds / 60.0 << " island minutes or " << fIslandSeconds / 60.0 / 60.0
+                      << " island hours) on the fastest path. " << std::endl;
+            std::cout << "Cumulative elevation: " << m_sResult.nCumulativeElevation << std::endl;
+            std::cout << "Number of expanded nodes: " << m_sResult.nNodesExpanded << std::endl;
+            std::cout << "Heuristic was " << (m_sResult.bConsistentHeuristic ? "consistent" : "NOT consistent") << std::endl;
+        }
+    }
+
+
+    void cPlanner::TraversePath(std::shared_ptr<tNode>& i_psNode)
+    {
+        /// Set the cost (time) it takes to get to the goal
+        m_sResult.fTravellingTime = i_psNode->g;
+
+        /// Reconstruct the path by going backward from the goal location
+        int nXCurrent = i_psNode->sLocation.nX;
+        int nYCurrent = i_psNode->sLocation.nY;
+
+        /// Update cumulative elevation
+        m_sResult.nCumulativeElevation += m_oMap->Elevation(nXCurrent, nYCurrent);
+        /// Store path in overrides
+        m_oMap->SetOverrides(nXCurrent, nYCurrent, 0x01);
+
         /// Check if the current node is the start node, which has no parent and is therefore set to NULL
         while (nullptr != i_psNode->psParent) {
-            nX = i_psNode->sLocation.nX;
-            nY = i_psNode->sLocation.nY;
-
-            /// Store path in overrides
-            m_oMap->SetOverrides(nX, nY, 0x01);
-
-            nElevation += m_oMap->Elevation(nX, nY);
-
             /// Move towards the start
             i_psNode = i_psNode->psParent;
+            nXCurrent = i_psNode->sLocation.nX;
+            nYCurrent = i_psNode->sLocation.nY;
+
+            /// Update cumulative elevation
+            m_sResult.nCumulativeElevation += m_oMap->Elevation(nXCurrent, nYCurrent);
+            /// Store path in overrides
+            m_oMap->SetOverrides(nXCurrent, nYCurrent, 0x01);
         }
-
-        std::cout << "Total Elevation: " << nElevation << std::endl;
-
     }
 
 

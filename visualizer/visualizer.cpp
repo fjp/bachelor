@@ -106,68 +106,6 @@ namespace visualizer {
         }
     }
 
-    /*
-    template<typename T>
-    void write(std::string i_strName, uint8_t* i_oElevation, uint8_t* i_oOverrides, int i_nImageDim) {
-        std::ofstream of(i_strName, std::ofstream::binary);
-        visualizer::writeBMP(
-                of,
-                &i_oElevation[0],
-                i_nImageDim,
-                i_nImageDim,
-                [&] (size_t x, size_t y, uint8_t elevation) {
-
-                    // Marks interesting positions on the map
-
-                    for (auto sLocation : i_asLocation)
-                    {
-                        if (visualizer::donut(x, y, sLocation.nX, sLocation.nY))
-                        {
-                            return uint8_t(visualizer::IPV_PATH);
-                        }
-                    }
-
-
-                    if (visualizer::donut(x, y, 20, 20) ||
-                        visualizer::donut(x, y, 50, 50) ||
-                        visualizer::donut(x, y, 100, 100))
-                    {
-                        return uint8_t(visualizer::IPV_PATH);
-                    }
-
-
-                    if (visualizer::path(x, y, i_oOverrides))
-                    {
-                        return uint8_t(visualizer::IPV_PATH);
-                    }
-
-                    // Signifies water
-                    if ((i_oOverrides[y * i_nImageDim + x] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
-                        elevation == 0)
-                    {
-                        return uint8_t(visualizer::IPV_WATER);
-                    }
-
-                    if (visualizer::visited(x, y, i_oOverrides))
-                    {
-                        return uint8_t(visualizer::IPV_VISITED);
-                    }
-
-                    // Signifies normal ground color
-                    if (elevation < visualizer::IPV_ELEVATION_BEGIN)
-                    {
-                        elevation = visualizer::IPV_ELEVATION_BEGIN;
-                    }
-                    return elevation;
-                });
-        of.flush();
-#if __APPLE__
-        auto res = system("open pic.bmp");
-        (void)res;
-#endif
-    }
-    */
-
     uint8_t maxImage(
             const uint8_t *pixels,
             size_t width,
@@ -255,25 +193,22 @@ namespace visualizer {
     }
 
 
-    bool donut(int x, int y, int x1, int y1)
+    bool donut(int i_nX, int i_nY, int i_nX1, int i_nY1)
     {
-        int dx = x - x1;
-        int dy = y - y1;
+        int dx = i_nX - i_nX1;
+        int dy = i_nY - i_nY1;
         int r2 = dx * dx + dy * dy;
-        //return r2 >= 150 && r2 <= 400;
-        return false;
+        return r2 >= 150 && r2 <= 400;
     }
 
 
-    bool path(int x, int y, uint8_t* overrides, int i_nImageDim)
+    bool path(int i_nX, int i_nY, uint8_t* overrides, int i_nImageDim, int i_nPenSize)
     {
-
-        int nPenSize = 1;
-        if (nPenSize > 1) {
-            for (int i = -nPenSize; i < nPenSize; ++i) {
-                int dx = x - i;
-                for (int j = -nPenSize; j < nPenSize; ++j) {
-                    int dy = y - j;
+        if (i_nPenSize > 1) {
+            for (int i = -i_nPenSize; i < i_nPenSize; ++i) {
+                int dx = i_nX - i;
+                for (int j = -i_nPenSize; j < i_nPenSize; ++j) {
+                    int dy = i_nY - j;
                     if ((dx >= 0 && dx < i_nImageDim) && (dy >= 0 && dy < i_nImageDim) &&
                         (overrides[dy * i_nImageDim + dx] & (OF_PATH))) {
                         return true;
@@ -282,7 +217,7 @@ namespace visualizer {
             }
         }
         else {
-            if (overrides[y * i_nImageDim + x] & (OF_PATH))
+            if (overrides[i_nY * i_nImageDim + i_nX] & (OF_PATH))
             {
                 return true;
             }
@@ -291,13 +226,12 @@ namespace visualizer {
         return false;
     }
 
-    bool visited(int x, int y, uint8_t* overrides, int i_nImageDim)
+    bool visited(int i_nX, int i_nY, uint8_t* overrides, int i_nImageDim)
     {
 
-        if (overrides[y * i_nImageDim + x] & (OF_VISITED))
+        if (overrides[i_nY * i_nImageDim + i_nX] & (OF_VISITED))
         {
-            //return true;
-            return false;
+            return true;
         }
 
         return false;

@@ -44,13 +44,13 @@ enum ImagePixelValues
 
 
     ///\brief Used in the functional from writeBMP to mark a node given its location.
-    bool donut(int x, int y, int x1, int y1);
+    bool donut(int i_nX, int i_nY, int i_nX1, int i_nY1);
 
     ///\brief Used in the functional from writeBMP to plot the fastest path found by AStar() in cPlanner.
-    bool path(int x, int y, uint8_t* overrides, int i_nImageDim = IMAGE_DIM);
+    bool path(int i_nX, int i_nY, uint8_t* overrides, int i_nImageDim = IMAGE_DIM, int i_nPenSize = 1);
 
     ///\brief Used in the functional from writeBMP to plot the visited nodes found by AStar() in cPlanner.
-    bool visited(int x, int y, uint8_t* overrides, int i_nImageDim = IMAGE_DIM);
+    bool visited(int i_nX, int i_nY, uint8_t* overrides, int i_nImageDim = IMAGE_DIM);
 
 
     template<typename TLocations>

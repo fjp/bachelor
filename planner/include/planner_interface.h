@@ -34,21 +34,13 @@ namespace planner {
         explicit cPlannerInterface(std::shared_ptr<cRoverInterface<Directions>> i_poRover, std::shared_ptr<cGraph> i_oMap) :
             m_poRover(i_poRover)
             , m_oMap(i_oMap)
-            , m_sResult{0.f, false, true, 0, 0} {
+            , m_sResult{} {
             std::cout << "Constructing cPlannerInterface" << std::endl;
         };
 
         ///\brief Virtual abstract method of the base interface, which must be implemented to perform a search algorithm.
         ///\returns The cost to move from start to goal if it was found. Otherwise -1 is returned.
-        virtual double Plan() = 0;
-
-        ///\brief Virtual abstract method of the base interface, which must be implemented to output the best found path.
-        ///\details The nodes in the best path contain a field tNode::psParent which makes it possible to move back to
-        ///         the start node, which has its parent pointer set to nullptr.
-        ///         This method is also used in planner::cPlanner::Plot() to output intermediate paths on an output image.
-        ///\param[in] The node which on which we walk back. Usually the goal node.
-        virtual void TraversePath(std::shared_ptr<tNode> i_psNode) const = 0;
-
+        virtual tResult Plan() = 0;
 
         ///\brief Test if two nodes are the same, which means the goal is reached.
         ///\details Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface.

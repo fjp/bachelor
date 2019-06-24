@@ -31,17 +31,17 @@ namespace planner {
             : cPlanner(i_poRover, i_oMap)
             {
 
-        std::cout << "Constructing cPlannerRBG" << std::endl;
+        //std::cout << "Constructing cPlannerRBG" << std::endl;
     }
 
-   
 
-    double cPlannerRBG::Plan() {
+
+    tResult cPlannerRBG::Plan() {
 
         return AStar();
     }
 
-    double cPlannerRBG::AStar()
+    tResult cPlannerRBG::AStar()
     {
         std::map<tSimpleLocation, tSimpleLocation> came_from;
         std::map<tSimpleLocation, double> cost_so_far;
@@ -61,15 +61,17 @@ namespace planner {
 
         tSimpleLocation sCurrent;
 
-        int nIteration = 0;
+        /// Initialize result struct
+        m_sResult.bFoundGoal = false;
+        m_sResult.nIterations = 0;
 
         // While I am still searching for the goal and the problem is solvable
         while (!oFrontier.empty()) {
 
-            nIteration++;
-            if (nIteration % 100000 == 0)
+            m_sResult.nIterations++;
+            if (m_sResult.nIterations % 100000 == 0)
             {
-                std::cout << "Iteration " << nIteration
+                std::cout << "Iteration " << m_sResult.nIterations
                           //<< ": Best node location (" << m_oFrontier.pop()->sLocation.nX << "," << m_oFrontier.pop()->sLocation.nY
                           //<< "), \n\t Evaluation function f(n): " << m_oFrontier.pop()->f
                           //<< ", step cost c(n): " << m_oFrontier.pop()->g - m_oFrontier.pop()->psParent->g
@@ -85,6 +87,7 @@ namespace planner {
 
             /// Check if we reached the goal:
             if (sCurrent == m_poRover->Goal()) {
+                m_sResult.bFoundGoal = true;
                 break;
             }
 
@@ -111,6 +114,7 @@ namespace planner {
 
                         /// Mark visited nodes
                         m_oMap->SetOverrides(sNext.nX, sNext.nY, 0x02);
+                        m_sResult.nNodesExpanded++;
 
                         /// Check that heuristic never overestimates the true distance:
                         /// Priority of a new node should never be lower than the priority of its parent.
@@ -122,50 +126,40 @@ namespace planner {
             }
         }
 
-        /// Goal
-        nX = m_poRover->Goal().nX;
-        nY = m_poRover->Goal().nY;
-        nId = nY * m_oMap->Width() + nX;
-        tSimpleLocation sGoal{nId, nX, nY};
-        sCurrent = sGoal;
+        ReconstructPath(cost_so_far, came_from);
+        PrintTravelResult();
 
-        int nElevation = 0;
-        while (sCurrent.nX != sStart.nX || sCurrent.nY != sStart.nY) {
-            m_oMap->SetOverrides(sCurrent.nX, sCurrent.nY, 0x01);
-            sCurrent = came_from[sCurrent];
-
-            nElevation += m_oMap->Elevation(sCurrent.nX, sCurrent.nY);
-        }
-
-        std::cout << "Total Elevation: " << nElevation << std::endl;
-
-        double fIslandSeconds = cost_so_far[sGoal];
-        std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
-                  << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
-
-        return fIslandSeconds;
+        return m_sResult;
     }
 
-    void cPlannerRBG::TraversePath(std::shared_ptr<tNode> i_psNode) const
+    template<typename TCostSoFar, typename TCameFrom>
+    void cPlannerRBG::ReconstructPath(TCostSoFar&& i_cost_so_far, TCameFrom&& i_came_from)
     {
-        int nElevation = 0;
-        int nX, nY;
-        /// Check if the current node is the start node, which has no parent and is therefore set to NULL
-        while (nullptr != i_psNode->psParent) {
-            nX = i_psNode->sLocation.nX;
-            nY = i_psNode->sLocation.nY;
+        /// Reconstruct the path by going backward from the goal location
+        int nX = m_poRover->Goal().nX;
+        int nY = m_poRover->Goal().nY;
+        int nId = nY * m_oMap->Width() + nX;
+        tSimpleLocation sGoal{nId, nX, nY};
+        tSimpleLocation sCurrent = sGoal;
 
-            /// Store path in overrides
-            m_oMap->SetOverrides(nX, nY, 0x01);
+        /// Set the cost (time) it takes to get to the goal
+        m_sResult.fTravellingTime = i_cost_so_far[sGoal];
 
-            nElevation += m_oMap->Elevation(nX, nY);
+        /// Update cumulative elevation
+        m_sResult.nCumulativeElevation += m_oMap->Elevation(sCurrent.nX, sCurrent.nY);
+        /// Store path in overrides
+        m_oMap->SetOverrides(sCurrent.nX, sCurrent.nY, 0x01);
 
+        /// Check if the current node is the start node
+        while (sCurrent != m_poRover->Start()) {
             /// Move towards the start
-            i_psNode = i_psNode->psParent;
+            sCurrent = i_came_from[sCurrent];
+
+            /// Update cumulative elevation
+            m_sResult.nCumulativeElevation += m_oMap->Elevation(sCurrent.nX, sCurrent.nY);
+            /// Store path in overrides
+            m_oMap->SetOverrides(sCurrent.nX, sCurrent.nY, 0x01);
         }
-
-        std::cout << "Total Elevation: " << nElevation << std::endl;
-
     }
 
 }

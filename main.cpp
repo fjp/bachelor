@@ -20,11 +20,8 @@ int main(int argc, char** argv)
     auto overrides = loadFile(anchor + "assets" + PATH_SEP + "overrides.data", expectedFileSize);
 
 
-
     //////////////// Create the Audi rover and use its summon feature ///////////////
-
     auto poAudiRover = std::make_shared<cAudiRover>(cAudiRover(&elevation[0], &overrides[0], IMAGE_DIM, IMAGE_DIM));
-
 
     std::vector<tLocation> asLocation;
     asLocation.push_back(tLocation{ROVER_X, ROVER_Y});

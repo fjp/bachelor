@@ -36,14 +36,16 @@ namespace planner
 
     tResult cAudiRover::Summon(const int i_nStepSize, const int i_nVelocity, std::string&& i_strAlgorithm) {
 
+        /// Initialize a planner according to the passed i_strAlgorithm (factory method)
         auto poPlanner = InitializePlanner(i_nStepSize, i_nVelocity, std::move(i_strAlgorithm));
 
         if (poPlanner)
         {
-            //poPlanner->SetAlgorithm(i_strAlgorithm);
-            //countPlanner();
-            m_fTotalTime += poPlanner->Plan();
+            /// Start to plan the optimal path with the initialized planner.
+            tResult sResult = poPlanner->Plan();
 
+            /// Update the total planning time with the current result (will be zero if planning failed)
+            m_fTotalTime += sResult.fTravellingTime;
             return poPlanner->Result();
         }
         return tResult{};

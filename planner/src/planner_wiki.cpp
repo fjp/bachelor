@@ -30,14 +30,14 @@ namespace planner {
         std::cout << "Constructing cPlannerWiki" << std::endl;
     }
 
-   
 
-    double cPlannerWiki::Plan() {
+
+    tResult cPlannerWiki::Plan() {
 
         return AStar();
     }
 
-    double cPlannerWiki::AStar()
+    tResult cPlannerWiki::AStar()
     {
         /// The set of nodes already evaluated. Implemented as 2d array filled with 0s and start element set to 1.
         std::vector<std::vector<int> > closed(m_oMap->Height(), std::vector<int>(m_oMap->Width()));
@@ -175,55 +175,40 @@ namespace planner {
             }
         }
 
-        /// Reconstruct the path by going backward
-        nX = m_poRover->Goal().nX;
-        nY = m_poRover->Goal().nY;
-
-        int nElevation = 0;
-
-        while (nX != m_poRover->Start().nX || nY != m_poRover->Start().nY) {
-            nXNext = nX - m_poRover->m_asActions[action[nX][nY]].nX;
-            nYNext = nY - m_poRover->m_asActions[action[nX][nY]].nY;
-            // Store the  Path in a vector
-            m_oMap->SetOverrides(nXNext, nYNext, 0x01);
-
-            nElevation += m_oMap->Elevation(nXNext, nYNext);
-
-            nX = nXNext;
-            nY = nYNext;
-        }
-
-        std::cout << "Total Elevation: " << nElevation << std::endl;
-
-        double fIslandSeconds = g;
-        std::cout << "Travelling will take " << fIslandSeconds << " island seconds ("
-                  << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 
 
-        m_sResult.fTravellingTime = fIslandSeconds;
+        ReconstructPath(g, action);
+        PrintTravelResult();
 
-        return fIslandSeconds;
+        return m_sResult;
     }
 
-    void cPlannerWiki::TraversePath(std::shared_ptr<tNode> i_psNode) const
+    template<typename TCostSoFar, typename TCameFrom>
+    void cPlannerWiki::ReconstructPath(TCostSoFar &&i_cost_so_far, TCameFrom &&i_came_from)
     {
-        int nElevation = 0;
-        int nX, nY;
-        /// Check if the current node is the start node, which has no parent and is therefore set to NULL
-        while (nullptr != i_psNode->psParent) {
-            nX = i_psNode->sLocation.nX;
-            nY = i_psNode->sLocation.nY;
+        /// Set the cost (time) it takes to get to the goal
+        m_sResult.fTravellingTime = i_cost_so_far;
 
-            /// Store path in overrides
-            m_oMap->SetOverrides(nX, nY, 0x01);
+        /// Reconstruct the path by going backward from the goal location
+        int nXCurrent = m_poRover->Goal().nX;
+        int nYCurrent = m_poRover->Goal().nY;
 
-            nElevation += m_oMap->Elevation(nX, nY);
+        /// Update cumulative elevation
+        m_sResult.nCumulativeElevation += m_oMap->Elevation(nXCurrent, nYCurrent);
+        /// Store path in overrides
+        m_oMap->SetOverrides(nXCurrent, nYCurrent, 0x01);
 
+        /// Check if the current node is the start node
+        while (nXCurrent != m_poRover->Start().nX || nYCurrent != m_poRover->Start().nY) {
             /// Move towards the start
-            i_psNode = i_psNode->psParent;
-        }
+            nXCurrent = nXCurrent - m_poRover->m_asActions[i_came_from[nXCurrent][nYCurrent]].nX;
+            nYCurrent = nYCurrent - m_poRover->m_asActions[i_came_from[nXCurrent][nYCurrent]].nY;
 
-        std::cout << "Total Elevation: " << nElevation << std::endl;
+            /// Update cumulative elevation
+            m_sResult.nCumulativeElevation += m_oMap->Elevation(nXCurrent, nYCurrent);
+            /// Store path in overrides
+            m_oMap->SetOverrides(nXCurrent, nYCurrent, 0x01);
+        }
 
     }
 

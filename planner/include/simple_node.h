@@ -21,6 +21,11 @@ namespace planner {
         bool operator==(const TLocation& i_rhs) const {
             return nX == i_rhs.nX && nY == i_rhs.nY;
         }
+
+        template<typename TLocation>
+        bool operator!=(const TLocation& i_rhs) const {
+            return nX != i_rhs.nX || nY != i_rhs.nY;
+        }
     };
 
 

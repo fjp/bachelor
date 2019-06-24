@@ -29,12 +29,12 @@ namespace planner {
 
         ///\brief Destructor to delete the allocated memory.
         ~cPlanner() {
-            std::cout << "~cPlanner" << std::endl;
+            //std::cout << "~cPlanner" << std::endl;
         };
 
         ///\brief Override of the base interface cPlannerInterface, which invokes the AStar() search algorithm.
         ///\returns the time to travel from start to goal if it was found. Otherwise -1 is returned.
-        double Plan() override;
+        tResult Plan() override;
 
 
         ///\brief Types of heuristics that can be calculated with UpdateHeuristic()
@@ -130,15 +130,24 @@ namespace planner {
         ///
         ///\param[in] i_sParent node which becomes the parent of the new node.
         ///\param[in] i_sAction struct of type tAction that contains the direction and cost of the action.
+        ///\return the generated child node as shared pointer.
         std::shared_ptr<tNode> Child(std::shared_ptr<tNode>& i_sParent, const tAction &i_sAction) const override;
 
-        ///\brief considers step size of rover and checks if the path is traversable TODO improve comment
+        ///\brief Checks if the path from i_sCurrent to i_sNext is traversable.
+        ///\details Takes into account the set step size of the rover.
+        ///
+        /// \param i_sCurrent source node is the start of the path, going to i_sNext, that is going to be check.
+        /// \param i_sNext destination node is the goal of the path, starting at i_sCurrent, that is going to be checked.
+        /// \return true if the rover can move on the path between i_sCurrent and i_sNext. false otherwise.
         bool Traversable(std::shared_ptr<tNode> i_sCurrent, std::shared_ptr<tNode> i_sNext) const;
 
-        ///\brief Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path.
-        ///\details Traversing a path takes place using the m_psParent field of the tNode struct.
-        ///\param[in] i_psNode Goal node or any other which is traversed back
-        void TraversePath(std::shared_ptr<tNode> i_psNode) const override;
+        ///\brief Reconstructs the best path, considers step size of rover.
+        ///\details The nodes in the best path contains a field tNode::psParent which makes it possible to move back to
+        ///          the start node, which has its parent pointer set to nullptr.
+        ///          Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path.
+        ///          This method is also used in planner::cPlanner::Plot() to output intermediate paths on an output image.
+        ///\param[in] The node at which we start to walk back. Usually the goal node.
+        void TraversePath(std::shared_ptr<tNode>& i_psNode);
 
         ///\brief Calculates the discrete gradient of the map m_poMap in x direction.
         const int GradX(int i_nX, int i_nY) const;
@@ -165,7 +174,7 @@ namespace planner {
         ///         to the start node, thereby following the fastest path and setting bit 1 of the overrides map, see
         ///         planner::cGraph::SetOverrides().
         ///\returns the time it took to find the fastest path in island seconds.
-        double AStar();
+        tResult AStar();
 
 
         ///\brief Calculates a consistency factor to get a consistent heuristic h(n) <= c(p,n) + h(p)
@@ -179,20 +188,15 @@ namespace planner {
         ///\brief This value is calculated in the constructor of planner::cPlanner and used to scale the heuristic values to get consistency.
         double m_fConsistencyFactor;
 
-
         ///\brief Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first.
-        //PriorityQueue<std::shared_ptr<tNode>, double> m_oFrontier;
         PriorityQueue<std::shared_ptr<tNode>, double> m_oFrontier;
-
 
         ///\brief Debug method to plot intermediate paths during planning. Used in Plan().
         void Plot();
+
+        ///\brief Report travelling time in island seconds, minutes and hours.
+        void PrintTravelResult();
     };
-
-
-
-
-
 }
 
 #endif //BACHELOR_PLANNER_H

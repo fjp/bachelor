@@ -22,23 +22,23 @@ namespace planner {
 
         ///\brief Destructor to delete the allocated memory.
         ~cPlannerWiki() {
-            std::cout << "~cPlannerWiki" << std::endl;
+            //std::cout << "~cPlannerWiki" << std::endl;
         };
 
         ///\brief Override of the base interface cPlannerInterface, which invokes the AStar() search algorithm.
         ///\returns the time to travel from start to goal if it was found. Otherwise -1 is returned.
-        double Plan() override;
+        tResult Plan() override;
 
 
         ///\brief Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path.
         ///\details Traversing a path takes place using the m_psParent field of the tNode struct.
         ///\param[in] i_psNode Goal node or any other which is traversed back
-        void TraversePath(std::shared_ptr<tNode> i_psNode) const override;
+        template<typename TCostSoFar, typename TCameFrom>
+        void ReconstructPath(TCostSoFar&& i_cost_so_far, TCameFrom&& i_came_from);
 
 
-    private:
-
-        double AStar();
+    protected:
+        tResult AStar();
     };
 }
 
