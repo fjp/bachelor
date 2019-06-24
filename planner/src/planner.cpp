@@ -382,7 +382,6 @@ namespace planner {
             }
         };
 
-        using namespace std;
         /// The set of nodes already evaluated. Implemented as 2d array filled with 0s and start element set to 1.
         std::vector<std::vector<int> > closed(m_oMap->Height(), std::vector<int>(m_oMap->Width()));
         closed[m_poRover->Start().nX][m_poRover->Start().nY] = 1;
@@ -403,11 +402,11 @@ namespace planner {
         /// For each node, which action it can most efficiently be reached from.
         /// If a node can be reached from many nodes, action will eventually contain the
         /// most efficient previous step.
-        vector<vector<int> > action(m_oMap->Height(), vector<int>(m_oMap->Width(), -1));
+        std::vector<std::vector<int> > action(m_oMap->Height(), vector<int>(m_oMap->Width(), -1));
 
 
         /// For each node, the cost of getting from the start node to that node.
-        vector<vector<double> > gScore(m_oMap->Height(), vector<double>(m_oMap->Width(), std::numeric_limits<double>::max()));
+        std::vector<std::vector<double> > gScore(m_oMap->Height(), vector<double>(m_oMap->Width(), std::numeric_limits<double>::max()));
 
         /// The cost of going from start to start is zero.
         gScore[nX][nY] = 0.f;
