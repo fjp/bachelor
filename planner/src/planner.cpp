@@ -526,7 +526,7 @@ namespace planner {
 
         int nElevation = 0;
 
-        while (nX != m_poRover->Start().nX or nY != m_poRover->Start().nY) {
+        while (nX != m_poRover->Start().nX || nY != m_poRover->Start().nY) {
             nXNext = nX - m_poRover->m_asActions[action[nX][nY]].nX;
             nYNext = nY - m_poRover->m_asActions[action[nX][nY]].nY;
             // Store the  Path in a vector
