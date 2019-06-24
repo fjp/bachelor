@@ -43,7 +43,7 @@ namespace planner {
 
 
         ///\brief
-        virtual std::shared_ptr<cPlannerInterface<Directions>> InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) = 0;
+        virtual std::shared_ptr<cPlannerInterface<Directions>> InitializePlanner(const int &i_nStepSize, const int &i_nVelocity, std::string&& i_strAlgorithm) = 0;
 
         ///\brief Array that contains the number of actions in which the robot can move. It has a template size parameter Directions.
         std::array<tAction, Directions> m_asActions;

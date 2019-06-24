@@ -5,7 +5,8 @@
 #include <cmath>
 #include "audi_rover.h"
 
-#include "planner.h"
+#include "planner_wiki.h"
+#include "planner_rbg.h"
 
 namespace planner
 {
@@ -33,38 +34,46 @@ namespace planner
 
     }
 
-    void cAudiRover::Summon(const int i_nStepSize, const int i_nVelocity, const tAlgorithm i_eAlgorithm) {
+    tResult cAudiRover::Summon(const int i_nStepSize, const int i_nVelocity, std::string&& i_strAlgorithm) {
 
-        auto poPlanner = InitializePlanner(i_nStepSize, i_nVelocity);
+        auto poPlanner = InitializePlanner(i_nStepSize, i_nVelocity, std::move(i_strAlgorithm));
 
-        //m_fTotalTime += m_poPlanner->Plan();
-        countPlanner();
-        //std::shared_ptr<cPlanner> poPlanner = std::static_pointer_cast<cPlanner>(m_poPlanner.lock());
-        countPlanner();
         if (poPlanner)
         {
-            poPlanner->SetAlgorithm(i_eAlgorithm);
-            countPlanner();
+            //poPlanner->SetAlgorithm(i_strAlgorithm);
+            //countPlanner();
             m_fTotalTime += poPlanner->Plan();
+
+            return poPlanner->Result();
         }
+        return tResult{};
 
     }
 
-    std::shared_ptr<cPlannerInterface<8>> cAudiRover::InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) {
+    std::shared_ptr<cPlannerInterface<8>> cAudiRover::InitializePlanner(const int &i_nStepSize, const int &i_nVelocity, std::string&& i_strAlgorithm) {
 
         SetStepSize(i_nStepSize);
 
         SetVelocity(i_nVelocity);
 
-        //m_poPlanner = std::make_shared<cPlanner>(shared_from_this(), m_poMap);
-        auto poPlanner = std::make_shared<cPlanner>(shared_from_this(), m_poMap);
-        m_poPlanner = poPlanner;
-        //m_poPlanner = std::static_pointer_cast<cPlanner>(std::make_shared<cPlanner>(shared_from_this(), m_poMap));
+        if ("ASTAR" == i_strAlgorithm) {
+            auto poPlanner = std::make_shared<cPlanner>(shared_from_this(), m_poMap);
+            m_poPlanner = poPlanner;
+            return poPlanner;
+        }
+        if ("ASTAR_WIKI" == i_strAlgorithm) {
+            auto poPlanner = std::make_shared<cPlannerWiki>(shared_from_this(), m_poMap);
+            m_poPlanner = poPlanner;
+            return poPlanner;
+        }
+        if ("ASTAR_RBG" == i_strAlgorithm) {
+            auto poPlanner = std::make_shared<cPlannerRBG>(shared_from_this(), m_poMap);
+            m_poPlanner = poPlanner;
+            return poPlanner;
+        }
 
-        countPlanner();
-
-        return poPlanner;
-
+        std::cout << "Failed to initialize planner with algorithm: " << i_strAlgorithm << std::endl;
+        return nullptr;
     }
 
     void cAudiRover::countPlanner()

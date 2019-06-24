@@ -21,7 +21,7 @@ TEST_F(cPlannerTest, simple_map_with_elevation)
 
 
 
-    m_poAudiRover->Summon(1, 1, ASTAR);
+    m_poAudiRover->Summon(1, 1, "ASTAR");
     double fTimeAStar = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
@@ -45,15 +45,15 @@ TEST_F(cPlannerTest, simple_map)
     CreateRover(tLocation{nStartX, nStartY}, tLocation{nGoalX, nGoalY});
 
 
-    m_poAudiRover->Summon(1, 1, ASTAR_OPT);
+    m_poAudiRover->Summon(1, 1, "ASTAR_WIK");
     double fTimeAStarOpt = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
-    m_poAudiRover->Summon(1, 1, ASTAR);
+    m_poAudiRover->Summon(1, 1, "ASTAR");
     double fTimeAStar = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
-    m_poAudiRover->Summon(1, 1, ASTAR_CK);
+    m_poAudiRover->Summon(1, 1, "ASTAR_RBG");
     double fTimeAStarCk = m_poAudiRover->TotalTime();
 
     EXPECT_DOUBLE_EQ(fTimeAStar, fTimeAStarCk);

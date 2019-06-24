@@ -94,7 +94,19 @@ namespace planner {
         /// \param[in] i_sAction the action the rover takes to get from i_sCurrent to i_sNext. Contains the step cost, which is used to calculate a percentage height cost.
         /// \return The height cost of moving from i_sCurrent to i_sNext. Will be less than or equal to the action cost, which is required to ensure a consistent heuristic.
         template<typename TLocation>
-        double HeightCost(TLocation& i_sCurrent, TLocation& i_sNext, tAction& i_sAction) const;
+        double HeightCost(TLocation& i_sCurrent, TLocation& i_sNext, tAction& i_sAction) const
+        {
+            /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
+            /// Calculate current gradient in step direction
+            double fDeltaHeight =
+                    (m_oMap->Elevation(i_sNext.nX, i_sNext.nY) -
+                     m_oMap->Elevation(i_sCurrent.nX, i_sCurrent.nY));
+
+            /// This cost value is either positive or negative, depending on the height difference
+            double fHeightCost = i_sAction.fCost * fDeltaHeight / 255.f; //static_cast<double>(m_nMaxGradient + 1); //10.f;
+
+            return fHeightCost;
+        };
 
 
         ///\brief Test if the provided location i_sLocation lies within the map
@@ -118,7 +130,7 @@ namespace planner {
         ///
         ///\param[in] i_sParent node which becomes the parent of the new node.
         ///\param[in] i_sAction struct of type tAction that contains the direction and cost of the action.
-        std::shared_ptr<tNode> Child(std::shared_ptr<tNode> i_sParent, const tAction &i_sAction) const override;
+        std::shared_ptr<tNode> Child(std::shared_ptr<tNode>& i_sParent, const tAction &i_sAction) const override;
 
         ///\brief considers step size of rover and checks if the path is traversable TODO improve comment
         bool Traversable(std::shared_ptr<tNode> i_sCurrent, std::shared_ptr<tNode> i_sNext) const;
@@ -140,7 +152,7 @@ namespace planner {
         int NodeHash(std::shared_ptr<tNode>& i_sNode) const;
 
 
-    private:
+    protected:
 
         ///\brief AStar algorithm implementation.
         ///\details Initializes start, goal and intermediate nodes (sCurrent and sNext). The frontier m_oFrontier
@@ -155,9 +167,6 @@ namespace planner {
         ///\returns the time it took to find the fastest path in island seconds.
         double AStar();
 
-        double AStarOptimized();
-
-        double AStarCheck();
 
         ///\brief Calculates a consistency factor to get a consistent heuristic h(n) <= c(p,n) + h(p)
         ///\details Calculates the gradient of the elevation and considers the acceleration on slopes.
@@ -178,9 +187,6 @@ namespace planner {
 
         ///\brief Debug method to plot intermediate paths during planning. Used in Plan().
         void Plot();
-
-
-
     };
 
 

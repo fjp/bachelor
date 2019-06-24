@@ -18,11 +18,6 @@
 
 namespace planner {
 
-    enum tAlgorithm {
-        ASTAR,
-        ASTAR_OPT,
-        ASTAR_CK
-    };
 
     /// Forward declaration of interface planner::cRoverInterface.
     template <size_t Directions>
@@ -39,8 +34,8 @@ namespace planner {
         explicit cPlannerInterface(std::shared_ptr<cRoverInterface<Directions>> i_poRover, std::shared_ptr<cGraph> i_oMap) :
             m_poRover(i_poRover)
             , m_oMap(i_oMap)
-            , m_eAlgorithm(ASTAR) {
-            std::cout << "cPlannerInterface" << std::endl;
+            , m_sResult{0.f, false, true, 0, 0} {
+            std::cout << "Constructing cPlannerInterface" << std::endl;
         };
 
         ///\brief Virtual abstract method of the base interface, which must be implemented to perform a search algorithm.
@@ -61,26 +56,18 @@ namespace planner {
 
         ///\brief Given the action i_sAction and the parent node i_sParent a new node of type tNode is created.
         ///\details Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface.
-        virtual std::shared_ptr<tNode> Child(std::shared_ptr<tNode> i_sParent, const tAction &i_sAction) const = 0;
+        virtual std::shared_ptr<tNode> Child(std::shared_ptr<tNode>& i_sParent, const tAction &i_sAction) const = 0;
 
 
         virtual ~cPlannerInterface() {
             std::cout << "~cPlannerInterface" << std::endl;
         }
 
-        ///\brief Setter to specify the algorithm that should be used to plan a path.
-        void SetAlgorithm(const tAlgorithm i_eAlgorithm = ASTAR) { m_eAlgorithm = i_eAlgorithm; };
-        
-        ///\brief Getter to obtain the currently set algorithm.
-        tAlgorithm Algorithm() { return m_eAlgorithm; };
-
         ///\brief Getter to obtain result struct member m_sResult that contains information about the found path.
         tResult Result() { return m_sResult; };
 
-    protected:
-        ///\brief Select which algorithm should be used to plan a path.
-        tAlgorithm m_eAlgorithm;
 
+    protected:
         ///\brief Information to store planning results such as travelling time and consistency of heuristic.
         tResult m_sResult;
 
@@ -89,8 +76,6 @@ namespace planner {
 
         ///\brief Provides the subclasses with important map information such as terrain and elevation maps.
         std::shared_ptr<cGraph> m_oMap;
-
-
     };
 
 

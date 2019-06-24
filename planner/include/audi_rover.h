@@ -11,6 +11,7 @@
 #include "planner.h"
 
 #include "graph.h"
+#include "result.h"
 
 namespace planner {
 
@@ -30,11 +31,11 @@ namespace planner {
 
 
         ///\brief The summon feature that the Audi rover provides
-        void Summon(const int i_nStepSize = 1, const int i_nVelocity = 1, const tAlgorithm i_eAlgorithm = ASTAR);
+        tResult Summon(const int i_nStepSize = 1, const int i_nVelocity = 1, std::string&& i_strAlgorithm = "ASTAR");
 
         ///\brief Initializes the reference to the planner which is located in the inherited interface.
         ///\details
-        std::shared_ptr<cPlannerInterface<8>> InitializePlanner(const int &i_nStepSize, const int &i_nVelocity) override;
+        std::shared_ptr<cPlannerInterface<8>> InitializePlanner(const int &i_nStepSize, const int &i_nVelocity, std::string&& i_strAlgorithm) override;
 
 
         ///\brief Destructor to delete the allocated memory of the map.
