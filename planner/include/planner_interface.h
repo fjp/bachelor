@@ -73,8 +73,10 @@ namespace planner {
 
 
     protected:
+        ///\brief Select which algorithm should be used to plan a path
         tAlgorithm m_eAlgorithm;
 
+        ///\brief Information to store planning results such as travelling time and consistency of heuristic
         tResult m_sResult;
 
         ///\brief Reference pointer to the interface of the rover class planner::cRoverInterface<Directions>.
