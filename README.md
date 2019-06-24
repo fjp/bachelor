@@ -17,6 +17,7 @@ The complete doxygen documentation can be found in the doc folder, see [index.ht
     for the cyclic dependency between rover interface and planner interface.
     - Use of smart pointers reduces memory consumption from approx 2 GB to 570 MB. This high memory is caused by creating
     child nodes while exploring new locations. Each node contains information that increase the memory used each time a new node is created.
+- Uses double instead of float for the cost values to improve numerical inaccuracy because of diagonal step cost sqrt(2).
 - To verify the correctness of the current implementation this version adds two more implementations of A*,
 one from [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode) and
 the other from [Red Blob Games](https://www.redblobgames.com/pathfinding/a-star/implementation.html#cpp-astar).
