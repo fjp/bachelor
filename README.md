@@ -36,9 +36,10 @@ calculated octile heuristic value in planner::cPlanner::Heuristic().
         - path, 
         - locations such as start and goal passed as list of locations
         - NEW: show visited nodes
-- C++11 features used
-    - smart pointer: std::shared_ptr, std::weak_ptr, std::enable_shared_from_this, shared_from_this()
-    - 
+- [C++11 features](https://github.com/AnthonyCalandra/modern-cpp-features) used
+    - smart pointer: std::shared_ptr, std::weak_ptr, std::enable_shared_from_this, shared_from_this(), nullptr
+    - [Lambda expression](https://en.cppreference.com/w/cpp/language/lambda)
+    - [List initialization](https://en.cppreference.com/w/cpp/language/list_initialization)
 
 
 <img src="doc/images/solution_rover_bachelor_wedding.bmp" alt="Solution Rover Bachelor Wedding" width="200"/>
