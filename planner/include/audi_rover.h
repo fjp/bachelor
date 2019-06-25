@@ -61,7 +61,7 @@ namespace planner {
         void ResetTime();
 
 
-        ///\brief Debug method to check use cound of shared pointer
+        ///\brief Debug method to check use count of shared pointer
         void countPlanner();
 
 
