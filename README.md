@@ -53,6 +53,10 @@ Used [C++11 features](https://github.com/AnthonyCalandra/modern-cpp-features):
     
 ## Memory
 
+AStar memory usage.             |  AStar Wikipedia memory usage. | AStar Red Blob Games memory usage.
+:-------------------------:|:-------------------------:|:------------------------------------------------:
+<img src="doc/images/memory_usage_AStar.png" alt="AStar" width="250" />  |  <img src="doc/images/memory_usage_AStar_Wiki.png" alt="AStarWiki" width="250" /> | <img src="doc/images/memory_usage_AStar_RBG.png" alt="AStarRedBlobGames" width="250" /> 
+
 <p float="left">
   <figure>
       <img src="doc/images/memory_usage_AStar.png" alt="AStar" width="250" /> 
