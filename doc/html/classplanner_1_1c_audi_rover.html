@@ -76,14 +76,15 @@ $(function() {
 <p>The concrete <a class="el" href="classplanner_1_1c_audi_rover.html" title="The concrete cAudiRover class implementation of the interface cRoverInterface&lt;size_t Direction&gt;...">cAudiRover</a> class implementation of the interface cRoverInterface&lt;size_t Direction&gt;.  
  <a href="classplanner_1_1c_audi_rover.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="audi__rover_8h_source.html">audi_rover.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2audi__rover_8h_source.html">audi_rover.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for planner::cAudiRover:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classplanner_1_1c_audi_rover.png" usemap="#planner::cAudiRover_map" alt=""/>
   <map id="planner::cAudiRover_map" name="planner::cAudiRover_map">
-<area href="classplanner_1_1c_rover_interface.html" alt="planner::cRoverInterface&lt; 8 &gt;" shape="rect" coords="0,0,183,24"/>
+<area href="classplanner_1_1c_rover_interface.html" alt="planner::cRoverInterface&lt; 8 &gt;" shape="rect" coords="0,0,267,24"/>
+<area href="classplanner_1_1c_rover_interface.html" alt="planner::cRoverInterface&lt; 8 &gt;" shape="rect" coords="554,0,821,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -92,75 +93,146 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abafb926aca93fb8382284a10bd341986"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#abafb926aca93fb8382284a10bd341986">cAudiRover</a> (uint8_t *i_oElevation, uint8_t *i_oOverrides, int i_nHeight, int i_nWidth)</td></tr>
 <tr class="memdesc:abafb926aca93fb8382284a10bd341986"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives the map data such as elevation and overrides and generates a map stored in m_oMap.  <a href="#abafb926aca93fb8382284a10bd341986">More...</a><br /></td></tr>
 <tr class="separator:abafb926aca93fb8382284a10bd341986"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9344499573a5599a5d42040c34b3fdf9"><td class="memItemLeft" align="right" valign="top"><a id="a9344499573a5599a5d42040c34b3fdf9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#a9344499573a5599a5d42040c34b3fdf9">Summon</a> (const int i_nStepSize=1, const int i_nVelocity=1)</td></tr>
-<tr class="memdesc:a9344499573a5599a5d42040c34b3fdf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The summon feature that the Audi rover provides. <br /></td></tr>
-<tr class="separator:a9344499573a5599a5d42040c34b3fdf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af32b3dd5bc9e3916242a3c0aeaae5c26"><td class="memItemLeft" align="right" valign="top"><a id="af32b3dd5bc9e3916242a3c0aeaae5c26"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#af32b3dd5bc9e3916242a3c0aeaae5c26">InitializePlanner</a> (const int &amp;i_nStepSize, const int &amp;i_nVelocity) override</td></tr>
-<tr class="memdesc:af32b3dd5bc9e3916242a3c0aeaae5c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the reference to the planner which is located in the inherited interface. <br /></td></tr>
-<tr class="separator:af32b3dd5bc9e3916242a3c0aeaae5c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09a9f9ff21d3b139db7c2990a5989674"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#a09a9f9ff21d3b139db7c2990a5989674">Summon</a> (const int i_nStepSize=1, const int i_nVelocity=1, std::string &amp;&amp;i_strAlgorithm=&quot;ASTAR&quot;)</td></tr>
+<tr class="memdesc:a09a9f9ff21d3b139db7c2990a5989674"><td class="mdescLeft">&#160;</td><td class="mdescRight">The summon feature that the Audi rover provides.  <a href="#a09a9f9ff21d3b139db7c2990a5989674">More...</a><br /></td></tr>
+<tr class="separator:a09a9f9ff21d3b139db7c2990a5989674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a892dfcdf781ccdfe95f5af808f5a24ac"><td class="memItemLeft" align="right" valign="top"><a id="a892dfcdf781ccdfe95f5af808f5a24ac"></a>
+std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_planner_interface.html">cPlannerInterface</a>&lt; 8 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#a892dfcdf781ccdfe95f5af808f5a24ac">InitializePlanner</a> (const int &amp;i_nStepSize, const int &amp;i_nVelocity, std::string &amp;&amp;i_strAlgorithm) override</td></tr>
+<tr class="memdesc:a892dfcdf781ccdfe95f5af808f5a24ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the reference to the planner which is located in the inherited interface. <br /></td></tr>
+<tr class="separator:a892dfcdf781ccdfe95f5af808f5a24ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9057332995c0ac8a286551345aee9cc7"><td class="memItemLeft" align="right" valign="top"><a id="a9057332995c0ac8a286551345aee9cc7"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#a9057332995c0ac8a286551345aee9cc7">~cAudiRover</a> ()</td></tr>
 <tr class="memdesc:a9057332995c0ac8a286551345aee9cc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor to delete the allocated memory of the map. <br /></td></tr>
 <tr class="separator:a9057332995c0ac8a286551345aee9cc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2742130960fa69430731172e99db59e"><td class="memItemLeft" align="right" valign="top"><a id="aa2742130960fa69430731172e99db59e"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#aa2742130960fa69430731172e99db59e">TotalTime</a> () const</td></tr>
-<tr class="memdesc:aa2742130960fa69430731172e99db59e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total time in island seconds to travel on the fastest found path by AStar(). <br /></td></tr>
-<tr class="separator:aa2742130960fa69430731172e99db59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4ff29dbdcf096e9f3ec0a734ed7b2d3"><td class="memItemLeft" align="right" valign="top"><a id="ab4ff29dbdcf096e9f3ec0a734ed7b2d3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>countPlanner</b> ()</td></tr>
+<tr class="separator:ab4ff29dbdcf096e9f3ec0a734ed7b2d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3457f112b5906654ca4dbefef7ea7e46"><td class="memItemLeft" align="right" valign="top"><a id="a3457f112b5906654ca4dbefef7ea7e46"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#a3457f112b5906654ca4dbefef7ea7e46">TotalTime</a> () const</td></tr>
+<tr class="memdesc:a3457f112b5906654ca4dbefef7ea7e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total time in island seconds to travel on the fastest found path by AStar(). <br /></td></tr>
+<tr class="separator:a3457f112b5906654ca4dbefef7ea7e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581d4a30c727d6fbe224b317834a45ba"><td class="memItemLeft" align="right" valign="top"><a id="a581d4a30c727d6fbe224b317834a45ba"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#a581d4a30c727d6fbe224b317834a45ba">ResetTime</a> ()</td></tr>
+<tr class="memdesc:a581d4a30c727d6fbe224b317834a45ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the total planning time to zero island seconds. <br /></td></tr>
+<tr class="separator:a581d4a30c727d6fbe224b317834a45ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abafb926aca93fb8382284a10bd341986"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#abafb926aca93fb8382284a10bd341986">cAudiRover</a> (uint8_t *i_oElevation, uint8_t *i_oOverrides, int i_nHeight, int i_nWidth)</td></tr>
+<tr class="memdesc:abafb926aca93fb8382284a10bd341986"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives the map data such as elevation and overrides and generates a map stored in m_oMap.  <a href="#abafb926aca93fb8382284a10bd341986">More...</a><br /></td></tr>
+<tr class="separator:abafb926aca93fb8382284a10bd341986"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab43943af331caf76ac442280f1c667be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#ab43943af331caf76ac442280f1c667be">Summon</a> (std::string &amp;&amp;i_strAlgorithm=&quot;ASTAR&quot;, const int i_nStepSize=1, const int i_nVelocity=1)</td></tr>
+<tr class="memdesc:ab43943af331caf76ac442280f1c667be"><td class="mdescLeft">&#160;</td><td class="mdescRight">The summon feature that the Audi rover provides.  <a href="#ab43943af331caf76ac442280f1c667be">More...</a><br /></td></tr>
+<tr class="separator:ab43943af331caf76ac442280f1c667be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc214acc6e76a6820501971769bc270f"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_planner_interface.html">cPlannerInterface</a>&lt; 8 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#afc214acc6e76a6820501971769bc270f">InitializePlanner</a> (const int &amp;i_nStepSize, const int &amp;i_nVelocity, std::string &amp;&amp;i_strAlgorithm) override</td></tr>
+<tr class="memdesc:afc214acc6e76a6820501971769bc270f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the reference to the planner which is located in the inherited interface.  <a href="#afc214acc6e76a6820501971769bc270f">More...</a><br /></td></tr>
+<tr class="separator:afc214acc6e76a6820501971769bc270f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9057332995c0ac8a286551345aee9cc7"><td class="memItemLeft" align="right" valign="top"><a id="a9057332995c0ac8a286551345aee9cc7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#a9057332995c0ac8a286551345aee9cc7">~cAudiRover</a> ()</td></tr>
+<tr class="memdesc:a9057332995c0ac8a286551345aee9cc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor to delete the allocated memory of the map. <br /></td></tr>
+<tr class="separator:a9057332995c0ac8a286551345aee9cc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3457f112b5906654ca4dbefef7ea7e46"><td class="memItemLeft" align="right" valign="top"><a id="a3457f112b5906654ca4dbefef7ea7e46"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#a3457f112b5906654ca4dbefef7ea7e46">TotalTime</a> () const</td></tr>
+<tr class="memdesc:a3457f112b5906654ca4dbefef7ea7e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total time in island seconds to travel on the fastest found path by AStar(). <br /></td></tr>
+<tr class="separator:a3457f112b5906654ca4dbefef7ea7e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581d4a30c727d6fbe224b317834a45ba"><td class="memItemLeft" align="right" valign="top"><a id="a581d4a30c727d6fbe224b317834a45ba"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#a581d4a30c727d6fbe224b317834a45ba">ResetTime</a> ()</td></tr>
+<tr class="memdesc:a581d4a30c727d6fbe224b317834a45ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the total planning time to zero island seconds. <br /></td></tr>
+<tr class="separator:a581d4a30c727d6fbe224b317834a45ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4ff29dbdcf096e9f3ec0a734ed7b2d3"><td class="memItemLeft" align="right" valign="top"><a id="ab4ff29dbdcf096e9f3ec0a734ed7b2d3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_audi_rover.html#ab4ff29dbdcf096e9f3ec0a734ed7b2d3">countPlanner</a> ()</td></tr>
+<tr class="memdesc:ab4ff29dbdcf096e9f3ec0a734ed7b2d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug method to check use cound of shared pointer. <br /></td></tr>
+<tr class="separator:ab4ff29dbdcf096e9f3ec0a734ed7b2d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classplanner_1_1c_rover_interface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classplanner_1_1c_rover_interface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classplanner_1_1c_rover_interface.html">planner::cRoverInterface&lt; 8 &gt;</a></td></tr>
-<tr class="memitem:aa77e98811dbe34b474da519c0efa6a04 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="aa77e98811dbe34b474da519c0efa6a04"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#aa77e98811dbe34b474da519c0efa6a04">CostStraight</a> () const</td></tr>
-<tr class="memdesc:aa77e98811dbe34b474da519c0efa6a04 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter and Setter for the private member varialbes. <br /></td></tr>
-<tr class="separator:aa77e98811dbe34b474da519c0efa6a04 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4227b0aaf49ae8f0e0968558981e577e inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a4227b0aaf49ae8f0e0968558981e577e"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>CostDiagonal</b> () const</td></tr>
-<tr class="separator:a4227b0aaf49ae8f0e0968558981e577e inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8a5f2c1fe9034b7a0049a1e8489b43a inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ad8a5f2c1fe9034b7a0049a1e8489b43a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetCostStraight</b> (float i_fCostStraight)</td></tr>
-<tr class="separator:ad8a5f2c1fe9034b7a0049a1e8489b43a inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0df1c2cd4eebab29ca44255375e0fb4 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ac0df1c2cd4eebab29ca44255375e0fb4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetCostDiagonal</b> (float i_fCostDiagonal)</td></tr>
-<tr class="separator:ac0df1c2cd4eebab29ca44255375e0fb4 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2b552aaf43f7ce5af340d05b5657267 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ad2b552aaf43f7ce5af340d05b5657267"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#ad2b552aaf43f7ce5af340d05b5657267">CostStraight</a> () const</td></tr>
+<tr class="memdesc:ad2b552aaf43f7ce5af340d05b5657267 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter and Setter for the private member varialbes. <br /></td></tr>
+<tr class="separator:ad2b552aaf43f7ce5af340d05b5657267 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2b552aaf43f7ce5af340d05b5657267 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ad2b552aaf43f7ce5af340d05b5657267"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#ad2b552aaf43f7ce5af340d05b5657267">CostStraight</a> () const</td></tr>
+<tr class="memdesc:ad2b552aaf43f7ce5af340d05b5657267 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter and Setter for the private member varialbes. <br /></td></tr>
+<tr class="separator:ad2b552aaf43f7ce5af340d05b5657267 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4c45b0f0c586f864a83ba90be06efd0 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ab4c45b0f0c586f864a83ba90be06efd0"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>CostDiagonal</b> () const</td></tr>
+<tr class="separator:ab4c45b0f0c586f864a83ba90be06efd0 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4c45b0f0c586f864a83ba90be06efd0 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ab4c45b0f0c586f864a83ba90be06efd0"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>CostDiagonal</b> () const</td></tr>
+<tr class="separator:ab4c45b0f0c586f864a83ba90be06efd0 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2f57f4b9bf2c01fbcf1ca3c6d1fc55d inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ac2f57f4b9bf2c01fbcf1ca3c6d1fc55d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetCostStraight</b> (double i_fCostStraight)</td></tr>
+<tr class="separator:ac2f57f4b9bf2c01fbcf1ca3c6d1fc55d inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2f57f4b9bf2c01fbcf1ca3c6d1fc55d inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ac2f57f4b9bf2c01fbcf1ca3c6d1fc55d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetCostStraight</b> (double i_fCostStraight)</td></tr>
+<tr class="separator:ac2f57f4b9bf2c01fbcf1ca3c6d1fc55d inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aa2779928912477dcf76c7767ea746d inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a3aa2779928912477dcf76c7767ea746d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetCostDiagonal</b> (double i_fCostDiagonal)</td></tr>
+<tr class="separator:a3aa2779928912477dcf76c7767ea746d inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aa2779928912477dcf76c7767ea746d inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a3aa2779928912477dcf76c7767ea746d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetCostDiagonal</b> (double i_fCostDiagonal)</td></tr>
+<tr class="separator:a3aa2779928912477dcf76c7767ea746d inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad62c6dcbe7c8194c6a93ca1fc29ee4b8 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ad62c6dcbe7c8194c6a93ca1fc29ee4b8"></a>
+<a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
+<tr class="separator:ad62c6dcbe7c8194c6a93ca1fc29ee4b8 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad62c6dcbe7c8194c6a93ca1fc29ee4b8 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ad62c6dcbe7c8194c6a93ca1fc29ee4b8"></a>
 <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
 <tr class="separator:ad62c6dcbe7c8194c6a93ca1fc29ee4b8 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29669ceb2b1f4cebf0953b59e3c8936a inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a29669ceb2b1f4cebf0953b59e3c8936a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetStart</b> (const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;i_sStart)</td></tr>
 <tr class="separator:a29669ceb2b1f4cebf0953b59e3c8936a inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29669ceb2b1f4cebf0953b59e3c8936a inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a29669ceb2b1f4cebf0953b59e3c8936a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetStart</b> (const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;i_sStart)</td></tr>
+<tr class="separator:a29669ceb2b1f4cebf0953b59e3c8936a inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a02ffb5e04d128bf81567da55807850 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a5a02ffb5e04d128bf81567da55807850"></a>
+<a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Goal</b> ()</td></tr>
+<tr class="separator:a5a02ffb5e04d128bf81567da55807850 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a02ffb5e04d128bf81567da55807850 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a5a02ffb5e04d128bf81567da55807850"></a>
 <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Goal</b> ()</td></tr>
 <tr class="separator:a5a02ffb5e04d128bf81567da55807850 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f0e30cf351e8cb7ba75622273056343 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a8f0e30cf351e8cb7ba75622273056343"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetGoal</b> (const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;i_sGoal)</td></tr>
 <tr class="separator:a8f0e30cf351e8cb7ba75622273056343 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f0e30cf351e8cb7ba75622273056343 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a8f0e30cf351e8cb7ba75622273056343"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetGoal</b> (const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;i_sGoal)</td></tr>
+<tr class="separator:a8f0e30cf351e8cb7ba75622273056343 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a10c0d42c89adefa46390fe351583a2 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a2a10c0d42c89adefa46390fe351583a2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>StepSize</b> () const</td></tr>
+<tr class="separator:a2a10c0d42c89adefa46390fe351583a2 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a10c0d42c89adefa46390fe351583a2 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a2a10c0d42c89adefa46390fe351583a2"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>StepSize</b> () const</td></tr>
 <tr class="separator:a2a10c0d42c89adefa46390fe351583a2 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6410b636f0f2d5614e3463912f9646f inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ac6410b636f0f2d5614e3463912f9646f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetStepSize</b> (int i_nStepSize)</td></tr>
 <tr class="separator:ac6410b636f0f2d5614e3463912f9646f inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6410b636f0f2d5614e3463912f9646f inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ac6410b636f0f2d5614e3463912f9646f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetStepSize</b> (int i_nStepSize)</td></tr>
+<tr class="separator:ac6410b636f0f2d5614e3463912f9646f inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65279be04ab88f54d69204087503448b inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a65279be04ab88f54d69204087503448b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Velocity</b> () const</td></tr>
+<tr class="separator:a65279be04ab88f54d69204087503448b inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65279be04ab88f54d69204087503448b inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a65279be04ab88f54d69204087503448b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>Velocity</b> () const</td></tr>
 <tr class="separator:a65279be04ab88f54d69204087503448b inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a209a069d48223e427e27e4582037b158 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a209a069d48223e427e27e4582037b158"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetVelocity</b> (int i_nVelocity)</td></tr>
 <tr class="separator:a209a069d48223e427e27e4582037b158 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a4d39a81f9fac046411fa2f70986b96 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a5a4d39a81f9fac046411fa2f70986b96"></a>
-<a class="el" href="classplanner_1_1c_planner_interface.html">cPlannerInterface</a>&lt; Directions &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>GetPlanner</b> () const</td></tr>
-<tr class="separator:a5a4d39a81f9fac046411fa2f70986b96 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a209a069d48223e427e27e4582037b158 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a209a069d48223e427e27e4582037b158"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetVelocity</b> (int i_nVelocity)</td></tr>
+<tr class="separator:a209a069d48223e427e27e4582037b158 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeab2cd88b65b86f42cfbb5b063d3f9d1 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="aeab2cd88b65b86f42cfbb5b063d3f9d1"></a>
+std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_planner_interface.html">cPlannerInterface</a>&lt; Directions &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetPlanner</b> () const</td></tr>
+<tr class="separator:aeab2cd88b65b86f42cfbb5b063d3f9d1 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeab2cd88b65b86f42cfbb5b063d3f9d1 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="aeab2cd88b65b86f42cfbb5b063d3f9d1"></a>
+std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_planner_interface.html">cPlannerInterface</a>&lt; Directions &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetPlanner</b> () const</td></tr>
+<tr class="separator:aeab2cd88b65b86f42cfbb5b063d3f9d1 inherit pub_methods_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_attribs_classplanner_1_1c_rover_interface"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classplanner_1_1c_rover_interface')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classplanner_1_1c_rover_interface.html">planner::cRoverInterface&lt; 8 &gt;</a></td></tr>
-<tr class="memitem:a119c31cfd1e6aa72921fc5185e6f44a5 inherit pub_attribs_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a119c31cfd1e6aa72921fc5185e6f44a5"></a>
-std::array&lt; <a class="el" href="structplanner_1_1t_action.html">tAction</a>, Directions &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#a119c31cfd1e6aa72921fc5185e6f44a5">m_asActions</a></td></tr>
-<tr class="memdesc:a119c31cfd1e6aa72921fc5185e6f44a5 inherit pub_attribs_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array that contains the number of actions in which the robot can move. It has a template size parameter Directions. <br /></td></tr>
-<tr class="separator:a119c31cfd1e6aa72921fc5185e6f44a5 inherit pub_attribs_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae706ad1952c9761f6183d4776b3aabec inherit pub_attribs_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ae706ad1952c9761f6183d4776b3aabec"></a>
+std::array&lt; <a class="el" href="structplanner_1_1t_action.html">tAction</a>, Directions &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#ae706ad1952c9761f6183d4776b3aabec">m_asActions</a></td></tr>
+<tr class="memdesc:ae706ad1952c9761f6183d4776b3aabec inherit pub_attribs_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array that contains the number of actions in which the robot can move. It has a template size parameter Directions. <br /></td></tr>
+<tr class="separator:ae706ad1952c9761f6183d4776b3aabec inherit pub_attribs_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classplanner_1_1c_rover_interface"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classplanner_1_1c_rover_interface')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classplanner_1_1c_rover_interface.html">planner::cRoverInterface&lt; 8 &gt;</a></td></tr>
-<tr class="memitem:a8e1ffb06f3301b9440da125666ecdc4f inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplanner_1_1c_planner_interface.html">cPlannerInterface</a>&lt; Directions &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#a8e1ffb06f3301b9440da125666ecdc4f">m_poPlanner</a></td></tr>
-<tr class="memdesc:a8e1ffb06f3301b9440da125666ecdc4f inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to an abstract planner interface.  <a href="classplanner_1_1c_rover_interface.html#a8e1ffb06f3301b9440da125666ecdc4f">More...</a><br /></td></tr>
-<tr class="separator:a8e1ffb06f3301b9440da125666ecdc4f inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2922d392a98ab42a3f8e706851a4813 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; <a class="el" href="classplanner_1_1c_planner_interface.html">cPlannerInterface</a>&lt; Directions &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#af2922d392a98ab42a3f8e706851a4813">m_poPlanner</a></td></tr>
+<tr class="memdesc:af2922d392a98ab42a3f8e706851a4813 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to an abstract planner interface.  <a href="classplanner_1_1c_rover_interface.html#af2922d392a98ab42a3f8e706851a4813">More...</a><br /></td></tr>
+<tr class="separator:af2922d392a98ab42a3f8e706851a4813 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42552f6e5f1f2909821eaef8535a9979 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a42552f6e5f1f2909821eaef8535a9979"></a>
 <a class="el" href="structplanner_1_1t_location.html">tLocation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#a42552f6e5f1f2909821eaef8535a9979">m_sStart</a></td></tr>
 <tr class="memdesc:a42552f6e5f1f2909821eaef8535a9979 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start location (x,y) of the rover. <br /></td></tr>
@@ -177,21 +249,21 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#a458f3e469a13cfc909e957678ddee753">m_nVelocity</a></td></tr>
 <tr class="memdesc:a458f3e469a13cfc909e957678ddee753 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Speed of the rover (always set to one, not tested). <br /></td></tr>
 <tr class="separator:a458f3e469a13cfc909e957678ddee753 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8378fd644c70195336ffdb6a61b14884 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a8378fd644c70195336ffdb6a61b14884"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#a8378fd644c70195336ffdb6a61b14884">m_fCostStraight</a></td></tr>
-<tr class="memdesc:a8378fd644c70195336ffdb6a61b14884 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost to move straight. <br /></td></tr>
-<tr class="separator:a8378fd644c70195336ffdb6a61b14884 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a622dc2ed266037b2b50dbbd9227c0cc0 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="a622dc2ed266037b2b50dbbd9227c0cc0"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#a622dc2ed266037b2b50dbbd9227c0cc0">m_fCostDiagonal</a></td></tr>
-<tr class="memdesc:a622dc2ed266037b2b50dbbd9227c0cc0 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost to move diagonal. <br /></td></tr>
-<tr class="separator:a622dc2ed266037b2b50dbbd9227c0cc0 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad94337c2b05eed20423c1a2dcaa680cc inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="ad94337c2b05eed20423c1a2dcaa680cc"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#ad94337c2b05eed20423c1a2dcaa680cc">m_fCostStraight</a></td></tr>
+<tr class="memdesc:ad94337c2b05eed20423c1a2dcaa680cc inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost to move straight. <br /></td></tr>
+<tr class="separator:ad94337c2b05eed20423c1a2dcaa680cc inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcc4b7ec327b8d2ddcdb163c7a8397b3 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memItemLeft" align="right" valign="top"><a id="afcc4b7ec327b8d2ddcdb163c7a8397b3"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html#afcc4b7ec327b8d2ddcdb163c7a8397b3">m_fCostDiagonal</a></td></tr>
+<tr class="memdesc:afcc4b7ec327b8d2ddcdb163c7a8397b3 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost to move diagonal. <br /></td></tr>
+<tr class="separator:afcc4b7ec327b8d2ddcdb163c7a8397b3 inherit pro_attribs_classplanner_1_1c_rover_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The concrete <a class="el" href="classplanner_1_1c_audi_rover.html" title="The concrete cAudiRover class implementation of the interface cRoverInterface&lt;size_t Direction&gt;...">cAudiRover</a> class implementation of the interface cRoverInterface&lt;size_t Direction&gt;. </p>
 <p>Provides eight actions and a summon feature. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abafb926aca93fb8382284a10bd341986"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abafb926aca93fb8382284a10bd341986">&#9670;&nbsp;</a></span>cAudiRover()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abafb926aca93fb8382284a10bd341986">&#9670;&nbsp;</a></span>cAudiRover() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,13 +302,202 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 
 <p>Receives the map data such as elevation and overrides and generates a map stored in m_oMap. </p>
 <p>The action struct array of the interface m_asActions is initialized here together with the individual cost values. </p>
+<p>Define direction and cost of different possible actions</p>
 <p>Define direction and cost of different possible actions </p>
 
 </div>
 </div>
+<a id="abafb926aca93fb8382284a10bd341986"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abafb926aca93fb8382284a10bd341986">&#9670;&nbsp;</a></span>cAudiRover() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">planner::cAudiRover::cAudiRover </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>i_oElevation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>i_oOverrides</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i_nHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i_nWidth</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Receives the map data such as elevation and overrides and generates a map stored in m_oMap. </p>
+<p>The action struct array of the interface m_asActions is initialized here together with the individual cost values. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="afc214acc6e76a6820501971769bc270f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc214acc6e76a6820501971769bc270f">&#9670;&nbsp;</a></span>InitializePlanner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classplanner_1_1c_planner_interface.html">cPlannerInterface</a>&lt;8&gt; &gt; planner::cAudiRover::InitializePlanner </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>i_nStepSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>i_nVelocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&amp;&#160;</td>
+          <td class="paramname"><em>i_strAlgorithm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes the reference to the planner which is located in the inherited interface. </p>
+<p>Acts as a factory method to generate the planner which implements the passed algorithm i_strAlgorithm</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i_nStepSize</td><td>the step size of the rover. Should be set to 1. </td></tr>
+    <tr><td class="paramname">i_nVelocity</td><td>the velocity of the rover. Deprecated. Should be set to 1. </td></tr>
+    <tr><td class="paramname">i_strAlgorithm</td><td>the algorithm to use, can be currently one of "ASTAR", "ASTAR_WIKI", "ASTAR_RBG". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>shared pointer to the created concrete planner class (<a class="el" href="classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e...">cPlanner</a>, <a class="el" href="classplanner_1_1c_planner_wiki.html" title="Extends the planner class to implement A* from Wikipedia. ">cPlannerWiki</a>, <a class="el" href="classplanner_1_1c_planner_r_b_g.html" title="Extends the planner class to implement A* from Wikipedia. ">cPlannerRBG</a>). </dd></dl>
+
+<p>Implements <a class="el" href="classplanner_1_1c_rover_interface.html">planner::cRoverInterface&lt; 8 &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a09a9f9ff21d3b139db7c2990a5989674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09a9f9ff21d3b139db7c2990a5989674">&#9670;&nbsp;</a></span>Summon() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt_result.html">tResult</a> planner::cAudiRover::Summon </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>i_nStepSize</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>i_nVelocity</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&amp;&#160;</td>
+          <td class="paramname"><em>i_strAlgorithm</em> = <code>&quot;ASTAR&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The summon feature that the Audi rover provides. </p>
+<p>Initialize a planner according to the passed i_strAlgorithm (factory method)</p>
+<p>Start to plan the optimal path with the initialized planner.</p>
+<p>Update the total planning time with the current result (will be zero if planning failed) </p>
+
+</div>
+</div>
+<a id="ab43943af331caf76ac442280f1c667be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab43943af331caf76ac442280f1c667be">&#9670;&nbsp;</a></span>Summon() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt_result.html">tResult</a> planner::cAudiRover::Summon </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&amp;&#160;</td>
+          <td class="paramname"><em>i_strAlgorithm</em> = <code>&quot;ASTAR&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>i_nStepSize</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>i_nVelocity</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The summon feature that the Audi rover provides. </p>
+<p>Calls InitializePlanner which then acts as a factory to create a planner according to i_strAlgorithm parameter. Sets the step and velocity to 1. Note: step size and velocity should always be set to 1.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i_strAlgorithm</td><td>Rvalue reference input specifies the algorithm to use. Possible strings "ASTAR", "ASTAR_WIKI", "ASTAR_RBG". </td></tr>
+    <tr><td class="paramname">i_nStepSize</td><td>the step size of the rover. Should be set to 1. </td></tr>
+    <tr><td class="paramname">i_nVelocity</td><td>the velocity of the rover. Deprecated. Should be set to 1. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Planning result struct with information such as travelling time and heuristic consistency. </dd></dl>
+<p>Initialize a planner according to the passed i_strAlgorithm (factory method)</p>
+<p>Start to plan the optimal path with the initialized planner.</p>
+<p>Update the total planning time with the current result (will be zero if planning failed) </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/fjp/git/bachelor/planner/include/<a class="el" href="audi__rover_8h_source.html">audi_rover.h</a></li>
-<li>/Users/fjp/git/bachelor/planner/src/audi_rover.cpp</li>
+<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/include/<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2audi__rover_8h_source.html">audi_rover.h</a></li>
+<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/src/audi_rover.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

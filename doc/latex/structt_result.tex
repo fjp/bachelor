@@ -1,0 +1,52 @@
+\hypertarget{structt_result}{}\section{t\+Result Struct Reference}
+\label{structt_result}\index{t\+Result@{t\+Result}}
+
+
+Contains result information from the planner.  
+
+
+
+
+{\ttfamily \#include $<$result.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structt_result_add525cabcdd568ffc72a25052d351042}\label{structt_result_add525cabcdd568ffc72a25052d351042}} 
+bool \mbox{\hyperlink{structt_result_add525cabcdd568ffc72a25052d351042}{b\+Found\+Goal}}
+\begin{DoxyCompactList}\small\item\em True if the goal was found. False otherwise. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structt_result_a7d87aab6411a466aed07a27a70eeded2}{b\+Consistent\+Heuristic}}
+\begin{DoxyCompactList}\small\item\em True if the used heuristic is consistent h(x) $<$= d(x,y) + h(y) for every node x and its successor y. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structt_result_ab3934006c8a2a92c5622cb9d4b246eba}\label{structt_result_ab3934006c8a2a92c5622cb9d4b246eba}} 
+double \mbox{\hyperlink{structt_result_ab3934006c8a2a92c5622cb9d4b246eba}{f\+Travelling\+Time}}
+\begin{DoxyCompactList}\small\item\em Total time it will take the rover for the found path. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structt_result_a07f3f875dadb3075b1ca7f5e9dea66af}\label{structt_result_a07f3f875dadb3075b1ca7f5e9dea66af}} 
+int \mbox{\hyperlink{structt_result_a07f3f875dadb3075b1ca7f5e9dea66af}{n\+Cumulative\+Elevation}}
+\begin{DoxyCompactList}\small\item\em Cumulative sum of the elevation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structt_result_aeec87653572128a631adb83face701ee}\label{structt_result_aeec87653572128a631adb83face701ee}} 
+int \mbox{\hyperlink{structt_result_aeec87653572128a631adb83face701ee}{n\+Nodes\+Expanded}}
+\begin{DoxyCompactList}\small\item\em Stores the number of expanded nodes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structt_result_ae43cdacfd85c009a19f17af62adf8729}\label{structt_result_ae43cdacfd85c009a19f17af62adf8729}} 
+int \mbox{\hyperlink{structt_result_ae43cdacfd85c009a19f17af62adf8729}{n\+Iterations}}
+\begin{DoxyCompactList}\small\item\em Numer of total iterations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains result information from the planner. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structt_result_a7d87aab6411a466aed07a27a70eeded2}\label{structt_result_a7d87aab6411a466aed07a27a70eeded2}} 
+\index{t\+Result@{t\+Result}!b\+Consistent\+Heuristic@{b\+Consistent\+Heuristic}}
+\index{b\+Consistent\+Heuristic@{b\+Consistent\+Heuristic}!t\+Result@{t\+Result}}
+\subsubsection{\texorpdfstring{b\+Consistent\+Heuristic}{bConsistentHeuristic}}
+{\footnotesize\ttfamily bool t\+Result\+::b\+Consistent\+Heuristic}
+
+
+
+True if the used heuristic is consistent h(x) $<$= d(x,y) + h(y) for every node x and its successor y. 
+
+Will be set to false if h(x) $>$ d(x,y) + h(y) 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/include/result.\+h\end{DoxyCompactItemize}

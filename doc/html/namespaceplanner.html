@@ -85,11 +85,17 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html">cPlannerInterface</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a> is an abstract interface which can be implemented by concrete planner classes.  <a href="classplanner_1_1c_planner_interface.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_r_b_g.html">cPlannerRBG</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends the planner class to implement A* from Wikipedia.  <a href="classplanner_1_1c_planner_r_b_g.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_wiki.html">cPlannerWiki</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends the planner class to implement A* from Wikipedia.  <a href="classplanner_1_1c_planner_wiki.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward declaration of interface <a class="el" href="classplanner_1_1c_rover_interface.html" title="Forward declaration of interface planner::cRoverInterface. ">planner::cRoverInterface</a>.  <a href="classplanner_1_1c_rover_interface.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1_priority_queue.html">PriorityQueue</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority queue servers as frontier that stores the best nodes explored during planner::cPlanner::AStar().  <a href="structplanner_1_1_priority_queue.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority queue servers as frontier that stores the best nodes explored during <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">planner::cPlanner::AStar()</a>.  <a href="structplanner_1_1_priority_queue.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_action.html">tAction</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Action struct, used to specify the motion direction and the cost it takes to move in that direction.  <a href="structplanner_1_1t_action.html#details">More...</a><br /></td></tr>
@@ -99,6 +105,12 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html">tNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node gets expanded while searching for the shortest path.  <a href="structplanner_1_1t_node.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_simple_location.html">tSimpleLocation</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extended location struct with identifier used as hash value.  <a href="structplanner_1_1t_simple_location.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_simple_node.html">tSimpleNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplified node struct without the a pointer to its parent as in node struct (node.h).  <a href="structplanner_1_1t_simple_node.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

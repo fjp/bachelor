@@ -1,245 +1,134 @@
-This is my solution for the A\+ID Bachelor Coding Challenge. For the problem description refer to the A\+ID \href{../../AID Coding Challenge.pdf}{\tt Coding Challenge.\+pdf}. The complete doxygen documentation can be found in the doc folder, see \href{../../doc/html/index.html}{\tt index.\+html}
+This is my updated solution for the A\+ID Bachelor Coding Challenge. The readme of the previous version can be found here. For the problem description refer to the \href{AID_Coding_Challenge.pdf}{\tt A\+ID Coding Challenge.\+pdf}. The complete doxygen documentation can be found in the doc folder, see \href{doc/html/index.html}{\tt index.\+html}
 
-\section*{Result Preview}
-
-Travelling from the Rover (R\+O\+V\+E\+R\+\_\+X, R\+O\+V\+E\+R\+\_\+Y) to the Bachelor (B\+A\+C\+H\+E\+L\+O\+R\+\_\+X, B\+A\+C\+H\+E\+L\+O\+R\+\_\+Y) will take 2094.\+51 island seconds (34.\+9085 island minutes or 0.\+581809 island hours) on the fastest path.
-
-Travelling from the Bachelor (B\+A\+C\+H\+E\+L\+O\+R\+\_\+X, B\+A\+C\+H\+E\+L\+O\+R\+\_\+Y) to the Wedding (W\+E\+D\+D\+I\+N\+G\+\_\+X, W\+E\+D\+D\+I\+N\+G\+\_\+Y) will take 1283.\+17 island seconds (21.\+3862 island minutes or 0.\+356436 island hours) on the fastest path.
-
-In total the Audi rover requires 3390.\+71 island seconds (56.\+5118 island minutes or 0.\+941863 island hours) on the fastest path. Details are explained at the end in section Results. To plot the path I added another path() function to the visualizer.\+cpp.
-
-image html solution\+\_\+rover\+\_\+bachelor\+\_\+wedding.\+jpg
+\subsection*{Result}
 
 
 
-\section*{Algorithm Choice}
+\subsection*{Main New Features}
 
-To find the fastest route from a start to a goal location, I considered Gradient Fields, Dynamic Programming and Graph Search algorithms. I decided to use A$\ast$ graph search because it is an informed search algorithm, which uses a heuristic function $h(n)$ and relies on dynamic programming to find the shortest path. Compared to Dijkstra, which is an uninformed algorithm. The heuristic provides A$\ast$ ~\newline
- with an estimate of the minimum cost from any node n to the goal.
+Beside the fixed bug of setting the diagonal cost to 1.\+4f instead of sqrt(2) I made the following changes to my solution.
 
-Another reason against Gradient descent are the non-\/convex constraints imposed by the fjords. Gradient descent could easily fall into a lokal minimum and get stuck, which would require methods such as stochastic gradient descent.
+\subsubsection*{Simplified Motion Model}
 
-\subsection*{Cost Function}
+I simplified the step cost model of the rover. Instead of the physical model, used previously, the rover now uses height costs that are percentage values of the current step cost, which are either {\ttfamily 1} when moving straight or sqrt(2)\`{} when moving diagonal. The percentage step cost (height cost) is added to the current step cost if the rover moves uphill and subtracted if it moves downhill. This height cost calculation takes place in \mbox{\hyperlink{classplanner_1_1c_planner_a9d57a0697bb0e4666f4fd45f77c4a1aa}{planner\+::c\+Planner\+::\+Height\+Cost}}.
 
-The evaluation function $f(n) = g(n) + h(n)$ describes the total cost of a node. It consists of the path cost $g(n)$, which describes how long it takes the rover to get to node $n$ from its start location.
+\subsubsection*{Consistent Heuristic}
 
-The path cost $g(n)$ is calculated using the parent node\textquotesingle{}s path cost $g(parent)$ and the step cost $c(n)$, which is the cost of getting from the parent to the current node. The step cost is described in the next section step-\/cost.
+A consistent heuristic is ensured with the chosen step cost and height cost model. This is achieved by calculating a normalization factor {\ttfamily m\+\_\+f\+Consistency\+Factor = 1.\+f -\/ static\+\_\+cast$<$double$>$(m\+\_\+n\+Max\+Gradient) / 255.\+0;}. I assume that {\ttfamily 255} is the maximum that the rover can climb or fall, which is why I divide by 255.\+0. The normalization factor is then used to normalize the calculated octile heuristic value in \mbox{\hyperlink{classplanner_1_1c_planner_a77cefeae3d7a58a96c74b66f6be22611}{planner\+::c\+Planner\+::\+Heuristic}}. To check the consistency of the heuristic during A$\ast$ I perform the check\+: h(x) $<$= d(x,y) + h(y) with x as parent node and y as its successor. In case of an inconsistent heuristic the boolean flag b\+Consistent\+Heuristic in the new member struct planner\+::t\+Result of c\+Planner\+Interface is set to false. This boolean flag is tested against in the g\+Tests.
 
-In this challenge the heuristic represents the time it takes the robot to move from a node to the goal. Because the robot can move in eight directions (straight and diagonal) I use an octile distance heuristic $h(n)$, implemented in c\+Planner\+::\+Update\+Heuristic(). To get a consistent heuristic, I scaled it using the maximum gradient analyzing the elevation of the map and taking the slope into account. The consistency $ h(n) <= c(n,p) + h(p)$ is checked in \mbox{\hyperlink{classplanner_1_1c_planner_a8b4f67bd192db4784c6ab95c11e51a16}{planner\+::c\+Planner\+::\+Heuristic\+Check()}}. I exported the calculated heuristic values using \mbox{\hyperlink{classplanner_1_1c_planner_a1a4650050656545744796296a653d388}{planner\+::c\+Planner\+::\+Generate\+Heuristic()}} in the google test T\+E\+S\+T\+\_\+\+F(c\+Planner\+Test, heuristic) (see, test\+\_\+system.\+cpp).
+\subsubsection*{Memory Leaks}
 
-image html heuristic.\+jpg
+I analyzed my previous implementation using valgrind which showed memory leaks when creating child nodes in \mbox{\hyperlink{classplanner_1_1c_planner_adbffc6ce05119c940a09369d7e61554e}{planner\+::c\+Planner\+::\+Child}}. Additionally because of not destructing the planner and audi rover objects correctly. To overcome these memory leaks I now use smart pointers which are a C++11 feature. The valgrind results for the planner and g\+Test project are shown in valgrind.\+xml and valgrind\+\_\+gtest.\+xml respectively. See also the memory usage in the Memory Usage section below.
 
+\subsubsection*{Implementation Correctness}
 
+To verify the correctness of my implemented A\+Star algorithm, I added two more implementations.
+\begin{DoxyEnumerate}
+\item \href{https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode}{\tt Wikipedia A$\ast$ Pseudocode} implemented in class \mbox{\hyperlink{classplanner_1_1c_planner_wiki}{planner\+::c\+Planner\+Wiki}} which inherits from \mbox{\hyperlink{classplanner_1_1c_planner}{planner\+::c\+Planner}}.
+\item \href{https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus}{\tt Red Blob Games A$\ast$} implemented in class \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g}{planner\+::c\+Planner\+R\+BG}} which inherits from \mbox{\hyperlink{classplanner_1_1c_planner}{planner\+::c\+Planner}}.
+\end{DoxyEnumerate}
 
-\subsection*{Step Cost Model}
+Both use less memory than my previous implementation, which can still be found in \mbox{\hyperlink{classplanner_1_1c_planner_a341e70531266f023ac9461d18979d1ef}{planner\+::c\+Planner\+::\+A\+Star}}. Less memory usage is achieved with other data structures. For example the node struct in Red Blob Games implementation uses less fields (see planner\+::t\+Simplified\+Node). Regarding the computation time, \mbox{\hyperlink{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}{planner\+::c\+Planner\+Wiki\+::\+A\+Star}} is the fastest implementation. Here preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.
 
-Another task was to model the speed of the rover when driving up or downhill. For this purpose I implemented a simple kinematic approach with an inclined plane to model the elevation of the terrain.
+\subsubsection*{g\+Tests using Simple Maps}
 
-image html inclined.\+jpg
-
-
-
-The first step is to calculate the descent or ascent using the height difference between two locations, see \mbox{\hyperlink{classplanner_1_1c_planner_a82e45fc2701e90d3fa9df72f475e455e}{planner\+::c\+Planner\+::\+Update\+Cost()}}. In this method the pitch angle is calculated next, followed by computing the x or y component of the downhill-\/slope force using the gravitational force $F_G$. In the equation the friction is neglected.
-
-\begin{eqnarray*} F_H &= F_G \cdot sin\alpha \\ a_H &= g \cdot sin\alpha \\ F_{H,x} &= F_H \cdot cos\alpha \\ F_{H,x} = F_H \cdot cos\alpha \cdot sin\alpha = F_G \cdot \frac{1}{2} sin(2\alpha) \\ m \cdot a_x = m \cdot g \cdot \frac{1}{2} sin(2\alpha) \end{eqnarray*}
-
-While the rover is moving up or downhill it is also moving in the x or y direction and the calculated acceleration $a_x$ in x direction is acting on the rover. The same equation holds for the y-\/direction. To get the time it takes the rover to move up or downhill (regarding the two dimensional plane), the planar acceleration is used in the next kinematic equation, where $\Delta s$ refers to the running length in either x or y direction.
-
-\begin{eqnarray*} \Delta s &= v_0 \cdot t + \frac{1}{2} a_x t^2 \\ \Delta s &= \frac{g}{4} \cdot sin(2\alpha) \cdot t^2 \\ t &= \sqrt(\frac{4 \Delta s}{g \cdot sin(2\alpha}) \end{eqnarray*}
-
-The start velocity is neglected in this formula but added to the final height time cost. The time it takes the rover to move one cell is given in the problem description (1 island second moving straight, and $\sqrt 2$ moving diagonal). These step costs are implemented in \mbox{\hyperlink{classplanner_1_1c_planner_a82e45fc2701e90d3fa9df72f475e455e}{planner\+::c\+Planner\+::\+Update\+Cost()}}.
-
-\section*{Time and Space Complexity}
-
-I avoid allocating two dimensional vectors of the image size. Instead I am using a std\+::priority\+\_\+queue \mbox{\hyperlink{priority__queue_8h_source}{priority\+\_\+queue.\+h}} (planner\+::c\+Planner\+::m\+\_\+po\+Frontier) and a std\+::map. The priority queue is sorted by the score value of the evaluation function $f(n)$ and contains the frontier or border nodes. All expanded nodes are stored in an std\+::map inside the planner\+::c\+Planner\+::\+A\+Star() method together with their path costs $g(n)$.
-
-The priority queue is suggested in all the literature and can access elements in linear time. With a step size of one the algorithm requires approximately 2 minutes to find the best path from rover to bachelor to the wedding. (Mac\+Book Pro 3,3 G\+Hz Intel Core i7, 16 GB 2133 M\+Hz L\+P\+D\+D\+R3).
-
-\section*{Software Organization and Architecture}
-
-The advantage of using interfaces is to get different implementations with different behavior but keep the public interface methods the same. I use two interfaces that have a reference to each other, \mbox{\hyperlink{classplanner_1_1c_rover_interface}{planner\+::c\+Rover\+Interface}} and \mbox{\hyperlink{classplanner_1_1c_planner_interface}{planner\+::c\+Planner\+Interface}}. The \mbox{\hyperlink{classplanner_1_1c_audi_rover}{planner\+::c\+Audi\+Rover}} implements \mbox{\hyperlink{classplanner_1_1c_rover_interface}{planner\+::c\+Rover\+Interface}} and acts as a factory, creating \mbox{\hyperlink{classplanner_1_1c_planner}{planner\+::c\+Planner}} in planner\+::c\+Rover\+Interface\+::\+Initialize\+Planner(). To construct a Rover it requires the map data ({\ttfamily elevation.\+data} and
-\begin{DoxyCode}
-overrides 
-\end{DoxyCode}
-). This data is used int the constructor of \mbox{\hyperlink{classplanner_1_1c_audi_rover}{planner\+::c\+Audi\+Rover}} to create a new map data structure of type t\+Graph. In the constructor the array of actions is initizlized which is flexible due to the template parameter of the base class planner\+::c\+Rover\+Interface$<$size\+\_\+t Directions$>$. To start planning, the start and goal positions of the rover need to be set with planner\+::c\+Rover\+Interface\+::\+Set\+Start() and planner\+::c\+Rover\+Interface\+::\+Set\+Goal(). These methods provide the rover with location structs of type t\+Location. After the initialization, a call to the method \mbox{\hyperlink{classplanner_1_1c_audi_rover_a9344499573a5599a5d42040c34b3fdf9}{planner\+::c\+Audi\+Rover\+::\+Summon()}}, invokes the method \mbox{\hyperlink{classplanner_1_1c_audi_rover_af32b3dd5bc9e3916242a3c0aeaae5c26}{planner\+::c\+Audi\+Rover\+::\+Initialize\+Planner()}} which is part of the interface and used to create a new planner object. Finally the the interface method \mbox{\hyperlink{classplanner_1_1c_planner_interface_a4d8effce5ee5d097a30465280e9416d6}{planner\+::c\+Planner\+Interface\+::\+Plan()}} is called. Possible parameters to \mbox{\hyperlink{classplanner_1_1c_audi_rover_a9344499573a5599a5d42040c34b3fdf9}{planner\+::c\+Audi\+Rover\+::\+Summon()}} are the step size \mbox{\hyperlink{classplanner_1_1c_rover_interface_aea86540c3962e223de84f28ff067d788}{planner\+::c\+Rover\+Interface\+::m\+\_\+n\+Step\+Size}} and its velocity \mbox{\hyperlink{classplanner_1_1c_rover_interface_a458f3e469a13cfc909e957678ddee753}{planner\+::c\+Rover\+Interface\+::m\+\_\+n\+Velocity}} (not tested testing).
-
-During the the while loop of the A\+Star() method, debug messages are displayed every 100000 iterations in the following form\+:
+The mentioned implementations are used in new g\+Tests which create and use two simple maps to test if the different implementations yield the same result (regarding travelling time given in island seconds).
 
 
-\begin{DoxyCode}
-Max gradient 8
-Iteration 100000: Best node location (1406,338), 
-     Evaluation function f(n): 423.181, step cost c(n): 0.654846, path cost g(n): 320.498, heuristic h(n):
-       102.683
-Iteration 200000: Best node location (1299,592), 
-     Evaluation function f(n): 654.874, step cost c(n): 2.17358, path cost g(n): 573.159, heuristic h(n):
-       81.7151
-Iteration 300000: Best node location (1330,782), 
-     Evaluation function f(n): 831.174, step cost c(n): 1, path cost g(n): 769.743, heuristic h(n): 61.4311
-Iteration 400000: Best node location (1565,567), 
-     Evaluation function f(n): 917.657, step cost c(n): 1.41418, path cost g(n): 844.46, heuristic h(n):
-       73.1971
-\end{DoxyCode}
-
-
-\subsection*{C\+Make and File Structure}
-
-I added a new planner library which gets linked by the main program Bachelor. To get the visualization working during the algorithm I placed the functions inside the main.\+cpp inside \mbox{\hyperlink{utilities_8h_source}{utilities.\+h}} and \mbox{\hyperlink{constants_8h_source}{constants.\+h}}. The content of other files is documented in the Doxygen documentation. ~\newline
-
-
-\section*{Coding Style}
-
-For the variable naming conventions, I follow the \href{https://en.wikipedia.org/wiki/MISRA_C}{\tt M\+I\+S\+RA C} standard.
-
-\section*{Testing}
-
-{\bfseries Note} The tests are not completely finished because of the limited time.
-
-I added google g\+Test version 1.\+8.\+0 to the zip file and created a test fixture \mbox{\hyperlink{classc_planner_test}{c\+Planner\+Test}} in \mbox{\hyperlink{test__fixture_8h_source}{test\+\_\+fixture.\+h}}. It is used to initialize the test by loading the evaluation.\+data and overrides.\+data files. Furthermore, the c\+Audi\+Rover is initialized in the \mbox{\hyperlink{classc_planner_test_a88ad8b0e63c66a9d94c7606aa67ef20d}{c\+Planner\+Test\+::\+Set\+Up}} method.
-
-As explained in software the default values for step size and velocity are set to one for both parameters. I tested with different step sizes to reach the goal faster, thereby verifying that the path and island seconds stay the same.
-
-To get intermediate paths from the planner\+::c\+Planner\+::\+A\+Star() I used the provided \mbox{\hyperlink{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}{visualizer\+::write\+B\+M\+P()}} inside A\+Star(). This results in the following output\+:
-
-\subsection*{Results}
-
-The total travelling time will take 3390.\+71 island seconds (56.\+5118 island minutes or 0.\+941863 island hours) on the fastest path. Hopefully this is enough for the Bachelor to get to his wedding on time.
-
-image html solution\+\_\+rover\+\_\+bachelor\+\_\+wedding.\+jpg
+\begin{DoxyEnumerate}
+\item simple\+\_\+map\+\_\+with\+\_\+water creates a 330x330 map with elevation 1 and water such that the greediness and therefore the heuristic is evaluated.
+\end{DoxyEnumerate}
 
 
 
-The best path avoids high mountains and even gets close to see locations (bachelor to wedding) to find the fastest route.
+All the implementations find a shortest but but the implementation from Wikipedia chooses the right side to pass the water obstacle.
 
 
-\begin{DoxyCode}
-Max gradient 8
-Iteration 100000: Best node location (327,1652), 
-     Evaluation function f(n): 458.474, step cost c(n): 1.41422, path cost g(n): 261.347, heuristic h(n):
-       197.127
-Iteration 200000: Best node location (361,1744), 
-     Evaluation function f(n): 586.127, step cost c(n): 1.41422, path cost g(n): 381.208, heuristic h(n):
-       204.919
-Iteration 300000: Best node location (450,1843), 
-     Evaluation function f(n): 746, step cost c(n): 0.654846, path cost g(n): 534.867, heuristic h(n):
-       211.132
-Iteration 400000: Best node location (544,1842), 
-     Evaluation function f(n): 820.269, step cost c(n): 0.654846, path cost g(n): 613.13, heuristic h(n):
-       207.139
-Iteration 500000: Best node location (744,1660), 
-     Evaluation function f(n): 868.232, step cost c(n): 1.41418, path cost g(n): 687.578, heuristic h(n):
-       180.655
-Iteration 600000: Best node location (578,1011), 
-     Evaluation function f(n): 928.31, step cost c(n): 2.17358, path cost g(n): 805.679, heuristic h(n):
-       122.63
-Iteration 700000: Best node location (449,719), 
-     Evaluation function f(n): 1021.07, step cost c(n): 2.17358, path cost g(n): 909.411, heuristic h(n):
-       111.661
-Iteration 800000: Best node location (982,1793), 
-     Evaluation function f(n): 1101.28, step cost c(n): 0.36145, path cost g(n): 917.187, heuristic h(n):
-       184.096
-Iteration 900000: Best node location (660,678), 
-     Evaluation function f(n): 1184.87, step cost c(n): 0.654785, path cost g(n): 1096.01, heuristic h(n):
-       88.8629
-Iteration 1000000: Best node location (879,1017), 
-     Evaluation function f(n): 1299.34, step cost c(n): 2.17358, path cost g(n): 1188.58, heuristic h(n):
-       110.763
-Iteration 1100000: Best node location (928,801), 
-     Evaluation function f(n): 1378.91, step cost c(n): 0.36145, path cost g(n): 1291.78, heuristic h(n):
-       87.133
-Iteration 1200000: Best node location (1023,893), 
-     Evaluation function f(n): 1435.69, step cost c(n): 1.41418, path cost g(n): 1343.3, heuristic h(n):
-       92.398
-Iteration 1300000: Best node location (893,467), 
-     Evaluation function f(n): 1482.32, step cost c(n): 1.41418, path cost g(n): 1425.5, heuristic h(n):
-       56.823
-Iteration 1400000: Best node location (1227,930), 
-     Evaluation function f(n): 1527.56, step cost c(n): 0.654785, path cost g(n): 1439.91, heuristic h(n):
-       87.648
-Iteration 1500000: Best node location (801,324), 
-     Evaluation function f(n): 1568.78, step cost c(n): 1.41418, path cost g(n): 1508.68, heuristic h(n):
-       60.0997
-Iteration 1600000: Best node location (1273,841), 
-     Evaluation function f(n): 1602.9, step cost c(n): 0.654785, path cost g(n): 1526.06, heuristic h(n):
-       76.8426
-Iteration 1700000: Best node location (1190,672), 
-     Evaluation function f(n): 1640.51, step cost c(n): 1.41418, path cost g(n): 1577.13, heuristic h(n):
-       63.3806
-Iteration 1800000: Best node location (838,1508), 
-     Evaluation function f(n): 1679.28, step cost c(n): 0.36145, path cost g(n): 1517.72, heuristic h(n):
-       161.561
-Iteration 1900000: Best node location (1253,1254), 
-     Evaluation function f(n): 1714.33, step cost c(n): 1.41418, path cost g(n): 1595.36, heuristic h(n):
-       118.971
-Iteration 2000000: Best node location (1054,1443), 
-     Evaluation function f(n): 1749.07, step cost c(n): 1.63855, path cost g(n): 1602.95, heuristic h(n):
-       146.114
-Iteration 2100000: Best node location (1005,1602), 
-     Evaluation function f(n): 1783.83, step cost c(n): 0.654785, path cost g(n): 1619.78, heuristic h(n):
-       164.044
-Iteration 2200000: Best node location (1353,439), 
-     Evaluation function f(n): 1829.3, step cost c(n): 1, path cost g(n): 1791.83, heuristic h(n): 37.4711
-Iteration 2300000: Best node location (1507,947), 
-     Evaluation function f(n): 1902.5, step cost c(n): 2.17358, path cost g(n): 1807.85, heuristic h(n):
-       94.65
-Iteration 2400000: Best node location (1531,506), 
-     Evaluation function f(n): 1963.31, step cost c(n): 1.41418, path cost g(n): 1911.76, heuristic h(n):
-       51.5441
-Iteration 2500000: Best node location (1474,258), 
-     Evaluation function f(n): 2022.63, step cost c(n): 1, path cost g(n): 1998.25, heuristic h(n): 24.3831
-Iteration 2600000: Best node location (1530,1153), 
-     Evaluation function f(n): 2071.34, step cost c(n): 2.17358, path cost g(n): 1955.14, heuristic h(n):
-       116.203
-Travelling will take 2103.89 island seconds (35.0648 island minutes or 0.584413 island hours) on the
-       shortest path. 
-Max gradient 8
-Iteration 100000: Best node location (1309,404), 
-     Evaluation function f(n): 425.268, step cost c(n): 1.41422, path cost g(n): 325.167, heuristic h(n):
-       100.101
-Iteration 200000: Best node location (1332,598), 
-     Evaluation function f(n): 657.984, step cost c(n): 1, path cost g(n): 578.236, heuristic h(n): 79.7482
-Iteration 300000: Best node location (1305,776), 
-     Evaluation function f(n): 832.324, step cost c(n): 0.36145, path cost g(n): 769.258, heuristic h(n):
-       63.0666
-Iteration 400000: Best node location (1220,810), 
-     Evaluation function f(n): 918.601, step cost c(n): 1.41418, path cost g(n): 855.414, heuristic h(n):
-       63.1874
-Iteration 500000: Best node location (1640,807), 
-     Evaluation function f(n): 1003.84, step cost c(n): 1.41418, path cost g(n): 952.53, heuristic h(n):
-       51.3095
-Iteration 600000: Best node location (1179,1006), 
-     Evaluation function f(n): 1082.64, step cost c(n): 2.17358, path cost g(n): 1030.91, heuristic h(n):
-       51.7294
-Iteration 700000: Best node location (1700,1027), 
-     Evaluation function f(n): 1134.43, step cost c(n): 1, path cost g(n): 1102.64, heuristic h(n): 31.7948
-Iteration 800000: Best node location (1830,787), 
-     Evaluation function f(n): 1183.37, step cost c(n): 1, path cost g(n): 1122.19, heuristic h(n): 61.1796
-Heuristic not consistent: 61.3867 > 0.0808105 + 61.2453
-Heuristic not consistent: 97.5835 > 0.0692139 + 97.4835
-Iteration 900000: Best node location (1842,597), 
-     Evaluation function f(n): 1226.45, step cost c(n): 1.41418, path cost g(n): 1145.77, heuristic h(n):
-       80.6767
-Iteration 1000000: Best node location (1255,1143), 
-     Evaluation function f(n): 1266.87, step cost c(n): 1.41418, path cost g(n): 1228.42, heuristic h(n):
-       38.4546
-Travelling will take 1286.82 island seconds (21.447 island minutes or 0.35745 island hours) on the shortest
-       path. 
-Total Travelling will take 3390.71 island seconds (56.5118 island minutes or 0.941863 island hours) on the
-       shortest path. 
-\end{DoxyCode}
-
-
-Notice that the heuristic is not always consistent which requires more weight on the $g$ score values. This can also be seen from the f score value which should stay the same because it is the sum of $ g(n) + h(n) $. $g(n)$ should increase, while $h(n)$ should decrease when moving to the goal. Tuning could be done in planner\+::c\+Planner\+::\+Calculate\+Consistency\+Factor(), for example by lowering the gravitational force.
-
-\subsection*{Intermediate Paths}
-
-As described above here is the image showing the indermediate path results that were explored by A$\ast$.
-
-image html intermediate\+\_\+rover\+\_\+bachelor\+\_\+wedding.\+bmp
+\begin{DoxyEnumerate}
+\item simple\+\_\+map\+\_\+with\+\_\+elevation is a 4x4 map with elevation 1 except the diagonal is set to 255. The rover needs to find a path between the left top corner (x,y)=(0,0) and the bottom right corner (x,y)=(3,3). This test is used to check the step cost, which is combination of height cost and direction cost. Furthermore, the consistency of the heuristic is evaluated.
+\end{DoxyEnumerate}
 
 
 
-\section*{References}
+\subsection*{C++11 Features}
+
+Used \href{https://github.com/AnthonyCalandra/modern-cpp-features}{\tt C++11 features}\+:
+\begin{DoxyItemize}
+\item smart pointer\+:
+\begin{DoxyItemize}
+\item \href{https://en.cppreference.com/w/cpp/memory/shared_ptr}{\tt std\+::shared\+\_\+ptr},
+\item \href{https://en.cppreference.com/w/cpp/memory/weak_ptr}{\tt std\+::weak\+\_\+ptr},
+\item \href{https://en.cppreference.com/w/cpp/memory/enable_shared_from_this}{\tt std\+::enable\+\_\+shared\+\_\+from\+\_\+this},
+\item \href{https://en.cppreference.com/w/cpp/memory/enable_shared_from_this/shared_from_this}{\tt shared\+\_\+from\+\_\+this()},
+\item \href{https://en.cppreference.com/w/cpp/language/nullptr}{\tt nullptr}
+\end{DoxyItemize}
+\item \href{https://en.cppreference.com/w/cpp/language/lambda}{\tt Lambda expression}
+\item \href{https://en.cppreference.com/w/cpp/language/list_initialization}{\tt List initialization}
+\item \href{https://en.cppreference.com/w/cpp/language/reference}{\tt Rvalue reference}
+\item \href{https://en.cppreference.com/w/cpp/utility/move}{\tt std\+::move}
+\end{DoxyItemize}
+
+\subsection*{Memory Usage}
+
+The images below show the memory usage and runtime of the different A$\ast$ implementations.
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ A\+Star  }&\textbf{ A\+Star Wikipedia  }&\textbf{ A\+Star Red Blob Games \+:-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---\+:   }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ A\+Star  }&\textbf{ A\+Star Wikipedia  }&\textbf{ A\+Star Red Blob Games \+:-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---\+:   }\\\cline{1-3}
+\endhead
+  &  &   \\\cline{1-3}
+270.\+5 MB, 4\+:30 min  &77.\+2 MB, 19.\+48 sec  &208.\+1 MB, 3 min   \\\cline{1-3}
+\end{longtabu}
+
+
+\subsection*{Class Design}
+
+There exists a cyclic dependency between the rover interface and planner interface where the rover acts as a \href{https://en.wikipedia.org/wiki/Factory_method_pattern}{\tt factory} to create different planners.
+
+\subsubsection*{Complete Changelog}
+
 
 \begin{DoxyItemize}
-\item Artificial Intelligence A Modern Approach Third Edition -\/ Stuart Russel, Peter Norvig \item Head First Design Patterns -\/ Eric Freeman, Elisabeth Robson \item \href{https://autonomous-driving.org/2018/08/15/so-you-want-to-be-a-self-driving-car-engineer/}{\tt https\+://autonomous-\/driving.\+org/2018/08/15/so-\/you-\/want-\/to-\/be-\/a-\/self-\/driving-\/car-\/engineer/} \item \href{https://www.linkedin.com/pulse/software-quality-sami-vaaraniemi/}{\tt https\+://www.\+linkedin.\+com/pulse/software-\/quality-\/sami-\/vaaraniemi/} \item \href{https://en.wikipedia.org/wiki/A}{\tt https\+://en.\+wikipedia.\+org/wiki/A}$\ast$\+\_\+search\+\_\+algorithm \item \href{https://en.wikipedia.org/wiki/Consistent_heuristic}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Consistent\+\_\+heuristic} \item \href{https://en.wikipedia.org/wiki/Admissible_heuristic}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Admissible\+\_\+heuristic} \item \href{https://www.redblobgames.com/pathfinding/a-star/introduction.html}{\tt https\+://www.\+redblobgames.\+com/pathfinding/a-\/star/introduction.\+html} \end{DoxyItemize}
+\item Fixes diagonal cost value\+: uses sqrt(2) for the diagonal cost instead of 1.\+4f.
+\item Fixes memory leaks caused by dangling pointers, mainly in the Child() method of planner.\+cpp.
+\begin{DoxyItemize}
+\item Valgrind shows no memory leaks anymore with the use of smart pointers (C++11 feature)
+\item Now using smart pointers for the nodes
+\item Uses \href{https://en.cppreference.com/w/cpp/memory/shared_ptr}{\tt shared\+\_\+ptr}, \href{http://en.cppreference.com/w/cpp/memory/weak_ptr}{\tt std\+::weak\+\_\+ptr}, \href{http://en.cppreference.com/w/cpp/memory/enable_shared_from_this}{\tt std\+::enable\+\_\+shared\+\_\+from\+\_\+this} and \href{https://en.cppreference.com/w/cpp/memory/enable_shared_from_this/shared_from_this}{\tt shared\+\_\+from\+\_\+this()} for the cyclic dependency between rover interface and planner interface.
+\item Use of smart pointers reduces memory consumption from approx 2 GB to 570 MB. This high memory is caused by creating child nodes while exploring new locations. Each node contains information that increase the memory used each time a new node is created.
+\end{DoxyItemize}
+\item Uses double instead of float for the cost values to improve numerical inaccuracy because of diagonal step cost sqrt(2).
+\item To verify the correctness of the current implementation this version adds two more implementations of A$\ast$, one from \href{https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode}{\tt Wikipedia} and the other from \href{https://www.redblobgames.com/pathfinding/a-star/implementation.html#cpp-astar}{\tt Red Blob Games}.
+\item The new A$\ast$ implementations use less memory
+\item Simplifies step cost model of the rover\+: instead of the physical model the rover now uses height costs that are percentage values of the step cost. The percentage step cost (height cost) is added to the current step cost if the rover moves uphill and subtracted if it moves downhill. The height cost calculation takes place in \mbox{\hyperlink{classplanner_1_1c_planner_a9d57a0697bb0e4666f4fd45f77c4a1aa}{planner\+::c\+Planner\+::\+Height\+Cost()}}.
+\item Ensures consistent heuristic with the chosen step cost and height cost model. This is achieved by normalizing the calculated octile heuristic value in \mbox{\hyperlink{classplanner_1_1c_planner_a77cefeae3d7a58a96c74b66f6be22611}{planner\+::c\+Planner\+::\+Heuristic()}}.
+\item Fixes calculation of consistency output\+: h(x) $<$= d(x,y) + h(y) with x as parent node and y as its successor.
+\item In case of an inconsistent heuristic the boolean flag b\+Consistent\+Heuristic in the new member struct planner\+::t\+Result of c\+Planner\+Interface is set to false.
+\item Adds g\+Tests that use a simplified map, including water and elevation transitions. The result struct is used to check the expected results.
+\item Refactors visualizer
+\begin{DoxyItemize}
+\item Encapsulates the \mbox{\hyperlink{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}{visualizer\+::write\+B\+M\+P()}} function including its lambda expression
+\item Adds option (flag) what to draw
+\begin{DoxyItemize}
+\item locations such as start and goal passed as list of locations,
+\item path,
+\item N\+EW\+: display visited nodes in light red.
+\end{DoxyItemize}
+\item Adds option for pen size of the path.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\subsection*{Possible improvements}
+
+
+\begin{DoxyItemize}
+\item Use std\+::filesystem C++17 features to read and write elevation and overrides data.
+\item std\+::chrono to time function calls.
+\item std\+::array$<$int, size$>$ instead of std\+::vector for the optimized A\+Star version that allocates the closed set beforehand. 
+\end{DoxyItemize}

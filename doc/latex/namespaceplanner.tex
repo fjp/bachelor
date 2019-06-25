@@ -16,16 +16,24 @@ class \mbox{\hyperlink{classplanner_1_1c_planner}{c\+Planner}}
 \begin{DoxyCompactList}\small\item\em Implements the planner interface c\+Planner\+Interface$<$size\+\_\+t Directions$>$ with an action vector of size eight. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}} is an abstract interface which can be implemented by concrete planner classes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g}{c\+Planner\+R\+BG}}
+\begin{DoxyCompactList}\small\item\em Extends the planner class to implement A$\ast$ from Wikipedia. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classplanner_1_1c_planner_wiki}{c\+Planner\+Wiki}}
+\begin{DoxyCompactList}\small\item\em Extends the planner class to implement A$\ast$ from Wikipedia. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}
 \begin{DoxyCompactList}\small\item\em Forward declaration of interface \mbox{\hyperlink{classplanner_1_1c_rover_interface}{planner\+::c\+Rover\+Interface}}. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structplanner_1_1_priority_queue}{Priority\+Queue}}
-\begin{DoxyCompactList}\small\item\em Priority queue servers as frontier that stores the best nodes explored during planner\+::c\+Planner\+::\+A\+Star(). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Priority queue servers as frontier that stores the best nodes explored during \mbox{\hyperlink{classplanner_1_1c_planner_a341e70531266f023ac9461d18979d1ef}{planner\+::c\+Planner\+::\+A\+Star()}}. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}}
 \begin{DoxyCompactList}\small\item\em Action struct, used to specify the motion direction and the cost it takes to move in that direction. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}}
 \begin{DoxyCompactList}\small\item\em Data structure used as location information for nodes. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}}
-\begin{DoxyCompactList}\small\item\em Node gets expanded while searching for the shortest path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Node gets expanded while searching for the shortest path. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structplanner_1_1t_simple_location}{t\+Simple\+Location}}
+\begin{DoxyCompactList}\small\item\em Extended location struct with identifier used as hash value. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structplanner_1_1t_simple_node}{t\+Simple\+Node}}
+\begin{DoxyCompactList}\small\item\em Simplified node struct without the a pointer to its parent as in node struct (node.\+h). \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}

@@ -12,7 +12,7 @@ The concrete \mbox{\hyperlink{classplanner_1_1c_audi_rover}{c\+Audi\+Rover}} cla
 Inheritance diagram for planner\+:\+:c\+Audi\+Rover\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{classplanner_1_1c_audi_rover}
+\includegraphics[height=1.018182cm]{classplanner_1_1c_audi_rover}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -20,18 +20,41 @@ Inheritance diagram for planner\+:\+:c\+Audi\+Rover\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classplanner_1_1c_audi_rover_abafb926aca93fb8382284a10bd341986}{c\+Audi\+Rover}} (uint8\+\_\+t $\ast$i\+\_\+o\+Elevation, uint8\+\_\+t $\ast$i\+\_\+o\+Overrides, int i\+\_\+n\+Height, int i\+\_\+n\+Width)
 \begin{DoxyCompactList}\small\item\em Receives the map data such as elevation and overrides and generates a map stored in m\+\_\+o\+Map. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classplanner_1_1c_audi_rover_a9344499573a5599a5d42040c34b3fdf9}\label{classplanner_1_1c_audi_rover_a9344499573a5599a5d42040c34b3fdf9}} 
-void \mbox{\hyperlink{classplanner_1_1c_audi_rover_a9344499573a5599a5d42040c34b3fdf9}{Summon}} (const int i\+\_\+n\+Step\+Size=1, const int i\+\_\+n\+Velocity=1)
+\mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_audi_rover_a09a9f9ff21d3b139db7c2990a5989674}{Summon}} (const int i\+\_\+n\+Step\+Size=1, const int i\+\_\+n\+Velocity=1, std\+::string \&\&i\+\_\+str\+Algorithm=\char`\"{}A\+S\+T\+AR\char`\"{})
 \begin{DoxyCompactList}\small\item\em The summon feature that the Audi rover provides. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classplanner_1_1c_audi_rover_af32b3dd5bc9e3916242a3c0aeaae5c26}\label{classplanner_1_1c_audi_rover_af32b3dd5bc9e3916242a3c0aeaae5c26}} 
-void \mbox{\hyperlink{classplanner_1_1c_audi_rover_af32b3dd5bc9e3916242a3c0aeaae5c26}{Initialize\+Planner}} (const int \&i\+\_\+n\+Step\+Size, const int \&i\+\_\+n\+Velocity) override
+\mbox{\Hypertarget{classplanner_1_1c_audi_rover_a892dfcdf781ccdfe95f5af808f5a24ac}\label{classplanner_1_1c_audi_rover_a892dfcdf781ccdfe95f5af808f5a24ac}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}$<$ 8 $>$ $>$ \mbox{\hyperlink{classplanner_1_1c_audi_rover_a892dfcdf781ccdfe95f5af808f5a24ac}{Initialize\+Planner}} (const int \&i\+\_\+n\+Step\+Size, const int \&i\+\_\+n\+Velocity, std\+::string \&\&i\+\_\+str\+Algorithm) override
 \begin{DoxyCompactList}\small\item\em Initializes the reference to the planner which is located in the inherited interface. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classplanner_1_1c_audi_rover_a9057332995c0ac8a286551345aee9cc7}\label{classplanner_1_1c_audi_rover_a9057332995c0ac8a286551345aee9cc7}} 
 \mbox{\hyperlink{classplanner_1_1c_audi_rover_a9057332995c0ac8a286551345aee9cc7}{$\sim$c\+Audi\+Rover}} ()
 \begin{DoxyCompactList}\small\item\em Destructor to delete the allocated memory of the map. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classplanner_1_1c_audi_rover_aa2742130960fa69430731172e99db59e}\label{classplanner_1_1c_audi_rover_aa2742130960fa69430731172e99db59e}} 
-float \mbox{\hyperlink{classplanner_1_1c_audi_rover_aa2742130960fa69430731172e99db59e}{Total\+Time}} () const
-\begin{DoxyCompactList}\small\item\em Total time in island seconds to travel on the fastest found path by A\+Star(). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\Hypertarget{classplanner_1_1c_audi_rover_ab4ff29dbdcf096e9f3ec0a734ed7b2d3}\label{classplanner_1_1c_audi_rover_ab4ff29dbdcf096e9f3ec0a734ed7b2d3}} 
+void {\bfseries count\+Planner} ()
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_audi_rover_a3457f112b5906654ca4dbefef7ea7e46}\label{classplanner_1_1c_audi_rover_a3457f112b5906654ca4dbefef7ea7e46}} 
+double \mbox{\hyperlink{classplanner_1_1c_audi_rover_a3457f112b5906654ca4dbefef7ea7e46}{Total\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Total time in island seconds to travel on the fastest found path by A\+Star(). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_audi_rover_a581d4a30c727d6fbe224b317834a45ba}\label{classplanner_1_1c_audi_rover_a581d4a30c727d6fbe224b317834a45ba}} 
+void \mbox{\hyperlink{classplanner_1_1c_audi_rover_a581d4a30c727d6fbe224b317834a45ba}{Reset\+Time}} ()
+\begin{DoxyCompactList}\small\item\em Resets the total planning time to zero island seconds. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classplanner_1_1c_audi_rover_abafb926aca93fb8382284a10bd341986}{c\+Audi\+Rover}} (uint8\+\_\+t $\ast$i\+\_\+o\+Elevation, uint8\+\_\+t $\ast$i\+\_\+o\+Overrides, int i\+\_\+n\+Height, int i\+\_\+n\+Width)
+\begin{DoxyCompactList}\small\item\em Receives the map data such as elevation and overrides and generates a map stored in m\+\_\+o\+Map. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_audi_rover_ab43943af331caf76ac442280f1c667be}{Summon}} (std\+::string \&\&i\+\_\+str\+Algorithm=\char`\"{}A\+S\+T\+AR\char`\"{}, const int i\+\_\+n\+Step\+Size=1, const int i\+\_\+n\+Velocity=1)
+\begin{DoxyCompactList}\small\item\em The summon feature that the Audi rover provides. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}$<$ 8 $>$ $>$ \mbox{\hyperlink{classplanner_1_1c_audi_rover_afc214acc6e76a6820501971769bc270f}{Initialize\+Planner}} (const int \&i\+\_\+n\+Step\+Size, const int \&i\+\_\+n\+Velocity, std\+::string \&\&i\+\_\+str\+Algorithm) override
+\begin{DoxyCompactList}\small\item\em Initializes the reference to the planner which is located in the inherited interface. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_audi_rover_a9057332995c0ac8a286551345aee9cc7}\label{classplanner_1_1c_audi_rover_a9057332995c0ac8a286551345aee9cc7}} 
+\mbox{\hyperlink{classplanner_1_1c_audi_rover_a9057332995c0ac8a286551345aee9cc7}{$\sim$c\+Audi\+Rover}} ()
+\begin{DoxyCompactList}\small\item\em Destructor to delete the allocated memory of the map. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_audi_rover_a3457f112b5906654ca4dbefef7ea7e46}\label{classplanner_1_1c_audi_rover_a3457f112b5906654ca4dbefef7ea7e46}} 
+double \mbox{\hyperlink{classplanner_1_1c_audi_rover_a3457f112b5906654ca4dbefef7ea7e46}{Total\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Total time in island seconds to travel on the fastest found path by A\+Star(). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_audi_rover_a581d4a30c727d6fbe224b317834a45ba}\label{classplanner_1_1c_audi_rover_a581d4a30c727d6fbe224b317834a45ba}} 
+void \mbox{\hyperlink{classplanner_1_1c_audi_rover_a581d4a30c727d6fbe224b317834a45ba}{Reset\+Time}} ()
+\begin{DoxyCompactList}\small\item\em Resets the total planning time to zero island seconds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_audi_rover_ab4ff29dbdcf096e9f3ec0a734ed7b2d3}\label{classplanner_1_1c_audi_rover_ab4ff29dbdcf096e9f3ec0a734ed7b2d3}} 
+void \mbox{\hyperlink{classplanner_1_1c_audi_rover_ab4ff29dbdcf096e9f3ec0a734ed7b2d3}{count\+Planner}} ()
+\begin{DoxyCompactList}\small\item\em Debug method to check use cound of shared pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
@@ -44,16 +67,101 @@ Provides eight actions and a summon feature.
 \mbox{\Hypertarget{classplanner_1_1c_audi_rover_abafb926aca93fb8382284a10bd341986}\label{classplanner_1_1c_audi_rover_abafb926aca93fb8382284a10bd341986}} 
 \index{planner\+::c\+Audi\+Rover@{planner\+::c\+Audi\+Rover}!c\+Audi\+Rover@{c\+Audi\+Rover}}
 \index{c\+Audi\+Rover@{c\+Audi\+Rover}!planner\+::c\+Audi\+Rover@{planner\+::c\+Audi\+Rover}}
-\subsubsection{\texorpdfstring{c\+Audi\+Rover()}{cAudiRover()}}
+\subsubsection{\texorpdfstring{c\+Audi\+Rover()}{cAudiRover()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily planner\+::c\+Audi\+Rover\+::c\+Audi\+Rover (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{i\+\_\+o\+Elevation,  }\item[{uint8\+\_\+t $\ast$}]{i\+\_\+o\+Overrides,  }\item[{int}]{i\+\_\+n\+Height,  }\item[{int}]{i\+\_\+n\+Width }\end{DoxyParamCaption})}
 
 
 
 Receives the map data such as elevation and overrides and generates a map stored in m\+\_\+o\+Map. 
 
-The action struct array of the interface m\+\_\+as\+Actions is initialized here together with the individual cost values. Define direction and cost of different possible actions 
+The action struct array of the interface m\+\_\+as\+Actions is initialized here together with the individual cost values. Define direction and cost of different possible actions
+
+Define direction and cost of different possible actions \mbox{\Hypertarget{classplanner_1_1c_audi_rover_abafb926aca93fb8382284a10bd341986}\label{classplanner_1_1c_audi_rover_abafb926aca93fb8382284a10bd341986}} 
+\index{planner\+::c\+Audi\+Rover@{planner\+::c\+Audi\+Rover}!c\+Audi\+Rover@{c\+Audi\+Rover}}
+\index{c\+Audi\+Rover@{c\+Audi\+Rover}!planner\+::c\+Audi\+Rover@{planner\+::c\+Audi\+Rover}}
+\subsubsection{\texorpdfstring{c\+Audi\+Rover()}{cAudiRover()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily planner\+::c\+Audi\+Rover\+::c\+Audi\+Rover (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{i\+\_\+o\+Elevation,  }\item[{uint8\+\_\+t $\ast$}]{i\+\_\+o\+Overrides,  }\item[{int}]{i\+\_\+n\+Height,  }\item[{int}]{i\+\_\+n\+Width }\end{DoxyParamCaption})}
+
+
+
+Receives the map data such as elevation and overrides and generates a map stored in m\+\_\+o\+Map. 
+
+The action struct array of the interface m\+\_\+as\+Actions is initialized here together with the individual cost values. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classplanner_1_1c_audi_rover_afc214acc6e76a6820501971769bc270f}\label{classplanner_1_1c_audi_rover_afc214acc6e76a6820501971769bc270f}} 
+\index{planner\+::c\+Audi\+Rover@{planner\+::c\+Audi\+Rover}!Initialize\+Planner@{Initialize\+Planner}}
+\index{Initialize\+Planner@{Initialize\+Planner}!planner\+::c\+Audi\+Rover@{planner\+::c\+Audi\+Rover}}
+\subsubsection{\texorpdfstring{Initialize\+Planner()}{InitializePlanner()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}$<$8$>$ $>$ planner\+::c\+Audi\+Rover\+::\+Initialize\+Planner (\begin{DoxyParamCaption}\item[{const int \&}]{i\+\_\+n\+Step\+Size,  }\item[{const int \&}]{i\+\_\+n\+Velocity,  }\item[{std\+::string \&\&}]{i\+\_\+str\+Algorithm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the reference to the planner which is located in the inherited interface. 
+
+Acts as a factory method to generate the planner which implements the passed algorithm i\+\_\+str\+Algorithm
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\+\_\+n\+Step\+Size} & the step size of the rover. Should be set to 1. \\
+\hline
+{\em i\+\_\+n\+Velocity} & the velocity of the rover. Deprecated. Should be set to 1. \\
+\hline
+{\em i\+\_\+str\+Algorithm} & the algorithm to use, can be currently one of \char`\"{}\+A\+S\+T\+A\+R\char`\"{}, \char`\"{}\+A\+S\+T\+A\+R\+\_\+\+W\+I\+K\+I\char`\"{}, \char`\"{}\+A\+S\+T\+A\+R\+\_\+\+R\+B\+G\char`\"{}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+shared pointer to the created concrete planner class (\mbox{\hyperlink{classplanner_1_1c_planner}{c\+Planner}}, \mbox{\hyperlink{classplanner_1_1c_planner_wiki}{c\+Planner\+Wiki}}, \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g}{c\+Planner\+R\+BG}}). 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classplanner_1_1c_rover_interface}{planner\+::c\+Rover\+Interface$<$ 8 $>$}}.
+
+\mbox{\Hypertarget{classplanner_1_1c_audi_rover_a09a9f9ff21d3b139db7c2990a5989674}\label{classplanner_1_1c_audi_rover_a09a9f9ff21d3b139db7c2990a5989674}} 
+\index{planner\+::c\+Audi\+Rover@{planner\+::c\+Audi\+Rover}!Summon@{Summon}}
+\index{Summon@{Summon}!planner\+::c\+Audi\+Rover@{planner\+::c\+Audi\+Rover}}
+\subsubsection{\texorpdfstring{Summon()}{Summon()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structt_result}{t\+Result}} planner\+::c\+Audi\+Rover\+::\+Summon (\begin{DoxyParamCaption}\item[{const int}]{i\+\_\+n\+Step\+Size = {\ttfamily 1},  }\item[{const int}]{i\+\_\+n\+Velocity = {\ttfamily 1},  }\item[{std\+::string \&\&}]{i\+\_\+str\+Algorithm = {\ttfamily \char`\"{}ASTAR\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+The summon feature that the Audi rover provides. 
+
+Initialize a planner according to the passed i\+\_\+str\+Algorithm (factory method)
+
+Start to plan the optimal path with the initialized planner.
+
+Update the total planning time with the current result (will be zero if planning failed) \mbox{\Hypertarget{classplanner_1_1c_audi_rover_ab43943af331caf76ac442280f1c667be}\label{classplanner_1_1c_audi_rover_ab43943af331caf76ac442280f1c667be}} 
+\index{planner\+::c\+Audi\+Rover@{planner\+::c\+Audi\+Rover}!Summon@{Summon}}
+\index{Summon@{Summon}!planner\+::c\+Audi\+Rover@{planner\+::c\+Audi\+Rover}}
+\subsubsection{\texorpdfstring{Summon()}{Summon()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structt_result}{t\+Result}} planner\+::c\+Audi\+Rover\+::\+Summon (\begin{DoxyParamCaption}\item[{std\+::string \&\&}]{i\+\_\+str\+Algorithm = {\ttfamily \char`\"{}ASTAR\char`\"{}},  }\item[{const int}]{i\+\_\+n\+Step\+Size = {\ttfamily 1},  }\item[{const int}]{i\+\_\+n\+Velocity = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+The summon feature that the Audi rover provides. 
+
+Calls Initialize\+Planner which then acts as a factory to create a planner according to i\+\_\+str\+Algorithm parameter. Sets the step and velocity to 1. Note\+: step size and velocity should always be set to 1.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\+\_\+str\+Algorithm} & Rvalue reference input specifies the algorithm to use. Possible strings \char`\"{}\+A\+S\+T\+A\+R\char`\"{}, \char`\"{}\+A\+S\+T\+A\+R\+\_\+\+W\+I\+K\+I\char`\"{}, \char`\"{}\+A\+S\+T\+A\+R\+\_\+\+R\+B\+G\char`\"{}. \\
+\hline
+{\em i\+\_\+n\+Step\+Size} & the step size of the rover. Should be set to 1. \\
+\hline
+{\em i\+\_\+n\+Velocity} & the velocity of the rover. Deprecated. Should be set to 1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Planning result struct with information such as travelling time and heuristic consistency. 
+\end{DoxyReturn}
+Initialize a planner according to the passed i\+\_\+str\+Algorithm (factory method)
+
+Start to plan the optimal path with the initialized planner.
+
+Update the total planning time with the current result (will be zero if planning failed) 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/fjp/git/bachelor/planner/include/audi\+\_\+rover.\+h\item 
-/\+Users/fjp/git/bachelor/planner/src/audi\+\_\+rover.\+cpp\end{DoxyCompactItemize}
+/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/include/audi\+\_\+rover.\+h\item 
+/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/src/audi\+\_\+rover.\+cpp\end{DoxyCompactItemize}

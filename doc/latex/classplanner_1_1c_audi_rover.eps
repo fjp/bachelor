@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 209.424084
+%%BoundingBox: 0 0 500 36.363636
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,13 +19,13 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 2.387500 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 13.750000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
 /rows 2 def
-/cols 1 def
+/cols 4 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
 
@@ -175,6 +175,9 @@ boxfont setfont
 1 boundaspect scale
 (planner::cAudiRover) cw
 (planner::cRoverInterface< 8 >) cw
+(std::enable_shared_from_this< cAudiRover >) cw
+(planner::cRoverInterface< 8 >) cw
+(std::enable_shared_from_this< cAudiRover >) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -186,12 +189,23 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (planner::cAudiRover) 0.000000 0.000000 box
+ (planner::cAudiRover) 1.500000 0.000000 box
  (planner::cRoverInterface< 8 >) 0.000000 1.000000 box
+ (std::enable_shared_from_this< cAudiRover >) 1.000000 1.000000 box
+ (planner::cRoverInterface< 8 >) 2.000000 1.000000 box
+ (std::enable_shared_from_this< cAudiRover >) 3.000000 1.000000 box
 
 % ----- relations -----
 
 solid
-0 0.000000 0.000000 out
+0 1.500000 0.000000 out
+solid
+0.000000 3.000000 1.000000 conn
 solid
 1 0.000000 1.000000 in
+solid
+1 1.000000 1.000000 in
+solid
+1 2.000000 1.000000 in
+solid
+1 3.000000 1.000000 in

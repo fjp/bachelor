@@ -1,0 +1,312 @@
+\hypertarget{classplanner_1_1c_planner_wiki}{}\section{planner\+:\+:c\+Planner\+Wiki Class Reference}
+\label{classplanner_1_1c_planner_wiki}\index{planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}}
+
+
+Extends the planner class to implement A$\ast$ from Wikipedia.  
+
+
+
+
+{\ttfamily \#include $<$planner\+\_\+wiki.\+h$>$}
+
+Inheritance diagram for planner\+:\+:c\+Planner\+Wiki\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.089552cm]{classplanner_1_1c_planner_wiki}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classplanner_1_1c_planner_wiki_aed6ae97e85a338e082ec2879629f0f3b}{c\+Planner\+Wiki}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ 8 $>$$>$ i\+\_\+po\+Rover, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$ i\+\_\+o\+Map)
+\begin{DoxyCompactList}\small\item\em Initializes member variables m\+\_\+po\+Rover and m\+\_\+o\+Map and calls \mbox{\hyperlink{classplanner_1_1c_planner_a2e5a745f83f903662eff914d8beddb5e}{Calculate\+Consistency\+Factor()}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_wiki_ab9f2b825a5b1e0bd2e33271f25c812be}\label{classplanner_1_1c_planner_wiki_ab9f2b825a5b1e0bd2e33271f25c812be}} 
+\mbox{\hyperlink{classplanner_1_1c_planner_wiki_ab9f2b825a5b1e0bd2e33271f25c812be}{$\sim$c\+Planner\+Wiki}} ()
+\begin{DoxyCompactList}\small\item\em Destructor to delete the allocated memory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}{Plan}} () override
+\begin{DoxyCompactList}\small\item\em Override of the base interface \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}, which invokes the \mbox{\hyperlink{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}{A\+Star()}} search algorithm. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T\+Cost\+So\+Far , typename T\+Came\+From $>$ }\\void \mbox{\hyperlink{classplanner_1_1c_planner_wiki_a049e5c4a9540fecbe82a0648f771bbd2}{Reconstruct\+Path}} (T\+Cost\+So\+Far \&\&i\+\_\+cost\+\_\+so\+\_\+far, T\+Came\+From \&\&i\+\_\+came\+\_\+from)
+\begin{DoxyCompactList}\small\item\em Given the node i\+\_\+ps\+Node the overrides map m\+\_\+po\+Overrides is updated for displaying the path. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classplanner_1_1c_planner_wiki_aed6ae97e85a338e082ec2879629f0f3b}{c\+Planner\+Wiki}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ 8 $>$$>$ i\+\_\+po\+Rover, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$ i\+\_\+o\+Map)
+\begin{DoxyCompactList}\small\item\em Initializes member variables m\+\_\+po\+Rover and m\+\_\+o\+Map and calls \mbox{\hyperlink{classplanner_1_1c_planner_a2e5a745f83f903662eff914d8beddb5e}{Calculate\+Consistency\+Factor()}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_wiki_ab9f2b825a5b1e0bd2e33271f25c812be}\label{classplanner_1_1c_planner_wiki_ab9f2b825a5b1e0bd2e33271f25c812be}} 
+\mbox{\hyperlink{classplanner_1_1c_planner_wiki_ab9f2b825a5b1e0bd2e33271f25c812be}{$\sim$c\+Planner\+Wiki}} ()
+\begin{DoxyCompactList}\small\item\em Destructor to delete the allocated memory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}{Plan}} () override
+\begin{DoxyCompactList}\small\item\em Override of the base interface \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}, which invokes the \mbox{\hyperlink{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}{A\+Star()}} search algorithm. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T\+Cost\+So\+Far , typename T\+Came\+From $>$ }\\void \mbox{\hyperlink{classplanner_1_1c_planner_wiki_a049e5c4a9540fecbe82a0648f771bbd2}{Reconstruct\+Path}} (T\+Cost\+So\+Far \&\&i\+\_\+cost\+\_\+so\+\_\+far, T\+Came\+From \&\&i\+\_\+came\+\_\+from)
+\begin{DoxyCompactList}\small\item\em Given the node i\+\_\+ps\+Node the overrides map m\+\_\+po\+Overrides is updated for displaying the path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}{A\+Star}} ()
+\item 
+\mbox{\Hypertarget{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}\label{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}} 
+\mbox{\hyperlink{structt_result}{t\+Result}} {\bfseries A\+Star} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Extends the planner class to implement A$\ast$ from Wikipedia. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classplanner_1_1c_planner_wiki_aed6ae97e85a338e082ec2879629f0f3b}\label{classplanner_1_1c_planner_wiki_aed6ae97e85a338e082ec2879629f0f3b}} 
+\index{planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}!c\+Planner\+Wiki@{c\+Planner\+Wiki}}
+\index{c\+Planner\+Wiki@{c\+Planner\+Wiki}!planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}}
+\subsubsection{\texorpdfstring{c\+Planner\+Wiki()}{cPlannerWiki()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily planner\+::c\+Planner\+Wiki\+::c\+Planner\+Wiki (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ 8 $>$$>$}]{i\+\_\+po\+Rover,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$}]{i\+\_\+o\+Map }\end{DoxyParamCaption})}
+
+
+
+Initializes member variables m\+\_\+po\+Rover and m\+\_\+o\+Map and calls \mbox{\hyperlink{classplanner_1_1c_planner_a2e5a745f83f903662eff914d8beddb5e}{Calculate\+Consistency\+Factor()}}. 
+
+The \mbox{\Hypertarget{classplanner_1_1c_planner_wiki_aed6ae97e85a338e082ec2879629f0f3b}\label{classplanner_1_1c_planner_wiki_aed6ae97e85a338e082ec2879629f0f3b}} 
+\index{planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}!c\+Planner\+Wiki@{c\+Planner\+Wiki}}
+\index{c\+Planner\+Wiki@{c\+Planner\+Wiki}!planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}}
+\subsubsection{\texorpdfstring{c\+Planner\+Wiki()}{cPlannerWiki()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily planner\+::c\+Planner\+Wiki\+::c\+Planner\+Wiki (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ 8 $>$$>$}]{i\+\_\+po\+Rover,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$}]{i\+\_\+o\+Map }\end{DoxyParamCaption})}
+
+
+
+Initializes member variables m\+\_\+po\+Rover and m\+\_\+o\+Map and calls \mbox{\hyperlink{classplanner_1_1c_planner_a2e5a745f83f903662eff914d8beddb5e}{Calculate\+Consistency\+Factor()}}. 
+
+The 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}\label{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}} 
+\index{planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}!A\+Star@{A\+Star}}
+\index{A\+Star@{A\+Star}!planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}}
+\subsubsection{\texorpdfstring{A\+Star()}{AStar()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structt_result}{t\+Result}} planner\+::c\+Planner\+Wiki\+::\+A\+Star (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+The set of nodes already evaluated. Implemented as 2d array filled with 0s and start element set to 1.
+
+The set of currently discovered nodes that are not evaluated yet. Initially, only the start node is known. ~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+ Defined the simplified start node
+
+For each node, which action it can most efficiently be reached from. If a node can be reached from many nodes, action will eventually contain the most efficient previous step. ~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+ For each node, the cost of getting from the start node to that node.
+
+The cost of going from start to start is zero.
+
+Initialize result struct
+
+While the goal is not found the problem is solvable
+
+Resign if no values in the open list and you can\textquotesingle{}t expand anymore
+
+Remove the node from the open priority queue having the lowest f\+Score value
+
+Check if the goal is reached
+
+Otherwise explore new locations
+
+Add the current node to the set of nodes already evaluated
+
+Perform each possible rover action on the current node
+
+Check if the location of the next node lies within the map and is not on water. Ignore the neighbors which are already evaluated (closed\mbox{[}n\+X\+Next\mbox{]}\mbox{[}n\+Y\+Next\mbox{]} == 0). ~\newline
+~\newline
+~\newline
+ The distance from start to a neighbor
+
+Mark visited nodes
+
+Check that heuristic never overestimates the true distance\+: Priority of a new node should never be lower than the priority of its parent.
+
+The set of nodes already evaluated. Implemented as 2d array filled with 0s and start element set to 1.
+
+The set of currently discovered nodes that are not evaluated yet. Initially, only the start node is known. ~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+ Defined the simplified start node
+
+For each node, which action it can most efficiently be reached from. If a node can be reached from many nodes, action will eventually contain the most efficient previous step. ~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+ For each node, the cost of getting from the start node to that node.
+
+The cost of going from start to start is zero.
+
+Initialize result struct
+
+While the goal is not found the problem is solvable
+
+Resign if no values in the open list and you can\textquotesingle{}t expand anymore
+
+Remove the node from the open priority queue having the lowest f\+Score value
+
+Check if the goal is reached
+
+Otherwise explore new locations
+
+Add the current node to the set of nodes already evaluated
+
+Perform each possible rover action on the current node
+
+Check if the location of the next node lies within the map and is not on water. Ignore the neighbors which are already evaluated (closed\mbox{[}n\+X\+Next\mbox{]}\mbox{[}n\+Y\+Next\mbox{]} == 0). ~\newline
+~\newline
+~\newline
+~\newline
+ The distance from start to a neighbor
+
+Mark visited nodes
+
+Check that heuristic never overestimates the true distance\+: Priority of a new node should never be lower than the priority of its parent. ~\newline
+ Move from the current node back to the start node \mbox{\Hypertarget{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}\label{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}} 
+\index{planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}!Plan@{Plan}}
+\index{Plan@{Plan}!planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}}
+\subsubsection{\texorpdfstring{Plan()}{Plan()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structt_result}{t\+Result}} planner\+::c\+Planner\+Wiki\+::\+Plan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Override of the base interface \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}, which invokes the \mbox{\hyperlink{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}{A\+Star()}} search algorithm. 
+
+\begin{DoxyReturn}{Returns}
+the time to travel from start to goal if it was found. Otherwise -\/1 is returned. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classplanner_1_1c_planner_a21230c015260b9fc34ad2f239592470e}{planner\+::c\+Planner}}.
+
+\mbox{\Hypertarget{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}\label{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}} 
+\index{planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}!Plan@{Plan}}
+\index{Plan@{Plan}!planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}}
+\subsubsection{\texorpdfstring{Plan()}{Plan()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structt_result}{t\+Result}} planner\+::c\+Planner\+Wiki\+::\+Plan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Override of the base interface \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}, which invokes the \mbox{\hyperlink{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}{A\+Star()}} search algorithm. 
+
+\begin{DoxyReturn}{Returns}
+the time to travel from start to goal if it was found. Otherwise -\/1 is returned. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classplanner_1_1c_planner_a21230c015260b9fc34ad2f239592470e}{planner\+::c\+Planner}}.
+
+\mbox{\Hypertarget{classplanner_1_1c_planner_wiki_a049e5c4a9540fecbe82a0648f771bbd2}\label{classplanner_1_1c_planner_wiki_a049e5c4a9540fecbe82a0648f771bbd2}} 
+\index{planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}!Reconstruct\+Path@{Reconstruct\+Path}}
+\index{Reconstruct\+Path@{Reconstruct\+Path}!planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}}
+\subsubsection{\texorpdfstring{Reconstruct\+Path()}{ReconstructPath()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Cost\+So\+Far , typename T\+Came\+From $>$ \\
+void planner\+::c\+Planner\+Wiki\+::\+Reconstruct\+Path (\begin{DoxyParamCaption}\item[{T\+Cost\+So\+Far \&\&}]{i\+\_\+cost\+\_\+so\+\_\+far,  }\item[{T\+Came\+From \&\&}]{i\+\_\+came\+\_\+from }\end{DoxyParamCaption})}
+
+
+
+Given the node i\+\_\+ps\+Node the overrides map m\+\_\+po\+Overrides is updated for displaying the path. 
+
+Traversing a path takes place using the m\+\_\+ps\+Parent field of the \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} struct. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+ps\+Node} & Goal node or any other which is traversed back \\
+\hline
+\end{DoxyParams}
+Set the cost (time) it takes to get to the goal
+
+Reconstruct the path by going backward
+
+Update cumulative elevation
+
+Store path in overrides
+
+Check if the current node is the start node
+
+Move towards the start
+
+Update cumulative elevation
+
+Store path in overrides
+
+Set the cost (time) it takes to get to the goal
+
+Reconstruct the path by going backward
+
+Update cumulative elevation
+
+Store path in overrides
+
+Check if the current node is the start node
+
+Move towards the start
+
+Update cumulative elevation
+
+Store path in overrides \mbox{\Hypertarget{classplanner_1_1c_planner_wiki_a049e5c4a9540fecbe82a0648f771bbd2}\label{classplanner_1_1c_planner_wiki_a049e5c4a9540fecbe82a0648f771bbd2}} 
+\index{planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}!Reconstruct\+Path@{Reconstruct\+Path}}
+\index{Reconstruct\+Path@{Reconstruct\+Path}!planner\+::c\+Planner\+Wiki@{planner\+::c\+Planner\+Wiki}}
+\subsubsection{\texorpdfstring{Reconstruct\+Path()}{ReconstructPath()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Cost\+So\+Far , typename T\+Came\+From $>$ \\
+void planner\+::c\+Planner\+Wiki\+::\+Reconstruct\+Path (\begin{DoxyParamCaption}\item[{T\+Cost\+So\+Far \&\&}]{i\+\_\+cost\+\_\+so\+\_\+far,  }\item[{T\+Came\+From \&\&}]{i\+\_\+came\+\_\+from }\end{DoxyParamCaption})}
+
+
+
+Given the node i\+\_\+ps\+Node the overrides map m\+\_\+po\+Overrides is updated for displaying the path. 
+
+Traversing a path takes place using the m\+\_\+ps\+Parent field of the \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} struct. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i\+\_\+ps\+Node} & Goal node or any other which is traversed back \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/include/planner\+\_\+wiki.\+h\item 
+/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/src/planner\+\_\+wiki.\+cpp\end{DoxyCompactItemize}

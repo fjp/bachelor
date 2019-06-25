@@ -77,7 +77,7 @@ $(function() {
 <p>Node gets expanded while searching for the shortest path.  
  <a href="structplanner_1_1t_node.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="node_8h_source.html">node.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2node_8h_source.html">node.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -99,37 +99,51 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5085f3fcf4a960ed9fe14068f1b5e950"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a5085f3fcf4a960ed9fe14068f1b5e950">operator&lt;</a> (const <a class="el" href="structplanner_1_1t_node.html">tNode</a> &amp;i_rhs) const</td></tr>
 <tr class="memdesc:a5085f3fcf4a960ed9fe14068f1b5e950"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloads less than operator to provide hasing for this node.  <a href="#a5085f3fcf4a960ed9fe14068f1b5e950">More...</a><br /></td></tr>
 <tr class="separator:a5085f3fcf4a960ed9fe14068f1b5e950"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0d6e37475fe4a78abb8f271220c999e"><td class="memItemLeft" align="right" valign="top"><a id="ad0d6e37475fe4a78abb8f271220c999e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#ad0d6e37475fe4a78abb8f271220c999e">operator&gt;</a> (const <a class="el" href="structplanner_1_1t_node.html">tNode</a> &amp;i_lhs) const</td></tr>
-<tr class="memdesc:ad0d6e37475fe4a78abb8f271220c999e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloads greater than operator to provide using node identifier nId. <br /></td></tr>
-<tr class="separator:ad0d6e37475fe4a78abb8f271220c999e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83ff217ef060b93698045b2357999594"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a83ff217ef060b93698045b2357999594">tNode</a> ()</td></tr>
+<tr class="memdesc:a83ff217ef060b93698045b2357999594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor which initializes its members to define a start node.  <a href="#a83ff217ef060b93698045b2357999594">More...</a><br /></td></tr>
+<tr class="separator:a83ff217ef060b93698045b2357999594"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6728fd921145674d77dec553aad10824"><td class="memItemLeft" align="right" valign="top"><a id="a6728fd921145674d77dec553aad10824"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a6728fd921145674d77dec553aad10824">tNode</a> (const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;i_sLocation)</td></tr>
+<tr class="memdesc:a6728fd921145674d77dec553aad10824"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to set a location and calls the default constructor (c++11) <br /></td></tr>
+<tr class="separator:a6728fd921145674d77dec553aad10824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcbfb81ac371e43234f66072547af049"><td class="memItemLeft" align="right" valign="top"><a id="abcbfb81ac371e43234f66072547af049"></a>
+<a class="el" href="structplanner_1_1t_node.html">tNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#abcbfb81ac371e43234f66072547af049">operator=</a> (const <a class="el" href="structplanner_1_1t_node.html">tNode</a> &amp;i_sNode)</td></tr>
+<tr class="memdesc:abcbfb81ac371e43234f66072547af049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator of the node struct. <br /></td></tr>
+<tr class="separator:abcbfb81ac371e43234f66072547af049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18891f54e73f974f1142fba95887de98"><td class="memItemLeft" align="right" valign="top"><a id="a18891f54e73f974f1142fba95887de98"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a18891f54e73f974f1142fba95887de98">tNode</a> (const <a class="el" href="structplanner_1_1t_node.html">tNode</a> &amp;i_sNode)</td></tr>
+<tr class="memdesc:a18891f54e73f974f1142fba95887de98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor of the node struct. <br /></td></tr>
+<tr class="separator:a18891f54e73f974f1142fba95887de98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5085f3fcf4a960ed9fe14068f1b5e950"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a5085f3fcf4a960ed9fe14068f1b5e950">operator&lt;</a> (const <a class="el" href="structplanner_1_1t_node.html">tNode</a> &amp;i_rhs) const</td></tr>
+<tr class="memdesc:a5085f3fcf4a960ed9fe14068f1b5e950"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloads less than operator to provide hasing for this node.  <a href="#a5085f3fcf4a960ed9fe14068f1b5e950">More...</a><br /></td></tr>
+<tr class="separator:a5085f3fcf4a960ed9fe14068f1b5e950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ae4b20cbcf754ea9e73e8ddc6044db0b2"><td class="memItemLeft" align="right" valign="top"><a id="ae4b20cbcf754ea9e73e8ddc6044db0b2"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#ae4b20cbcf754ea9e73e8ddc6044db0b2">nId</a></td></tr>
-<tr class="memdesc:ae4b20cbcf754ea9e73e8ddc6044db0b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node identifier describes its location and updated with <a class="el" href="classplanner_1_1c_planner.html#a5ae4464a4d418cda71f4a8133d592c93" title="Calculates the node hash using its location and the width of the map. ">cPlanner::NodeHash()</a>. <br /></td></tr>
-<tr class="separator:ae4b20cbcf754ea9e73e8ddc6044db0b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad02a69af312bcc43a9487d2ee09bb2a0"><td class="memItemLeft" align="right" valign="top"><a id="ad02a69af312bcc43a9487d2ee09bb2a0"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#ad02a69af312bcc43a9487d2ee09bb2a0">f</a></td></tr>
-<tr class="memdesc:ad02a69af312bcc43a9487d2ee09bb2a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluation function <img class="formulaInl" alt="$f(n) = g(n) + h(n)$" src="form_0.png"/>. <br /></td></tr>
-<tr class="separator:ad02a69af312bcc43a9487d2ee09bb2a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cb2b4b2b8eb500d015d1aebd37499ae"><td class="memItemLeft" align="right" valign="top"><a id="a1cb2b4b2b8eb500d015d1aebd37499ae"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a1cb2b4b2b8eb500d015d1aebd37499ae">g</a></td></tr>
-<tr class="memdesc:a1cb2b4b2b8eb500d015d1aebd37499ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost to reach this node <img class="formulaInl" alt="$g(n)$" src="form_1.png"/>, also known as path cost. <br /></td></tr>
-<tr class="separator:a1cb2b4b2b8eb500d015d1aebd37499ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afabc13f803a1548f5875467350666168"><td class="memItemLeft" align="right" valign="top"><a id="afabc13f803a1548f5875467350666168"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#afabc13f803a1548f5875467350666168">h</a></td></tr>
-<tr class="memdesc:afabc13f803a1548f5875467350666168"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heuristic value h(n) of this node. <br /></td></tr>
-<tr class="separator:afabc13f803a1548f5875467350666168"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a066ba40e1ca2ba323116a443528df174"><td class="memItemLeft" align="right" valign="top"><a id="a066ba40e1ca2ba323116a443528df174"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a066ba40e1ca2ba323116a443528df174">nId</a></td></tr>
+<tr class="memdesc:a066ba40e1ca2ba323116a443528df174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node identifier describes its location and updated with <a class="el" href="classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f" title="Calculates the node hash using its location and the width of the map. ">cPlanner::NodeHash()</a>. <br /></td></tr>
+<tr class="separator:a066ba40e1ca2ba323116a443528df174"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc45202105ccc8b7fb040d557977dbd4"><td class="memItemLeft" align="right" valign="top"><a id="adc45202105ccc8b7fb040d557977dbd4"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#adc45202105ccc8b7fb040d557977dbd4">f</a></td></tr>
+<tr class="memdesc:adc45202105ccc8b7fb040d557977dbd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluation function <img class="formulaInl" alt="$f(n) = g(n) + h(n)$" src="form_0.png"/>. <br /></td></tr>
+<tr class="separator:adc45202105ccc8b7fb040d557977dbd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b6b0cf6cf79d00aa1725e656246ed47"><td class="memItemLeft" align="right" valign="top"><a id="a3b6b0cf6cf79d00aa1725e656246ed47"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a3b6b0cf6cf79d00aa1725e656246ed47">g</a></td></tr>
+<tr class="memdesc:a3b6b0cf6cf79d00aa1725e656246ed47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost to reach this node <img class="formulaInl" alt="$g(n)$" src="form_1.png"/>, also known as path cost. <br /></td></tr>
+<tr class="separator:a3b6b0cf6cf79d00aa1725e656246ed47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7460c082f787b803f0202436edea6526"><td class="memItemLeft" align="right" valign="top"><a id="a7460c082f787b803f0202436edea6526"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a7460c082f787b803f0202436edea6526">h</a></td></tr>
+<tr class="memdesc:a7460c082f787b803f0202436edea6526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heuristic value h(n) of this node. <br /></td></tr>
+<tr class="separator:a7460c082f787b803f0202436edea6526"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af13cb3b665f2c03c8b9c764d3fd42b4b"><td class="memItemLeft" align="right" valign="top"><a id="af13cb3b665f2c03c8b9c764d3fd42b4b"></a>
 <a class="el" href="structplanner_1_1t_location.html">tLocation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#af13cb3b665f2c03c8b9c764d3fd42b4b">sLocation</a></td></tr>
 <tr class="memdesc:af13cb3b665f2c03c8b9c764d3fd42b4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">(x,y) location of the node in the grid map cMap. <br /></td></tr>
 <tr class="separator:af13cb3b665f2c03c8b9c764d3fd42b4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0d83ee95132d2d2af6a794189411fab"><td class="memItemLeft" align="right" valign="top"><a id="aa0d83ee95132d2d2af6a794189411fab"></a>
-<a class="el" href="structplanner_1_1t_node.html">tNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#aa0d83ee95132d2d2af6a794189411fab">psParent</a></td></tr>
-<tr class="memdesc:aa0d83ee95132d2d2af6a794189411fab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the parent of the node, which is required to find the best path by traversing back from the goal node. <br /></td></tr>
-<tr class="separator:aa0d83ee95132d2d2af6a794189411fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a626d33dc40af6be79e975d54200d77e8"><td class="memItemLeft" align="right" valign="top"><a id="a626d33dc40af6be79e975d54200d77e8"></a>
+std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a626d33dc40af6be79e975d54200d77e8">psParent</a></td></tr>
+<tr class="memdesc:a626d33dc40af6be79e975d54200d77e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the parent of the node, which is required to find the best path by traversing back from the goal node. <br /></td></tr>
+<tr class="separator:a626d33dc40af6be79e975d54200d77e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad64b2f4aead654e8e187a9bbb0be483c"><td class="memItemLeft" align="right" valign="top"><a id="ad64b2f4aead654e8e187a9bbb0be483c"></a>
 <a class="el" href="structplanner_1_1t_action.html">tAction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#ad64b2f4aead654e8e187a9bbb0be483c">sAction</a></td></tr>
 <tr class="memdesc:ad64b2f4aead654e8e187a9bbb0be483c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The action that lead to this node. <br /></td></tr>
@@ -137,10 +151,38 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Node gets expanded while searching for the shortest path. </p>
-<p>A node has an identifier nId which is defined by its location <a class="el" href="structplanner_1_1t_location.html" title="Data structure used as location information for nodes. ">tLocation</a> (see <a class="el" href="classplanner_1_1c_planner.html#a5ae4464a4d418cda71f4a8133d592c93" title="Calculates the node hash using its location and the width of the map. ">cPlanner::NodeHash()</a>). Each node has an associated action sAction of type <a class="el" href="structplanner_1_1t_action.html" title="Action struct, used to specify the motion direction and the cost it takes to move in that direction...">tAction</a> which describes how this node was reached from its parent node psParent. </p>
+<p>A node has an identifier nId which is defined by its location <a class="el" href="structplanner_1_1t_location.html" title="Data structure used as location information for nodes. ">tLocation</a> (see <a class="el" href="classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f" title="Calculates the node hash using its location and the width of the map. ">cPlanner::NodeHash()</a>). Each node has an associated action sAction of type <a class="el" href="structplanner_1_1t_action.html" title="Action struct, used to specify the motion direction and the cost it takes to move in that direction...">tAction</a> which describes how this node was reached from its parent node psParent. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a83ff217ef060b93698045b2357999594"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83ff217ef060b93698045b2357999594">&#9670;&nbsp;</a></span>tNode()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a83ff217ef060b93698045b2357999594">&#9670;&nbsp;</a></span>tNode() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">planner::tNode::tNode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor which initializes its members to define a start node. </p>
+<p>A start node has its parent psParent set to nullptr and the zero action associated. </p>
+
+</div>
+</div>
+<a id="a83ff217ef060b93698045b2357999594"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83ff217ef060b93698045b2357999594">&#9670;&nbsp;</a></span>tNode() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,7 +211,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5085f3fcf4a960ed9fe14068f1b5e950"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5085f3fcf4a960ed9fe14068f1b5e950">&#9670;&nbsp;</a></span>operator&lt;()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5085f3fcf4a960ed9fe14068f1b5e950">&#9670;&nbsp;</a></span>operator&lt;() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,12 +235,41 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str
 </div><div class="memdoc">
 
 <p>Overloads less than operator to provide hasing for this node. </p>
-<p>The hash of a node is calculated using <a class="el" href="classplanner_1_1c_planner.html#a5ae4464a4d418cda71f4a8133d592c93" title="Calculates the node hash using its location and the width of the map. ">cPlanner::NodeHash()</a>. Required for the path cost map std::map&lt;tNode&gt; oPathCost used in cPlanner::AStar(). </p>
+<p>The hash of a node is calculated using <a class="el" href="classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f" title="Calculates the node hash using its location and the width of the map. ">cPlanner::NodeHash()</a>. Required for the path cost map std::map&lt;tNode&gt; oPathCost used in <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">cPlanner::AStar()</a>. </p>
+
+</div>
+</div>
+<a id="a5085f3fcf4a960ed9fe14068f1b5e950"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5085f3fcf4a960ed9fe14068f1b5e950">&#9670;&nbsp;</a></span>operator&lt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool planner::tNode::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structplanner_1_1t_node.html">tNode</a> &amp;&#160;</td>
+          <td class="paramname"><em>i_rhs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overloads less than operator to provide hasing for this node. </p>
+<p>The hash of a node is calculated using <a class="el" href="classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f" title="Calculates the node hash using its location and the width of the map. ">cPlanner::NodeHash()</a>. Required for the path cost map std::map&lt;tNode&gt; oPathCost used in <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">cPlanner::AStar()</a>. </p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/fjp/git/bachelor/planner/include/<a class="el" href="node_8h_source.html">node.h</a></li>
+<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/include/<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2node_8h_source.html">node.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

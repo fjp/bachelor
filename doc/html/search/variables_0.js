@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['f',['f',['../structplanner_1_1t_node.html#ad02a69af312bcc43a9487d2ee09bb2a0',1,'planner::tNode']]],
-  ['fcost',['fCost',['../structplanner_1_1t_action.html#ad90ddd244d8eb12cb6460797755e8b07',1,'planner::tAction']]]
+  ['bconsistentheuristic',['bConsistentHeuristic',['../structt_result.html#a7d87aab6411a466aed07a27a70eeded2',1,'tResult']]],
+  ['bfoundgoal',['bFoundGoal',['../structt_result.html#add525cabcdd568ffc72a25052d351042',1,'tResult']]]
 ];

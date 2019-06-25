@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['elevation',['Elevation',['../classplanner_1_1c_graph.html#a0e01eaa240f5e4f5020df2d611ab1994',1,'planner::cGraph']]],
-  ['empty',['empty',['../structplanner_1_1_priority_queue.html#a459a18939cb4b02517d5a7db19fd829c',1,'planner::PriorityQueue']]]
+  ['branchfiles',['BranchFiles',['../classrelease__docs_1_1_wiki_brancher.html#a5ef284f7e1742f465ecd0c14d2667327',1,'release_docs::WikiBrancher']]]
 ];

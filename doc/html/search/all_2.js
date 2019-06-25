@@ -1,13 +1,17 @@
 var searchData=
 [
-  ['caudirover',['cAudiRover',['../classplanner_1_1c_audi_rover.html',1,'planner::cAudiRover'],['../classplanner_1_1c_audi_rover.html#abafb926aca93fb8382284a10bd341986',1,'planner::cAudiRover::cAudiRover()']]],
-  ['cgraph',['cGraph',['../classplanner_1_1c_graph.html',1,'planner::cGraph'],['../classplanner_1_1c_graph.html#a189aeb64fe91fd6dd07f4b068d3b791e',1,'planner::cGraph::cGraph()']]],
-  ['child',['Child',['../classplanner_1_1c_planner.html#a7ddb18b161e5d59cfe733bce32c31896',1,'planner::cPlanner::Child()'],['../classplanner_1_1c_planner_interface.html#a499d8d3b81b0090318f4f2ea044c084c',1,'planner::cPlannerInterface::Child()']]],
-  ['coststraight',['CostStraight',['../classplanner_1_1c_rover_interface.html#aa77e98811dbe34b474da519c0efa6a04',1,'planner::cRoverInterface']]],
-  ['cplanner',['cPlanner',['../classplanner_1_1c_planner.html',1,'planner::cPlanner'],['../classplanner_1_1c_planner.html#a4f425d47b277f000d34df04de9995274',1,'planner::cPlanner::cPlanner()']]],
-  ['cplannerinterface',['cPlannerInterface',['../classplanner_1_1c_planner_interface.html',1,'planner::cPlannerInterface&lt; Directions &gt;'],['../classplanner_1_1c_planner_interface.html#aa3c1b1467ed9cc94fb293339c04924d1',1,'planner::cPlannerInterface::cPlannerInterface()']]],
-  ['cplannerinterface_3c_208_20_3e',['cPlannerInterface&lt; 8 &gt;',['../classplanner_1_1c_planner_interface.html',1,'planner']]],
-  ['cplannertest',['cPlannerTest',['../classc_planner_test.html',1,'']]],
-  ['croverinterface',['cRoverInterface',['../classplanner_1_1c_rover_interface.html',1,'planner']]],
-  ['croverinterface_3c_208_20_3e',['cRoverInterface&lt; 8 &gt;',['../classplanner_1_1c_rover_interface.html',1,'planner']]]
+  ['barenvironment',['BarEnvironment',['../class_bar_environment.html',1,'']]],
+  ['base',['Base',['../class_base.html',1,'Base'],['../classtesting_1_1internal_1_1_base.html',1,'testing::internal::Base']]],
+  ['bconsistentheuristic',['bConsistentHeuristic',['../structt_result.html#a7d87aab6411a466aed07a27a70eeded2',1,'tResult']]],
+  ['bfoundgoal',['bFoundGoal',['../structt_result.html#add525cabcdd568ffc72a25052d351042',1,'tResult']]],
+  ['big',['Big',['../structtesting_1_1gtest__printers__test_1_1_big.html',1,'testing::gtest_printers_test']]],
+  ['biggestintconvertible',['BiggestIntConvertible',['../class_biggest_int_convertible.html',1,'']]],
+  ['bitmap',['Bitmap',['../structvisualizer_1_1_bitmap.html',1,'visualizer']]],
+  ['bitmapinfoheader',['BitmapInfoHeader',['../structvisualizer_1_1_bitmap_info_header.html',1,'visualizer']]],
+  ['bool',['Bool',['../struct_bool.html',1,'']]],
+  ['bool_5fconstant',['bool_constant',['../structtesting_1_1internal_1_1bool__constant.html',1,'testing::internal']]],
+  ['bool_5fconstant_3c_20implicitlyconvertible_3c_20const_20t_20_2a_2c_20const_20_3a_3aprotocolmessage_20_2a_3e_3a_3avalue_7c_7cimplicitlyconvertible_3c_20const_20t_20_2a_2c_20const_20_3a_3aproto2_3a_3amessage_20_2a_3e_3a_3avalue_20_3e',['bool_constant&lt; ImplicitlyConvertible&lt; const T *, const ::ProtocolMessage *&gt;::value||ImplicitlyConvertible&lt; const T *, const ::proto2::Message *&gt;::value &gt;',['../structtesting_1_1internal_1_1bool__constant.html',1,'testing::internal']]],
+  ['branchfiles',['BranchFiles',['../classrelease__docs_1_1_wiki_brancher.html#a5ef284f7e1742f465ecd0c14d2667327',1,'release_docs::WikiBrancher']]],
+  ['byref',['ByRef',['../structstd_1_1tr1_1_1gtest__internal_1_1_by_ref.html',1,'std::tr1::gtest_internal']]],
+  ['byref_3c_20t_20_26_20_3e',['ByRef&lt; T &amp; &gt;',['../structstd_1_1tr1_1_1gtest__internal_1_1_by_ref_3_01_t_01_6_01_4.html',1,'std::tr1::gtest_internal']]]
 ];

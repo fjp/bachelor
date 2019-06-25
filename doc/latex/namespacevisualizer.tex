@@ -18,22 +18,57 @@ struct \mbox{\hyperlink{structvisualizer_1_1_file_header}{File\+Header}}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{namespacevisualizer_af36cea222d0362709a55b17474afcc8a}\label{namespacevisualizer_af36cea222d0362709a55b17474afcc8a}} 
-enum \mbox{\hyperlink{namespacevisualizer_af36cea222d0362709a55b17474afcc8a}{Image\+Pixel\+Values}} \{ {\bfseries I\+P\+V\+\_\+\+P\+A\+TH} = 0, 
+enum \mbox{\hyperlink{namespacevisualizer_af36cea222d0362709a55b17474afcc8a}{Image\+Pixel\+Values}} \{ \newline
+{\bfseries I\+P\+V\+\_\+\+P\+A\+TH} = 0, 
 {\bfseries I\+P\+V\+\_\+\+W\+A\+T\+ER} = 1, 
-{\bfseries I\+P\+V\+\_\+\+E\+L\+E\+V\+A\+T\+I\+O\+N\+\_\+\+B\+E\+G\+IN} = 2
+{\bfseries I\+P\+V\+\_\+\+V\+I\+S\+I\+T\+ED} = 2, 
+{\bfseries I\+P\+V\+\_\+\+E\+L\+E\+V\+A\+T\+I\+O\+N\+\_\+\+B\+E\+G\+IN} = 3, 
+\newline
+{\bfseries I\+P\+V\+\_\+\+P\+A\+TH} = 0, 
+{\bfseries I\+P\+V\+\_\+\+W\+A\+T\+ER} = 1, 
+{\bfseries I\+P\+V\+\_\+\+V\+I\+S\+I\+T\+ED} = 2, 
+{\bfseries I\+P\+V\+\_\+\+E\+L\+E\+V\+A\+T\+I\+O\+N\+\_\+\+B\+E\+G\+IN} = 3
  \}
-\begin{DoxyCompactList}\small\item\em Pixel values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pixel values. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevisualizer_af36cea222d0362709a55b17474afcc8a}\label{namespacevisualizer_af36cea222d0362709a55b17474afcc8a}} 
+enum \mbox{\hyperlink{namespacevisualizer_af36cea222d0362709a55b17474afcc8a}{Image\+Pixel\+Values}} \{ \newline
+{\bfseries I\+P\+V\+\_\+\+P\+A\+TH} = 0, 
+{\bfseries I\+P\+V\+\_\+\+W\+A\+T\+ER} = 1, 
+{\bfseries I\+P\+V\+\_\+\+V\+I\+S\+I\+T\+ED} = 2, 
+{\bfseries I\+P\+V\+\_\+\+E\+L\+E\+V\+A\+T\+I\+O\+N\+\_\+\+B\+E\+G\+IN} = 3, 
+\newline
+{\bfseries I\+P\+V\+\_\+\+P\+A\+TH} = 0, 
+{\bfseries I\+P\+V\+\_\+\+W\+A\+T\+ER} = 1, 
+{\bfseries I\+P\+V\+\_\+\+V\+I\+S\+I\+T\+ED} = 2, 
+{\bfseries I\+P\+V\+\_\+\+E\+L\+E\+V\+A\+T\+I\+O\+N\+\_\+\+B\+E\+G\+IN} = 3
+ \}
+\begin{DoxyCompactList}\small\item\em Pixel values. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevisualizer_ad08cef44b6dbff468f08c62effe9cb8f}\label{namespacevisualizer_ad08cef44b6dbff468f08c62effe9cb8f}} 
+enum \mbox{\hyperlink{namespacevisualizer_ad08cef44b6dbff468f08c62effe9cb8f}{t\+Visualise}} \{ \newline
+{\bfseries L\+O\+C\+A\+T\+I\+O\+NS} = 0x01, 
+{\bfseries P\+A\+TH} = 0x02, 
+{\bfseries L\+O\+C\+A\+T\+I\+O\+N\+S\+\_\+\+P\+A\+TH} = 0x03, 
+{\bfseries V\+I\+S\+I\+T\+ED} = 0x04, 
+\newline
+{\bfseries A\+LL} = 0x07
+ \}
+\begin{DoxyCompactList}\small\item\em Used for the bitset to specify what to visualise in \mbox{\hyperlink{namespacevisualizer_addbe7459069b4e845756152e1804ca76}{visualizer\+::write}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}{write\+B\+MP}} (std\+::ostream \&out, const uint8\+\_\+t $\ast$elevation\+Data, size\+\_\+t width, size\+\_\+t height, std\+::function$<$ uint8\+\_\+t(size\+\_\+t, size\+\_\+t, uint8\+\_\+t)$>$ pixel\+Filter)
 \item 
-\mbox{\Hypertarget{namespacevisualizer_a54813d6ff1e38d269bf94963e9e51638}\label{namespacevisualizer_a54813d6ff1e38d269bf94963e9e51638}} 
-bool \mbox{\hyperlink{namespacevisualizer_a54813d6ff1e38d269bf94963e9e51638}{donut}} (int x, int y, int x1, int y1)
+\mbox{\Hypertarget{namespacevisualizer_a7ff2fee7ef1cf41bc0f273d730f38abc}\label{namespacevisualizer_a7ff2fee7ef1cf41bc0f273d730f38abc}} 
+bool \mbox{\hyperlink{namespacevisualizer_a7ff2fee7ef1cf41bc0f273d730f38abc}{donut}} (int i\+\_\+nX, int i\+\_\+nY, int i\+\_\+n\+X1, int i\+\_\+n\+Y1)
 \begin{DoxyCompactList}\small\item\em Used in the functional from write\+B\+MP to mark a node given its location. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{namespacevisualizer_ab62e3ad6dc8e75a39f1f2927c935948e}\label{namespacevisualizer_ab62e3ad6dc8e75a39f1f2927c935948e}} 
-bool \mbox{\hyperlink{namespacevisualizer_ab62e3ad6dc8e75a39f1f2927c935948e}{path}} (int x, int y, uint8\+\_\+t $\ast$overrides)
+\mbox{\Hypertarget{namespacevisualizer_a12c362482021eed2a592a9d0254e0ab6}\label{namespacevisualizer_a12c362482021eed2a592a9d0254e0ab6}} 
+bool \mbox{\hyperlink{namespacevisualizer_a12c362482021eed2a592a9d0254e0ab6}{path}} (int i\+\_\+nX, int i\+\_\+nY, uint8\+\_\+t $\ast$overrides, int i\+\_\+n\+Image\+Dim=I\+M\+A\+G\+E\+\_\+\+D\+IM, int i\+\_\+n\+Pen\+Size=1)
 \begin{DoxyCompactList}\small\item\em Used in the functional from write\+B\+MP to plot the fastest path found by A\+Star() in c\+Planner. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevisualizer_a147374664b0a7e0a40cae2435d9eab5e}\label{namespacevisualizer_a147374664b0a7e0a40cae2435d9eab5e}} 
+bool \mbox{\hyperlink{namespacevisualizer_a147374664b0a7e0a40cae2435d9eab5e}{visited}} (int i\+\_\+nX, int i\+\_\+nY, uint8\+\_\+t $\ast$overrides, int i\+\_\+n\+Image\+Dim=I\+M\+A\+G\+E\+\_\+\+D\+IM)
+\begin{DoxyCompactList}\small\item\em Used in the functional from write\+B\+MP to plot the visited nodes found by A\+Star() in c\+Planner. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T\+Locations $>$ }\\void \mbox{\hyperlink{namespacevisualizer_addbe7459069b4e845756152e1804ca76}{write}} (std\+::string i\+\_\+str\+Name, uint8\+\_\+t $\ast$i\+\_\+o\+Elevation, uint8\+\_\+t $\ast$i\+\_\+o\+Overrides, std\+::vector$<$ T\+Locations $>$ i\+\_\+as\+Location, int i\+\_\+n\+Image\+Dim=I\+M\+A\+G\+E\+\_\+\+D\+IM)
+\item 
 \mbox{\Hypertarget{namespacevisualizer_a63e82fd57f54a0051c341db82d96b1e4}\label{namespacevisualizer_a63e82fd57f54a0051c341db82d96b1e4}} 
 void {\bfseries write\+B\+MP} (std\+::ostream \&out, size\+\_\+t width, size\+\_\+t height, const uint8\+\_\+t $\ast$pixels, const uint8\+\_\+t $\ast$colormap, size\+\_\+t colormap\+Size, std\+::function$<$ uint8\+\_\+t(size\+\_\+t, size\+\_\+t, uint8\+\_\+t)$>$ pixel\+Filter)
 \item 
@@ -46,8 +81,10 @@ void {\bfseries set\+Color} (std\+::vector$<$ uint8\+\_\+t $>$ \&vec, size\+\_\+
 \mbox{\Hypertarget{namespacevisualizer_a627bff4c6bfe19982566020c2af63497}\label{namespacevisualizer_a627bff4c6bfe19982566020c2af63497}} 
 void {\bfseries blend\+Color} (std\+::vector$<$ uint8\+\_\+t $>$ \&vec, size\+\_\+t start\+Index, size\+\_\+t end\+Index, uint8\+\_\+t start\+Red, uint8\+\_\+t start\+Green, uint8\+\_\+t start\+Blue, uint8\+\_\+t end\+Red, uint8\+\_\+t end\+Green, uint8\+\_\+t end\+Blue)
 \item 
-\mbox{\Hypertarget{namespacevisualizer_a6fd4dbb10bbd0b71f19af0e1806f5836}\label{namespacevisualizer_a6fd4dbb10bbd0b71f19af0e1806f5836}} 
+\mbox{\Hypertarget{namespacevisualizer_ae01858882fd46cf76a74b329b97598b9}\label{namespacevisualizer_ae01858882fd46cf76a74b329b97598b9}} 
 std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries generate\+Elevation\+Colormap} ()
+\item 
+{\footnotesize template$<$typename T\+Locations $>$ }\\void \mbox{\hyperlink{namespacevisualizer_a67da0136480955913d914be67573251d}{write}} (std\+::string i\+\_\+str\+Name, uint8\+\_\+t $\ast$i\+\_\+o\+Elevation, uint8\+\_\+t $\ast$i\+\_\+o\+Overrides, std\+::vector$<$ T\+Locations $>$ i\+\_\+as\+Location, int i\+\_\+n\+Image\+Dim=I\+M\+A\+G\+E\+\_\+\+D\+IM, int i\+\_\+n\+Visualise=A\+LL)
 \end{DoxyCompactItemize}
 
 
@@ -55,7 +92,35 @@ std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries generate\+Elevation\+Colormap} ()
 Contains functions for plotting overrides data and elevation. 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}\label{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}} 
+\mbox{\Hypertarget{namespacevisualizer_addbe7459069b4e845756152e1804ca76}\label{namespacevisualizer_addbe7459069b4e845756152e1804ca76}} 
+\index{visualizer@{visualizer}!write@{write}}
+\index{write@{write}!visualizer@{visualizer}}
+\subsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Locations $>$ \\
+void visualizer\+::write (\begin{DoxyParamCaption}\item[{std\+::string}]{i\+\_\+str\+Name,  }\item[{uint8\+\_\+t $\ast$}]{i\+\_\+o\+Elevation,  }\item[{uint8\+\_\+t $\ast$}]{i\+\_\+o\+Overrides,  }\item[{std\+::vector$<$ T\+Locations $>$}]{i\+\_\+as\+Location,  }\item[{int}]{i\+\_\+n\+Image\+Dim = {\ttfamily IMAGE\+\_\+DIM} }\end{DoxyParamCaption})}
+
+Marks interesting positions on the map
+
+Signifies water
+
+Signifies visited locations
+
+Signifies normal ground color \mbox{\Hypertarget{namespacevisualizer_a67da0136480955913d914be67573251d}\label{namespacevisualizer_a67da0136480955913d914be67573251d}} 
+\index{visualizer@{visualizer}!write@{write}}
+\index{write@{write}!visualizer@{visualizer}}
+\subsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Locations $>$ \\
+void visualizer\+::write (\begin{DoxyParamCaption}\item[{std\+::string}]{i\+\_\+str\+Name,  }\item[{uint8\+\_\+t $\ast$}]{i\+\_\+o\+Elevation,  }\item[{uint8\+\_\+t $\ast$}]{i\+\_\+o\+Overrides,  }\item[{std\+::vector$<$ T\+Locations $>$}]{i\+\_\+as\+Location,  }\item[{int}]{i\+\_\+n\+Image\+Dim = {\ttfamily IMAGE\+\_\+DIM},  }\item[{int}]{i\+\_\+n\+Visualise = {\ttfamily ALL} }\end{DoxyParamCaption})}
+
+Marks interesting positions on the map (enable using bitset)
+
+Visualize the found path (enable using bitset)
+
+Signifies water
+
+Signifies visited locations (enable using bitset)
+
+Signifies normal ground color \mbox{\Hypertarget{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}\label{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}} 
 \index{visualizer@{visualizer}!write\+B\+MP@{write\+B\+MP}}
 \index{write\+B\+MP@{write\+B\+MP}!visualizer@{visualizer}}
 \subsubsection{\texorpdfstring{write\+B\+M\+P()}{writeBMP()}}

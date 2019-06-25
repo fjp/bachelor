@@ -1,0 +1,52 @@
+This is my updated solution for the A\+ID Bachelor Coding Challenge. The readme of the previous version can be found here. For the problem description refer to the \href{AID_Coding_Challenge.pdf}{\tt A\+ID Coding Challenge.\+pdf}. The complete doxygen documentation can be found in the doc folder, see \href{doc/html/index.html}{\tt index.\+html}
+
+\subsection*{Changelog}
+
+
+\begin{DoxyItemize}
+\item Fixes diagonal cost value\+: uses sqrt(2) for the diagonal cost instead of 1.\+4f.
+\item Fixes memory leaks caused by dangling pointers, mainly in the Child() method of planner.\+cpp.
+\begin{DoxyItemize}
+\item Valgrind shows no memory leaks anymore (see valgrind.\+xml) with the use of smart pointers (C++11 feature)
+\item Now using smart pointers for the nodes
+\item Uses \href{https://en.cppreference.com/w/cpp/memory/shared_ptr}{\tt shared\+\_\+ptr}, \href{http://en.cppreference.com/w/cpp/memory/weak_ptr}{\tt std\+::weak\+\_\+ptr} and \href{http://en.cppreference.com/w/cpp/memory/enable_shared_from_this}{\tt std\+::enable\+\_\+shared\+\_\+from\+\_\+this} and \href{https://en.cppreference.com/w/cpp/memory/enable_shared_from_this/shared_from_this}{\tt shared\+\_\+from\+\_\+this()} for the cyclic dependency between rover interface and planner interface.
+\item Use of smart pointers reduces memory consumption from approx 2 GB to 570 MB. This high memory is caused by creating child nodes while exploring new locations. Each node contains information that increase the memory used each time a new node is created.
+\end{DoxyItemize}
+\item Uses double instead of float for the cost values to improve numerical inaccuracy because of diagonal step cost sqrt(2).
+\item To verify the correctness of the current implementation this version adds two more implementations of A$\ast$, one from \href{https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode}{\tt Wikipedia} and the other from \href{https://www.redblobgames.com/pathfinding/a-star/implementation.html#cpp-astar}{\tt Red Blob Games}.
+\item The new A$\ast$ implementations use less memory
+\item Simplifies step cost model of the rover\+: instead of the physical model the rover now uses height costs that are percentage values of the step cost. The percentage step cost (height cost) is added to the current step cost if the rover moves uphill and subtracted if it moves downhill. The height cost calculation takes place in \mbox{\hyperlink{classplanner_1_1c_planner_a9d57a0697bb0e4666f4fd45f77c4a1aa}{planner\+::c\+Planner\+::\+Height\+Cost()}}.
+\item Ensures consistent heuristic with the chosen step cost and height cost model. This is achieved by normalizing the calculated octile heuristic value in \mbox{\hyperlink{classplanner_1_1c_planner_a77cefeae3d7a58a96c74b66f6be22611}{planner\+::c\+Planner\+::\+Heuristic()}}.
+\item Fixes calculation of consistency output\+: h(x) $<$= d(x,y) + h(y) with x as parent node and y as its successor.
+\item In case of an inconsistent heuristic the boolean flag b\+Consistent\+Heuristic in the new member struct planner\+::t\+Result of c\+Planner\+Interface is set to false.
+\item Adds g\+Tests that use a simplified map, including water and elevation transitions. The result struct is used to check the expected results.
+\item Refactors visualizer
+\begin{DoxyItemize}
+\item Encapsulates the \mbox{\hyperlink{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}{visualizer\+::write\+B\+M\+P()}} function including its lambda
+\item Adds option what to draw
+\begin{DoxyItemize}
+\item path,
+\item locations such as start and goal passed as list of locations
+\item N\+EW\+: show visited nodes
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item \href{https://github.com/AnthonyCalandra/modern-cpp-features}{\tt C++11 features} used
+\begin{DoxyItemize}
+\item smart pointer\+: std\+::shared\+\_\+ptr, std\+::weak\+\_\+ptr, std\+::enable\+\_\+shared\+\_\+from\+\_\+this, shared\+\_\+from\+\_\+this(), nullptr
+\item \href{https://en.cppreference.com/w/cpp/language/lambda}{\tt Lambda expression}
+\item \href{https://en.cppreference.com/w/cpp/language/list_initialization}{\tt List initialization}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+
+
+\subsection*{Memory}
+
+\subsection*{Possible improvements}
+
+
+\begin{DoxyItemize}
+\item Use std\+::filesystem C++17 features to read and write elevation and overrides data.
+\item std\+::chrono to time function calls.
+\item std\+::array$<$int, size$>$ with fixed map size instead of std\+::vector for the A\+Star Wikipedia version that allocates the closed and actino set beforehand. 
+\end{DoxyItemize}
