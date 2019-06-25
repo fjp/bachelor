@@ -60,6 +60,12 @@ Used [C++11 features](https://github.com/AnthonyCalandra/modern-cpp-features):
   </div>
 </div> 
 
+<p float="left">
+  <img src="doc/images/memory_usage_AStar.png" width="100" />
+  <img src="doc/images/memory_usage_AStar_Wiki.png" width="100" /> 
+  <img src="doc/images/memory_usage_AStar_RBG.png" width="100" />
+</p>
+
 ## Class Design
 
 ## Possible improvements
