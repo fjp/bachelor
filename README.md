@@ -5,21 +5,9 @@ The readme of the previous version can be found [here](README_v0.md).
 For the problem description refer to the [AID Coding Challenge.pdf](AID_Coding_Challenge.pdf). 
 The complete doxygen documentation can be found in the doc folder, see [index.html](doc/html/index.html)
 
-## Main new features
+## Main New Features
 
 Beside the fixed bug of setting the diagonal cost to 1.4f instead of sqrt(2) I made the following changes to my solution.
-
-### Implementation Correctness
-
-To verify the correctness of my implemented AStar algorithm, I added two more implementations.
-1. [Wikipedia A* Pseudocode](https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode) implemented in class planner::cPlannerWiki which inherits from planner::cPlanner.
-2. [Red Blob Games A*](https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus) implemented in class planner::cPlannerWiki which inherits from planner::cPlanner.
-
-Both use less memory than my previous implementation which can still be found in planner::cPlanner::AStar() because the used
-data structures require less memory. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode).
-Regarding the computation time, planner::cPlannerWiki::AStar() is the fastest implementation preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.
-
-These implementations are used in new gTests which create and use simple maps to test if the different implementations yield the same result (regarding travelling time given in island seconds).
 
 ### Simplified Motion Model
 
@@ -33,10 +21,22 @@ calculated octile heuristic value in planner::cPlanner::Heuristic().
 
 ### Memory Leaks
 
-I analyzed my previous implementation using valgrind which showed memory leaks when creating child nodes in planner::cPlanner::Child().
+I analyzed my previous implementation using valgrind which showed memory leaks when creating child nodes in planner::cPlanner::Child() and not destructing the planner and audi rover correctly. To overcome these memory leaks I now use smart pointers which are a C++11 feature.
+
+### Implementation Correctness
+
+To verify the correctness of my implemented AStar algorithm, I added two more implementations.
+1. [Wikipedia A* Pseudocode](https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode) implemented in class planner::cPlannerWiki which inherits from planner::cPlanner.
+2. [Red Blob Games A*](https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus) implemented in class planner::cPlannerWiki which inherits from planner::cPlanner.
+
+Both use less memory than my previous implementation which can still be found in planner::cPlanner::AStar() because the used
+data structures require less memory. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode).
+Regarding the computation time, planner::cPlannerWiki::AStar() is the fastest implementation preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.
+
+These implementations are used in new gTests which create and use simple maps to test if the different implementations yield the same result (regarding travelling time given in island seconds).
 
 
-## Changelog
+### Complete Changelog
 
 - Fixes diagonal cost value: uses sqrt(2) for the diagonal cost instead of 1.4f.
 - Fixes memory leaks caused by dangling pointers, mainly in the Child() method of planner.cpp.
