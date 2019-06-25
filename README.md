@@ -79,7 +79,6 @@ Used [C++11 features](https://github.com/AnthonyCalandra/modern-cpp-features):
 AStar memory usage.             |  AStar Wikipedia memory usage. | AStar Red Blob Games memory usage.
 :-------------------------:|:-------------------------:|:------------------------------------------------:
 <img src="doc/images/memory_usage_AStar.png" alt="AStar" width="250" />  |  <img src="doc/images/memory_usage_AStar_Wiki.png" alt="AStarWiki" width="250" /> | <img src="doc/images/memory_usage_AStar_RBG.png" alt="AStarRedBlobGames" width="250" /> 
-:-------------------------:|:-------------------------:|:------------------------------------------------:
 270.5 MB, 4:30 min         |   77.2 MB, 19.48 sec      |  208.1 MB, 3 min
 
 
