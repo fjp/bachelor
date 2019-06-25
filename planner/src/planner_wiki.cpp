@@ -211,7 +211,5 @@ namespace planner {
             nX = nXNext;
             nY = nYNext;
         }
-
     }
-
 }

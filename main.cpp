@@ -32,14 +32,14 @@ int main(int argc, char** argv)
     poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
 
 
-    tResult sResultR2B = poAudiRover->Summon(1, 1, "ASTAR_WIKI");
+    tResult sResultR2B = poAudiRover->Summon(1, 1, "ASTAR");
 
 
     poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
     poAudiRover->SetGoal({WEDDING_X, WEDDING_Y});
 
 
-    tResult sResultB2W = poAudiRover->Summon(1, 1, "ASTAR_WIKI");
+    tResult sResultB2W = poAudiRover->Summon(1, 1, "ASTAR");
 
 
     /// Report the total planning time
@@ -48,9 +48,9 @@ int main(int argc, char** argv)
               << fIslandSeconds/60.f << " island minutes or " << fIslandSeconds/60.f/60.f << " island hours) on the fastest path. " << std::endl;
 
     //////////// Output the found path /////////////////////
-    visualizer::write("pic.bmp", &elevation[0], &overrides[0], asLocation, IMAGE_DIM);
+    visualizer::write("solution_v2_island_rover_bachelor_wedding.bmp", &elevation[0], &overrides[0], asLocation, IMAGE_DIM);
 #if __APPLE__
-    auto res = system("open pic.bmp");
+    auto res = system("open solution_v2_island_rover_bachelor_wedding.bmp");
     (void)res;
 #endif
 

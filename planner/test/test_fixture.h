@@ -86,7 +86,7 @@ protected:
         //InitIslandMap();
     }
 
-    void CreateSimpleMap()
+    void CreateSimpleMapWithWater()
     {
         /// Prepare to read elevation and overrides data
         m_nImageDim = 330;
@@ -106,19 +106,19 @@ protected:
                 data_elevation[y * m_nImageDim + x] = 0;
             }
         }
-        writeFile("../../../assets/test_elevation.data", data_elevation, expectedFileSize);
+        writeFile("../../../assets/elevation_simple_map_with_water.data", data_elevation, expectedFileSize);
 
         std::vector<uint8_t> dataOverrides(expectedFileSize, 0);
-        writeFile("../../../assets/test_overrides.data", dataOverrides, expectedFileSize);
+        writeFile("../../../assets/overrides_simple_map_with_water.data", dataOverrides, expectedFileSize);
     }
 
-    void InitSimpleMap()
+    void InitSimpleMapWithWater()
     {
-        CreateSimpleMap();
+        CreateSimpleMapWithWater();
 
         m_nImageDim = 330;
 
-        ReadData("test_elevation.data", "test_overrides.data");
+        ReadData("elevation_simple_map_with_water.data", "overrides_simple_map_with_water.data");
     }
 
     void CreateSimpleMapWithElevation()
