@@ -26,6 +26,7 @@ calculated octile heuristic value in planner::cPlanner::Heuristic().
 ### Memory Leaks
 
 I analyzed my previous implementation using valgrind which showed memory leaks when creating child nodes in planner::cPlanner::Child() and not destructing the planner and audi rover correctly. To overcome these memory leaks I now use smart pointers which are a C++11 feature.
+The valgrind results for the planner and gTest project are shown in valgrind.xml and valgrind_gtest.xml respectively.
 
 ### Implementation Correctness
 
