@@ -159,3 +159,8 @@ calculated octile heuristic value in planner::cPlanner::Heuristic().
 - Use std::filesystem C++17 features to read and write elevation and overrides data.
 - std::chrono to time function calls.
 - std::array<int, size> instead of std::vector for the optimized AStar version that allocates the closed set beforehand.
+
+## Lessons Learned
+
+- Use gTests to spot bugs and wrong code changes early.
+- Use new C++ features such as smart pointers to avoid memory leaks.
