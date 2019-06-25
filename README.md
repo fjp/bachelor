@@ -35,11 +35,32 @@ calculated octile heuristic value in planner::cPlanner::Heuristic().
     - Adds option what to draw
         - path, 
         - locations such as start and goal passed as list of locations
-        - NEW: show visited nodes
-- [C++11 features](https://github.com/AnthonyCalandra/modern-cpp-features) used
-    - smart pointer: std::shared_ptr, std::weak_ptr, std::enable_shared_from_this, shared_from_this(), nullptr
+        - NEW: display visited nodes in light red
+        
+## C++11 Features
+
+Used [C++11 features](https://github.com/AnthonyCalandra/modern-cpp-features):
+    - smart pointer: [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr), [std::weak_ptr](https://en.cppreference.com/w/cpp/memory/weak_ptr), [std::enable_shared_from_this](https://en.cppreference.com/w/cpp/memory/enable_shared_from_this), shared_from_this(), nullptr
     - [Lambda expression](https://en.cppreference.com/w/cpp/language/lambda)
     - [List initialization](https://en.cppreference.com/w/cpp/language/list_initialization)
+    - [Rvalue reference](https://en.cppreference.com/w/cpp/language/reference)
+    - [std::move](https://en.cppreference.com/w/cpp/utility/move)
+    
+## Memory
+
+ <div class="row">
+  <div class="column">
+    <img src="doc/images/memory_usage_AStar.png" alt="Snow" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="img_forest.jpg" alt="Forest" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="img_mountains.jpg" alt="Mountains" style="width:100%">
+  </div>
+</div> 
+
+## Class Design
 
 ## Possible improvements
 
