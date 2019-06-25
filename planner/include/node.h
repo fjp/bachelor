@@ -73,7 +73,7 @@ namespace planner {
         /// The action that lead to this node
         tAction sAction;
 
-        ///\brief Overloads less than operator to provide hasing for this node.
+        ///\brief Overloads less than operator to provide hashing for this node.
         ///\details The hash of a node is calculated using cPlanner::NodeHash().
         ///         Required for the path cost map std::map<tNode> oPathCost used in cPlanner::AStar().
         bool operator<(const tNode& i_rhs) const

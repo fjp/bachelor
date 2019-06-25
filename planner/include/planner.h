@@ -125,7 +125,7 @@ namespace planner {
         virtual bool GoalTest(std::shared_ptr<tNode>& i_sFirst, std::shared_ptr<tNode>& i_sSecond) const override;
 
         ///\brief Generate a successor node state given a node i_sParent and action i_sAction.
-        ///\details Overrides method of the base class inteface cPlannerInterface<size_t Directions>.
+        ///\details Overrides method of the base class interface cPlannerInterface<size_t Directions>.
         ///         Defines a new node on the heap and initializes it according to the given action.
         ///
         ///\param[in] i_sParent node which becomes the parent of the new node.
@@ -166,7 +166,7 @@ namespace planner {
         ///\details Initializes start, goal and intermediate nodes (sCurrent and sNext). The frontier m_oFrontier
         ///         is implemented as a priority queue PriorityQueue<tNode*> and initialized with the start node.
         ///         All other expanded nodes are store in a std::map oPathCost with their currently best g score value.
-        ///         The algorithm makes use of GoalTest(), Child() to generate sucessor nodes given an action,
+        ///         The algorithm makes use of GoalTest(), Child() to generate successor nodes given an action,
         ///         Traversable to check for the constraints imposed by the overrides.data file, cost methods
         ///         UpdateCost() for the step cost, UpdateHeuristic() while checking for consistency HeuristicCheck().
         ///         In case the goal node is reached, the method TraversePath() is invoked to move from the goal back
@@ -187,7 +187,7 @@ namespace planner {
         ///\brief This value is calculated in the constructor of planner::cPlanner and used to scale the heuristic values to get consistency.
         double m_fConsistencyFactor;
 
-        ///\brief Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first.
+        ///\brief Priority queue data structure, which is the basis of A star. Always dequeues the node with the best f score first.
         PriorityQueue<std::shared_ptr<tNode>, double> m_oFrontier;
 
         ///\brief Debug method to plot intermediate paths during planning. Used in Plan().

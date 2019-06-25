@@ -65,7 +65,7 @@ namespace planner {
         void SetOverrides(int i_nX, int i_nY, uint8_t i_nValue);
 
     private:
-    public: // TODO public for gtesting - use better design wiht Getter and Setter.
+    public: // TODO public for gtesting - use better design with Getter and Setter.
         ///\brief Elevation over the ground (0-255).
         uint8_t *m_oElevation;
         ///\brief Overrides is the terrain flag bit mask which act as constraints see \enum OverrideFlags and planner::cMap::Water().

@@ -49,7 +49,7 @@ namespace planner {
         std::array<tAction, Directions> m_asActions;
 
 
-        /// Getter and Setter for the private member varialbes
+        /// Getter and Setter for the private member variables
 
         double CostStraight() const {
             return m_fCostStraight;
