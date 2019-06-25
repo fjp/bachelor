@@ -49,6 +49,7 @@ Used [C++11 features](https://github.com/AnthonyCalandra/modern-cpp-features):
 ## Memory
 
 <p float="left">
+    test
   <img src="doc/images/memory_usage_AStar.png" alt="AStar" width="250" />
   <img src="doc/images/memory_usage_AStar_Wiki.png" alt="AStarWiki" width="250" /> 
   <img src="doc/images/memory_usage_AStar_RBG.png" alt="AStarRedBlobGames" width="250" />
