@@ -7,7 +7,7 @@ The complete doxygen documentation can be found in the doc folder, see [index.ht
 
 ## Result
 
-
+<img src="doc/images/solution_v2_island_rover_bachelor_wedding.bmp" alt="Planning result with AStar() implementation." width="800"/>
 
 ## Main New Features
 
