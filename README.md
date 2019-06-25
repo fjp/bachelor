@@ -57,20 +57,6 @@ AStar memory usage.             |  AStar Wikipedia memory usage. | AStar Red Blo
 :-------------------------:|:-------------------------:|:------------------------------------------------:
 <img src="doc/images/memory_usage_AStar.png" alt="AStar" width="250" />  |  <img src="doc/images/memory_usage_AStar_Wiki.png" alt="AStarWiki" width="250" /> | <img src="doc/images/memory_usage_AStar_RBG.png" alt="AStarRedBlobGames" width="250" /> 
 
-<p float="left">
-  <figure>
-      <img src="doc/images/memory_usage_AStar.png" alt="AStar" width="250" /> 
-      <figcaption>AStar memory usage.</figcaption>
-  </figure>
-  <figure>
-      <img src="doc/images/memory_usage_AStar_Wiki.png" alt="AStarWiki" width="250" /> 
-      <figcaption>AStar Wikipedia memory usage.</figcaption>
-  </figure>
-  <figure>
-      <img src="doc/images/memory_usage_AStar_RBG.png" alt="AStarRedBlobGames" width="250" /> 
-      <figcaption>AStar Red Blob Games memory usage.</figcaption>
-  </figure>
-</p>
 
 ## Class Design
 
