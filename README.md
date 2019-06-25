@@ -7,6 +7,8 @@ The complete doxygen documentation can be found in the doc folder, see [index.ht
 
 ## Main new features
 
+Beside the fixed bug of setting the diagonal cost to 1.4f instead of sqrt(2) I made the following changes to my solution.
+
 ### Implementation Correctness
 
 To verify the correctness of my implemented AStar algorithm, I added two more implementations.
@@ -21,7 +23,7 @@ These implementations are used in new gTests which create and use simple maps to
 
 ### Simplified Motion Model
 
-- Simplifies step cost model of the rover: instead of the physical model the rover now uses height costs that are percentage values of the step cost.
+I simplified the step cost model of the rover. Instead of the physical model, used previously, the rover now uses height costs that are percentage values of the current step cost, which are either 1 when moving straight or sqrt(2) when moving diagonal.
 The percentage step cost (height cost) is added to the current step cost if the rover moves uphill and subtracted if it moves downhill.
 The height cost calculation takes place in planner::cPlanner::HeightCost().
 - Ensures consistent heuristic with the chosen step cost and height cost model. This is achieved by normalizing the 
