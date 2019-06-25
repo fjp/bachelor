@@ -44,7 +44,7 @@ The mentioned implementations are used in new gTests which create and use two si
 
 1. simple_map_with_water creates a 330x330 map with elevation 1 and water such that the greediness and therefore the heuristic is evaluated.
 
-<img src="doc/images/test/simple_map_with_water.bmp" alt="Simple Map with Water." width="200"/>
+<img src="doc/images/pic.bmp" alt="Planning result with AStar() implementation." width="800"/>
 
 All the implementations find a shortest but but the implementation from Wikipedia chooses the right side to pass the water obstacle.
 
