@@ -12,7 +12,7 @@
   <line>Command: /media/sf_E_DRIVE/test_env/bachelor-master/cmake-build-debug/planner/test/testPlanner --gtest_filter=* --gtest_color=no</line>
 </preamble>
 
-<pid>23786</pid>
+<pid>24582</pid>
 <ppid>23211</ppid>
 <tool>memcheck</tool>
 
@@ -37,13 +37,13 @@
 
 <status>
   <state>RUNNING</state>
-  <time>00:00:00:00.111 </time>
+  <time>00:00:00:00.185 </time>
 </status>
 
 
 <status>
   <state>FINISHED</state>
-  <time>00:00:24:15.471 </time>
+  <time>00:02:17:26.465 </time>
 </status>
 
 <errorcounts>
