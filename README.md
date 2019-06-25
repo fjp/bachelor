@@ -40,7 +40,12 @@ calculated octile heuristic value in planner::cPlanner::Heuristic().
 ## C++11 Features
 
 Used [C++11 features](https://github.com/AnthonyCalandra/modern-cpp-features):
-    - smart pointer: [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr), [std::weak_ptr](https://en.cppreference.com/w/cpp/memory/weak_ptr), [std::enable_shared_from_this](https://en.cppreference.com/w/cpp/memory/enable_shared_from_this), shared_from_this(), nullptr
+    - smart pointer: 
+        - [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr), 
+        - [std::weak_ptr](https://en.cppreference.com/w/cpp/memory/weak_ptr), 
+        - [std::enable_shared_from_this](https://en.cppreference.com/w/cpp/memory/enable_shared_from_this), 
+        - [shared_from_this()](https://en.cppreference.com/w/cpp/memory/enable_shared_from_this/shared_from_this), 
+        - [nullptr](https://en.cppreference.com/w/cpp/language/nullptr)
     - [Lambda expression](https://en.cppreference.com/w/cpp/language/lambda)
     - [List initialization](https://en.cppreference.com/w/cpp/language/list_initialization)
     - [Rvalue reference](https://en.cppreference.com/w/cpp/language/reference)
