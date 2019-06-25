@@ -38,8 +38,8 @@ planner::tResult of cPlannerInterface is set to false. This boolean flag is test
 I analyzed my previous implementation using valgrind which showed memory leaks when creating child nodes in planner::cPlanner::Child.
 Additionally because of not destructing the planner and audi rover objects correctly. 
 To overcome these memory leaks I now use smart pointers which are a C++11 feature.
-The valgrind results for the planner and gTest project are shown in valgrind.xml and valgrind_gtest.xml respectively.
-See also the memory usage in the Memory Usage section below.
+The valgrind results for the planner and gTest project are shown in [doc/valgrind.xml](doc/valgrind.xml) 
+and [valgrind_gtest.xml](valgrind_gtest.xml) respectively. See also the memory usage in the Memory Usage section below.
 
 ### Implementation Correctness
 
@@ -55,17 +55,25 @@ Here preallocated vectors are used instead of a priority queue that needs to be 
 
 ### gTests using Simple Maps
 
-The mentioned implementations are used in new gTests which create and use two simple maps to test if the different implementations yield the same result (regarding travelling time given in island seconds).
+The mentioned implementations are used in new gTests which create and use simple maps to test if the different 
+implementations yield the same results (regarding travelling time given in island seconds).
 
-1. simple_map_with_water creates a 330x330 map with elevation 1 and water such that the greediness and therefore the heuristic is evaluated.
+1. simple_map creates a 330x330 map with elevation 1 to check if the implementations find a path from 
+the start to the goal location.
+
+<img src="doc/images/test/simple_map.bmp" alt="Simple Map." width="300"/>
+
+2. simple_map_with_water creates a 330x330 map with elevation 1 and water such that the greediness and therefore the heuristic is evaluated.
 
 <img src="doc/images/test/simple_map_with_water.bmp" alt="Simple Map with Water." width="300"/>
 
 All the implementations find a shortest but but the implementation from Wikipedia chooses the right side to pass the water obstacle.
 
-2. simple_map_with_elevation is a 4x4 map with elevation 1 except the diagonal is set to 255. The rover needs to find a path between the left top corner (x,y)=(0,0) and the bottom right corner (x,y)=(3,3). This test is used to check the step cost, which is combination of height cost and direction cost. Furthermore, the consistency of the heuristic is evaluated.
+3. simple_map_with_elevation is a 4x4 map with elevation 1 except the diagonal is set to 255. The rover needs to find a path between the left top corner (x,y)=(0,0) and the bottom right corner (x,y)=(3,3). This test is used to check the step cost, which is combination of height cost and direction cost. Furthermore, the consistency of the heuristic is evaluated.
 
 <img src="doc/images/test/simple_map_with_elevation.bmp" alt="Simple Map with Elevation." width="100"/>
+
+Additional test results can be seen in the image folder [doc/images/test](doc/images/test).
 
 ## C++11 Features
 
