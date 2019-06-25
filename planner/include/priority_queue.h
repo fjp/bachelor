@@ -15,6 +15,10 @@ namespace planner {
 
     ///\brief Priority queue servers as frontier that stores the best nodes explored during planner::cPlanner::AStar().
     ///\details The priority queue is sorted by the evaluation function value \f$f(n)\f$.
+    ///         Code from https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus
+    ///
+    /// \tparam T element of the queue such as a node with location information.
+    /// \tparam priority_t specifies the importance of a node (f score value).
     template<typename T, typename priority_t>
     struct PriorityQueue {
         typedef std::pair<priority_t, T> PQElement;

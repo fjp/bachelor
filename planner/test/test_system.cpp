@@ -10,6 +10,45 @@
 #include "result.h"
 
 
+TEST_F(cPlannerTest, simple_map)
+{
+    InitSimpleMap();
+
+    int nStartX = 30; int nStartY = 30;
+    int nGoalX = 300; int nGoalY = 200;
+    CreateRover(tLocation{ nStartX, nStartY }, tLocation{ nGoalX, nGoalY });
+
+    /// Test cPlanner::AStar implementation
+    tResult sResultAStar = m_poAudiRover->Summon("ASTAR");
+    EXPECT_TRUE(sResultAStar.bFoundGoal) << "Goal not found.";
+    EXPECT_TRUE(sResultAStar.bConsistentHeuristic) << "Heuristic not consistent.";
+    double fTimeAStar = m_poAudiRover->TotalTime();
+    m_poAudiRover->ResetTime();
+
+    /// Test cPlannerWiki::AStar() implementation
+    tResult sResultAStarWiki = m_poAudiRover->Summon("ASTAR_WIKI");
+    EXPECT_TRUE(sResultAStarWiki.bFoundGoal) << "Goal not found.";
+    EXPECT_TRUE(sResultAStarWiki.bConsistentHeuristic) << "Heuristic not consistent.";
+    double fTimeAStarWiki = m_poAudiRover->TotalTime();
+    m_poAudiRover->ResetTime();
+
+    /// Test cPlannerRBG::AStar() implementation
+    tResult sResultAStarRBG = m_poAudiRover->Summon("ASTAR_RBG");
+    EXPECT_TRUE(sResultAStarRBG.bFoundGoal) << "Goal not found.";
+    EXPECT_TRUE(sResultAStarRBG.bConsistentHeuristic) << "Heuristic not consistent.";
+    double fTimeAStarRBG = m_poAudiRover->TotalTime();
+
+    EXPECT_NEAR(fTimeAStar, fTimeAStarWiki, 1.0e-8);
+    EXPECT_NEAR(fTimeAStarWiki, fTimeAStarRBG, 1.0e-8);
+
+    /// Output the found paths between the defined locations
+    std::vector<tLocation> asLocation;
+    asLocation.push_back(tLocation{ nStartX, nStartY });
+    asLocation.push_back(tLocation{ nGoalX, nGoalY });
+    visualizer::write("simple_map.bmp", &m_oElevation[0], &m_oOverrides[0], asLocation, m_nImageDim);
+}
+
+
 TEST_F(cPlannerTest, simple_map_with_water)
 {
     InitSimpleMapWithWater();
@@ -67,9 +106,9 @@ TEST_F(cPlannerTest, simple_map_with_elevation)
     std::vector<tLocation> asLocation;
     asLocation.push_back(tLocation{nStartX, nStartY});
     asLocation.push_back(tLocation{nGoalX, nGoalY});
-    visualizer::write("simple_map_with_elevation.bmp", &m_oElevation[0], &m_oOverrides[0], asLocation, m_nImageDim);
+    visualizer::write("simple_map_with_elevation.bmp", &m_oElevation[0], &m_oOverrides[0], asLocation, m_nImageDim, visualizer::PATH);
 
-    m_poAudiRover->countPlanner();
+    //m_poAudiRover->countPlanner();
 }
 
 TEST_F(cPlannerTest, island_map_astar)

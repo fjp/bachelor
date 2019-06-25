@@ -86,24 +86,48 @@ protected:
         //InitIslandMap();
     }
 
-    void CreateSimpleMapWithWater()
+    void CreateSimpleMap()
     {
         /// Prepare to read elevation and overrides data
         m_nImageDim = 330;
         const size_t expectedFileSize = m_nImageDim * m_nImageDim;
 
         std::vector<uint8_t> data_elevation(expectedFileSize, 1);
-        for (int y = 100; y <= 110; ++y)
+        writeFile("../../../assets/elevation_simple_map.data", data_elevation, expectedFileSize);
+
+        std::vector<uint8_t> dataOverrides(expectedFileSize, 0);
+        writeFile("../../../assets/overrides_simple_map.data", dataOverrides, expectedFileSize);
+    }
+
+    void InitSimpleMap()
+    {
+        CreateSimpleMap();
+
+        m_nImageDim = 330;
+
+        ReadData("elevation_simple_map.data", "overrides_simple_map.data");
+    }
+
+
+    void CreateSimpleMapWithWater()
+    {
+        /// Prepare to read elevation and overrides data
+        m_nImageDim = 330;
+        const size_t expectedFileSize = m_nImageDim * m_nImageDim;
+
+        /// Create water
+        std::vector<uint8_t> data_elevation(expectedFileSize, 1);
+        for (int nY = 100; nY <= 110; ++nY)
         {
             for (int x = 50; x <= 100; ++x) {
-                data_elevation[y * m_nImageDim + x] = 0;
+                data_elevation[nY * m_nImageDim + x] = 0;
             }
         }
 
-        for (int y = 50; y <= 100; ++y)
+        for (int nY = 50; nY <= 100; ++nY)
         {
-            for (int x = 100; x <= 110; ++x) {
-                data_elevation[y * m_nImageDim + x] = 0;
+            for (int nX = 100; nX <= 110; ++nX) {
+                data_elevation[nY * m_nImageDim + nX] = 0;
             }
         }
         writeFile("../../../assets/elevation_simple_map_with_water.data", data_elevation, expectedFileSize);
@@ -127,21 +151,13 @@ protected:
         m_nImageDim = 4;
         const size_t expectedFileSize = m_nImageDim * m_nImageDim;
 
+        /// Create mountain
         std::vector<uint8_t> data_elevation(expectedFileSize, 1);
-        /*
-        for (int y = 0; y < m_nImageDim; ++y)
+        for (int nY = 0; nY < m_nImageDim; ++nY)
         {
-            for (int x = 150; x <= 150; ++x) {
-                data_elevation[y * m_nImageDim + x] = 255;
-            }
-        }
-         */
-
-        for (int y = 0; y < m_nImageDim; ++y)
-        {
-            for (int x = 0; x < m_nImageDim; ++x) {
-                if (m_nImageDim - 2 <= x + y && x + y <= m_nImageDim) {
-                    data_elevation[y * m_nImageDim + x] = 255;
+            for (int nX = 0; nX < m_nImageDim; ++nX) {
+                if (m_nImageDim - 2 <= nX + nY && nX + nY <= m_nImageDim) {
+                    data_elevation[nY * m_nImageDim + nX] = 255;
                 }
             }
         }
