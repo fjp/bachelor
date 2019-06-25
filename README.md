@@ -15,6 +15,8 @@ Both use less memory than my previous implementation which can still be found in
 data structures require less memory. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode).
 Regarding the computation time, planner::cPlannerWiki::AStar() is the fastest implementation preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.
 
+These implementations are used in new gTests which create and use simple maps to test if the different implementations yield the same result (regarding travelling time given in island seconds).
+
 ## Changelog
 
 - Fixes diagonal cost value: uses sqrt(2) for the diagonal cost instead of 1.4f.
