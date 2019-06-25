@@ -44,13 +44,13 @@ The mentioned implementations are used in new gTests which create and use two si
 
 1. simple_map_with_water creates a 330x330 map with elevation 1 and water such that the greediness and therefore the heuristic is evaluated.
 
-<img src="doc/images/pic.bmp" alt="Planning result with AStar() implementation." width="800"/>
+<img src="doc/images/test/simple_map_with_water.bmp" alt="Simple Map with Water." width="800"/>
 
 All the implementations find a shortest but but the implementation from Wikipedia chooses the right side to pass the water obstacle.
 
 2. simple_map_with_elevation is a 4x4 map with elevation 1 except the diagonal is set to 255. The rover needs to find a path between the left top corner (x,y)=(0,0) and the bottom right corner (x,y)=(3,3). This test is used to check the step cost, which is combination of height cost and direction cost. Furthermore, the consistency of the heuristic is evaluated.
 
-<img src="doc/images/test/simple_map_with_elevation.bmp" alt="Simple Map with Elevation" width="200"/>
+<img src="doc/images/test/simple_map_with_elevation.bmp" alt="Simple Map with Elevation." width="200"/>
 
 ### Complete Changelog
 
