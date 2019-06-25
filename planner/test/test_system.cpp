@@ -19,21 +19,21 @@ TEST_F(cPlannerTest, simple_map_with_water)
     CreateRover(tLocation{ nStartX, nStartY }, tLocation{ nGoalX, nGoalY });
 
     /// Test cPlanner::AStar implementation
-    tResult sResultAStar = m_poAudiRover->Summon(1, 1, "ASTAR");
+    tResult sResultAStar = m_poAudiRover->Summon("ASTAR");
     EXPECT_TRUE(sResultAStar.bFoundGoal) << "Goal not found.";
     EXPECT_TRUE(sResultAStar.bConsistentHeuristic) << "Heuristic not consistent.";
     double fTimeAStar = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
     /// Test cPlannerWiki::AStar() implementation
-    tResult sResultAStarWiki = m_poAudiRover->Summon(1, 1, "ASTAR_WIKI");
+    tResult sResultAStarWiki = m_poAudiRover->Summon("ASTAR_WIKI");
     EXPECT_TRUE(sResultAStarWiki.bFoundGoal) << "Goal not found.";
     EXPECT_TRUE(sResultAStarWiki.bConsistentHeuristic) << "Heuristic not consistent.";
     double fTimeAStarWiki = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
     /// Test cPlannerRBG::AStar() implementation
-    tResult sResultAStarRBG = m_poAudiRover->Summon(1, 1, "ASTAR_RBG");
+    tResult sResultAStarRBG = m_poAudiRover->Summon("ASTAR_RBG");
     EXPECT_TRUE(sResultAStarRBG.bFoundGoal) << "Goal not found.";
     EXPECT_TRUE(sResultAStarRBG.bConsistentHeuristic) << "Heuristic not consistent.";
     double fTimeAStarRBG = m_poAudiRover->TotalTime();
@@ -58,7 +58,7 @@ TEST_F(cPlannerTest, simple_map_with_elevation)
     CreateRover(tLocation{nStartX, nStartY}, tLocation{nGoalX, nGoalY});
 
     /// Test cPlannerWiki::AStar() implementation
-    tResult sResult = m_poAudiRover->Summon(1, 1, "ASTAR");
+    tResult sResult = m_poAudiRover->Summon("ASTAR");
     EXPECT_TRUE(sResult.bFoundGoal) << "Goal not found.";
     EXPECT_TRUE(sResult.bConsistentHeuristic) << "Heuristic not consistent.";
     double fTimeAStar = m_poAudiRover->TotalTime();
@@ -81,14 +81,14 @@ TEST_F(cPlannerTest, island_map_astar)
     /// Test cPlanner::AStar implementation moving from rover to bachelor
     m_poAudiRover->SetStart(tLocation{ROVER_X, ROVER_Y});
     m_poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
-    tResult sResultR2B = m_poAudiRover->Summon(1, 1, "ASTAR");
+    tResult sResultR2B = m_poAudiRover->Summon("ASTAR");
     EXPECT_TRUE(sResultR2B.bFoundGoal);
     EXPECT_TRUE(sResultR2B.bConsistentHeuristic);
 
     /// Test cPlanner::AStar implementation moving from bachelor to wedding
     m_poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
     m_poAudiRover->SetGoal({WEDDING_X, WEDDING_Y});
-    tResult sResultB2W = m_poAudiRover->Summon(1, 1, "ASTAR");
+    tResult sResultB2W = m_poAudiRover->Summon("ASTAR");
     EXPECT_TRUE(sResultB2W.bFoundGoal);
     EXPECT_TRUE(sResultB2W.bConsistentHeuristic);
 
@@ -113,14 +113,14 @@ TEST_F(cPlannerTest, island_map_astar_wiki)
 
     m_poAudiRover->SetStart(tLocation{ROVER_X, ROVER_Y});
     m_poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
-    tResult sResultR2B = m_poAudiRover->Summon(1, 1, "ASTAR_WIKI");
+    tResult sResultR2B = m_poAudiRover->Summon("ASTAR_WIKI");
     EXPECT_TRUE(sResultR2B.bFoundGoal);
     EXPECT_TRUE(sResultR2B.bConsistentHeuristic);
 
 
     m_poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
     m_poAudiRover->SetGoal({WEDDING_X, WEDDING_Y});
-    tResult sResultB2W = m_poAudiRover->Summon(1, 1, "ASTAR_WIKI");
+    tResult sResultB2W = m_poAudiRover->Summon("ASTAR_WIKI");
     EXPECT_TRUE(sResultB2W.bFoundGoal);
     EXPECT_TRUE(sResultB2W.bConsistentHeuristic);
 
@@ -144,14 +144,14 @@ TEST_F(cPlannerTest, island_map_astar_rbg)
 
     m_poAudiRover->SetStart(tLocation{ROVER_X, ROVER_Y});
     m_poAudiRover->SetGoal(tLocation{BACHELOR_X, BACHELOR_Y});
-    tResult sResultR2B = m_poAudiRover->Summon(1, 1, "ASTAR_RBG");
+    tResult sResultR2B = m_poAudiRover->Summon("ASTAR_RBG");
     EXPECT_TRUE(sResultR2B.bFoundGoal);
     EXPECT_TRUE(sResultR2B.bConsistentHeuristic);
 
 
     m_poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
     m_poAudiRover->SetGoal({WEDDING_X, WEDDING_Y});
-    tResult sResultB2W = m_poAudiRover->Summon(1, 1, "ASTAR_RBG");
+    tResult sResultB2W = m_poAudiRover->Summon("ASTAR_RBG");
     EXPECT_TRUE(sResultB2W.bFoundGoal);
     EXPECT_TRUE(sResultB2W.bConsistentHeuristic);
 
@@ -176,19 +176,19 @@ TEST_F(cPlannerTest, island_map_all)
     m_poAudiRover->SetStart({BACHELOR_X, BACHELOR_Y});
     m_poAudiRover->SetGoal({WEDDING_X, WEDDING_Y});
 
-    tResult sResultAStar = m_poAudiRover->Summon(1, 1, "ASTAR");
+    tResult sResultAStar = m_poAudiRover->Summon("ASTAR");
     EXPECT_TRUE(sResultAStar.bFoundGoal);
     EXPECT_TRUE(sResultAStar.bConsistentHeuristic);
     double fTimeAStar = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
-    tResult sResultAStarWiki = m_poAudiRover->Summon(1, 1, "ASTAR_WIKI");
+    tResult sResultAStarWiki = m_poAudiRover->Summon("ASTAR_WIKI");
     EXPECT_TRUE(sResultAStarWiki.bFoundGoal);
     EXPECT_TRUE(sResultAStarWiki.bConsistentHeuristic);
     double fTimeAStarWiki = m_poAudiRover->TotalTime();
     m_poAudiRover->ResetTime();
 
-    tResult sResultAStarRBG = m_poAudiRover->Summon(1, 1, "ASTAR_RBG");
+    tResult sResultAStarRBG = m_poAudiRover->Summon("ASTAR_RBG");
     EXPECT_TRUE(sResultAStarRBG.bFoundGoal);
     EXPECT_TRUE(sResultAStarRBG.bConsistentHeuristic);
     double fTimeAStarRBG = m_poAudiRover->TotalTime();

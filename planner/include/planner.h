@@ -69,7 +69,7 @@ namespace planner {
         ///\param[in] i_sNode the node which heuristic value is tested.
         void HeuristicCheck(std::shared_ptr<tNode>& i_sNode);
 
-        ///\brief Updates the node argument with its path cost \f$g(n)\f$ with island seconds as its unit.
+        ///\brief DEPRECATED Updates the node argument with its path cost \f$g(n)\f$ with island seconds as its unit.
         ///\details Uses the slope found from the gradient of the elevation map cMap::m_oElevation to calculate
         ///         an acceleration value, where only its component in the x,y plane is used.
         ///         The value is added to the time it takes for a straight or diagonal step (depending on the action of the node).
@@ -103,7 +103,7 @@ namespace planner {
                      m_poMap->Elevation(i_sCurrent.nX, i_sCurrent.nY));
 
             /// This cost value is either positive or negative, depending on the height difference
-            double fHeightCost = i_sAction.fCost * fDeltaHeight / 255.f; //static_cast<double>(m_nMaxGradient + 1); //10.f;
+            double fHeightCost = i_sAction.fCost * fDeltaHeight / 255.0; //static_cast<double>(m_nMaxGradient + 1); //10.f;
 
             return fHeightCost;
         };

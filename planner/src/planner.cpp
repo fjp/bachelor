@@ -27,7 +27,7 @@ namespace planner {
     cPlanner::cPlanner(std::shared_ptr<cRoverInterface<8>> i_poRover, std::shared_ptr<cGraph> i_poMap)
             : cPlannerInterface(std::static_pointer_cast<cAudiRover>(i_poRover), i_poMap)
             , m_nMaxGradient(0)
-            , m_fConsistencyFactor(0.f) {
+            , m_fConsistencyFactor(0.0) {
 
         //std::cout << "Constructing cPlanner" << std::endl;
 
@@ -57,7 +57,7 @@ namespace planner {
             }
         }
 
-        m_fConsistencyFactor = 1.f - static_cast<double>(m_nMaxGradient) / 255.f;
+        m_fConsistencyFactor = 1.f - static_cast<double>(m_nMaxGradient) / 255.0;
 
 
         //double fAlpha = atan(m_nMaxGradient / static_cast<double>(m_poRover->StepSize()));
@@ -121,7 +121,7 @@ namespace planner {
                 /// Octile distance
                 double fD1 = static_cast<double>(m_poRover->StepSize()) / static_cast<double>(m_poRover->Velocity());
                 double fD2 = m_poRover->CostDiagonal();
-                fHeuristicValue = fD1 * (fDeltaX + fDeltaY) + (fD2 - 2.f * fD1) * std::min(fDeltaX, fDeltaY);
+                fHeuristicValue = fD1 * (fDeltaX + fDeltaY) + (fD2 - 2.0 * fD1) * std::min(fDeltaX, fDeltaY);
                 break;
             }
             case CHEBYSHEV: {
@@ -306,7 +306,7 @@ namespace planner {
 
                             /// Check that heuristic never overestimates the true distance:
                             /// Priority of a new node should never be lower than the priority of its parent.
-                            if (sNext->psParent && sNext->f < sNext->psParent->f - 1e-8f)
+                            if (sNext->psParent && sNext->f < sNext->psParent->f - 1.0e-8)
                             {
                                 m_sResult.bConsistentHeuristic = false;
                                 std::cout << "Heuristic overestimates true distance" << std::endl;

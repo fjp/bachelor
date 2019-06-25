@@ -29,13 +29,24 @@ namespace planner {
                    int i_nHeight, int i_nWidth);
 
 
-
         ///\brief The summon feature that the Audi rover provides
-        tResult Summon(const int i_nStepSize = 1, const int i_nVelocity = 1, std::string&& i_strAlgorithm = "ASTAR");
+        ///\details Calls InitializePlanner which then acts as a factory to create a planner according to i_strAlgorithm parameter.
+        ///         Sets the step and velocity to 1. Note: step size and velocity should always be set to 1.
+        ///
+        /// \param i_strAlgorithm Rvalue reference input specifies the algorithm to use. Possible strings "ASTAR", "ASTAR_WIKI", "ASTAR_RBG".
+        /// \param i_nStepSize the step size of the rover. Should be set to 1.
+        /// \param i_nVelocity the velocity of the rover. Deprecated. Should be set to 1.
+        /// \return Planning result struct with information such as travelling time and heuristic consistency.
+        tResult Summon(std::string&& i_strAlgorithm = "ASTAR", const int i_nStepSize = 1, const int i_nVelocity = 1);
 
         ///\brief Initializes the reference to the planner which is located in the inherited interface.
-        ///\details
-        std::shared_ptr<cPlannerInterface<8>> InitializePlanner(const int &i_nStepSize, const int &i_nVelocity, std::string&& i_strAlgorithm) override;
+        ///\details Acts as a factory method to generate the planner which implements the passed algorithm i_strAlgorithm
+        ///
+        /// \param i_nStepSize the step size of the rover. Should be set to 1.
+        /// \param i_nVelocity the velocity of the rover. Deprecated. Should be set to 1.
+        /// \param i_strAlgorithm the algorithm to use, can be currently one of "ASTAR", "ASTAR_WIKI", "ASTAR_RBG".
+        /// \return shared pointer to the created concrete planner class (cPlanner, cPlannerWiki, cPlannerRBG).
+        std::shared_ptr<cPlannerInterface<8>> InitializePlanner(const int& i_nStepSize, const int& i_nVelocity, std::string&& i_strAlgorithm) override;
 
 
         ///\brief Destructor to delete the allocated memory of the map.
@@ -43,6 +54,14 @@ namespace planner {
             //std::cout << "~cAudiRover" << std::endl;
         };
 
+        ///\brief Total time in island seconds to travel on the fastest found path by AStar().
+        double TotalTime() const;
+
+        ///\brief Resets the total planning time to zero island seconds.
+        void ResetTime();
+
+
+        ///\brief Debug method to check use cound of shared pointer
         void countPlanner();
 
 
@@ -50,19 +69,8 @@ namespace planner {
         ///\brief Reference to the map of type cGraph.
         std::shared_ptr<cGraph> m_poMap;
 
-        ///\brief Pointer to the elevation data (rather redundant because it is stored in the map)
-        uint8_t* m_oElevation;
-        ///\brief Pointer to the overrides data, which will also be stored in the map m_oMap.
-        uint8_t* m_oOverrides;
-
         ///\brief Used to calculate the total traveling time, depending on how often the Summon() method gets called.
         double m_fTotalTime;
-    public:
-        ///\brief Total time in island seconds to travel on the fastest found path by AStar().
-        double TotalTime() const;
-
-        ///\brief Resets the total planning time to zero island seconds.
-        void ResetTime();
 
     };
 

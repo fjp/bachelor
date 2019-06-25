@@ -11,15 +11,16 @@
 namespace planner
 {
 
-    cAudiRover::cAudiRover(
-            uint8_t* i_oElevation,
-            uint8_t* i_oOverrides,
-            int i_nHeight, int i_nWidth) : cRoverInterface(), m_oElevation(i_oElevation), m_oOverrides(i_oOverrides)
-            , m_poMap(nullptr), m_fTotalTime(0.f) {
+    cAudiRover::cAudiRover(uint8_t* i_oElevation
+            , uint8_t* i_oOverrides
+            , int i_nHeight
+            , int i_nWidth) : cRoverInterface()
+            , m_poMap(nullptr)
+            , m_fTotalTime(0.0) {
 
         //std::cout << "cAudiRover" << std::endl;
 
-        m_poMap = std::make_shared<cGraph>(m_oElevation, m_oOverrides, i_nHeight, i_nWidth);
+        m_poMap = std::make_shared<cGraph>(i_oElevation, i_oOverrides, i_nHeight, i_nWidth);
 
         SetCostStraight(1.0);
         SetCostDiagonal(sqrt(2));
@@ -36,7 +37,7 @@ namespace planner
 
     }
 
-    tResult cAudiRover::Summon(const int i_nStepSize, const int i_nVelocity, std::string&& i_strAlgorithm) {
+    tResult cAudiRover::Summon(std::string&& i_strAlgorithm, const int i_nStepSize, const int i_nVelocity) {
 
         /// Initialize a planner according to the passed i_strAlgorithm (factory method)
         auto poPlanner = InitializePlanner(i_nStepSize, i_nVelocity, std::move(i_strAlgorithm));
@@ -91,7 +92,7 @@ namespace planner
     }
 
     void cAudiRover::ResetTime() {
-        m_fTotalTime = 0.f;
+        m_fTotalTime = 0.0;
     }
 
 }

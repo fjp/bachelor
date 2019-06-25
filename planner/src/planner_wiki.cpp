@@ -42,8 +42,8 @@ namespace planner {
         std::cout << "Planning optimal path with A* Wiki" << std::endl;
 
         /// The set of nodes already evaluated. Implemented as 2d array filled with 0s and start element set to 1.
-        std::vector<std::vector<int> > closed(m_poMap->Height(), std::vector<int>(m_poMap->Width()));
-        closed[m_poRover->Start().nX][m_poRover->Start().nY] = 1;
+        std::vector<std::vector<int> > mnClosed(m_poMap->Height(), std::vector<int>(m_poMap->Width()));
+        mnClosed[m_poRover->Start().nX][m_poRover->Start().nY] = 1;
 
         /// The set of currently discovered nodes that are not evaluated yet.
         /// Initially, only the start node is known.
@@ -61,7 +61,7 @@ namespace planner {
         /// For each node, which action it can most efficiently be reached from.
         /// If a node can be reached from many nodes, action will eventually contain the
         /// most efficient previous step.
-        std::vector<std::vector<int> > action(m_poMap->Height(), std::vector<int>(m_poMap->Width(), -1));
+        std::vector<std::vector<int> > mnAction(m_poMap->Height(), std::vector<int>(m_poMap->Width(), -1));
 
 
         /// For each node, the cost of getting from the start node to that node.
@@ -119,7 +119,7 @@ namespace planner {
                 /// Otherwise explore new locations
                 else {
                     /// Add the current node to the set of nodes already evaluated
-                    closed[nX][nY] = 1;
+                    mnClosed[nX][nY] = 1;
 
                     /// Perform each possible rover action on the current node
                     for (int i = 0; i < m_poRover->m_asActions.size(); i++) {
@@ -133,7 +133,7 @@ namespace planner {
                         /// Check if the location of the next node lies within the map and is not on water.
                         /// Ignore the neighbors which are already evaluated (closed[nXNext][nYNext] == 0).
                         if (WithinMap(sNextLocation)) {
-                            if (closed[nXNext][nYNext] == 0 && !m_poMap->Water(nXNext, nYNext)) {
+                            if (mnClosed[nXNext][nYNext] == 0 && !m_poMap->Water(nXNext, nYNext)) {
 
                                 tLocation sCurrent{nX, nY};
                                 double fHeightCost = HeightCost(sCurrent, sNextLocation, sAction);
@@ -157,7 +157,7 @@ namespace planner {
                                 sNext.f = f;
 
                                 oOpenPrioQ.put(sNext, f);
-                                action[nXNext][nYNext] = i;
+                                mnAction[nXNext][nYNext] = i;
 
                                 /// Mark visited nodes
                                 m_poMap->SetOverrides(nXNext, nYNext, 0x02);
@@ -179,7 +179,7 @@ namespace planner {
 
         if (m_sResult.bFoundGoal) {
             /// Move from the current node back to the start node
-            ReconstructPath(g, action);
+            ReconstructPath(g, mnAction);
         }
 
         PrintTravelResult();
