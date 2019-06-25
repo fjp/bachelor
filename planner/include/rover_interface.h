@@ -32,13 +32,13 @@ namespace planner {
     public:
         cRoverInterface() : m_fCostStraight(1.f), m_fCostDiagonal(sqrt(2.f)), m_nStepSize(1), m_nVelocity(1)
         {
-            std::cout << "cRoverInterface" << std::endl;
+            //std::cout << "cRoverInterface" << std::endl;
         };
 
         virtual ~cRoverInterface() {
-            std::cout << "~cRoverInterface" << std::endl;
+            //std::cout << "~cRoverInterface" << std::endl;
 
-            std::cout << "     destructor ~cRoverInterface: m_poPlanner.use_count() == " << m_poPlanner.use_count() << std::endl;
+            //std::cout << "     destructor ~cRoverInterface: m_poPlanner.use_count() == " << m_poPlanner.use_count() << std::endl;
         }
 
 

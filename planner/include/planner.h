@@ -23,7 +23,7 @@ namespace planner {
     class cPlanner : public cPlannerInterface<8> {
     public:
 
-        ///\brief Initializes member variables m_poRover and m_oMap and calls CalculateConsistencyFactor().
+        ///\brief Initializes member variables m_poRover and m_poMap and calls CalculateConsistencyFactor().
         ///\details The
         cPlanner(std::shared_ptr<cRoverInterface<8>> i_poRover, std::shared_ptr<cGraph> i_oMap);
 
@@ -99,8 +99,8 @@ namespace planner {
             /// If the rover is going up or down hill, calculate the acceleration on the inclined plane
             /// Calculate current gradient in step direction
             double fDeltaHeight =
-                    (m_oMap->Elevation(i_sNext.nX, i_sNext.nY) -
-                     m_oMap->Elevation(i_sCurrent.nX, i_sCurrent.nY));
+                    (m_poMap->Elevation(i_sNext.nX, i_sNext.nY) -
+                     m_poMap->Elevation(i_sCurrent.nX, i_sCurrent.nY));
 
             /// This cost value is either positive or negative, depending on the height difference
             double fHeightCost = i_sAction.fCost * fDeltaHeight / 255.f; //static_cast<double>(m_nMaxGradient + 1); //10.f;

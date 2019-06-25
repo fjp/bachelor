@@ -43,13 +43,15 @@ namespace planner {
 
     tResult cPlannerRBG::AStar()
     {
+        std::cout << "Planning optimal path with A* RBG" << std::endl;
+
         std::map<tSimpleLocation, tSimpleLocation> came_from;
         std::map<tSimpleLocation, double> cost_so_far;
 
         /// Start
         int nX = m_poRover->Start().nX;
         int nY = m_poRover->Start().nY;
-        int nId = nY * m_oMap->Width() + nX;
+        int nId = nY * m_poMap->Width() + nX;
         tSimpleLocation sStart{nId, nX, nY};
 
         PriorityQueue<tSimpleLocation, double> oFrontier;
@@ -95,11 +97,11 @@ namespace planner {
 
                 int nXNext = sCurrent.nX + sAction.nX;
                 int nYNext = sCurrent.nY + sAction.nY;
-                int nIdNext = nYNext * m_oMap->Width() + nXNext;
+                int nIdNext = nYNext * m_poMap->Width() + nXNext;
                 tSimpleLocation sNext{nIdNext, nXNext, nYNext};
 
                 tLocation sLocation{nXNext, nYNext};
-                if (WithinMap(sLocation) && !m_oMap->Water(nXNext, nYNext)) {
+                if (WithinMap(sLocation) && !m_poMap->Water(nXNext, nYNext)) {
 
                     double fHeightCost = HeightCost(sCurrent, sNext, sAction);
 
@@ -113,7 +115,7 @@ namespace planner {
                         came_from[sNext] = sCurrent;
 
                         /// Mark visited nodes
-                        m_oMap->SetOverrides(sNext.nX, sNext.nY, 0x02);
+                        m_poMap->SetOverrides(sNext.nX, sNext.nY, 0x02);
                         m_sResult.nNodesExpanded++;
 
                         /// Check that heuristic never overestimates the true distance:
@@ -126,7 +128,11 @@ namespace planner {
             }
         }
 
-        ReconstructPath(cost_so_far, came_from);
+        if (m_sResult.bFoundGoal) {
+            /// Move from the current node back to the start node
+            ReconstructPath(cost_so_far, came_from);
+        }
+
         PrintTravelResult();
 
         return m_sResult;
@@ -138,7 +144,7 @@ namespace planner {
         /// Reconstruct the path by going backward from the goal location
         int nX = m_poRover->Goal().nX;
         int nY = m_poRover->Goal().nY;
-        int nId = nY * m_oMap->Width() + nX;
+        int nId = nY * m_poMap->Width() + nX;
         tSimpleLocation sGoal{nId, nX, nY};
         tSimpleLocation sCurrent = sGoal;
 
@@ -146,9 +152,9 @@ namespace planner {
         m_sResult.fTravellingTime = i_cost_so_far[sGoal];
 
         /// Update cumulative elevation
-        m_sResult.nCumulativeElevation += m_oMap->Elevation(sCurrent.nX, sCurrent.nY);
+        m_sResult.nCumulativeElevation += m_poMap->Elevation(sCurrent.nX, sCurrent.nY);
         /// Store path in overrides
-        m_oMap->SetOverrides(sCurrent.nX, sCurrent.nY, 0x01);
+        m_poMap->SetOverrides(sCurrent.nX, sCurrent.nY, 0x01);
 
         /// Check if the current node is the start node
         while (sCurrent != m_poRover->Start()) {
@@ -156,9 +162,9 @@ namespace planner {
             sCurrent = i_came_from[sCurrent];
 
             /// Update cumulative elevation
-            m_sResult.nCumulativeElevation += m_oMap->Elevation(sCurrent.nX, sCurrent.nY);
+            m_sResult.nCumulativeElevation += m_poMap->Elevation(sCurrent.nX, sCurrent.nY);
             /// Store path in overrides
-            m_oMap->SetOverrides(sCurrent.nX, sCurrent.nY, 0x01);
+            m_poMap->SetOverrides(sCurrent.nX, sCurrent.nY, 0x01);
         }
     }
 

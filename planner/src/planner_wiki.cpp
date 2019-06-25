@@ -27,7 +27,7 @@ namespace planner {
             : cPlanner(i_poRover, i_oMap)
             {
 
-        std::cout << "Constructing cPlannerWiki" << std::endl;
+        //std::cout << "Constructing cPlannerWiki" << std::endl;
     }
 
 
@@ -39,8 +39,10 @@ namespace planner {
 
     tResult cPlannerWiki::AStar()
     {
+        std::cout << "Planning optimal path with A* Wiki" << std::endl;
+
         /// The set of nodes already evaluated. Implemented as 2d array filled with 0s and start element set to 1.
-        std::vector<std::vector<int> > closed(m_oMap->Height(), std::vector<int>(m_oMap->Width()));
+        std::vector<std::vector<int> > closed(m_poMap->Height(), std::vector<int>(m_poMap->Width()));
         closed[m_poRover->Start().nX][m_poRover->Start().nY] = 1;
 
         /// The set of currently discovered nodes that are not evaluated yet.
@@ -53,17 +55,17 @@ namespace planner {
         double g = 0;
         double h = Heuristic(m_poRover->Start());
         double f = g + h;
-        tSimpleNode sNode{nY * m_oMap->Width() + nX, nX, nY, g, h, f};
+        tSimpleNode sNode{nY * m_poMap->Width() + nX, nX, nY, g, h, f};
         oOpenPrioQ.put(sNode, f);
 
         /// For each node, which action it can most efficiently be reached from.
         /// If a node can be reached from many nodes, action will eventually contain the
         /// most efficient previous step.
-        std::vector<std::vector<int> > action(m_oMap->Height(), std::vector<int>(m_oMap->Width(), -1));
+        std::vector<std::vector<int> > action(m_poMap->Height(), std::vector<int>(m_poMap->Width(), -1));
 
 
         /// For each node, the cost of getting from the start node to that node.
-        std::vector<std::vector<double> > gScore(m_oMap->Height(), std::vector<double>(m_oMap->Width(), std::numeric_limits<double>::max()));
+        std::vector<std::vector<double> > gScore(m_poMap->Height(), std::vector<double>(m_poMap->Width(), std::numeric_limits<double>::max()));
 
         /// The cost of going from start to start is zero.
         gScore[nX][nY] = 0.f;
@@ -125,13 +127,13 @@ namespace planner {
                         nXNext = nX + sAction.nX;
                         nYNext = nY + sAction.nY;
                         tLocation sNextLocation{nXNext, nYNext};
-                        tSimpleNode sNext{nYNext * m_oMap->Width() + nXNext, nXNext, nYNext};
+                        tSimpleNode sNext{nYNext * m_poMap->Width() + nXNext, nXNext, nYNext};
 
 
                         /// Check if the location of the next node lies within the map and is not on water.
                         /// Ignore the neighbors which are already evaluated (closed[nXNext][nYNext] == 0).
                         if (WithinMap(sNextLocation)) {
-                            if (closed[nXNext][nYNext] == 0 && !m_oMap->Water(nXNext, nYNext)) {
+                            if (closed[nXNext][nYNext] == 0 && !m_poMap->Water(nXNext, nYNext)) {
 
                                 tLocation sCurrent{nX, nY};
                                 double fHeightCost = HeightCost(sCurrent, sNextLocation, sAction);
@@ -158,7 +160,7 @@ namespace planner {
                                 action[nXNext][nYNext] = i;
 
                                 /// Mark visited nodes
-                                m_oMap->SetOverrides(nXNext, nYNext, 0x02);
+                                m_poMap->SetOverrides(nXNext, nYNext, 0x02);
                                 m_sResult.nNodesExpanded++;
 
                                 /// Check that heuristic never overestimates the true distance:
@@ -175,7 +177,11 @@ namespace planner {
         }
 
 
-        ReconstructPath(g, action);
+        if (m_sResult.bFoundGoal) {
+            /// Move from the current node back to the start node
+            ReconstructPath(g, action);
+        }
+
         PrintTravelResult();
 
         return m_sResult;
@@ -192,9 +198,9 @@ namespace planner {
         int nY = m_poRover->Goal().nY;
 
         /// Update cumulative elevation
-        m_sResult.nCumulativeElevation += m_oMap->Elevation(nX, nY);
+        m_sResult.nCumulativeElevation += m_poMap->Elevation(nX, nY);
         /// Store path in overrides
-        m_oMap->SetOverrides(nX, nY, 0x01);
+        m_poMap->SetOverrides(nX, nY, 0x01);
 
         /// Check if the current node is the start node
         int nXNext, nYNext;
@@ -204,9 +210,9 @@ namespace planner {
             nYNext = nY - m_poRover->m_asActions[i_came_from[nX][nY]].nY;
 
             /// Update cumulative elevation
-            m_sResult.nCumulativeElevation += m_oMap->Elevation(nXNext, nYNext);
+            m_sResult.nCumulativeElevation += m_poMap->Elevation(nXNext, nYNext);
             /// Store path in overrides
-            m_oMap->SetOverrides(nXNext, nYNext, 0x01);
+            m_poMap->SetOverrides(nXNext, nYNext, 0x01);
 
             nX = nXNext;
             nY = nYNext;

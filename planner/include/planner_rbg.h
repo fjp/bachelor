@@ -22,7 +22,7 @@ namespace planner {
 
         ///\brief Destructor to delete the allocated memory.
         ~cPlannerRBG() {
-            std::cout << "~cPlannerRBG" << std::endl;
+            //std::cout << "~cPlannerRBG" << std::endl;
         };
 
         ///\brief Override of the base interface cPlannerInterface, which invokes the AStar() search algorithm.

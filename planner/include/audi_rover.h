@@ -40,7 +40,7 @@ namespace planner {
 
         ///\brief Destructor to delete the allocated memory of the map.
         ~cAudiRover() {
-            std::cout << "~cAudiRover" << std::endl;
+            //std::cout << "~cAudiRover" << std::endl;
         };
 
         void countPlanner();

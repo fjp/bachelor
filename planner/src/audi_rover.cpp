@@ -17,10 +17,12 @@ namespace planner
             int i_nHeight, int i_nWidth) : cRoverInterface(), m_oElevation(i_oElevation), m_oOverrides(i_oOverrides)
             , m_poMap(nullptr), m_fTotalTime(0.f) {
 
-        std::cout << "cAudiRover" << std::endl;
+        //std::cout << "cAudiRover" << std::endl;
 
         m_poMap = std::make_shared<cGraph>(m_oElevation, m_oOverrides, i_nHeight, i_nWidth);
 
+        SetCostStraight(1.0);
+        SetCostDiagonal(sqrt(2));
 
         /// Define direction and cost of different possible actions
         m_asActions[0] = tAction{ 1, 0, m_fCostStraight };   // E
