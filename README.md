@@ -5,6 +5,10 @@ The readme of the previous version can be found [here](README_v0.md).
 For the problem description refer to the [AID Coding Challenge.pdf](AID_Coding_Challenge.pdf). 
 The complete doxygen documentation can be found in the doc folder, see [index.html](doc/html/index.html)
 
+## Result
+
+
+
 ## Main New Features
 
 Beside the fixed bug of setting the diagonal cost to 1.4f instead of sqrt(2) I made the following changes to my solution.
@@ -33,7 +37,15 @@ Both use less memory than my previous implementation which can still be found in
 data structures require less memory. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode).
 Regarding the computation time, planner::cPlannerWiki::AStar() is the fastest implementation preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.
 
-These implementations are used in new gTests which create and use simple maps to test if the different implementations yield the same result (regarding travelling time given in island seconds).
+### gTests using Simple Maps
+
+The mentioned implementations are used in new gTests which create and use two simple maps to test if the different implementations yield the same result (regarding travelling time given in island seconds).
+
+1. simple_map_with_water 
+
+
+2. simple_map_with_elevation is a 4x4 map with elevation 1 except the diagonal is set to 255. The rover needs to find a path between the left top corner (x,y)=(0,0) and the bottom right corner (x,y)=(3,3). This test is used to check the step cost, which is combination of height cost and direction cost. Furthermore, the consistency of the heuristic is evaluated.
+
 
 
 ### Complete Changelog
