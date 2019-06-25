@@ -1,9 +1,20 @@
 var searchData=
 [
-  ['ncumulativeelevation',['nCumulativeElevation',['../structt_result.html#a07f3f875dadb3075b1ca7f5e9dea66af',1,'tResult']]],
-  ['nid',['nId',['../structplanner_1_1t_node.html#a066ba40e1ca2ba323116a443528df174',1,'planner::tNode']]],
-  ['niterations',['nIterations',['../structt_result.html#ae43cdacfd85c009a19f17af62adf8729',1,'tResult']]],
-  ['nnodesexpanded',['nNodesExpanded',['../structt_result.html#aeec87653572128a631adb83face701ee',1,'tResult']]],
-  ['nodehash',['NodeHash',['../classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f',1,'planner::cPlanner']]],
-  ['nx',['nX',['../structplanner_1_1t_action.html#a6cf36892b4601d7d267d1a9d2e9d6595',1,'planner::tAction']]]
+  ['m_5fasactions',['m_asActions',['../classplanner_1_1c_rover_interface.html#a119c31cfd1e6aa72921fc5185e6f44a5',1,'planner::cRoverInterface']]],
+  ['m_5ffconsistencyfactor',['m_fConsistencyFactor',['../classplanner_1_1c_planner.html#ac9f4be1c679321a2f6bc5d1a1102b3c2',1,'planner::cPlanner']]],
+  ['m_5ffcostdiagonal',['m_fCostDiagonal',['../classplanner_1_1c_rover_interface.html#afcc4b7ec327b8d2ddcdb163c7a8397b3',1,'planner::cRoverInterface']]],
+  ['m_5ffcoststraight',['m_fCostStraight',['../classplanner_1_1c_rover_interface.html#ad94337c2b05eed20423c1a2dcaa680cc',1,'planner::cRoverInterface']]],
+  ['m_5fnheight',['m_nHeight',['../classplanner_1_1c_graph.html#a5bb5ea1aa1709b4530bbf5f931c1f277',1,'planner::cGraph']]],
+  ['m_5fnmaxgradient',['m_nMaxGradient',['../classplanner_1_1c_planner.html#af76b294d4e75b4e5d636bca4a795d2e4',1,'planner::cPlanner']]],
+  ['m_5fnstepsize',['m_nStepSize',['../classplanner_1_1c_rover_interface.html#aea86540c3962e223de84f28ff067d788',1,'planner::cRoverInterface']]],
+  ['m_5fnvelocity',['m_nVelocity',['../classplanner_1_1c_rover_interface.html#a458f3e469a13cfc909e957678ddee753',1,'planner::cRoverInterface']]],
+  ['m_5fnwidth',['m_nWidth',['../classplanner_1_1c_graph.html#a91f89c2fde0344dc74060297b2d5235e',1,'planner::cGraph']]],
+  ['m_5foelevation',['m_oElevation',['../classplanner_1_1c_graph.html#aea1ab1d83e0e58f454f07a46fc0d40dd',1,'planner::cGraph']]],
+  ['m_5fofrontier',['m_oFrontier',['../classplanner_1_1c_planner.html#a1c212bac80800ef51aacaa63fce32a2a',1,'planner::cPlanner']]],
+  ['m_5fpomap',['m_poMap',['../classplanner_1_1c_planner_interface.html#aa75ba58312d9398785d541a5e580a665',1,'planner::cPlannerInterface']]],
+  ['m_5fpoplanner',['m_poPlanner',['../classplanner_1_1c_rover_interface.html#a22d4f0d40dd064d62ed75da9728601ea',1,'planner::cRoverInterface']]],
+  ['m_5fporover',['m_poRover',['../classplanner_1_1c_planner_interface.html#a41f578c25bb96ea00fade4c87aac87dc',1,'planner::cPlannerInterface']]],
+  ['m_5fsgoal',['m_sGoal',['../classplanner_1_1c_rover_interface.html#a705221124f88ca9dbdf706869ebfc96a',1,'planner::cRoverInterface']]],
+  ['m_5fsresult',['m_sResult',['../classplanner_1_1c_planner_interface.html#a78389ea53bd3c9d5c57851a338ee91d8',1,'planner::cPlannerInterface']]],
+  ['m_5fsstart',['m_sStart',['../classplanner_1_1c_rover_interface.html#a42552f6e5f1f2909821eaef8535a9979',1,'planner::cRoverInterface']]]
 ];

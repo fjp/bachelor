@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['g',['g',['../structplanner_1_1t_node.html#a3b6b0cf6cf79d00aa1725e656246ed47',1,'planner::tNode::g()'],['../structplanner_1_1t_simple_node.html#aa75a8701dd9f556dee00365465aa21b5',1,'planner::tSimpleNode::g()']]],
-  ['generateheuristic',['GenerateHeuristic',['../classplanner_1_1c_planner.html#a1a4650050656545744796296a653d388',1,'planner::cPlanner']]],
-  ['get',['get',['../structplanner_1_1_priority_queue.html#abdd3d392da157bb645b5720eace1200a',1,'planner::PriorityQueue']]],
-  ['goaltest',['GoalTest',['../classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f',1,'planner::cPlanner::GoalTest()'],['../classplanner_1_1c_planner_interface.html#afec836d58ce54c49046bf30ecdebbfec',1,'planner::cPlannerInterface::GoalTest()']]],
-  ['gradx',['GradX',['../classplanner_1_1c_planner.html#aa90d751ce544870e4c89494e06fdac6c',1,'planner::cPlanner']]],
-  ['grady',['GradY',['../classplanner_1_1c_planner.html#a6fd8e8632d78d85ce472322267ba7b36',1,'planner::cPlanner']]]
+  ['f',['f',['../structplanner_1_1t_node.html#adc45202105ccc8b7fb040d557977dbd4',1,'planner::tNode::f()'],['../structplanner_1_1t_simple_node.html#a3411f599ba06ac5373746571ac5223e6',1,'planner::tSimpleNode::f()']]],
+  ['fcost',['fCost',['../structplanner_1_1t_action.html#a7bac43507f0daab4fb5850c66e1da9d2',1,'planner::tAction']]],
+  ['fileheader',['FileHeader',['../structvisualizer_1_1_file_header.html',1,'visualizer']]],
+  ['ftravellingtime',['fTravellingTime',['../structt_result.html#ab3934006c8a2a92c5622cb9d4b246eba',1,'tResult']]]
 ];

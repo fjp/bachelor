@@ -33,7 +33,7 @@ enum \mbox{\hyperlink{namespacevisualizer_ad08cef44b6dbff468f08c62effe9cb8f}{t\+
 \newline
 {\bfseries A\+LL} = 0x07
  \}
-\begin{DoxyCompactList}\small\item\em Used for the bitset to specify what to visualise in \mbox{\hyperlink{namespacevisualizer_a2f66e38c689ff3c3731faa95739bbf25}{visualizer\+::write}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Used for the flags to specify what to visualise in \mbox{\hyperlink{namespacevisualizer_a2f66e38c689ff3c3731faa95739bbf25}{visualizer\+::write}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -78,13 +78,13 @@ Contains functions for plotting overrides data and elevation.
 {\footnotesize\ttfamily template$<$typename T\+Locations $>$ \\
 void visualizer\+::write (\begin{DoxyParamCaption}\item[{std\+::string}]{i\+\_\+str\+Name,  }\item[{uint8\+\_\+t $\ast$}]{i\+\_\+o\+Elevation,  }\item[{uint8\+\_\+t $\ast$}]{i\+\_\+o\+Overrides,  }\item[{std\+::vector$<$ T\+Locations $>$}]{i\+\_\+as\+Location,  }\item[{int}]{i\+\_\+n\+Image\+Dim = {\ttfamily IMAGE\+\_\+DIM},  }\item[{int}]{i\+\_\+n\+Visualise = {\ttfamily ALL},  }\item[{int}]{i\+\_\+n\+Pen\+Size = {\ttfamily 1} }\end{DoxyParamCaption})}
 
-Marks interesting positions on the map (enable using bitset)
+Marks interesting positions on the map (enable using flag)
 
-Visualize the found path (enable using bitset)
+Visualize the found path (enable using flag)
 
 Signifies water
 
-Signifies visited locations (enable using bitset)
+Signifies visited locations (enable using flag)
 
 Signifies normal ground color \mbox{\Hypertarget{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}\label{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}} 
 \index{visualizer@{visualizer}!write\+B\+MP@{write\+B\+MP}}

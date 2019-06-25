@@ -127,7 +127,7 @@ inclinded</div></div>
 <p><b>Note</b> The tests are not completely finished because of the limited time.</p>
 <p>I added google gTest version 1.8.0 to the zip file and created a test fixture <a class="el" href="classc_planner_test.html" title="The fixture for testing class cPlannerTest. ">cPlannerTest</a> in <a class="el" href="test__fixture_8h_source.html">test_fixture.h</a>. It is used to initialize the test by loading the evaluation.data and overrides.data files. Furthermore, the cAudiRover is initialized in the cPlannerTest::SetUp method.</p>
 <p>As explained in software the default values for step size and velocity are set to one for both parameters. I tested with different step sizes to reach the goal faster, thereby verifying that the path and island seconds stay the same.</p>
-<p>To get intermediate paths from the <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">planner::cPlanner::AStar()</a> I used the provided visualizer::writeBMP() inside AStar(). This results in the following output:</p>
+<p>To get intermediate paths from the <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">planner::cPlanner::AStar()</a> I used the provided <a class="el" href="namespacevisualizer.html#ab4e649cd7413a51ac1ae4b31a2994c3a">visualizer::writeBMP()</a> inside AStar(). This results in the following output:</p>
 <h2>Results</h2>
 <p>The total travelling time will take 3377.68 island seconds (56.2947 island minutes or 0.938245 island hours) on the fastest path. Hopefully this is enough for the Bachelor to get to his wedding on time.</p>
 <p>image html solution_rover_bachelor_wedding.jpg</p>

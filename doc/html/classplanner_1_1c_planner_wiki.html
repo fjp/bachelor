@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Extends the planner class to implement A* from Wikipedia.  
+<p>Extends the planner class to implement A* from Wikipedia <a href="https://en.wikipedia.org/wiki/A">https://en.wikipedia.org/wiki/A</a>*_search_algorithm#Pseudocode.  
  <a href="classplanner_1_1c_planner_wiki.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="planner__wiki_8h_source.html">planner_wiki.h</a>&gt;</code></p>
@@ -109,7 +109,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab9f2b825a5b1e0bd2e33271f25c812be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor to delete the allocated memory. <br /></td></tr>
 <tr class="separator:ab9f2b825a5b1e0bd2e33271f25c812be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d18be721400b51162ff463ab11d1721"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_wiki.html#a9d18be721400b51162ff463ab11d1721">Plan</a> () override</td></tr>
-<tr class="memdesc:a9d18be721400b51162ff463ab11d1721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the <a class="el" href="classplanner_1_1c_planner_wiki.html#a2652cf0e84d0a1fcd17e6c4288179955" title="AStar algorithm implementation. ">AStar()</a> search algorithm.  <a href="#a9d18be721400b51162ff463ab11d1721">More...</a><br /></td></tr>
+<tr class="memdesc:a9d18be721400b51162ff463ab11d1721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the <a class="el" href="classplanner_1_1c_planner_wiki.html#a2652cf0e84d0a1fcd17e6c4288179955" title="AStar algorithm implementation. Overrides cPlanner::AStar() method. ">AStar()</a> search algorithm.  <a href="#a9d18be721400b51162ff463ab11d1721">More...</a><br /></td></tr>
 <tr class="separator:a9d18be721400b51162ff463ab11d1721"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a049e5c4a9540fecbe82a0648f771bbd2"><td class="memTemplParams" colspan="2">template&lt;typename TCostSoFar , typename TCameFrom &gt; </td></tr>
 <tr class="memitem:a049e5c4a9540fecbe82a0648f771bbd2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_wiki.html#a049e5c4a9540fecbe82a0648f771bbd2">ReconstructPath</a> (TCostSoFar &amp;&amp;i_cost_so_far, TCameFrom &amp;&amp;i_came_from)</td></tr>
@@ -181,7 +181,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a2652cf0e84d0a1fcd17e6c4288179955"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_wiki.html#a2652cf0e84d0a1fcd17e6c4288179955">AStar</a> () override</td></tr>
-<tr class="memdesc:a2652cf0e84d0a1fcd17e6c4288179955"><td class="mdescLeft">&#160;</td><td class="mdescRight">AStar algorithm implementation.  <a href="#a2652cf0e84d0a1fcd17e6c4288179955">More...</a><br /></td></tr>
+<tr class="memdesc:a2652cf0e84d0a1fcd17e6c4288179955"><td class="mdescLeft">&#160;</td><td class="mdescRight">AStar algorithm implementation. Overrides <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">cPlanner::AStar()</a> method.  <a href="#a2652cf0e84d0a1fcd17e6c4288179955">More...</a><br /></td></tr>
 <tr class="separator:a2652cf0e84d0a1fcd17e6c4288179955"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classplanner_1_1c_planner"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classplanner_1_1c_planner')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classplanner_1_1c_planner.html">planner::cPlanner</a></td></tr>
 <tr class="memitem:a2e5a745f83f903662eff914d8beddb5e inherit pro_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e">CalculateConsistencyFactor</a> ()</td></tr>
@@ -234,7 +234,7 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 <tr class="separator:aa75ba58312d9398785d541a5e580a665 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Extends the planner class to implement A* from Wikipedia. </p>
+<div class="textblock"><p>Extends the planner class to implement A* from Wikipedia <a href="https://en.wikipedia.org/wiki/A">https://en.wikipedia.org/wiki/A</a>*_search_algorithm#Pseudocode. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aed6ae97e85a338e082ec2879629f0f3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aed6ae97e85a338e082ec2879629f0f3b">&#9670;&nbsp;</a></span>cPlannerWiki()</h2>
@@ -291,8 +291,8 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 </table>
 </div><div class="memdoc">
 
-<p>AStar algorithm implementation. </p>
-<p>Initializes start, goal and intermediate nodes (sCurrent and sNext). The frontier m_oFrontier is implemented as a priority queue PriorityQueue&lt;tNode*&gt; and initialized with the start node. All other expanded nodes are store in a std::map oPathCost with their currently best g score value. The algorithm makes use of <a class="el" href="classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f" title="Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal. ">GoalTest()</a>, <a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e" title="Generate a successor node state given a node i_sParent and action i_sAction. ">Child()</a> to generate successor nodes given an action, Traversable to check for the constraints imposed by the overrides.data file, cost methods <a class="el" href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb" title="DEPRECATED Updates the node argument with its path cost  with island seconds as its unit...">UpdateCost()</a> for the step cost, <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> while checking for consistency <a class="el" href="classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c" title="Check if the heuristic of node i_sNode is consistent. ">HeuristicCheck()</a>. In case the goal node is reached, the method <a class="el" href="classplanner_1_1c_planner.html#a8624cb2afb8f2fd216c38b4424013178" title="Reconstructs the best path, considers step size of rover. ">TraversePath()</a> is invoked to move from the goal back to the start node, thereby following the fastest path and setting bit 1 of the overrides map, see <a class="el" href="classplanner_1_1c_graph.html#a6da6e6e269013628aef48245a7787cb9" title="Sets the provided overrides m_poOverrides 8 bit value i_nValue at the provided location while keeping...">planner::cGraph::SetOverrides()</a>. </p><dl class="section return"><dt>Returns</dt><dd>the time it took to find the fastest path in island seconds. </dd></dl>
+<p>AStar algorithm implementation. Overrides <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">cPlanner::AStar()</a> method. </p>
+<p>For the implementation details see <a href="https://en.wikipedia.org/wiki/A">https://en.wikipedia.org/wiki/A</a>*_search_algorithm#Pseudocode. </p>
 <p>The set of nodes already evaluated. Implemented as 2d array filled with 0s and start element set to 1.</p>
 <p>The set of currently discovered nodes that are not evaluated yet. Initially, only the start node is known. <br />
 <br />
@@ -344,23 +344,7 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
  The distance from start to a neighbor</p>
 <p>Mark visited nodes</p>
 <p>Check that heuristic never overestimates the true distance: Priority of a new node should never be lower than the priority of its parent. <br />
- Move from the current node back to the start node</p>
-<p>Define start node</p>
-<p>Create hash of the node using its position</p>
-<p>Get the goal node</p>
-<p>Create current node</p>
-<p>Serves as explored (closed) set and cost to reach a node</p>
-<p>Initialize start node with cost of zero because it does not cost anything to go to it</p>
-<p>Initialize result struct</p>
-<p>Resign if the frontier is empty, which means there are no nodes to expand and the goal has not been found</p>
-<p>Check if the node is already explored and if its path cost got smaller (found a better path to it).</p>
-<p>Check if the heuristic of the node is consistent h(n) &lt;= c(p,n) + h(p).</p>
-<p>Update the evaluation score value and put it on the frontier.</p>
-<p>Mark visited nodes</p>
-<p>Check that heuristic never overestimates the true distance: Priority of a new node should never be lower than the priority of its parent. <br />
-<br />
- Move from the current node back to the start node</p>
-<p>Free memory </p>
+ Move from the current node back to the start node </p>
 
 <p>Reimplemented from <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef">planner::cPlanner</a>.</p>
 
@@ -389,7 +373,7 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 </table>
 </div><div class="memdoc">
 
-<p>Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the <a class="el" href="classplanner_1_1c_planner_wiki.html#a2652cf0e84d0a1fcd17e6c4288179955" title="AStar algorithm implementation. ">AStar()</a> search algorithm. </p>
+<p>Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the <a class="el" href="classplanner_1_1c_planner_wiki.html#a2652cf0e84d0a1fcd17e6c4288179955" title="AStar algorithm implementation. Overrides cPlanner::AStar() method. ">AStar()</a> search algorithm. </p>
 <dl class="section return"><dt>Returns</dt><dd>the time to travel from start to goal if it was found. Otherwise -1 is returned. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e">planner::cPlanner</a>.</p>
