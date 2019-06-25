@@ -13,15 +13,24 @@
 ///\brief Contains functions for plotting overrides data and elevation.
 namespace visualizer {
 
-/// Pixel values
-enum ImagePixelValues
-{
-    IPV_PATH = 0,               // Results in red in the BMP
-    IPV_WATER = 1,              // Results in the water color in the BMP
-    IPV_VISITED = 2,
-    IPV_ELEVATION_BEGIN = 3     // 2-255
-};
+    /// Pixel values
+    enum ImagePixelValues
+    {
+        IPV_PATH = 0,               // Results in red in the BMP
+        IPV_WATER = 1,              // Results in the water color in the BMP
+        IPV_VISITED = 2,
+        IPV_ELEVATION_BEGIN = 3     // 2-255
+    };
 
+    ///\brief Used for the bitset to specify what to visualise in visualizer::write
+    enum tVisualise
+    {
+        LOCATIONS = 0x01,
+        PATH = 0x02,
+        LOCATIONS_PATH = 0x03,
+        VISITED = 0x04,
+        ALL = 0x07
+    };
 
     /**
      * A method to write BMP file contents to a specified ostream.
@@ -54,7 +63,12 @@ enum ImagePixelValues
 
 
     template<typename TLocations>
-    void write(std::string i_strName, uint8_t* i_oElevation, uint8_t* i_oOverrides, std::vector<TLocations> i_asLocation, int i_nImageDim = IMAGE_DIM)
+    void write(std::string i_strName
+            , uint8_t* i_oElevation
+            , uint8_t* i_oOverrides
+            , std::vector<TLocations> i_asLocation
+            , int i_nImageDim = IMAGE_DIM
+            , int i_nVisualise = ALL)
     {
         std::ofstream of(i_strName, std::ofstream::binary);
         visualizer::writeBMP(
@@ -62,33 +76,42 @@ enum ImagePixelValues
                 i_oElevation,
                 i_nImageDim,
                 i_nImageDim,
-                [&] (size_t x, size_t y, uint8_t elevation) {
+                [&] (size_t i_nX, size_t i_nY, uint8_t elevation) {
 
-                    /// Marks interesting positions on the map
-                    for (auto sLocation : i_asLocation)
+                    /// Marks interesting positions on the map (enable using bitset)
+                    if (i_nVisualise & LOCATIONS) {
+                        for (auto sLocation : i_asLocation)
+                        {
+                            if (visualizer::donut(i_nX, i_nY, sLocation.nX, sLocation.nY))
+                            {
+                                return uint8_t(visualizer::IPV_PATH);
+                            }
+                        }
+                    }
+
+                    /// Visualize the found path (enable using bitset)
+                    if (i_nVisualise & PATH)
                     {
-                        if (visualizer::donut(x, y, sLocation.nX, sLocation.nY))
+                        if (visualizer::path(i_nX, i_nY, i_oOverrides, i_nImageDim))
                         {
                             return uint8_t(visualizer::IPV_PATH);
                         }
                     }
 
-                    if (visualizer::path(x, y, i_oOverrides, i_nImageDim))
-                    {
-                        return uint8_t(visualizer::IPV_PATH);
-                    }
-
                     /// Signifies water
-                    if ((i_oOverrides[y * i_nImageDim + x] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
+                    if ((i_oOverrides[i_nY * i_nImageDim + i_nX] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
                         elevation == 0)
                     {
                         return uint8_t(visualizer::IPV_WATER);
                     }
 
-                    /// Signifies visited locations
-                    if (visualizer::visited(x, y, i_oOverrides, i_nImageDim))
+                    /// Signifies visited locations (enable using bitset)
+                    if (i_nVisualise & VISITED)
                     {
-                        return uint8_t(visualizer::IPV_VISITED);
+                        if (visualizer::visited(i_nX, i_nY, i_oOverrides, i_nImageDim))
+                        {
+                            return uint8_t(visualizer::IPV_VISITED);
+                        }
                     }
 
                     /// Signifies normal ground color
