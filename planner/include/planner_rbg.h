@@ -12,7 +12,7 @@
 namespace planner {
 
 
-    ///\brief Extends the planner class to implement A* from Wikipedia
+    ///\brief Extends the planner class to implement A* from Red Blob Games https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus.
     class cPlannerRBG : public cPlanner {
     public:
 
@@ -37,6 +37,8 @@ namespace planner {
         void ReconstructPath(TCostSoFar&& i_cost_so_far, TCameFrom&& i_came_from);
 
     protected:
+        ///\brief AStar algorithm implementation. Overrides cPlanner::AStar() method.
+        ///\details For the implementation details see https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus.
         tResult AStar() override;
     };
 }

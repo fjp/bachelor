@@ -12,7 +12,7 @@
 namespace planner {
 
 
-    ///\brief Extends the planner class to implement A* from Wikipedia
+    ///\brief Extends the planner class to implement A* from Wikipedia https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode
     class cPlannerWiki : public cPlanner {
     public:
 
@@ -38,6 +38,8 @@ namespace planner {
 
 
     protected:
+        ///\brief AStar algorithm implementation. Overrides cPlanner::AStar() method.
+        ///\details For the implementation details see https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode.
         tResult AStar() override;
     };
 }
