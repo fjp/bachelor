@@ -44,7 +44,7 @@ int main(int argc, char** argv)
               << fIslandSeconds/60.0 << " island minutes or " << fIslandSeconds/60.0/60.0 << " island hours) on the fastest path. " << std::endl;
 
     //////////// Output the found path /////////////////////
-    visualizer::write("solution_v2_island_rover_bachelor_wedding.bmp", &elevation[0], &overrides[0], asLocation, IMAGE_DIM, visualizer::LOCATIONS_PATH);
+    visualizer::write("solution_v2_island_rover_bachelor_wedding.bmp", &elevation[0], &overrides[0], asLocation, IMAGE_DIM, visualizer::LOCATIONS_PATH, 2);
 #if __APPLE__
     auto res = system("open solution_v2_island_rover_bachelor_wedding.bmp");
     (void)res;
