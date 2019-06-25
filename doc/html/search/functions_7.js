@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['height',['Height',['../classplanner_1_1c_graph.html#a5c163af76e19303794a908304f3b759e',1,'planner::cGraph::Height() const'],['../classplanner_1_1c_graph.html#a5c163af76e19303794a908304f3b759e',1,'planner::cGraph::Height() const']]],
-  ['heightcost',['HeightCost',['../classplanner_1_1c_planner.html#a9d57a0697bb0e4666f4fd45f77c4a1aa',1,'planner::cPlanner::HeightCost(TLocation &amp;i_sCurrent, TLocation &amp;i_sNext, tAction &amp;i_sAction) const'],['../classplanner_1_1c_planner.html#a9d57a0697bb0e4666f4fd45f77c4a1aa',1,'planner::cPlanner::HeightCost(TLocation &amp;i_sCurrent, TLocation &amp;i_sNext, tAction &amp;i_sAction) const']]],
-  ['heuristic',['Heuristic',['../classplanner_1_1c_planner.html#a77cefeae3d7a58a96c74b66f6be22611',1,'planner::cPlanner::Heuristic(const tLocation &amp;i_sLocation, const tHeuristic i_eHeuristic=OCTILE) const'],['../classplanner_1_1c_planner.html#a77cefeae3d7a58a96c74b66f6be22611',1,'planner::cPlanner::Heuristic(const tLocation &amp;i_sLocation, const tHeuristic i_eHeuristic=OCTILE) const']]],
-  ['heuristiccheck',['HeuristicCheck',['../classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c',1,'planner::cPlanner::HeuristicCheck(std::shared_ptr&lt; tNode &gt; &amp;i_sNode)'],['../classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c',1,'planner::cPlanner::HeuristicCheck(std::shared_ptr&lt; tNode &gt; &amp;i_sNode)']]]
+  ['nodehash',['NodeHash',['../classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f',1,'planner::cPlanner']]]
 ];

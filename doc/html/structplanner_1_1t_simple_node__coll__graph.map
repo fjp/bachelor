@@ -1,0 +1,4 @@
+<map id="planner::tSimpleNode" name="planner::tSimpleNode">
+<area shape="rect" id="node2" href="$structplanner_1_1t_simple_location.html" title="Extended location struct with identifier used as hash value. " alt="" coords="5,79,173,104"/>
+<area shape="rect" id="node3" href="$structplanner_1_1t_location.html" title="Data structure used as location information for nodes. " alt="" coords="26,5,153,31"/>
+</map>

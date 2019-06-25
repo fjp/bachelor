@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['elevation',['Elevation',['../classplanner_1_1c_graph.html#a0e01eaa240f5e4f5020df2d611ab1994',1,'planner::cGraph::Elevation(int i_nX, int i_nY)'],['../classplanner_1_1c_graph.html#a0e01eaa240f5e4f5020df2d611ab1994',1,'planner::cGraph::Elevation(int i_nX, int i_nY)']]],
-  ['empty',['empty',['../structplanner_1_1_priority_queue.html#a459a18939cb4b02517d5a7db19fd829c',1,'planner::PriorityQueue::empty() const'],['../structplanner_1_1_priority_queue.html#a459a18939cb4b02517d5a7db19fd829c',1,'planner::PriorityQueue::empty() const']]]
+  ['height',['Height',['../classplanner_1_1c_graph.html#a5c163af76e19303794a908304f3b759e',1,'planner::cGraph']]],
+  ['heightcost',['HeightCost',['../classplanner_1_1c_planner.html#a9d57a0697bb0e4666f4fd45f77c4a1aa',1,'planner::cPlanner']]],
+  ['heuristic',['Heuristic',['../classplanner_1_1c_planner.html#a77cefeae3d7a58a96c74b66f6be22611',1,'planner::cPlanner']]],
+  ['heuristiccheck',['HeuristicCheck',['../classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c',1,'planner::cPlanner']]]
 ];

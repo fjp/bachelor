@@ -77,7 +77,7 @@ $(function() {
 <h3>Consistent Heuristic</h3>
 <p>A consistent heuristic is ensured with the chosen step cost and height cost model. This is achieved by calculating a normalization factor <code>m_fConsistencyFactor = 1.f - static_cast&lt;double&gt;(m_nMaxGradient) / 255.0;</code>. I assume that <code>255</code> is the maximum that the rover can climb or fall, which is why I divide by 255.0. The normalization factor is then used to normalize the calculated octile heuristic value in <a class="el" href="classplanner_1_1c_planner.html#a77cefeae3d7a58a96c74b66f6be22611" title="Updates the heuristic value of the node located at tlocation i_sLocation. ">planner::cPlanner::Heuristic</a>. To check the consistency of the heuristic during A* I perform the check: h(x) &lt;= d(x,y) + h(y) with x as parent node and y as its successor. In case of an inconsistent heuristic the boolean flag bConsistentHeuristic in the new member struct planner::tResult of cPlannerInterface is set to false. This boolean flag is tested against in the gTests.</p>
 <h3>Memory Leaks</h3>
-<p>I analyzed my previous implementation using valgrind which showed memory leaks when creating child nodes in <a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e" title="Generate a successor node state given a node i_sParent and action i_sAction. ">planner::cPlanner::Child</a>. Additionally because of not destructing the planner and audi rover objects correctly. To overcome these memory leaks I now use smart pointers which are a C++11 feature. The valgrind results for the planner and gTest project are shown in valgrind.xml and valgrind_gtest.xml respectively. See also the memory usage in the Memory Usage section below.</p>
+<p>I analyzed my previous implementation using valgrind which showed memory leaks when creating child nodes in <a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e" title="Generate a successor node state given a node i_sParent and action i_sAction. ">planner::cPlanner::Child</a>. Additionally because of not destructing the planner and audi rover objects correctly. To overcome these memory leaks I now use smart pointers which are a C++11 feature. The valgrind results for the planner and gTest project are shown in <a href="doc/valgrind.xml">doc/valgrind.xml</a> and <a href="valgrind_gtest.xml">valgrind_gtest.xml</a> respectively. See also the memory usage in the Memory Usage section below.</p>
 <h3>Implementation Correctness</h3>
 <p>To verify the correctness of my implemented AStar algorithm, I added two more implementations.</p><ol type="1">
 <li><a href="https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode">Wikipedia A* Pseudocode</a> implemented in class <a class="el" href="classplanner_1_1c_planner_wiki.html" title="Extends the planner class to implement A* from Wikipedia. ">planner::cPlannerWiki</a> which inherits from <a class="el" href="classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e...">planner::cPlanner</a>.</li>
@@ -85,7 +85,13 @@ $(function() {
 </ol>
 <p>Both use less memory than my previous implementation, which can still be found in <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">planner::cPlanner::AStar</a>. Less memory usage is achieved with other data structures. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode). Regarding the computation time, <a class="el" href="classplanner_1_1c_planner_wiki.html#aa673ebc2b1b43af3b13fb0c958c5f2e4">planner::cPlannerWiki::AStar</a> is the fastest implementation. Here preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.</p>
 <h3>gTests using Simple Maps</h3>
-<p>The mentioned implementations are used in new gTests which create and use two simple maps to test if the different implementations yield the same result (regarding travelling time given in island seconds).</p>
+<p>The mentioned implementations are used in new gTests which create and use simple maps to test if the different implementations yield the same results (regarding travelling time given in island seconds).</p>
+<ol type="1">
+<li>simple_map creates a 330x330 map with elevation 1 to check if the implementations find a path from the start to the goal location.</li>
+</ol>
+<div class="image">
+<img src="doc/images/test/simple_map.bmp" alt="Simple Map." width="300"/>
+</div>
 <ol type="1">
 <li>simple_map_with_water creates a 330x330 map with elevation 1 and water such that the greediness and therefore the heuristic is evaluated.</li>
 </ol>
@@ -99,6 +105,7 @@ $(function() {
 <div class="image">
 <img src="doc/images/test/simple_map_with_elevation.bmp" alt="Simple Map with Elevation." width="100"/>
 </div>
+<p>Additional test results can be seen in the image folder <a href="doc/images/test">doc/images/test</a>.</p>
 <h2>C++11 Features</h2>
 <p>Used <a href="https://github.com/AnthonyCalandra/modern-cpp-features">C++11 features</a>:</p><ul>
 <li>smart pointer:<ul>

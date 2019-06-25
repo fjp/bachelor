@@ -9,21 +9,19 @@
 
 {\ttfamily \#include $<$planner\+\_\+interface.\+h$>$}
 
+
+
+Collaboration diagram for planner\+:\+:c\+Planner\+Interface$<$ Directions $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classplanner_1_1c_planner_interface__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a2d99a6f9fe144a0406c040d8da2a6dd4}\label{classplanner_1_1c_planner_interface_a2d99a6f9fe144a0406c040d8da2a6dd4}} 
-\mbox{\hyperlink{classplanner_1_1c_planner_interface_a2d99a6f9fe144a0406c040d8da2a6dd4}{c\+Planner\+Interface}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ Directions $>$$>$ i\+\_\+po\+Rover, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$ i\+\_\+o\+Map)
-\begin{DoxyCompactList}\small\item\em The constructor of the interface which initializes its members m\+\_\+po\+Rover and m\+\_\+o\+Map. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_planner_interface_a7a06632a8c53906daf39611d9692ffa5}{Plan}} ()=0
-\begin{DoxyCompactList}\small\item\em Virtual abstract method of the base interface, which must be implemented to perform a search algorithm. \end{DoxyCompactList}\item 
-virtual bool \mbox{\hyperlink{classplanner_1_1c_planner_interface_afec836d58ce54c49046bf30ecdebbfec}{Goal\+Test}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $>$ \&i\+\_\+s\+First, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $>$ \&i\+\_\+s\+Second) const =0
-\begin{DoxyCompactList}\small\item\em Test if two nodes are the same, which means the goal is reached. \end{DoxyCompactList}\item 
-virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $>$ \mbox{\hyperlink{classplanner_1_1c_planner_interface_a7e2048c2a4c699a76db90d1cbfecf156}{Child}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $>$ \&i\+\_\+s\+Parent, const \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}} \&i\+\_\+s\+Action) const =0
-\begin{DoxyCompactList}\small\item\em Given the action i\+\_\+s\+Action and the parent node i\+\_\+s\+Parent a new node of type \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} is created. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classplanner_1_1c_planner_interface_af7a88d017115e9bfee25c12091062641}\label{classplanner_1_1c_planner_interface_af7a88d017115e9bfee25c12091062641}} 
-\mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_planner_interface_af7a88d017115e9bfee25c12091062641}{Result}} ()
-\begin{DoxyCompactList}\small\item\em Getter to obtain result struct member m\+\_\+s\+Result that contains information about the found path. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classplanner_1_1c_planner_interface_ae09e9120335fce8f331749f492255fca}\label{classplanner_1_1c_planner_interface_ae09e9120335fce8f331749f492255fca}} 
 \mbox{\hyperlink{classplanner_1_1c_planner_interface_ae09e9120335fce8f331749f492255fca}{c\+Planner\+Interface}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ Directions $>$$>$ i\+\_\+po\+Rover, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$ i\+\_\+po\+Map)
 \begin{DoxyCompactList}\small\item\em The constructor of the interface which initializes its members m\+\_\+po\+Rover and m\+\_\+o\+Map. \end{DoxyCompactList}\item 
@@ -42,12 +40,9 @@ virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+N
 \mbox{\Hypertarget{classplanner_1_1c_planner_interface_a78389ea53bd3c9d5c57851a338ee91d8}\label{classplanner_1_1c_planner_interface_a78389ea53bd3c9d5c57851a338ee91d8}} 
 \mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_planner_interface_a78389ea53bd3c9d5c57851a338ee91d8}{m\+\_\+s\+Result}}
 \begin{DoxyCompactList}\small\item\em Information to store planning results such as travelling time and consistency of heuristic. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a4ef4a42f9e26463899f7c54d06580d7f}\label{classplanner_1_1c_planner_interface_a4ef4a42f9e26463899f7c54d06580d7f}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ Directions $>$ $>$ \mbox{\hyperlink{classplanner_1_1c_planner_interface_a4ef4a42f9e26463899f7c54d06580d7f}{m\+\_\+po\+Rover}}
+\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a41f578c25bb96ea00fade4c87aac87dc}\label{classplanner_1_1c_planner_interface_a41f578c25bb96ea00fade4c87aac87dc}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ Directions $>$ $>$ \mbox{\hyperlink{classplanner_1_1c_planner_interface_a41f578c25bb96ea00fade4c87aac87dc}{m\+\_\+po\+Rover}}
 \begin{DoxyCompactList}\small\item\em Reference pointer to the interface of the rover class planner\+::c\+Rover\+Interface$<$\+Directions$>$. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a5145c31369e5092bfcfc836de75a5680}\label{classplanner_1_1c_planner_interface_a5145c31369e5092bfcfc836de75a5680}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$ \mbox{\hyperlink{classplanner_1_1c_planner_interface_a5145c31369e5092bfcfc836de75a5680}{m\+\_\+o\+Map}}
-\begin{DoxyCompactList}\small\item\em Provides the subclasses with important map information such as terrain and elevation maps. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classplanner_1_1c_planner_interface_aa75ba58312d9398785d541a5e580a665}\label{classplanner_1_1c_planner_interface_aa75ba58312d9398785d541a5e580a665}} 
 std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$ \mbox{\hyperlink{classplanner_1_1c_planner_interface_aa75ba58312d9398785d541a5e580a665}{m\+\_\+po\+Map}}
 \begin{DoxyCompactList}\small\item\em Provides the subclasses with important map information such as terrain and elevation maps. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -65,7 +60,7 @@ Forward declaration of planner interface.
 \mbox{\Hypertarget{classplanner_1_1c_planner_interface_a7e2048c2a4c699a76db90d1cbfecf156}\label{classplanner_1_1c_planner_interface_a7e2048c2a4c699a76db90d1cbfecf156}} 
 \index{planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}!Child@{Child}}
 \index{Child@{Child}!planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}}
-\subsubsection{\texorpdfstring{Child()}{Child()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subsubsection{\texorpdfstring{Child()}{Child()}}
 {\footnotesize\ttfamily template$<$size\+\_\+t Directions$>$ \\
 virtual std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}}$>$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{planner\+::c\+Planner\+Interface}}$<$ Directions $>$\+::Child (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $>$ \&}]{i\+\_\+s\+Parent,  }\item[{const \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}} \&}]{i\+\_\+s\+Action }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
@@ -75,27 +70,12 @@ Given the action i\+\_\+s\+Action and the parent node i\+\_\+s\+Parent a new nod
 
 Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface. 
 
-Implemented in \mbox{\hyperlink{classplanner_1_1c_planner_adbffc6ce05119c940a09369d7e61554e}{planner\+::c\+Planner}}, and \mbox{\hyperlink{classplanner_1_1c_planner_ab260cfcb0ad00d46b02148d19faf040d}{planner\+::c\+Planner}}.
-
-\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a7e2048c2a4c699a76db90d1cbfecf156}\label{classplanner_1_1c_planner_interface_a7e2048c2a4c699a76db90d1cbfecf156}} 
-\index{planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}!Child@{Child}}
-\index{Child@{Child}!planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}}
-\subsubsection{\texorpdfstring{Child()}{Child()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$size\+\_\+t Directions$>$ \\
-virtual std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}}$>$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{planner\+::c\+Planner\+Interface}}$<$ Directions $>$\+::Child (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $>$ \&}]{i\+\_\+s\+Parent,  }\item[{const \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}} \&}]{i\+\_\+s\+Action }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
-
-
-
-Given the action i\+\_\+s\+Action and the parent node i\+\_\+s\+Parent a new node of type \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} is created. 
-
-Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface. 
-
-Implemented in \mbox{\hyperlink{classplanner_1_1c_planner_adbffc6ce05119c940a09369d7e61554e}{planner\+::c\+Planner}}, and \mbox{\hyperlink{classplanner_1_1c_planner_ab260cfcb0ad00d46b02148d19faf040d}{planner\+::c\+Planner}}.
+Implemented in \mbox{\hyperlink{classplanner_1_1c_planner_adbffc6ce05119c940a09369d7e61554e}{planner\+::c\+Planner}}.
 
 \mbox{\Hypertarget{classplanner_1_1c_planner_interface_afec836d58ce54c49046bf30ecdebbfec}\label{classplanner_1_1c_planner_interface_afec836d58ce54c49046bf30ecdebbfec}} 
 \index{planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}!Goal\+Test@{Goal\+Test}}
 \index{Goal\+Test@{Goal\+Test}!planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}}
-\subsubsection{\texorpdfstring{Goal\+Test()}{GoalTest()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subsubsection{\texorpdfstring{Goal\+Test()}{GoalTest()}}
 {\footnotesize\ttfamily template$<$size\+\_\+t Directions$>$ \\
 virtual bool \mbox{\hyperlink{classplanner_1_1c_planner_interface}{planner\+::c\+Planner\+Interface}}$<$ Directions $>$\+::Goal\+Test (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $>$ \&}]{i\+\_\+s\+First,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $>$ \&}]{i\+\_\+s\+Second }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
@@ -105,27 +85,12 @@ Test if two nodes are the same, which means the goal is reached.
 
 Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface. 
 
-Implemented in \mbox{\hyperlink{classplanner_1_1c_planner_a6b7554394efd7ad10d76a49b370aa62f}{planner\+::c\+Planner}}, and \mbox{\hyperlink{classplanner_1_1c_planner_a7050795c7174d0ec427fc91f8756a3d8}{planner\+::c\+Planner}}.
-
-\mbox{\Hypertarget{classplanner_1_1c_planner_interface_afec836d58ce54c49046bf30ecdebbfec}\label{classplanner_1_1c_planner_interface_afec836d58ce54c49046bf30ecdebbfec}} 
-\index{planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}!Goal\+Test@{Goal\+Test}}
-\index{Goal\+Test@{Goal\+Test}!planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}}
-\subsubsection{\texorpdfstring{Goal\+Test()}{GoalTest()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$size\+\_\+t Directions$>$ \\
-virtual bool \mbox{\hyperlink{classplanner_1_1c_planner_interface}{planner\+::c\+Planner\+Interface}}$<$ Directions $>$\+::Goal\+Test (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $>$ \&}]{i\+\_\+s\+First,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} $>$ \&}]{i\+\_\+s\+Second }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
-
-
-
-Test if two nodes are the same, which means the goal is reached. 
-
-Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface. 
-
-Implemented in \mbox{\hyperlink{classplanner_1_1c_planner_a6b7554394efd7ad10d76a49b370aa62f}{planner\+::c\+Planner}}, and \mbox{\hyperlink{classplanner_1_1c_planner_a7050795c7174d0ec427fc91f8756a3d8}{planner\+::c\+Planner}}.
+Implemented in \mbox{\hyperlink{classplanner_1_1c_planner_a6b7554394efd7ad10d76a49b370aa62f}{planner\+::c\+Planner}}.
 
 \mbox{\Hypertarget{classplanner_1_1c_planner_interface_a7a06632a8c53906daf39611d9692ffa5}\label{classplanner_1_1c_planner_interface_a7a06632a8c53906daf39611d9692ffa5}} 
 \index{planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}!Plan@{Plan}}
 \index{Plan@{Plan}!planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}}
-\subsubsection{\texorpdfstring{Plan()}{Plan()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subsubsection{\texorpdfstring{Plan()}{Plan()}}
 {\footnotesize\ttfamily template$<$size\+\_\+t Directions$>$ \\
 virtual \mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_planner_interface}{planner\+::c\+Planner\+Interface}}$<$ Directions $>$\+::Plan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
@@ -138,28 +103,10 @@ The cost to move from start to goal if it was found. Otherwise -\/1 is returned.
 \end{DoxyReturn}
 
 
-Implemented in \mbox{\hyperlink{classplanner_1_1c_planner_a21230c015260b9fc34ad2f239592470e}{planner\+::c\+Planner}}, \mbox{\hyperlink{classplanner_1_1c_planner_a21230c015260b9fc34ad2f239592470e}{planner\+::c\+Planner}}, \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g_a0bbd752702da582a47dbd153c0065eb5}{planner\+::c\+Planner\+R\+BG}}, \mbox{\hyperlink{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}{planner\+::c\+Planner\+Wiki}}, \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g_a0bbd752702da582a47dbd153c0065eb5}{planner\+::c\+Planner\+R\+BG}}, and \mbox{\hyperlink{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}{planner\+::c\+Planner\+Wiki}}.
-
-\mbox{\Hypertarget{classplanner_1_1c_planner_interface_a7a06632a8c53906daf39611d9692ffa5}\label{classplanner_1_1c_planner_interface_a7a06632a8c53906daf39611d9692ffa5}} 
-\index{planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}!Plan@{Plan}}
-\index{Plan@{Plan}!planner\+::c\+Planner\+Interface@{planner\+::c\+Planner\+Interface}}
-\subsubsection{\texorpdfstring{Plan()}{Plan()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$size\+\_\+t Directions$>$ \\
-virtual \mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_planner_interface}{planner\+::c\+Planner\+Interface}}$<$ Directions $>$\+::Plan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
-
-
-
-Virtual abstract method of the base interface, which must be implemented to perform a search algorithm. 
-
-\begin{DoxyReturn}{Returns}
-The cost to move from start to goal if it was found. Otherwise -\/1 is returned. 
-\end{DoxyReturn}
-
-
-Implemented in \mbox{\hyperlink{classplanner_1_1c_planner_a21230c015260b9fc34ad2f239592470e}{planner\+::c\+Planner}}, \mbox{\hyperlink{classplanner_1_1c_planner_a21230c015260b9fc34ad2f239592470e}{planner\+::c\+Planner}}, \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g_a0bbd752702da582a47dbd153c0065eb5}{planner\+::c\+Planner\+R\+BG}}, \mbox{\hyperlink{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}{planner\+::c\+Planner\+Wiki}}, \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g_a0bbd752702da582a47dbd153c0065eb5}{planner\+::c\+Planner\+R\+BG}}, and \mbox{\hyperlink{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}{planner\+::c\+Planner\+Wiki}}.
+Implemented in \mbox{\hyperlink{classplanner_1_1c_planner_a21230c015260b9fc34ad2f239592470e}{planner\+::c\+Planner}}, \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g_a0bbd752702da582a47dbd153c0065eb5}{planner\+::c\+Planner\+R\+BG}}, and \mbox{\hyperlink{classplanner_1_1c_planner_wiki_a9d18be721400b51162ff463ab11d1721}{planner\+::c\+Planner\+Wiki}}.
 
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/include/planner\+\_\+interface.\+h\end{DoxyCompactItemize}
+/\+Users/fjp/git/bachelor/planner/include/planner\+\_\+interface.\+h\end{DoxyCompactItemize}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['branchfiles',['BranchFiles',['../classrelease__docs_1_1_wiki_brancher.html#a5ef284f7e1742f465ecd0c14d2667327',1,'release_docs::WikiBrancher']]]
+  ['donut',['donut',['../namespacevisualizer.html#a7ff2fee7ef1cf41bc0f273d730f38abc',1,'visualizer']]]
 ];

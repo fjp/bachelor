@@ -9,50 +9,18 @@ Forward declaration of interface \mbox{\hyperlink{classplanner_1_1c_rover_interf
 
 {\ttfamily \#include $<$planner\+\_\+interface.\+h$>$}
 
+
+
+Collaboration diagram for planner\+:\+:c\+Rover\+Interface$<$ Directions $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{classplanner_1_1c_rover_interface__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_a7fedea18832ad850de1a2589fdca88b7}\label{classplanner_1_1c_rover_interface_a7fedea18832ad850de1a2589fdca88b7}} 
-virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}$<$ Directions $>$ $>$ {\bfseries Initialize\+Planner} (const int \&i\+\_\+n\+Step\+Size, const int \&i\+\_\+n\+Velocity, std\+::string \&\&i\+\_\+str\+Algorithm)=0
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_ad2b552aaf43f7ce5af340d05b5657267}\label{classplanner_1_1c_rover_interface_ad2b552aaf43f7ce5af340d05b5657267}} 
-double \mbox{\hyperlink{classplanner_1_1c_rover_interface_ad2b552aaf43f7ce5af340d05b5657267}{Cost\+Straight}} () const
-\begin{DoxyCompactList}\small\item\em Getter and Setter for the private member varialbes. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_ab4c45b0f0c586f864a83ba90be06efd0}\label{classplanner_1_1c_rover_interface_ab4c45b0f0c586f864a83ba90be06efd0}} 
-double {\bfseries Cost\+Diagonal} () const
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_ac2f57f4b9bf2c01fbcf1ca3c6d1fc55d}\label{classplanner_1_1c_rover_interface_ac2f57f4b9bf2c01fbcf1ca3c6d1fc55d}} 
-void {\bfseries Set\+Cost\+Straight} (double i\+\_\+f\+Cost\+Straight)
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_a3aa2779928912477dcf76c7767ea746d}\label{classplanner_1_1c_rover_interface_a3aa2779928912477dcf76c7767ea746d}} 
-void {\bfseries Set\+Cost\+Diagonal} (double i\+\_\+f\+Cost\+Diagonal)
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_ad62c6dcbe7c8194c6a93ca1fc29ee4b8}\label{classplanner_1_1c_rover_interface_ad62c6dcbe7c8194c6a93ca1fc29ee4b8}} 
-\mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \& {\bfseries Start} ()
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_a29669ceb2b1f4cebf0953b59e3c8936a}\label{classplanner_1_1c_rover_interface_a29669ceb2b1f4cebf0953b59e3c8936a}} 
-void {\bfseries Set\+Start} (const \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \&i\+\_\+s\+Start)
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_a5a02ffb5e04d128bf81567da55807850}\label{classplanner_1_1c_rover_interface_a5a02ffb5e04d128bf81567da55807850}} 
-\mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \& {\bfseries Goal} ()
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_a8f0e30cf351e8cb7ba75622273056343}\label{classplanner_1_1c_rover_interface_a8f0e30cf351e8cb7ba75622273056343}} 
-void {\bfseries Set\+Goal} (const \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \&i\+\_\+s\+Goal)
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_a2a10c0d42c89adefa46390fe351583a2}\label{classplanner_1_1c_rover_interface_a2a10c0d42c89adefa46390fe351583a2}} 
-int {\bfseries Step\+Size} () const
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_ac6410b636f0f2d5614e3463912f9646f}\label{classplanner_1_1c_rover_interface_ac6410b636f0f2d5614e3463912f9646f}} 
-void {\bfseries Set\+Step\+Size} (int i\+\_\+n\+Step\+Size)
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_a65279be04ab88f54d69204087503448b}\label{classplanner_1_1c_rover_interface_a65279be04ab88f54d69204087503448b}} 
-int {\bfseries Velocity} () const
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_a209a069d48223e427e27e4582037b158}\label{classplanner_1_1c_rover_interface_a209a069d48223e427e27e4582037b158}} 
-void {\bfseries Set\+Velocity} (int i\+\_\+n\+Velocity)
-\item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_aeab2cd88b65b86f42cfbb5b063d3f9d1}\label{classplanner_1_1c_rover_interface_aeab2cd88b65b86f42cfbb5b063d3f9d1}} 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}$<$ Directions $>$ $>$ {\bfseries Get\+Planner} () const
 \item 
 \mbox{\Hypertarget{classplanner_1_1c_rover_interface_a7fedea18832ad850de1a2589fdca88b7}\label{classplanner_1_1c_rover_interface_a7fedea18832ad850de1a2589fdca88b7}} 
 virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}$<$ Directions $>$ $>$ {\bfseries Initialize\+Planner} (const int \&i\+\_\+n\+Step\+Size, const int \&i\+\_\+n\+Velocity, std\+::string \&\&i\+\_\+str\+Algorithm)=0
@@ -99,13 +67,13 @@ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_ae706ad1952c9761f6183d4776b3aabec}\label{classplanner_1_1c_rover_interface_ae706ad1952c9761f6183d4776b3aabec}} 
-std\+::array$<$ \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}}, Directions $>$ \mbox{\hyperlink{classplanner_1_1c_rover_interface_ae706ad1952c9761f6183d4776b3aabec}{m\+\_\+as\+Actions}}
+\mbox{\Hypertarget{classplanner_1_1c_rover_interface_a119c31cfd1e6aa72921fc5185e6f44a5}\label{classplanner_1_1c_rover_interface_a119c31cfd1e6aa72921fc5185e6f44a5}} 
+std\+::array$<$ \mbox{\hyperlink{structplanner_1_1t_action}{t\+Action}}, Directions $>$ \mbox{\hyperlink{classplanner_1_1c_rover_interface_a119c31cfd1e6aa72921fc5185e6f44a5}{m\+\_\+as\+Actions}}
 \begin{DoxyCompactList}\small\item\em Array that contains the number of actions in which the robot can move. It has a template size parameter Directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}$<$ Directions $>$ $>$ \mbox{\hyperlink{classplanner_1_1c_rover_interface_af2922d392a98ab42a3f8e706851a4813}{m\+\_\+po\+Planner}}
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}$<$ Directions $>$ $>$ \mbox{\hyperlink{classplanner_1_1c_rover_interface_a22d4f0d40dd064d62ed75da9728601ea}{m\+\_\+po\+Planner}}
 \begin{DoxyCompactList}\small\item\em Pointer to an abstract planner interface. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classplanner_1_1c_rover_interface_a42552f6e5f1f2909821eaef8535a9979}\label{classplanner_1_1c_rover_interface_a42552f6e5f1f2909821eaef8535a9979}} 
 \mbox{\hyperlink{structplanner_1_1t_location}{t\+Location}} \mbox{\hyperlink{classplanner_1_1c_rover_interface_a42552f6e5f1f2909821eaef8535a9979}{m\+\_\+s\+Start}}
@@ -134,12 +102,12 @@ class planner\+::c\+Rover\+Interface$<$ Directions $>$}
 Forward declaration of interface \mbox{\hyperlink{classplanner_1_1c_rover_interface}{planner\+::c\+Rover\+Interface}}. 
 
 \subsection{Member Data Documentation}
-\mbox{\Hypertarget{classplanner_1_1c_rover_interface_af2922d392a98ab42a3f8e706851a4813}\label{classplanner_1_1c_rover_interface_af2922d392a98ab42a3f8e706851a4813}} 
+\mbox{\Hypertarget{classplanner_1_1c_rover_interface_a22d4f0d40dd064d62ed75da9728601ea}\label{classplanner_1_1c_rover_interface_a22d4f0d40dd064d62ed75da9728601ea}} 
 \index{planner\+::c\+Rover\+Interface@{planner\+::c\+Rover\+Interface}!m\+\_\+po\+Planner@{m\+\_\+po\+Planner}}
 \index{m\+\_\+po\+Planner@{m\+\_\+po\+Planner}!planner\+::c\+Rover\+Interface@{planner\+::c\+Rover\+Interface}}
 \subsubsection{\texorpdfstring{m\+\_\+po\+Planner}{m\_poPlanner}}
 {\footnotesize\ttfamily template$<$size\+\_\+t Directions$>$ \\
-std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}$<$ Directions $>$ $>$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{planner\+::c\+Rover\+Interface}}$<$ Directions $>$\+::m\+\_\+po\+Planner\hspace{0.3cm}{\ttfamily [protected]}}
+std\+::weak\+\_\+ptr$<$\mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}$<$Directions$>$ $>$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{planner\+::c\+Rover\+Interface}}$<$ Directions $>$\+::m\+\_\+po\+Planner\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -149,5 +117,5 @@ An implementation of this interface should initialize m\+\_\+po\+Planner.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/include/planner\+\_\+interface.\+h\item 
-/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/include/rover\+\_\+interface.\+h\end{DoxyCompactItemize}
+/\+Users/fjp/git/bachelor/planner/include/planner\+\_\+interface.\+h\item 
+/\+Users/fjp/git/bachelor/planner/include/rover\+\_\+interface.\+h\end{DoxyCompactItemize}

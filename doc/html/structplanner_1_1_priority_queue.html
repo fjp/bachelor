@@ -78,13 +78,10 @@ $(function() {
 <p>Priority queue servers as frontier that stores the best nodes explored during <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">planner::cPlanner::AStar()</a>.  
  <a href="structplanner_1_1_priority_queue.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2priority__queue_8h_source.html">priority_queue.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="priority__queue_8h_source.html">priority_queue.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ae0445a3c85c4e139fcf28479a800f019"><td class="memItemLeft" align="right" valign="top"><a id="ae0445a3c85c4e139fcf28479a800f019"></a>
-typedef std::pair&lt; priority_t, T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PQElement</b></td></tr>
-<tr class="separator:ae0445a3c85c4e139fcf28479a800f019"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0445a3c85c4e139fcf28479a800f019"><td class="memItemLeft" align="right" valign="top"><a id="ae0445a3c85c4e139fcf28479a800f019"></a>
 typedef std::pair&lt; priority_t, T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PQElement</b></td></tr>
 <tr class="separator:ae0445a3c85c4e139fcf28479a800f019"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,41 +108,28 @@ T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structp
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1_priority_queue.html#aa98bde3a7a3256915f80e1e61572214b">clear</a> ()</td></tr>
 <tr class="memdesc:aa98bde3a7a3256915f80e1e61572214b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all elements by overriding the struct field oElements. <br /></td></tr>
 <tr class="separator:aa98bde3a7a3256915f80e1e61572214b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a459a18939cb4b02517d5a7db19fd829c"><td class="memItemLeft" align="right" valign="top"><a id="a459a18939cb4b02517d5a7db19fd829c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1_priority_queue.html#a459a18939cb4b02517d5a7db19fd829c">empty</a> () const</td></tr>
-<tr class="memdesc:a459a18939cb4b02517d5a7db19fd829c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the queue is empty, which is used get new best nodes or resign because no path to the goal was found. <br /></td></tr>
-<tr class="separator:a459a18939cb4b02517d5a7db19fd829c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb6cb790e6a592d22a2f05441bfbf23b"><td class="memItemLeft" align="right" valign="top"><a id="afb6cb790e6a592d22a2f05441bfbf23b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1_priority_queue.html#afb6cb790e6a592d22a2f05441bfbf23b">put</a> (T item, priority_t priority)</td></tr>
-<tr class="memdesc:afb6cb790e6a592d22a2f05441bfbf23b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds new nodes to the priority queue, which is used when their path costs are lower than previously stored, see <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">planner::cPlanner::AStar()</a>. <br /></td></tr>
-<tr class="separator:afb6cb790e6a592d22a2f05441bfbf23b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abdd3d392da157bb645b5720eace1200a"><td class="memItemLeft" align="right" valign="top"><a id="abdd3d392da157bb645b5720eace1200a"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1_priority_queue.html#abdd3d392da157bb645b5720eace1200a">get</a> ()</td></tr>
-<tr class="memdesc:abdd3d392da157bb645b5720eace1200a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the best element in the queue and remove it. <br /></td></tr>
-<tr class="separator:abdd3d392da157bb645b5720eace1200a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abba3d8fcc5729acc424b1fbc38c94e84"><td class="memItemLeft" align="right" valign="top"><a id="abba3d8fcc5729acc424b1fbc38c94e84"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1_priority_queue.html#abba3d8fcc5729acc424b1fbc38c94e84">pop</a> ()</td></tr>
-<tr class="memdesc:abba3d8fcc5729acc424b1fbc38c94e84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the best element from the queue without removing it. <br /></td></tr>
-<tr class="separator:abba3d8fcc5729acc424b1fbc38c94e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa98bde3a7a3256915f80e1e61572214b"><td class="memItemLeft" align="right" valign="top"><a id="aa98bde3a7a3256915f80e1e61572214b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1_priority_queue.html#aa98bde3a7a3256915f80e1e61572214b">clear</a> ()</td></tr>
-<tr class="memdesc:aa98bde3a7a3256915f80e1e61572214b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all elements by overriding the struct field oElements. <br /></td></tr>
-<tr class="separator:aa98bde3a7a3256915f80e1e61572214b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a17b97e9a14688c54abec4de74b4b790f"><td class="memItemLeft" align="right" valign="top"><a id="a17b97e9a14688c54abec4de74b4b790f"></a>
+<tr class="memitem:ac8dd7ed5a5d4b65eed6ccbe2b503dd3b"><td class="memItemLeft" align="right" valign="top"><a id="ac8dd7ed5a5d4b65eed6ccbe2b503dd3b"></a>
 std::priority_queue&lt; PQElement, std::vector&lt; PQElement &gt;, std::greater&lt; PQElement &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>oElements</b></td></tr>
-<tr class="separator:a17b97e9a14688c54abec4de74b4b790f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ac8dd7ed5a5d4b65eed6ccbe2b503dd3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T, typename priority_t&gt;<br />
 struct planner::PriorityQueue&lt; T, priority_t &gt;</h3>
 
 <p>Priority queue servers as frontier that stores the best nodes explored during <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">planner::cPlanner::AStar()</a>. </p>
-<p>The priority queue is sorted by the evaluation function value <img class="formulaInl" alt="$f(n)$" src="form_2.png"/>. </p>
+<p>The priority queue is sorted by the evaluation function value <img class="formulaInl" alt="$f(n)$" src="form_2.png"/>. Code from <a href="https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus">https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus</a></p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>element of the queue such as a node with location information. </td></tr>
+    <tr><td class="paramname">priority_t</td><td>specifies the importance of a node (f score value). </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/include/<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2priority__queue_8h_source.html">priority_queue.h</a></li>
+<li>/Users/fjp/git/bachelor/planner/include/<a class="el" href="priority__queue_8h_source.html">priority_queue.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

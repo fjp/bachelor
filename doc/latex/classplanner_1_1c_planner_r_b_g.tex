@@ -9,24 +9,29 @@ Extends the planner class to implement A$\ast$ from Wikipedia.
 
 {\ttfamily \#include $<$planner\+\_\+rbg.\+h$>$}
 
-Inheritance diagram for planner\+:\+:c\+Planner\+R\+BG\+:\begin{figure}[H]
+
+
+Inheritance diagram for planner\+:\+:c\+Planner\+R\+BG\+:
+\nopagebreak
+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.089552cm]{classplanner_1_1c_planner_r_b_g}
+\includegraphics[width=236pt]{classplanner_1_1c_planner_r_b_g__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for planner\+:\+:c\+Planner\+R\+BG\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classplanner_1_1c_planner_r_b_g__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classplanner_1_1c_planner_r_b_g_a91296b98e64effc16f38e2430746d94d}{c\+Planner\+R\+BG}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ 8 $>$$>$ i\+\_\+po\+Rover, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$ i\+\_\+o\+Map)
-\begin{DoxyCompactList}\small\item\em Initializes member variables m\+\_\+po\+Rover and m\+\_\+o\+Map and calls \mbox{\hyperlink{classplanner_1_1c_planner_a2e5a745f83f903662eff914d8beddb5e}{Calculate\+Consistency\+Factor()}}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classplanner_1_1c_planner_r_b_g_ad582fdf21ae0d86a23e9c25546b66f0e}\label{classplanner_1_1c_planner_r_b_g_ad582fdf21ae0d86a23e9c25546b66f0e}} 
-\mbox{\hyperlink{classplanner_1_1c_planner_r_b_g_ad582fdf21ae0d86a23e9c25546b66f0e}{$\sim$c\+Planner\+R\+BG}} ()
-\begin{DoxyCompactList}\small\item\em Destructor to delete the allocated memory. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structt_result}{t\+Result}} \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g_a0bbd752702da582a47dbd153c0065eb5}{Plan}} () override
-\begin{DoxyCompactList}\small\item\em Override of the base interface \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}, which invokes the A\+Star() search algorithm. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T\+Cost\+So\+Far , typename T\+Came\+From $>$ }\\void \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g_a1af74d398b286f1e05e6ade495efbbd0}{Reconstruct\+Path}} (T\+Cost\+So\+Far \&\&i\+\_\+cost\+\_\+so\+\_\+far, T\+Came\+From \&\&i\+\_\+came\+\_\+from)
-\begin{DoxyCompactList}\small\item\em Given the node i\+\_\+ps\+Node the overrides map m\+\_\+po\+Overrides is updated for displaying the path. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g_a91296b98e64effc16f38e2430746d94d}{c\+Planner\+R\+BG}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ 8 $>$$>$ i\+\_\+po\+Rover, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$ i\+\_\+o\+Map)
 \begin{DoxyCompactList}\small\item\em Initializes member variables m\+\_\+po\+Rover and m\+\_\+o\+Map and calls \mbox{\hyperlink{classplanner_1_1c_planner_a2e5a745f83f903662eff914d8beddb5e}{Calculate\+Consistency\+Factor()}}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classplanner_1_1c_planner_r_b_g_ad582fdf21ae0d86a23e9c25546b66f0e}\label{classplanner_1_1c_planner_r_b_g_ad582fdf21ae0d86a23e9c25546b66f0e}} 
@@ -46,17 +51,7 @@ Extends the planner class to implement A$\ast$ from Wikipedia.
 \mbox{\Hypertarget{classplanner_1_1c_planner_r_b_g_a91296b98e64effc16f38e2430746d94d}\label{classplanner_1_1c_planner_r_b_g_a91296b98e64effc16f38e2430746d94d}} 
 \index{planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}!c\+Planner\+R\+BG@{c\+Planner\+R\+BG}}
 \index{c\+Planner\+R\+BG@{c\+Planner\+R\+BG}!planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}}
-\subsubsection{\texorpdfstring{c\+Planner\+R\+B\+G()}{cPlannerRBG()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily planner\+::c\+Planner\+R\+B\+G\+::c\+Planner\+R\+BG (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ 8 $>$$>$}]{i\+\_\+po\+Rover,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$}]{i\+\_\+o\+Map }\end{DoxyParamCaption})}
-
-
-
-Initializes member variables m\+\_\+po\+Rover and m\+\_\+o\+Map and calls \mbox{\hyperlink{classplanner_1_1c_planner_a2e5a745f83f903662eff914d8beddb5e}{Calculate\+Consistency\+Factor()}}. 
-
-The \mbox{\Hypertarget{classplanner_1_1c_planner_r_b_g_a91296b98e64effc16f38e2430746d94d}\label{classplanner_1_1c_planner_r_b_g_a91296b98e64effc16f38e2430746d94d}} 
-\index{planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}!c\+Planner\+R\+BG@{c\+Planner\+R\+BG}}
-\index{c\+Planner\+R\+BG@{c\+Planner\+R\+BG}!planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}}
-\subsubsection{\texorpdfstring{c\+Planner\+R\+B\+G()}{cPlannerRBG()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subsubsection{\texorpdfstring{c\+Planner\+R\+B\+G()}{cPlannerRBG()}}
 {\footnotesize\ttfamily planner\+::c\+Planner\+R\+B\+G\+::c\+Planner\+R\+BG (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_rover_interface}{c\+Rover\+Interface}}$<$ 8 $>$$>$}]{i\+\_\+po\+Rover,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classplanner_1_1c_graph}{c\+Graph}} $>$}]{i\+\_\+o\+Map }\end{DoxyParamCaption})}
 
 
@@ -69,24 +64,7 @@ The
 \mbox{\Hypertarget{classplanner_1_1c_planner_r_b_g_a0bbd752702da582a47dbd153c0065eb5}\label{classplanner_1_1c_planner_r_b_g_a0bbd752702da582a47dbd153c0065eb5}} 
 \index{planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}!Plan@{Plan}}
 \index{Plan@{Plan}!planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}}
-\subsubsection{\texorpdfstring{Plan()}{Plan()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structt_result}{t\+Result}} planner\+::c\+Planner\+R\+B\+G\+::\+Plan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Override of the base interface \mbox{\hyperlink{classplanner_1_1c_planner_interface}{c\+Planner\+Interface}}, which invokes the A\+Star() search algorithm. 
-
-\begin{DoxyReturn}{Returns}
-the time to travel from start to goal if it was found. Otherwise -\/1 is returned. 
-\end{DoxyReturn}
-
-
-Reimplemented from \mbox{\hyperlink{classplanner_1_1c_planner_a21230c015260b9fc34ad2f239592470e}{planner\+::c\+Planner}}.
-
-\mbox{\Hypertarget{classplanner_1_1c_planner_r_b_g_a0bbd752702da582a47dbd153c0065eb5}\label{classplanner_1_1c_planner_r_b_g_a0bbd752702da582a47dbd153c0065eb5}} 
-\index{planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}!Plan@{Plan}}
-\index{Plan@{Plan}!planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}}
-\subsubsection{\texorpdfstring{Plan()}{Plan()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subsubsection{\texorpdfstring{Plan()}{Plan()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structt_result}{t\+Result}} planner\+::c\+Planner\+R\+B\+G\+::\+Plan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -103,7 +81,7 @@ Reimplemented from \mbox{\hyperlink{classplanner_1_1c_planner_a21230c015260b9fc3
 \mbox{\Hypertarget{classplanner_1_1c_planner_r_b_g_a1af74d398b286f1e05e6ade495efbbd0}\label{classplanner_1_1c_planner_r_b_g_a1af74d398b286f1e05e6ade495efbbd0}} 
 \index{planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}!Reconstruct\+Path@{Reconstruct\+Path}}
 \index{Reconstruct\+Path@{Reconstruct\+Path}!planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}}
-\subsubsection{\texorpdfstring{Reconstruct\+Path()}{ReconstructPath()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subsubsection{\texorpdfstring{Reconstruct\+Path()}{ReconstructPath()}}
 {\footnotesize\ttfamily template$<$typename T\+Cost\+So\+Far , typename T\+Came\+From $>$ \\
 void planner\+::c\+Planner\+R\+B\+G\+::\+Reconstruct\+Path (\begin{DoxyParamCaption}\item[{T\+Cost\+So\+Far \&\&}]{i\+\_\+cost\+\_\+so\+\_\+far,  }\item[{T\+Came\+From \&\&}]{i\+\_\+came\+\_\+from }\end{DoxyParamCaption})}
 
@@ -116,38 +94,6 @@ Traversing a path takes place using the m\+\_\+ps\+Parent field of the \mbox{\hy
 \mbox{\tt in}  & {\em i\+\_\+ps\+Node} & Goal node or any other which is traversed back \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classplanner_1_1c_planner_r_b_g_a1af74d398b286f1e05e6ade495efbbd0}\label{classplanner_1_1c_planner_r_b_g_a1af74d398b286f1e05e6ade495efbbd0}} 
-\index{planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}!Reconstruct\+Path@{Reconstruct\+Path}}
-\index{Reconstruct\+Path@{Reconstruct\+Path}!planner\+::c\+Planner\+R\+BG@{planner\+::c\+Planner\+R\+BG}}
-\subsubsection{\texorpdfstring{Reconstruct\+Path()}{ReconstructPath()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename T\+Cost\+So\+Far , typename T\+Came\+From $>$ \\
-void planner\+::c\+Planner\+R\+B\+G\+::\+Reconstruct\+Path (\begin{DoxyParamCaption}\item[{T\+Cost\+So\+Far \&\&}]{i\+\_\+cost\+\_\+so\+\_\+far,  }\item[{T\+Came\+From \&\&}]{i\+\_\+came\+\_\+from }\end{DoxyParamCaption})}
-
-
-
-Given the node i\+\_\+ps\+Node the overrides map m\+\_\+po\+Overrides is updated for displaying the path. 
-
-Traversing a path takes place using the m\+\_\+ps\+Parent field of the \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} struct. 
-\begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em i\+\_\+ps\+Node} & Goal node or any other which is traversed back \\
-\hline
-\end{DoxyParams}
-Reconstruct the path by going backward from the goal location
-
-Set the cost (time) it takes to get to the goal
-
-Update cumulative elevation
-
-Store path in overrides
-
-Check if the current node is the start node
-
-Move towards the start
-
-Update cumulative elevation
-
-Store path in overrides
-
 Reconstruct the path by going backward from the goal location
 
 Set the cost (time) it takes to get to the goal
@@ -166,5 +112,5 @@ Store path in overrides
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/include/planner\+\_\+rbg.\+h\item 
-/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/src/planner\+\_\+rbg.\+cpp\end{DoxyCompactItemize}
+/\+Users/fjp/git/bachelor/planner/include/planner\+\_\+rbg.\+h\item 
+/\+Users/fjp/git/bachelor/planner/src/planner\+\_\+rbg.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,4 @@
+<map id="planner::tNode" name="planner::tNode">
+<area shape="rect" id="node2" href="$structplanner_1_1t_action.html" title="Action struct, used to specify the motion direction and the cost it takes to move in that direction..." alt="" coords="5,5,119,31"/>
+<area shape="rect" id="node3" href="$structplanner_1_1t_location.html" title="Data structure used as location information for nodes. " alt="" coords="143,5,270,31"/>
+</map>

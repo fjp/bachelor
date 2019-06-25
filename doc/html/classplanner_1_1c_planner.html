@@ -79,110 +79,40 @@ $(function() {
 <p>Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size eight.  
  <a href="classplanner_1_1c_planner.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2planner_8h_source.html">planner.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="planner_8h_source.html">planner.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for planner::cPlanner:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classplanner_1_1c_planner.png" usemap="#planner::cPlanner_map" alt=""/>
-  <map id="planner::cPlanner_map" name="planner::cPlanner_map">
-<area href="classplanner_1_1c_planner_interface.html" alt="planner::cPlannerInterface&lt; 8 &gt;" shape="rect" coords="203,0,396,24"/>
-<area href="classplanner_1_1c_planner_interface.html" alt="planner::cPlannerInterface&lt; 8 &gt;" shape="rect" coords="406,0,599,24"/>
-<area href="classplanner_1_1c_planner_r_b_g.html" title="Extends the planner class to implement A* from Wikipedia. " alt="planner::cPlannerRBG" shape="rect" coords="0,112,193,136"/>
-<area href="classplanner_1_1c_planner_r_b_g.html" title="Extends the planner class to implement A* from Wikipedia. " alt="planner::cPlannerRBG" shape="rect" coords="203,112,396,136"/>
-<area href="classplanner_1_1c_planner_wiki.html" title="Extends the planner class to implement A* from Wikipedia. " alt="planner::cPlannerWiki" shape="rect" coords="406,112,599,136"/>
-<area href="classplanner_1_1c_planner_wiki.html" title="Extends the planner class to implement A* from Wikipedia. " alt="planner::cPlannerWiki" shape="rect" coords="609,112,802,136"/>
+<div class="center"><img src="classplanner_1_1c_planner__inherit__graph.png" border="0" usemap="#planner_1_1c_planner_inherit__map" alt="Inheritance graph"/></div>
+<map name="planner_1_1c_planner_inherit__map" id="planner_1_1c_planner_inherit__map">
+<area shape="rect" id="node3" href="classplanner_1_1c_planner_r_b_g.html" title="Extends the planner class to implement A* from Wikipedia. " alt="" coords="5,152,160,177"/>
+<area shape="rect" id="node4" href="classplanner_1_1c_planner_wiki.html" title="Extends the planner class to implement A* from Wikipedia. " alt="" coords="185,152,336,177"/>
+<area shape="rect" id="node2" href="classplanner_1_1c_planner_interface.html" title="planner::cPlannerInterface\&lt; 8 \&gt;" alt="" coords="67,5,275,31"/>
 </map>
- </div></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for planner::cPlanner:</div>
+<div class="dyncontent">
+<div class="center"><img src="classplanner_1_1c_planner__coll__graph.png" border="0" usemap="#planner_1_1c_planner_coll__map" alt="Collaboration graph"/></div>
+<map name="planner_1_1c_planner_coll__map" id="planner_1_1c_planner_coll__map">
+<area shape="rect" id="node2" href="classplanner_1_1c_planner_interface.html" title="planner::cPlannerInterface\&lt; 8 \&gt;" alt="" coords="183,6,391,31"/>
+<area shape="rect" id="node3" href="structt_result.html" title="Contains result information from the planner. " alt="" coords="5,6,68,31"/>
+<area shape="rect" id="node4" href="structplanner_1_1_priority_queue.html" title="planner::PriorityQueue\l\&lt; std::shared_ptr\&lt; planner\l::tNode \&gt;, double \&gt;" alt="" coords="198,55,376,107"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="memItemLeft" align="right" valign="top"><a id="a7f6dc4cbb69dd1ede14a67b0a7bd425b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> { <br />
-&#160;&#160;<b>MANHATTEN</b>, 
-<b>EUCLIDEAN</b>, 
-<b>OCTILE</b>, 
-<b>CHEBYSHEV</b>, 
-<br />
-&#160;&#160;<b>MANHATTEN</b>, 
+<tr class="memitem:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="memItemLeft" align="right" valign="top"><a id="a7f6dc4cbb69dd1ede14a67b0a7bd425b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> { <b>MANHATTEN</b>, 
 <b>EUCLIDEAN</b>, 
 <b>OCTILE</b>, 
 <b>CHEBYSHEV</b>
-<br />
- }</td></tr>
-<tr class="memdesc:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of heuristics that can be calculated with <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> <br /></td></tr>
-<tr class="separator:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="memItemLeft" align="right" valign="top"><a id="a7f6dc4cbb69dd1ede14a67b0a7bd425b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> { <br />
-&#160;&#160;<b>MANHATTEN</b>, 
-<b>EUCLIDEAN</b>, 
-<b>OCTILE</b>, 
-<b>CHEBYSHEV</b>, 
-<br />
-&#160;&#160;<b>MANHATTEN</b>, 
-<b>EUCLIDEAN</b>, 
-<b>OCTILE</b>, 
-<b>CHEBYSHEV</b>
-<br />
  }</td></tr>
 <tr class="memdesc:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of heuristics that can be calculated with <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> <br /></td></tr>
 <tr class="separator:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a381d86c14532f65cf21cb80b4c64ce0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a381d86c14532f65cf21cb80b4c64ce0e">cPlanner</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; 8 &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_oMap)</td></tr>
-<tr class="memdesc:a381d86c14532f65cf21cb80b4c64ce0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes member variables m_poRover and m_oMap and calls <a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e" title="Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p) ...">CalculateConsistencyFactor()</a>.  <a href="#a381d86c14532f65cf21cb80b4c64ce0e">More...</a><br /></td></tr>
-<tr class="separator:a381d86c14532f65cf21cb80b4c64ce0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9ae1109d3c4b7ac19aef2616547654e"><td class="memItemLeft" align="right" valign="top"><a id="aa9ae1109d3c4b7ac19aef2616547654e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#aa9ae1109d3c4b7ac19aef2616547654e">~cPlanner</a> ()</td></tr>
-<tr class="memdesc:aa9ae1109d3c4b7ac19aef2616547654e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor to delete the allocated memory. <br /></td></tr>
-<tr class="separator:aa9ae1109d3c4b7ac19aef2616547654e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21230c015260b9fc34ad2f239592470e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e">Plan</a> () override</td></tr>
-<tr class="memdesc:a21230c015260b9fc34ad2f239592470e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">AStar()</a> search algorithm.  <a href="#a21230c015260b9fc34ad2f239592470e">More...</a><br /></td></tr>
-<tr class="separator:a21230c015260b9fc34ad2f239592470e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a4650050656545744796296a653d388"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a1a4650050656545744796296a653d388">GenerateHeuristic</a> ()</td></tr>
-<tr class="memdesc:a1a4650050656545744796296a653d388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output distance heuristic map to file, which is used to generate the Matlab plot.  <a href="#a1a4650050656545744796296a653d388">More...</a><br /></td></tr>
-<tr class="separator:a1a4650050656545744796296a653d388"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7cc7c2666de2e49f745901080aac147"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147">UpdateHeuristic</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; i_psNode, const <a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> i_eHeuristic=OCTILE) const</td></tr>
-<tr class="memdesc:ab7cc7c2666de2e49f745901080aac147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the heuristic value of the node argument i_sNode.  <a href="#ab7cc7c2666de2e49f745901080aac147">More...</a><br /></td></tr>
-<tr class="separator:ab7cc7c2666de2e49f745901080aac147"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77cefeae3d7a58a96c74b66f6be22611"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a77cefeae3d7a58a96c74b66f6be22611">Heuristic</a> (const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;i_sLocation, const <a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> i_eHeuristic=OCTILE) const</td></tr>
-<tr class="memdesc:a77cefeae3d7a58a96c74b66f6be22611"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the heuristic value of the node located at tlocation i_sLocation.  <a href="#a77cefeae3d7a58a96c74b66f6be22611">More...</a><br /></td></tr>
-<tr class="separator:a77cefeae3d7a58a96c74b66f6be22611"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1234d075676fcaa2c17b859d11b4638c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c">HeuristicCheck</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sNode)</td></tr>
-<tr class="memdesc:a1234d075676fcaa2c17b859d11b4638c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the heuristic of node i_sNode is consistent.  <a href="#a1234d075676fcaa2c17b859d11b4638c">More...</a><br /></td></tr>
-<tr class="separator:a1234d075676fcaa2c17b859d11b4638c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16e8c156297fff49a6ba9b97073baffb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb">UpdateCost</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; io_psNode) const</td></tr>
-<tr class="memdesc:a16e8c156297fff49a6ba9b97073baffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the node argument with its path cost <img class="formulaInl" alt="$g(n)$" src="form_1.png"/> with island seconds as its unit.  <a href="#a16e8c156297fff49a6ba9b97073baffb">More...</a><br /></td></tr>
-<tr class="separator:a16e8c156297fff49a6ba9b97073baffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d57a0697bb0e4666f4fd45f77c4a1aa"><td class="memTemplParams" colspan="2">template&lt;typename TLocation &gt; </td></tr>
-<tr class="memitem:a9d57a0697bb0e4666f4fd45f77c4a1aa"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a9d57a0697bb0e4666f4fd45f77c4a1aa">HeightCost</a> (TLocation &amp;i_sCurrent, TLocation &amp;i_sNext, <a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;i_sAction) const</td></tr>
-<tr class="memdesc:a9d57a0697bb0e4666f4fd45f77c4a1aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the height cost which is added or subtracted from the step cost.  <a href="#a9d57a0697bb0e4666f4fd45f77c4a1aa">More...</a><br /></td></tr>
-<tr class="separator:a9d57a0697bb0e4666f4fd45f77c4a1aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5119e3243d9f6747f1da0ed6d356642"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ac5119e3243d9f6747f1da0ed6d356642">WithinMap</a> (const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;i_sLocation) const</td></tr>
-<tr class="memdesc:ac5119e3243d9f6747f1da0ed6d356642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if the provided location i_sLocation lies within the map.  <a href="#ac5119e3243d9f6747f1da0ed6d356642">More...</a><br /></td></tr>
-<tr class="separator:ac5119e3243d9f6747f1da0ed6d356642"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b7554394efd7ad10d76a49b370aa62f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f">GoalTest</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sFirst, std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sSecond) const override</td></tr>
-<tr class="memdesc:a6b7554394efd7ad10d76a49b370aa62f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal.  <a href="#a6b7554394efd7ad10d76a49b370aa62f">More...</a><br /></td></tr>
-<tr class="separator:a6b7554394efd7ad10d76a49b370aa62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbffc6ce05119c940a09369d7e61554e"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e">Child</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sParent, const <a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;i_sAction) const override</td></tr>
-<tr class="memdesc:adbffc6ce05119c940a09369d7e61554e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a successor node state given a node i_sParent and action i_sAction.  <a href="#adbffc6ce05119c940a09369d7e61554e">More...</a><br /></td></tr>
-<tr class="separator:adbffc6ce05119c940a09369d7e61554e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab17c52bf6dd433b8f392a5bf2bc4b9a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ab17c52bf6dd433b8f392a5bf2bc4b9a1">Traversable</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; i_sCurrent, std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; i_sNext) const</td></tr>
-<tr class="memdesc:ab17c52bf6dd433b8f392a5bf2bc4b9a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the path from i_sCurrent to i_sNext is traversable.  <a href="#ab17c52bf6dd433b8f392a5bf2bc4b9a1">More...</a><br /></td></tr>
-<tr class="separator:ab17c52bf6dd433b8f392a5bf2bc4b9a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8624cb2afb8f2fd216c38b4424013178"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a8624cb2afb8f2fd216c38b4424013178">TraversePath</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_psNode)</td></tr>
-<tr class="memdesc:a8624cb2afb8f2fd216c38b4424013178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconstructs the best path, considers step size of rover.  <a href="#a8624cb2afb8f2fd216c38b4424013178">More...</a><br /></td></tr>
-<tr class="separator:a8624cb2afb8f2fd216c38b4424013178"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa90d751ce544870e4c89494e06fdac6c"><td class="memItemLeft" align="right" valign="top"><a id="aa90d751ce544870e4c89494e06fdac6c"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#aa90d751ce544870e4c89494e06fdac6c">GradX</a> (int i_nX, int i_nY) const</td></tr>
-<tr class="memdesc:aa90d751ce544870e4c89494e06fdac6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the discrete gradient of the map m_poMap in x direction. <br /></td></tr>
-<tr class="separator:aa90d751ce544870e4c89494e06fdac6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fd8e8632d78d85ce472322267ba7b36"><td class="memItemLeft" align="right" valign="top"><a id="a6fd8e8632d78d85ce472322267ba7b36"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a6fd8e8632d78d85ce472322267ba7b36">GradY</a> (int i_nX, int i_nY) const</td></tr>
-<tr class="memdesc:a6fd8e8632d78d85ce472322267ba7b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the discrete gradient of the map m_poMap in y direction. <br /></td></tr>
-<tr class="separator:a6fd8e8632d78d85ce472322267ba7b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c99873ce64b214899d65eda6366455f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f">NodeHash</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sNode) const</td></tr>
-<tr class="memdesc:a4c99873ce64b214899d65eda6366455f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the node hash using its location and the width of the map.  <a href="#a4c99873ce64b214899d65eda6366455f">More...</a><br /></td></tr>
-<tr class="separator:a4c99873ce64b214899d65eda6366455f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a381d86c14532f65cf21cb80b4c64ce0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a381d86c14532f65cf21cb80b4c64ce0e">cPlanner</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; 8 &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_oMap)</td></tr>
 <tr class="memdesc:a381d86c14532f65cf21cb80b4c64ce0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes member variables m_poRover and m_poMap and calls <a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e" title="Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p) ...">CalculateConsistencyFactor()</a>.  <a href="#a381d86c14532f65cf21cb80b4c64ce0e">More...</a><br /></td></tr>
 <tr class="separator:a381d86c14532f65cf21cb80b4c64ce0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -215,12 +145,12 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memitem:ac5119e3243d9f6747f1da0ed6d356642"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ac5119e3243d9f6747f1da0ed6d356642">WithinMap</a> (const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;i_sLocation) const</td></tr>
 <tr class="memdesc:ac5119e3243d9f6747f1da0ed6d356642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if the provided location i_sLocation lies within the map.  <a href="#ac5119e3243d9f6747f1da0ed6d356642">More...</a><br /></td></tr>
 <tr class="separator:ac5119e3243d9f6747f1da0ed6d356642"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7050795c7174d0ec427fc91f8756a3d8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a7050795c7174d0ec427fc91f8756a3d8">GoalTest</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sFirst, std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sSecond) const override</td></tr>
-<tr class="memdesc:a7050795c7174d0ec427fc91f8756a3d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal.  <a href="#a7050795c7174d0ec427fc91f8756a3d8">More...</a><br /></td></tr>
-<tr class="separator:a7050795c7174d0ec427fc91f8756a3d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab260cfcb0ad00d46b02148d19faf040d"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ab260cfcb0ad00d46b02148d19faf040d">Child</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sParent, const <a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;i_sAction) const override</td></tr>
-<tr class="memdesc:ab260cfcb0ad00d46b02148d19faf040d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a successor node state given a node i_sParent and action i_sAction.  <a href="#ab260cfcb0ad00d46b02148d19faf040d">More...</a><br /></td></tr>
-<tr class="separator:ab260cfcb0ad00d46b02148d19faf040d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b7554394efd7ad10d76a49b370aa62f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f">GoalTest</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sFirst, std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sSecond) const override</td></tr>
+<tr class="memdesc:a6b7554394efd7ad10d76a49b370aa62f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal.  <a href="#a6b7554394efd7ad10d76a49b370aa62f">More...</a><br /></td></tr>
+<tr class="separator:a6b7554394efd7ad10d76a49b370aa62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbffc6ce05119c940a09369d7e61554e"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e">Child</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sParent, const <a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;i_sAction) const override</td></tr>
+<tr class="memdesc:adbffc6ce05119c940a09369d7e61554e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a successor node state given a node i_sParent and action i_sAction.  <a href="#adbffc6ce05119c940a09369d7e61554e">More...</a><br /></td></tr>
+<tr class="separator:adbffc6ce05119c940a09369d7e61554e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab17c52bf6dd433b8f392a5bf2bc4b9a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ab17c52bf6dd433b8f392a5bf2bc4b9a1">Traversable</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; i_sCurrent, std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; i_sNext) const</td></tr>
 <tr class="memdesc:ab17c52bf6dd433b8f392a5bf2bc4b9a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the path from i_sCurrent to i_sNext is traversable.  <a href="#ab17c52bf6dd433b8f392a5bf2bc4b9a1">More...</a><br /></td></tr>
 <tr class="separator:ab17c52bf6dd433b8f392a5bf2bc4b9a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,10 +169,6 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memdesc:a4c99873ce64b214899d65eda6366455f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the node hash using its location and the width of the map.  <a href="#a4c99873ce64b214899d65eda6366455f">More...</a><br /></td></tr>
 <tr class="separator:a4c99873ce64b214899d65eda6366455f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classplanner_1_1c_planner_interface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classplanner_1_1c_planner_interface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classplanner_1_1c_planner_interface.html">planner::cPlannerInterface&lt; 8 &gt;</a></td></tr>
-<tr class="memitem:a2d99a6f9fe144a0406c040d8da2a6dd4 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a2d99a6f9fe144a0406c040d8da2a6dd4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a2d99a6f9fe144a0406c040d8da2a6dd4">cPlannerInterface</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_oMap)</td></tr>
-<tr class="memdesc:a2d99a6f9fe144a0406c040d8da2a6dd4 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of the interface which initializes its members m_poRover and m_oMap. <br /></td></tr>
-<tr class="separator:a2d99a6f9fe144a0406c040d8da2a6dd4 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae09e9120335fce8f331749f492255fca inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="ae09e9120335fce8f331749f492255fca"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#ae09e9120335fce8f331749f492255fca">cPlannerInterface</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_poMap)</td></tr>
 <tr class="memdesc:ae09e9120335fce8f331749f492255fca inherit pub_methods_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of the interface which initializes its members m_poRover and m_oMap. <br /></td></tr>
@@ -251,27 +177,9 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#af7a88d017115e9bfee25c12091062641">Result</a> ()</td></tr>
 <tr class="memdesc:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter to obtain result struct member m_sResult that contains information about the found path. <br /></td></tr>
 <tr class="separator:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="af7a88d017115e9bfee25c12091062641"></a>
-<a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#af7a88d017115e9bfee25c12091062641">Result</a> ()</td></tr>
-<tr class="memdesc:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter to obtain result struct member m_sResult that contains information about the found path. <br /></td></tr>
-<tr class="separator:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a341e70531266f023ac9461d18979d1ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef">AStar</a> ()</td></tr>
-<tr class="memdesc:a341e70531266f023ac9461d18979d1ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">AStar algorithm implementation.  <a href="#a341e70531266f023ac9461d18979d1ef">More...</a><br /></td></tr>
-<tr class="separator:a341e70531266f023ac9461d18979d1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e5a745f83f903662eff914d8beddb5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e">CalculateConsistencyFactor</a> ()</td></tr>
-<tr class="memdesc:a2e5a745f83f903662eff914d8beddb5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p)  <a href="#a2e5a745f83f903662eff914d8beddb5e">More...</a><br /></td></tr>
-<tr class="separator:a2e5a745f83f903662eff914d8beddb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a236a68e02c7a99323f2d30b3097aa767"><td class="memItemLeft" align="right" valign="top"><a id="a236a68e02c7a99323f2d30b3097aa767"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a236a68e02c7a99323f2d30b3097aa767">Plot</a> ()</td></tr>
-<tr class="memdesc:a236a68e02c7a99323f2d30b3097aa767"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug method to plot intermediate paths during planning. Used in <a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e" title="Override of the base interface cPlannerInterface, which invokes the AStar() search algorithm...">Plan()</a>. <br /></td></tr>
-<tr class="separator:a236a68e02c7a99323f2d30b3097aa767"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8d82968444f958f1b7e7acdd9df2e64"><td class="memItemLeft" align="right" valign="top"><a id="ad8d82968444f958f1b7e7acdd9df2e64"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ad8d82968444f958f1b7e7acdd9df2e64">PrintTravelResult</a> ()</td></tr>
-<tr class="memdesc:ad8d82968444f958f1b7e7acdd9df2e64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report travelling time in island seconds, minutes and hours. <br /></td></tr>
-<tr class="separator:ad8d82968444f958f1b7e7acdd9df2e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a341e70531266f023ac9461d18979d1ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef">AStar</a> ()</td></tr>
 <tr class="memdesc:a341e70531266f023ac9461d18979d1ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">AStar algorithm implementation.  <a href="#a341e70531266f023ac9461d18979d1ef">More...</a><br /></td></tr>
 <tr class="separator:a341e70531266f023ac9461d18979d1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -297,23 +205,19 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ac9f4be1c679321a2f6bc5d1a1102b3c2">m_fConsistencyFactor</a></td></tr>
 <tr class="memdesc:ac9f4be1c679321a2f6bc5d1a1102b3c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This value is calculated in the constructor of <a class="el" href="classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e...">planner::cPlanner</a> and used to scale the heuristic values to get consistency. <br /></td></tr>
 <tr class="separator:ac9f4be1c679321a2f6bc5d1a1102b3c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e99e496dd906f6f9db9dbb93cdb0d44"><td class="memItemLeft" align="right" valign="top"><a id="a6e99e496dd906f6f9db9dbb93cdb0d44"></a>
-<a class="el" href="structplanner_1_1_priority_queue.html">PriorityQueue</a>&lt; std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a6e99e496dd906f6f9db9dbb93cdb0d44">m_oFrontier</a></td></tr>
-<tr class="memdesc:a6e99e496dd906f6f9db9dbb93cdb0d44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first. <br /></td></tr>
-<tr class="separator:a6e99e496dd906f6f9db9dbb93cdb0d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c212bac80800ef51aacaa63fce32a2a"><td class="memItemLeft" align="right" valign="top"><a id="a1c212bac80800ef51aacaa63fce32a2a"></a>
+<a class="el" href="structplanner_1_1_priority_queue.html">PriorityQueue</a>&lt; std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a1c212bac80800ef51aacaa63fce32a2a">m_oFrontier</a></td></tr>
+<tr class="memdesc:a1c212bac80800ef51aacaa63fce32a2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first. <br /></td></tr>
+<tr class="separator:a1c212bac80800ef51aacaa63fce32a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classplanner_1_1c_planner_interface"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classplanner_1_1c_planner_interface')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classplanner_1_1c_planner_interface.html">planner::cPlannerInterface&lt; 8 &gt;</a></td></tr>
 <tr class="memitem:a78389ea53bd3c9d5c57851a338ee91d8 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a78389ea53bd3c9d5c57851a338ee91d8"></a>
 <a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a78389ea53bd3c9d5c57851a338ee91d8">m_sResult</a></td></tr>
 <tr class="memdesc:a78389ea53bd3c9d5c57851a338ee91d8 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Information to store planning results such as travelling time and consistency of heuristic. <br /></td></tr>
 <tr class="separator:a78389ea53bd3c9d5c57851a338ee91d8 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ef4a42f9e26463899f7c54d06580d7f inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a4ef4a42f9e26463899f7c54d06580d7f"></a>
-std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a4ef4a42f9e26463899f7c54d06580d7f">m_poRover</a></td></tr>
-<tr class="memdesc:a4ef4a42f9e26463899f7c54d06580d7f inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference pointer to the interface of the rover class planner::cRoverInterface&lt;Directions&gt;. <br /></td></tr>
-<tr class="separator:a4ef4a42f9e26463899f7c54d06580d7f inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5145c31369e5092bfcfc836de75a5680 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a5145c31369e5092bfcfc836de75a5680"></a>
-std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a5145c31369e5092bfcfc836de75a5680">m_oMap</a></td></tr>
-<tr class="memdesc:a5145c31369e5092bfcfc836de75a5680 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the subclasses with important map information such as terrain and elevation maps. <br /></td></tr>
-<tr class="separator:a5145c31369e5092bfcfc836de75a5680 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f578c25bb96ea00fade4c87aac87dc inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a41f578c25bb96ea00fade4c87aac87dc"></a>
+std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a41f578c25bb96ea00fade4c87aac87dc">m_poRover</a></td></tr>
+<tr class="memdesc:a41f578c25bb96ea00fade4c87aac87dc inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference pointer to the interface of the rover class planner::cRoverInterface&lt;Directions&gt;. <br /></td></tr>
+<tr class="separator:a41f578c25bb96ea00fade4c87aac87dc inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa75ba58312d9398785d541a5e580a665 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="aa75ba58312d9398785d541a5e580a665"></a>
 std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#aa75ba58312d9398785d541a5e580a665">m_poMap</a></td></tr>
 <tr class="memdesc:aa75ba58312d9398785d541a5e580a665 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the subclasses with important map information such as terrain and elevation maps. <br /></td></tr>
@@ -323,38 +227,7 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 <div class="textblock"><p>Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size eight. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a381d86c14532f65cf21cb80b4c64ce0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a381d86c14532f65cf21cb80b4c64ce0e">&#9670;&nbsp;</a></span>cPlanner() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">planner::cPlanner::cPlanner </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; 8 &gt;&gt;&#160;</td>
-          <td class="paramname"><em>i_poRover</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt;&#160;</td>
-          <td class="paramname"><em>i_oMap</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initializes member variables m_poRover and m_oMap and calls <a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e" title="Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p) ...">CalculateConsistencyFactor()</a>. </p>
-<p>The </p>
-
-</div>
-</div>
-<a id="a381d86c14532f65cf21cb80b4c64ce0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a381d86c14532f65cf21cb80b4c64ce0e">&#9670;&nbsp;</a></span>cPlanner() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a381d86c14532f65cf21cb80b4c64ce0e">&#9670;&nbsp;</a></span>cPlanner()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -386,7 +259,7 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a341e70531266f023ac9461d18979d1ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a341e70531266f023ac9461d18979d1ef">&#9670;&nbsp;</a></span>AStar() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a341e70531266f023ac9461d18979d1ef">&#9670;&nbsp;</a></span>AStar()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -409,23 +282,7 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 </div><div class="memdoc">
 
 <p>AStar algorithm implementation. </p>
-<p>Initializes start, goal and intermediate nodes (sCurrent and sNext). The frontier m_oFrontier is implemented as a priority queue PriorityQueue&lt;tNode*&gt; and initialized with the start node. All other expanded nodes are store in a std::map oPathCost with their currently best g score value. The algorithm makes use of <a class="el" href="classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f" title="Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal. ">GoalTest()</a>, <a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e" title="Generate a successor node state given a node i_sParent and action i_sAction. ">Child()</a> to generate sucessor nodes given an action, Traversable to check for the constraints imposed by the overrides.data file, cost methods <a class="el" href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb" title="Updates the node argument with its path cost  with island seconds as its unit. ">UpdateCost()</a> for the step cost, <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> while checking for consistency <a class="el" href="classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c" title="Check if the heuristic of node i_sNode is consistent. ">HeuristicCheck()</a>. In case the goal node is reached, the method <a class="el" href="classplanner_1_1c_planner.html#a8624cb2afb8f2fd216c38b4424013178" title="Reconstructs the best path, considers step size of rover. ">TraversePath()</a> is invoked to move from the goal back to the start node, thereby following the fastest path and setting bit 1 of the overrides map, see <a class="el" href="classplanner_1_1c_graph.html#a6da6e6e269013628aef48245a7787cb9" title="Sets the provided overrides m_poOverrides 8 bit value i_nValue at the provided location while keeping...">planner::cGraph::SetOverrides()</a>. </p><dl class="section return"><dt>Returns</dt><dd>the time it took to find the fastest path in island seconds. </dd></dl>
-<p>Define start node</p>
-<p>Create hash of the node using its position</p>
-<p>Get the goal node</p>
-<p>Create current node</p>
-<p>Serves as explored (closed) set and cost to reach a node</p>
-<p>Initialize start node with cost of zero because it does not cost anything to go to it</p>
-<p>Initialize result struct</p>
-<p>Resign if the frontier is empty, which means there are no nodes to expand and the goal has not been found</p>
-<p>Check if the node is already explored and if its path cost got smaller (found a better path to it).</p>
-<p>Check if the heuristic of the node is consistent h(n) &lt;= c(p,n) + h(p).</p>
-<p>Update the evaluation score value and put it on the frontier.</p>
-<p>Mark visited nodes</p>
-<p>Check that heuristic never overestimates the true distance: Priority of a new node should never be lower than the priority of its parent. <br />
-<br />
- Move from the current node back to the start node</p>
-<p>Free memory</p>
+<p>Initializes start, goal and intermediate nodes (sCurrent and sNext). The frontier m_oFrontier is implemented as a priority queue PriorityQueue&lt;tNode*&gt; and initialized with the start node. All other expanded nodes are store in a std::map oPathCost with their currently best g score value. The algorithm makes use of <a class="el" href="classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f" title="Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal. ">GoalTest()</a>, <a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e" title="Generate a successor node state given a node i_sParent and action i_sAction. ">Child()</a> to generate sucessor nodes given an action, Traversable to check for the constraints imposed by the overrides.data file, cost methods <a class="el" href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb" title="DEPRECATED Updates the node argument with its path cost  with island seconds as its unit...">UpdateCost()</a> for the step cost, <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> while checking for consistency <a class="el" href="classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c" title="Check if the heuristic of node i_sNode is consistent. ">HeuristicCheck()</a>. In case the goal node is reached, the method <a class="el" href="classplanner_1_1c_planner.html#a8624cb2afb8f2fd216c38b4424013178" title="Reconstructs the best path, considers step size of rover. ">TraversePath()</a> is invoked to move from the goal back to the start node, thereby following the fastest path and setting bit 1 of the overrides map, see <a class="el" href="classplanner_1_1c_graph.html#a6da6e6e269013628aef48245a7787cb9" title="Sets the provided overrides m_poOverrides 8 bit value i_nValue at the provided location while keeping...">planner::cGraph::SetOverrides()</a>. </p><dl class="section return"><dt>Returns</dt><dd>the time it took to find the fastest path in island seconds. </dd></dl>
 <p>Define start node</p>
 <p>Create hash of the node using its position</p>
 <p>Get the goal node</p>
@@ -445,36 +302,8 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 
 </div>
 </div>
-<a id="a341e70531266f023ac9461d18979d1ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a341e70531266f023ac9461d18979d1ef">&#9670;&nbsp;</a></span>AStar() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structt_result.html">tResult</a> planner::cPlanner::AStar </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>AStar algorithm implementation. </p>
-<p>Initializes start, goal and intermediate nodes (sCurrent and sNext). The frontier m_oFrontier is implemented as a priority queue PriorityQueue&lt;tNode*&gt; and initialized with the start node. All other expanded nodes are store in a std::map oPathCost with their currently best g score value. The algorithm makes use of <a class="el" href="classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f" title="Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal. ">GoalTest()</a>, <a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e" title="Generate a successor node state given a node i_sParent and action i_sAction. ">Child()</a> to generate sucessor nodes given an action, Traversable to check for the constraints imposed by the overrides.data file, cost methods <a class="el" href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb" title="Updates the node argument with its path cost  with island seconds as its unit. ">UpdateCost()</a> for the step cost, <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> while checking for consistency <a class="el" href="classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c" title="Check if the heuristic of node i_sNode is consistent. ">HeuristicCheck()</a>. In case the goal node is reached, the method <a class="el" href="classplanner_1_1c_planner.html#a8624cb2afb8f2fd216c38b4424013178" title="Reconstructs the best path, considers step size of rover. ">TraversePath()</a> is invoked to move from the goal back to the start node, thereby following the fastest path and setting bit 1 of the overrides map, see <a class="el" href="classplanner_1_1c_graph.html#a6da6e6e269013628aef48245a7787cb9" title="Sets the provided overrides m_poOverrides 8 bit value i_nValue at the provided location while keeping...">planner::cGraph::SetOverrides()</a>. </p><dl class="section return"><dt>Returns</dt><dd>the time it took to find the fastest path in island seconds. </dd></dl>
-
-</div>
-</div>
 <a id="a2e5a745f83f903662eff914d8beddb5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e5a745f83f903662eff914d8beddb5e">&#9670;&nbsp;</a></span>CalculateConsistencyFactor() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e5a745f83f903662eff914d8beddb5e">&#9670;&nbsp;</a></span>CalculateConsistencyFactor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -498,41 +327,12 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 
 <p>Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p) </p>
 <p>Calculates the gradient of the elevation and considers the acceleration on slopes. The result is stored in members m_nMaxGradient and m_fConsistencyFactor. </p>
-<p>Calculate maximum elevation gradient of the map and find its maximum elevation</p>
 <p>Calculate maximum elevation gradient of the map and find its maximum elevation </p>
 
 </div>
 </div>
-<a id="a2e5a745f83f903662eff914d8beddb5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e5a745f83f903662eff914d8beddb5e">&#9670;&nbsp;</a></span>CalculateConsistencyFactor() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void planner::cPlanner::CalculateConsistencyFactor </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p) </p>
-<p>Calculates the gradient of the elevation and considers the acceleration on slopes. The result is stored in members m_nMaxGradient and m_fConsistencyFactor. </p>
-
-</div>
-</div>
 <a id="adbffc6ce05119c940a09369d7e61554e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbffc6ce05119c940a09369d7e61554e">&#9670;&nbsp;</a></span>Child() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adbffc6ce05119c940a09369d7e61554e">&#9670;&nbsp;</a></span>Child()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -575,64 +375,14 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the generated child node as shared pointer. </dd></dl>
-<p>Calculate hash of node using its location</p>
 <p>Calculate hash of node using its location </p>
 
 <p>Implements <a class="el" href="classplanner_1_1c_planner_interface.html#a7e2048c2a4c699a76db90d1cbfecf156">planner::cPlannerInterface&lt; 8 &gt;</a>.</p>
 
 </div>
 </div>
-<a id="ab260cfcb0ad00d46b02148d19faf040d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab260cfcb0ad00d46b02148d19faf040d">&#9670;&nbsp;</a></span>Child() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="structplanner_1_1t_node.html">tNode</a>&gt; planner::cPlanner::Child </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>i_sParent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;&#160;</td>
-          <td class="paramname"><em>i_sAction</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Generate a successor node state given a node i_sParent and action i_sAction. </p>
-<p>Overrides method of the base class inteface cPlannerInterface&lt;size_t Directions&gt;. Defines a new node on the heap and initializes it according to the given action.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sParent</td><td>node which becomes the parent of the new node. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sAction</td><td>struct of type <a class="el" href="structplanner_1_1t_action.html" title="Action struct, used to specify the motion direction and the cost it takes to move in that direction...">tAction</a> that contains the direction and cost of the action. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the generated child node as shared pointer. </dd></dl>
-
-<p>Implements <a class="el" href="classplanner_1_1c_planner_interface.html#a7e2048c2a4c699a76db90d1cbfecf156">planner::cPlannerInterface&lt; 8 &gt;</a>.</p>
-
-</div>
-</div>
 <a id="a1a4650050656545744796296a653d388"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a4650050656545744796296a653d388">&#9670;&nbsp;</a></span>GenerateHeuristic() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a4650050656545744796296a653d388">&#9670;&nbsp;</a></span>GenerateHeuristic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -648,33 +398,12 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 
 <p>Output distance heuristic map to file, which is used to generate the Matlab plot. </p>
 <p>This implementation calls <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> to calculate a distance heuristic. Because the robot can move in eight directions the octile distance heuristic is calculated. Other possible gird map heuristics are Manhatten, Chebyshev and Euclidean. </p>
-<p>Output octile distance</p>
 <p>Output octile distance </p>
 
 </div>
 </div>
-<a id="a1a4650050656545744796296a653d388"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a4650050656545744796296a653d388">&#9670;&nbsp;</a></span>GenerateHeuristic() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void planner::cPlanner::GenerateHeuristic </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Output distance heuristic map to file, which is used to generate the Matlab plot. </p>
-<p>This implementation calls <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> to calculate a distance heuristic. Because the robot can move in eight directions the octile distance heuristic is calculated. Other possible gird map heuristics are Manhatten, Chebyshev and Euclidean. </p>
-
-</div>
-</div>
 <a id="a6b7554394efd7ad10d76a49b370aa62f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b7554394efd7ad10d76a49b370aa62f">&#9670;&nbsp;</a></span>GoalTest() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b7554394efd7ad10d76a49b370aa62f">&#9670;&nbsp;</a></span>GoalTest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -721,119 +450,8 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 
 </div>
 </div>
-<a id="a7050795c7174d0ec427fc91f8756a3d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7050795c7174d0ec427fc91f8756a3d8">&#9670;&nbsp;</a></span>GoalTest() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool planner::cPlanner::GoalTest </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>i_sFirst</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>i_sSecond</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal. </p>
-<p>Note that this check takes the step size m_nStepSize of the rover into account. This allows to set a step size greater than one, which can be used for debugging. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sFirst</td><td>could be the current node that needs to be checked. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sSecond</td><td>could be the goal node. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true or false if the two nodes are equal. </dd></dl>
-
-<p>Implements <a class="el" href="classplanner_1_1c_planner_interface.html#afec836d58ce54c49046bf30ecdebbfec">planner::cPlannerInterface&lt; 8 &gt;</a>.</p>
-
-</div>
-</div>
 <a id="a9d57a0697bb0e4666f4fd45f77c4a1aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d57a0697bb0e4666f4fd45f77c4a1aa">&#9670;&nbsp;</a></span>HeightCost() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename TLocation &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double planner::cPlanner::HeightCost </td>
-          <td>(</td>
-          <td class="paramtype">TLocation &amp;&#160;</td>
-          <td class="paramname"><em>i_sCurrent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TLocation &amp;&#160;</td>
-          <td class="paramname"><em>i_sNext</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;&#160;</td>
-          <td class="paramname"><em>i_sAction</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Calculates the height cost which is added or subtracted from the step cost. </p>
-<p>In case the rover is moving uphill, this method calculates a height cost which is a percentage value of the step cost of the current action. When the rover moves downhill, it is faster and therefore the height cost is a negative value which is also a result of a percentage value of the step cost. The percentage model uses the height difference while moving from i_sCurrent to i_sNext location. This delta height, eigher positive or negative, is then normalized by the maximum height difference the rover is able to move (climb or fall), which is defined to be 255 (max evlevation of a map). </p><div class="fragment"><div class="line">fHeightCost = i_sAction.fCost * fDeltaHeight / 255.f;</div></div><!-- fragment --><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">TLocation</td><td>Location type that should contain two integer members nX and nY that describe the location. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sCurrent</td><td>Location of the current node. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sNext</td><td>Location of the node where the rover is moving to. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sAction</td><td>the action the rover takes to get from i_sCurrent to i_sNext. Contains the step cost, which is used to calculate a percentage height cost. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The height cost of moving from i_sCurrent to i_sNext. Will be less than or equal to the action cost, which is required to ensure a consistent heuristic. </dd></dl>
-<p>If the rover is going up or down hill, calculate the acceleration on the inclined plane Calculate current gradient in step direction <br />
- This cost value is either positive or negative, depending on the height difference </p>
-
-</div>
-</div>
-<a id="a9d57a0697bb0e4666f4fd45f77c4a1aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d57a0697bb0e4666f4fd45f77c4a1aa">&#9670;&nbsp;</a></span>HeightCost() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d57a0697bb0e4666f4fd45f77c4a1aa">&#9670;&nbsp;</a></span>HeightCost()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -896,7 +514,7 @@ template&lt;typename TLocation &gt; </div>
 </div>
 </div>
 <a id="a77cefeae3d7a58a96c74b66f6be22611"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77cefeae3d7a58a96c74b66f6be22611">&#9670;&nbsp;</a></span>Heuristic() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a77cefeae3d7a58a96c74b66f6be22611">&#9670;&nbsp;</a></span>Heuristic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -930,11 +548,6 @@ template&lt;typename TLocation &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The calculated heuristic value. </dd></dl>
-<p>Manhattan Distance</p>
-<p>Euclidian Distance</p>
-<p>Octile distance</p>
-<p>Euclidian Distance</p>
-<p>Correct heuristic value to get a consistent heuristic. Required because of moving up or down the hill.</p>
 <p>Manhattan Distance</p>
 <p>Euclidian Distance</p>
 <p>Octile distance</p>
@@ -943,46 +556,8 @@ template&lt;typename TLocation &gt; </div>
 
 </div>
 </div>
-<a id="a77cefeae3d7a58a96c74b66f6be22611"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77cefeae3d7a58a96c74b66f6be22611">&#9670;&nbsp;</a></span>Heuristic() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double planner::cPlanner::Heuristic </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;&#160;</td>
-          <td class="paramname"><em>i_sLocation</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a>&#160;</td>
-          <td class="paramname"><em>i_eHeuristic</em> = <code>OCTILE</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Updates the heuristic value of the node located at tlocation i_sLocation. </p>
-<p>Calcualtes a grid map distance heuristic. Can be one of the heuristics defined in tHeuristic. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sNode</td><td>the node which heuristic is updated </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_eHeuristic</td><td>the type of heuristic to calculate, see tHeuristic. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The calculated heuristic value. </dd></dl>
-
-</div>
-</div>
 <a id="a1234d075676fcaa2c17b859d11b4638c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1234d075676fcaa2c17b859d11b4638c">&#9670;&nbsp;</a></span>HeuristicCheck() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1234d075676fcaa2c17b859d11b4638c">&#9670;&nbsp;</a></span>HeuristicCheck()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1004,60 +579,12 @@ template&lt;typename TLocation &gt; </div>
   </table>
   </dd>
 </dl>
-<p>Store this incident in the result struct of the planner interface</p>
 <p>Store this incident in the result struct of the planner interface </p>
 
 </div>
 </div>
-<a id="a1234d075676fcaa2c17b859d11b4638c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1234d075676fcaa2c17b859d11b4638c">&#9670;&nbsp;</a></span>HeuristicCheck() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void planner::cPlanner::HeuristicCheck </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>i_sNode</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check if the heuristic of node i_sNode is consistent. </p>
-<p>Consistency is given if h(x) &lt;= d(x,y) + h(y), where h(x) is the heuristic of the parent node and d(x,y) are the step costs from parent x to node y. In case the heuristic is not consistent the member m_sResult.bConsistentHeuristic is set to false. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sNode</td><td>the node which heuristic value is tested. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a4c99873ce64b214899d65eda6366455f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c99873ce64b214899d65eda6366455f">&#9670;&nbsp;</a></span>NodeHash() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int planner::cPlanner::NodeHash </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>i_sNode</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calculates the node hash using its location and the width of the map. </p>
-<p>The hash is required to sort the std::map&lt;tNode&gt; oCost of reaching a node, which is used in the <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">AStar()</a> search algorithm. </p>
-
-</div>
-</div>
-<a id="a4c99873ce64b214899d65eda6366455f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c99873ce64b214899d65eda6366455f">&#9670;&nbsp;</a></span>NodeHash() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c99873ce64b214899d65eda6366455f">&#9670;&nbsp;</a></span>NodeHash()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1078,39 +605,7 @@ template&lt;typename TLocation &gt; </div>
 </div>
 </div>
 <a id="a21230c015260b9fc34ad2f239592470e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21230c015260b9fc34ad2f239592470e">&#9670;&nbsp;</a></span>Plan() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structt_result.html">tResult</a> planner::cPlanner::Plan </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">AStar()</a> search algorithm. </p>
-<dl class="section return"><dt>Returns</dt><dd>the time to travel from start to goal if it was found. Otherwise -1 is returned. </dd></dl>
-
-<p>Implements <a class="el" href="classplanner_1_1c_planner_interface.html#a7a06632a8c53906daf39611d9692ffa5">planner::cPlannerInterface&lt; 8 &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="classplanner_1_1c_planner_r_b_g.html#a0bbd752702da582a47dbd153c0065eb5">planner::cPlannerRBG</a>, <a class="el" href="classplanner_1_1c_planner_wiki.html#a9d18be721400b51162ff463ab11d1721">planner::cPlannerWiki</a>, <a class="el" href="classplanner_1_1c_planner_r_b_g.html#a0bbd752702da582a47dbd153c0065eb5">planner::cPlannerRBG</a>, and <a class="el" href="classplanner_1_1c_planner_wiki.html#a9d18be721400b51162ff463ab11d1721">planner::cPlannerWiki</a>.</p>
-
-</div>
-</div>
-<a id="a21230c015260b9fc34ad2f239592470e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21230c015260b9fc34ad2f239592470e">&#9670;&nbsp;</a></span>Plan() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a21230c015260b9fc34ad2f239592470e">&#9670;&nbsp;</a></span>Plan()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1142,7 +637,7 @@ template&lt;typename TLocation &gt; </div>
 </div>
 </div>
 <a id="ab17c52bf6dd433b8f392a5bf2bc4b9a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab17c52bf6dd433b8f392a5bf2bc4b9a1">&#9670;&nbsp;</a></span>Traversable() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab17c52bf6dd433b8f392a5bf2bc4b9a1">&#9670;&nbsp;</a></span>Traversable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1177,54 +672,13 @@ template&lt;typename TLocation &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the rover can move on the path between i_sCurrent and i_sNext. false otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="ab17c52bf6dd433b8f392a5bf2bc4b9a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab17c52bf6dd433b8f392a5bf2bc4b9a1">&#9670;&nbsp;</a></span>Traversable() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool planner::cPlanner::Traversable </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;&#160;</td>
-          <td class="paramname"><em>i_sCurrent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;&#160;</td>
-          <td class="paramname"><em>i_sNext</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Checks if the path from i_sCurrent to i_sNext is traversable. </p>
-<p>Takes into account the set step size of the rover.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">i_sCurrent</td><td>source node is the start of the path, going to i_sNext, that is going to be check. </td></tr>
-    <tr><td class="paramname">i_sNext</td><td>destination node is the goal of the path, starting at i_sCurrent, that is going to be checked. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the rover can move on the path between i_sCurrent and i_sNext. false otherwise. </dd></dl>
-<p>Check if the intermediate locations moving from current node to next are on mainland or water</p>
-<p>Next location lies outside the map</p>
 <p>Check if the intermediate locations moving from current node to next are on mainland or water</p>
 <p>Next location lies outside the map </p>
 
 </div>
 </div>
 <a id="a8624cb2afb8f2fd216c38b4424013178"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8624cb2afb8f2fd216c38b4424013178">&#9670;&nbsp;</a></span>TraversePath() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8624cb2afb8f2fd216c38b4424013178">&#9670;&nbsp;</a></span>TraversePath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1240,46 +694,12 @@ template&lt;typename TLocation &gt; </div>
 </div><div class="memdoc">
 
 <p>Reconstructs the best path, considers step size of rover. </p>
-<p>The nodes in the best path contains a field <a class="el" href="structplanner_1_1t_node.html#a626d33dc40af6be79e975d54200d77e8" title="Pointer to the parent of the node, which is required to find the best path by traversing back from th...">tNode::psParent</a> which makes it possible to move back to the start node, which has its parent pointer set to nullptr. Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path. This method is also used in <a class="el" href="classplanner_1_1c_planner.html#a236a68e02c7a99323f2d30b3097aa767" title="Debug method to plot intermediate paths during planning. Used in Plan(). ">planner::cPlanner::Plot()</a> to output intermediate paths on an output image. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The nodes in the best path contains a field <a class="el" href="structplanner_1_1t_node.html#a297a5f7f75357b7a2eb2728ad452ff98" title="Pointer to the parent of the node, which is required to find the best path by traversing back from th...">tNode::psParent</a> which makes it possible to move back to the start node, which has its parent pointer set to nullptr. Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path. This method is also used in <a class="el" href="classplanner_1_1c_planner.html#a236a68e02c7a99323f2d30b3097aa767" title="Debug method to plot intermediate paths during planning. Used in Plan(). ">planner::cPlanner::Plot()</a> to output intermediate paths on an output image. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">The</td><td>node at which we start to walk back. Usually the goal node. </td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a8624cb2afb8f2fd216c38b4424013178"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8624cb2afb8f2fd216c38b4424013178">&#9670;&nbsp;</a></span>TraversePath() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void planner::cPlanner::TraversePath </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>i_psNode</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Reconstructs the best path, considers step size of rover. </p>
-<p>The nodes in the best path contains a field <a class="el" href="structplanner_1_1t_node.html#a626d33dc40af6be79e975d54200d77e8" title="Pointer to the parent of the node, which is required to find the best path by traversing back from th...">tNode::psParent</a> which makes it possible to move back to the start node, which has its parent pointer set to nullptr. Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path. This method is also used in <a class="el" href="classplanner_1_1c_planner.html#a236a68e02c7a99323f2d30b3097aa767" title="Debug method to plot intermediate paths during planning. Used in Plan(). ">planner::cPlanner::Plot()</a> to output intermediate paths on an output image. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">The</td><td>node at which we start to walk back. Usually the goal node. </td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Set the cost (time) it takes to get to the goal</p>
-<p>Reconstruct the path by going backward from the goal location</p>
-<p>Update cumulative elevation</p>
-<p>Store path in overrides</p>
-<p>Check if the current node is the start node, which has no parent and is therefore set to NULL</p>
-<p>Move towards the start</p>
-<p>Update cumulative elevation</p>
-<p>Store path in overrides</p>
 <p>Set the cost (time) it takes to get to the goal</p>
 <p>Reconstruct the path by going backward from the goal location</p>
 <p>Update cumulative elevation</p>
@@ -1292,38 +712,7 @@ template&lt;typename TLocation &gt; </div>
 </div>
 </div>
 <a id="a16e8c156297fff49a6ba9b97073baffb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16e8c156297fff49a6ba9b97073baffb">&#9670;&nbsp;</a></span>UpdateCost() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void planner::cPlanner::UpdateCost </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;&#160;</td>
-          <td class="paramname"><em>io_psNode</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Updates the node argument with its path cost <img class="formulaInl" alt="$g(n)$" src="form_1.png"/> with island seconds as its unit. </p>
-<p>Deprecated methods.</p>
-<p>Uses the slope found from the gradient of the elevation map cMap::m_oElevation to calculate an acceleration value, where only its component in the x,y plane is used. The value is added to the time it takes for a straight or diagonal step (depending on the action of the node). The sum is stored in <img class="formulaInl" alt="$g(n)$" src="form_1.png"/> of the node <a class="el" href="structplanner_1_1t_node.html" title="Node gets expanded while searching for the shortest path. ">planner::tNode</a> i_sNode. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sNode</td><td>The node which path cost is updated. </td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Rover's normal speed is 1 cell per island second</p>
-<p>Add action (step) cost, which is given in island seconds</p>
-<p>Rover's normal speed is 1 cell per island second</p>
-<p>Add action (step) cost, which is given in island seconds </p>
-
-</div>
-</div>
-<a id="a16e8c156297fff49a6ba9b97073baffb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16e8c156297fff49a6ba9b97073baffb">&#9670;&nbsp;</a></span>UpdateCost() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a16e8c156297fff49a6ba9b97073baffb">&#9670;&nbsp;</a></span>UpdateCost()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1339,55 +728,20 @@ template&lt;typename TLocation &gt; </div>
 </div><div class="memdoc">
 
 <p>DEPRECATED Updates the node argument with its path cost <img class="formulaInl" alt="$g(n)$" src="form_1.png"/> with island seconds as its unit. </p>
+<p>Deprecated methods.</p>
 <p>Uses the slope found from the gradient of the elevation map cMap::m_oElevation to calculate an acceleration value, where only its component in the x,y plane is used. The value is added to the time it takes for a straight or diagonal step (depending on the action of the node). The sum is stored in <img class="formulaInl" alt="$g(n)$" src="form_1.png"/> of the node <a class="el" href="structplanner_1_1t_node.html" title="Node gets expanded while searching for the shortest path. ">planner::tNode</a> i_sNode. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">i_sNode</td><td>The node which path cost is updated. </td></tr>
   </table>
   </dd>
 </dl>
+<p>Rover's normal speed is 1 cell per island second</p>
+<p>Add action (step) cost, which is given in island seconds </p>
 
 </div>
 </div>
 <a id="ab7cc7c2666de2e49f745901080aac147"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7cc7c2666de2e49f745901080aac147">&#9670;&nbsp;</a></span>UpdateHeuristic() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double planner::cPlanner::UpdateHeuristic </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;&#160;</td>
-          <td class="paramname"><em>i_psNode</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a>&#160;</td>
-          <td class="paramname"><em>i_eHeuristic</em> = <code>OCTILE</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Updates the heuristic value of the node argument i_sNode. </p>
-<p>Calcualtes a grid map distance heuristic. Can be one of the heuristics defined in tHeuristic. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sNode</td><td>the node which heuristic is updated </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_eHeuristic</td><td>the type of heuristic to calculate, see tHeuristic. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The calculated heuristic value. </dd></dl>
-
-</div>
-</div>
-<a id="ab7cc7c2666de2e49f745901080aac147"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7cc7c2666de2e49f745901080aac147">&#9670;&nbsp;</a></span>UpdateHeuristic() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7cc7c2666de2e49f745901080aac147">&#9670;&nbsp;</a></span>UpdateHeuristic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1425,34 +779,7 @@ template&lt;typename TLocation &gt; </div>
 </div>
 </div>
 <a id="ac5119e3243d9f6747f1da0ed6d356642"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5119e3243d9f6747f1da0ed6d356642">&#9670;&nbsp;</a></span>WithinMap() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool planner::cPlanner::WithinMap </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;&#160;</td>
-          <td class="paramname"><em>i_sLocation</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Test if the provided location i_sLocation lies within the map. </p>
-<p>Checks if the provided location lies within the map height and width and if the location is equal or greater than zero. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_sLocation</td><td>the location of type <a class="el" href="structplanner_1_1t_location.html" title="Data structure used as location information for nodes. ">tLocation</a>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the location i_sLocation lies within the map otherwise false. </dd></dl>
-
-</div>
-</div>
-<a id="ac5119e3243d9f6747f1da0ed6d356642"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5119e3243d9f6747f1da0ed6d356642">&#9670;&nbsp;</a></span>WithinMap() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5119e3243d9f6747f1da0ed6d356642">&#9670;&nbsp;</a></span>WithinMap()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1479,8 +806,8 @@ template&lt;typename TLocation &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/include/<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2planner_8h_source.html">planner.h</a></li>
-<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/src/planner.cpp</li>
+<li>/Users/fjp/git/bachelor/planner/include/<a class="el" href="planner_8h_source.html">planner.h</a></li>
+<li>/Users/fjp/git/bachelor/planner/src/planner.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

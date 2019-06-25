@@ -1,0 +1,4 @@
+<map id="visualizer::Bitmap" name="visualizer::Bitmap">
+<area shape="rect" id="node2" href="$structvisualizer_1_1_bitmap_info_header.html" title="visualizer::BitmapInfoHeader" alt="" coords="5,5,197,31"/>
+<area shape="rect" id="node3" href="$structvisualizer_1_1_file_header.html" title="visualizer::FileHeader" alt="" coords="221,5,371,31"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="planner::cPlannerRBG" name="planner::cPlannerRBG">
+<area shape="rect" id="node2" href="$classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e..." alt="" coords="515,53,640,78"/>
+<area shape="rect" id="node3" href="$classplanner_1_1c_planner_interface.html" title="planner::cPlannerInterface\&lt; 8 \&gt;" alt="" coords="183,6,391,31"/>
+<area shape="rect" id="node4" href="$structt_result.html" title="Contains result information from the planner. " alt="" coords="5,6,68,31"/>
+<area shape="rect" id="node5" href="$structplanner_1_1_priority_queue.html" title="planner::PriorityQueue\l\&lt; std::shared_ptr\&lt; planner\l::tNode \&gt;, double \&gt;" alt="" coords="198,55,376,107"/>
+</map>

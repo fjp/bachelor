@@ -77,27 +77,18 @@ $(function() {
 <p><a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a> is an abstract interface which can be implemented by concrete planner classes.  
  <a href="classplanner_1_1c_planner_interface.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2planner__interface_8h_source.html">planner_interface.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="planner__interface_8h_source.html">planner_interface.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for planner::cPlannerInterface&lt; Directions &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classplanner_1_1c_planner_interface__coll__graph.png" border="0" usemap="#planner_1_1c_planner_interface_3_01_directions_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="planner_1_1c_planner_interface_3_01_directions_01_4_coll__map" id="planner_1_1c_planner_interface_3_01_directions_01_4_coll__map">
+<area shape="rect" id="node2" href="structt_result.html" title="Contains result information from the planner. " alt="" coords="63,5,126,31"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2d99a6f9fe144a0406c040d8da2a6dd4"><td class="memItemLeft" align="right" valign="top"><a id="a2d99a6f9fe144a0406c040d8da2a6dd4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a2d99a6f9fe144a0406c040d8da2a6dd4">cPlannerInterface</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_oMap)</td></tr>
-<tr class="memdesc:a2d99a6f9fe144a0406c040d8da2a6dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of the interface which initializes its members m_poRover and m_oMap. <br /></td></tr>
-<tr class="separator:a2d99a6f9fe144a0406c040d8da2a6dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a06632a8c53906daf39611d9692ffa5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a7a06632a8c53906daf39611d9692ffa5">Plan</a> ()=0</td></tr>
-<tr class="memdesc:a7a06632a8c53906daf39611d9692ffa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual abstract method of the base interface, which must be implemented to perform a search algorithm.  <a href="#a7a06632a8c53906daf39611d9692ffa5">More...</a><br /></td></tr>
-<tr class="separator:a7a06632a8c53906daf39611d9692ffa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afec836d58ce54c49046bf30ecdebbfec"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#afec836d58ce54c49046bf30ecdebbfec">GoalTest</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sFirst, std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sSecond) const =0</td></tr>
-<tr class="memdesc:afec836d58ce54c49046bf30ecdebbfec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if two nodes are the same, which means the goal is reached.  <a href="#afec836d58ce54c49046bf30ecdebbfec">More...</a><br /></td></tr>
-<tr class="separator:afec836d58ce54c49046bf30ecdebbfec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e2048c2a4c699a76db90d1cbfecf156"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a7e2048c2a4c699a76db90d1cbfecf156">Child</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sParent, const <a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;i_sAction) const =0</td></tr>
-<tr class="memdesc:a7e2048c2a4c699a76db90d1cbfecf156"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the action i_sAction and the parent node i_sParent a new node of type <a class="el" href="structplanner_1_1t_node.html" title="Node gets expanded while searching for the shortest path. ">tNode</a> is created.  <a href="#a7e2048c2a4c699a76db90d1cbfecf156">More...</a><br /></td></tr>
-<tr class="separator:a7e2048c2a4c699a76db90d1cbfecf156"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7a88d017115e9bfee25c12091062641"><td class="memItemLeft" align="right" valign="top"><a id="af7a88d017115e9bfee25c12091062641"></a>
-<a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#af7a88d017115e9bfee25c12091062641">Result</a> ()</td></tr>
-<tr class="memdesc:af7a88d017115e9bfee25c12091062641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter to obtain result struct member m_sResult that contains information about the found path. <br /></td></tr>
-<tr class="separator:af7a88d017115e9bfee25c12091062641"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae09e9120335fce8f331749f492255fca"><td class="memItemLeft" align="right" valign="top"><a id="ae09e9120335fce8f331749f492255fca"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#ae09e9120335fce8f331749f492255fca">cPlannerInterface</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_poMap)</td></tr>
 <tr class="memdesc:ae09e9120335fce8f331749f492255fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of the interface which initializes its members m_poRover and m_oMap. <br /></td></tr>
@@ -122,14 +113,10 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a78389ea53bd3c9d5c57851a338ee91d8">m_sResult</a></td></tr>
 <tr class="memdesc:a78389ea53bd3c9d5c57851a338ee91d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Information to store planning results such as travelling time and consistency of heuristic. <br /></td></tr>
 <tr class="separator:a78389ea53bd3c9d5c57851a338ee91d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ef4a42f9e26463899f7c54d06580d7f"><td class="memItemLeft" align="right" valign="top"><a id="a4ef4a42f9e26463899f7c54d06580d7f"></a>
-std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a4ef4a42f9e26463899f7c54d06580d7f">m_poRover</a></td></tr>
-<tr class="memdesc:a4ef4a42f9e26463899f7c54d06580d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference pointer to the interface of the rover class planner::cRoverInterface&lt;Directions&gt;. <br /></td></tr>
-<tr class="separator:a4ef4a42f9e26463899f7c54d06580d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5145c31369e5092bfcfc836de75a5680"><td class="memItemLeft" align="right" valign="top"><a id="a5145c31369e5092bfcfc836de75a5680"></a>
-std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a5145c31369e5092bfcfc836de75a5680">m_oMap</a></td></tr>
-<tr class="memdesc:a5145c31369e5092bfcfc836de75a5680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the subclasses with important map information such as terrain and elevation maps. <br /></td></tr>
-<tr class="separator:a5145c31369e5092bfcfc836de75a5680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f578c25bb96ea00fade4c87aac87dc"><td class="memItemLeft" align="right" valign="top"><a id="a41f578c25bb96ea00fade4c87aac87dc"></a>
+std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a41f578c25bb96ea00fade4c87aac87dc">m_poRover</a></td></tr>
+<tr class="memdesc:a41f578c25bb96ea00fade4c87aac87dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference pointer to the interface of the rover class planner::cRoverInterface&lt;Directions&gt;. <br /></td></tr>
+<tr class="separator:a41f578c25bb96ea00fade4c87aac87dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa75ba58312d9398785d541a5e580a665"><td class="memItemLeft" align="right" valign="top"><a id="aa75ba58312d9398785d541a5e580a665"></a>
 std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#aa75ba58312d9398785d541a5e580a665">m_poMap</a></td></tr>
 <tr class="memdesc:aa75ba58312d9398785d541a5e580a665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the subclasses with important map information such as terrain and elevation maps. <br /></td></tr>
@@ -143,7 +130,7 @@ class planner::cPlannerInterface&lt; Directions &gt;</h3>
 <p>Forward declaration of planner interface. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7e2048c2a4c699a76db90d1cbfecf156"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e2048c2a4c699a76db90d1cbfecf156">&#9670;&nbsp;</a></span>Child() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e2048c2a4c699a76db90d1cbfecf156">&#9670;&nbsp;</a></span>Child()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -181,55 +168,12 @@ template&lt;size_t Directions&gt; </div>
 <p>Given the action i_sAction and the parent node i_sParent a new node of type <a class="el" href="structplanner_1_1t_node.html" title="Node gets expanded while searching for the shortest path. ">tNode</a> is created. </p>
 <p>Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface. </p>
 
-<p>Implemented in <a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e">planner::cPlanner</a>, and <a class="el" href="classplanner_1_1c_planner.html#ab260cfcb0ad00d46b02148d19faf040d">planner::cPlanner</a>.</p>
-
-</div>
-</div>
-<a id="a7e2048c2a4c699a76db90d1cbfecf156"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e2048c2a4c699a76db90d1cbfecf156">&#9670;&nbsp;</a></span>Child() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;size_t Directions&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual std::shared_ptr&lt;<a class="el" href="structplanner_1_1t_node.html">tNode</a>&gt; <a class="el" href="classplanner_1_1c_planner_interface.html">planner::cPlannerInterface</a>&lt; Directions &gt;::Child </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>i_sParent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;&#160;</td>
-          <td class="paramname"><em>i_sAction</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Given the action i_sAction and the parent node i_sParent a new node of type <a class="el" href="structplanner_1_1t_node.html" title="Node gets expanded while searching for the shortest path. ">tNode</a> is created. </p>
-<p>Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface. </p>
-
-<p>Implemented in <a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e">planner::cPlanner</a>, and <a class="el" href="classplanner_1_1c_planner.html#ab260cfcb0ad00d46b02148d19faf040d">planner::cPlanner</a>.</p>
+<p>Implemented in <a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e">planner::cPlanner</a>.</p>
 
 </div>
 </div>
 <a id="afec836d58ce54c49046bf30ecdebbfec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afec836d58ce54c49046bf30ecdebbfec">&#9670;&nbsp;</a></span>GoalTest() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afec836d58ce54c49046bf30ecdebbfec">&#9670;&nbsp;</a></span>GoalTest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -267,55 +211,12 @@ template&lt;size_t Directions&gt; </div>
 <p>Test if two nodes are the same, which means the goal is reached. </p>
 <p>Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface. </p>
 
-<p>Implemented in <a class="el" href="classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f">planner::cPlanner</a>, and <a class="el" href="classplanner_1_1c_planner.html#a7050795c7174d0ec427fc91f8756a3d8">planner::cPlanner</a>.</p>
-
-</div>
-</div>
-<a id="afec836d58ce54c49046bf30ecdebbfec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afec836d58ce54c49046bf30ecdebbfec">&#9670;&nbsp;</a></span>GoalTest() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;size_t Directions&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool <a class="el" href="classplanner_1_1c_planner_interface.html">planner::cPlannerInterface</a>&lt; Directions &gt;::GoalTest </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>i_sFirst</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>i_sSecond</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Test if two nodes are the same, which means the goal is reached. </p>
-<p>Defined pure virtual which means it must be implemented by the subclasses the inherit from this interface. </p>
-
-<p>Implemented in <a class="el" href="classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f">planner::cPlanner</a>, and <a class="el" href="classplanner_1_1c_planner.html#a7050795c7174d0ec427fc91f8756a3d8">planner::cPlanner</a>.</p>
+<p>Implemented in <a class="el" href="classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f">planner::cPlanner</a>.</p>
 
 </div>
 </div>
 <a id="a7a06632a8c53906daf39611d9692ffa5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a06632a8c53906daf39611d9692ffa5">&#9670;&nbsp;</a></span>Plan() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a06632a8c53906daf39611d9692ffa5">&#9670;&nbsp;</a></span>Plan()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -342,44 +243,12 @@ template&lt;size_t Directions&gt; </div>
 <p>Virtual abstract method of the base interface, which must be implemented to perform a search algorithm. </p>
 <dl class="section return"><dt>Returns</dt><dd>The cost to move from start to goal if it was found. Otherwise -1 is returned. </dd></dl>
 
-<p>Implemented in <a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e">planner::cPlanner</a>, <a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e">planner::cPlanner</a>, <a class="el" href="classplanner_1_1c_planner_r_b_g.html#a0bbd752702da582a47dbd153c0065eb5">planner::cPlannerRBG</a>, <a class="el" href="classplanner_1_1c_planner_wiki.html#a9d18be721400b51162ff463ab11d1721">planner::cPlannerWiki</a>, <a class="el" href="classplanner_1_1c_planner_r_b_g.html#a0bbd752702da582a47dbd153c0065eb5">planner::cPlannerRBG</a>, and <a class="el" href="classplanner_1_1c_planner_wiki.html#a9d18be721400b51162ff463ab11d1721">planner::cPlannerWiki</a>.</p>
-
-</div>
-</div>
-<a id="a7a06632a8c53906daf39611d9692ffa5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a06632a8c53906daf39611d9692ffa5">&#9670;&nbsp;</a></span>Plan() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;size_t Directions&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="structt_result.html">tResult</a> <a class="el" href="classplanner_1_1c_planner_interface.html">planner::cPlannerInterface</a>&lt; Directions &gt;::Plan </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Virtual abstract method of the base interface, which must be implemented to perform a search algorithm. </p>
-<dl class="section return"><dt>Returns</dt><dd>The cost to move from start to goal if it was found. Otherwise -1 is returned. </dd></dl>
-
-<p>Implemented in <a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e">planner::cPlanner</a>, <a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e">planner::cPlanner</a>, <a class="el" href="classplanner_1_1c_planner_r_b_g.html#a0bbd752702da582a47dbd153c0065eb5">planner::cPlannerRBG</a>, <a class="el" href="classplanner_1_1c_planner_wiki.html#a9d18be721400b51162ff463ab11d1721">planner::cPlannerWiki</a>, <a class="el" href="classplanner_1_1c_planner_r_b_g.html#a0bbd752702da582a47dbd153c0065eb5">planner::cPlannerRBG</a>, and <a class="el" href="classplanner_1_1c_planner_wiki.html#a9d18be721400b51162ff463ab11d1721">planner::cPlannerWiki</a>.</p>
+<p>Implemented in <a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e">planner::cPlanner</a>, <a class="el" href="classplanner_1_1c_planner_r_b_g.html#a0bbd752702da582a47dbd153c0065eb5">planner::cPlannerRBG</a>, and <a class="el" href="classplanner_1_1c_planner_wiki.html#a9d18be721400b51162ff463ab11d1721">planner::cPlannerWiki</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/include/<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2planner__interface_8h_source.html">planner_interface.h</a></li>
+<li>/Users/fjp/git/bachelor/planner/include/<a class="el" href="planner__interface_8h_source.html">planner_interface.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

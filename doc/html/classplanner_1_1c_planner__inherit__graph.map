@@ -1,0 +1,5 @@
+<map id="planner::cPlanner" name="planner::cPlanner">
+<area shape="rect" id="node3" href="$classplanner_1_1c_planner_r_b_g.html" title="Extends the planner class to implement A* from Wikipedia. " alt="" coords="5,152,160,177"/>
+<area shape="rect" id="node4" href="$classplanner_1_1c_planner_wiki.html" title="Extends the planner class to implement A* from Wikipedia. " alt="" coords="185,152,336,177"/>
+<area shape="rect" id="node2" href="$classplanner_1_1c_planner_interface.html" title="planner::cPlannerInterface\&lt; 8 \&gt;" alt="" coords="67,5,275,31"/>
+</map>

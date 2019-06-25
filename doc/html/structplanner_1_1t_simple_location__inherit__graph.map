@@ -1,0 +1,4 @@
+<map id="planner::tSimpleLocation" name="planner::tSimpleLocation">
+<area shape="rect" id="node3" href="$structplanner_1_1t_simple_node.html" title="Simplified node struct without the a pointer to its parent as in node struct (node.h). " alt="" coords="15,152,164,177"/>
+<area shape="rect" id="node2" href="$structplanner_1_1t_location.html" title="Data structure used as location information for nodes. " alt="" coords="26,5,153,31"/>
+</map>

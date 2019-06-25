@@ -77,7 +77,7 @@ $(function() {
 <p>The map class cMap has pointers to the elevation.data (m_poElevation) and overrides.data (m_poOverrides).  
  <a href="classplanner_1_1c_graph.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2graph_8h_source.html">graph.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="graph_8h_source.html">graph.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -106,41 +106,16 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>Overrides</b> (int
 <tr class="memitem:a6da6e6e269013628aef48245a7787cb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#a6da6e6e269013628aef48245a7787cb9">SetOverrides</a> (int i_nX, int i_nY, uint8_t i_nValue)</td></tr>
 <tr class="memdesc:a6da6e6e269013628aef48245a7787cb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the provided overrides m_poOverrides 8 bit value i_nValue at the provided location while keeping the old value (or operation).  <a href="#a6da6e6e269013628aef48245a7787cb9">More...</a><br /></td></tr>
 <tr class="separator:a6da6e6e269013628aef48245a7787cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a189aeb64fe91fd6dd07f4b068d3b791e"><td class="memItemLeft" align="right" valign="top"><a id="a189aeb64fe91fd6dd07f4b068d3b791e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#a189aeb64fe91fd6dd07f4b068d3b791e">cGraph</a> (uint8_t *i_oElevation, uint8_t *i_oOverrides, int i_nHeight, int i_nWidth)</td></tr>
-<tr class="memdesc:a189aeb64fe91fd6dd07f4b068d3b791e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the members m_poElevation, m_poOverrides and the maps height m_nHeight and width m_nWidth. <br /></td></tr>
-<tr class="separator:a189aeb64fe91fd6dd07f4b068d3b791e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e01eaa240f5e4f5020df2d611ab1994"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#a0e01eaa240f5e4f5020df2d611ab1994">Elevation</a> (int i_nX, int i_nY)</td></tr>
-<tr class="memdesc:a0e01eaa240f5e4f5020df2d611ab1994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get elevation at provided location.  <a href="#a0e01eaa240f5e4f5020df2d611ab1994">More...</a><br /></td></tr>
-<tr class="separator:a0e01eaa240f5e4f5020df2d611ab1994"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf0a3350d15819b92ec14c4596ebf702"><td class="memItemLeft" align="right" valign="top"><a id="adf0a3350d15819b92ec14c4596ebf702"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>Overrides</b> (int i_nX, int i_nY)</td></tr>
-<tr class="separator:adf0a3350d15819b92ec14c4596ebf702"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97108b0e05fa547c006d76e749d52f27"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#a97108b0e05fa547c006d76e749d52f27">Water</a> (int i_nX, int i_nY)</td></tr>
-<tr class="memdesc:a97108b0e05fa547c006d76e749d52f27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the position is on mainland or water.  <a href="#a97108b0e05fa547c006d76e749d52f27">More...</a><br /></td></tr>
-<tr class="separator:a97108b0e05fa547c006d76e749d52f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99935ff4c32d229e6006aaa843a685a9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#a99935ff4c32d229e6006aaa843a685a9">Water</a> (int i_nX0, int i_nY0, int i_nX1, int i_nY1)</td></tr>
-<tr class="memdesc:a99935ff4c32d229e6006aaa843a685a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the position between the two locations is on mainland or water or goes through it.  <a href="#a99935ff4c32d229e6006aaa843a685a9">More...</a><br /></td></tr>
-<tr class="separator:a99935ff4c32d229e6006aaa843a685a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c163af76e19303794a908304f3b759e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#a5c163af76e19303794a908304f3b759e">Height</a> () const</td></tr>
-<tr class="memdesc:a5c163af76e19303794a908304f3b759e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the height of the map, stored in m_nHeight.  <a href="#a5c163af76e19303794a908304f3b759e">More...</a><br /></td></tr>
-<tr class="separator:a5c163af76e19303794a908304f3b759e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25e3f4ee33c86a8a0c3a31c42dac7607"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#a25e3f4ee33c86a8a0c3a31c42dac7607">Width</a> () const</td></tr>
-<tr class="memdesc:a25e3f4ee33c86a8a0c3a31c42dac7607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the width of the map, stored in m_nWidth.  <a href="#a25e3f4ee33c86a8a0c3a31c42dac7607">More...</a><br /></td></tr>
-<tr class="separator:a25e3f4ee33c86a8a0c3a31c42dac7607"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6da6e6e269013628aef48245a7787cb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#a6da6e6e269013628aef48245a7787cb9">SetOverrides</a> (int i_nX, int i_nY, uint8_t i_nValue)</td></tr>
-<tr class="memdesc:a6da6e6e269013628aef48245a7787cb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the provided overrides m_poOverrides 8 bit value i_nValue at the provided location while keeping the old value (or operation).  <a href="#a6da6e6e269013628aef48245a7787cb9">More...</a><br /></td></tr>
-<tr class="separator:a6da6e6e269013628aef48245a7787cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a3138f12f0f4922c293af3f374ebd3e9e"><td class="memItemLeft" align="right" valign="top"><a id="a3138f12f0f4922c293af3f374ebd3e9e"></a>
-uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#a3138f12f0f4922c293af3f374ebd3e9e">m_oElevation</a></td></tr>
-<tr class="memdesc:a3138f12f0f4922c293af3f374ebd3e9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elevation over the ground (0-255). <br /></td></tr>
-<tr class="separator:a3138f12f0f4922c293af3f374ebd3e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48c342e3a45af78d52a6e6e5d5f3baf2"><td class="memItemLeft" align="right" valign="top"><a id="a48c342e3a45af78d52a6e6e5d5f3baf2"></a>
+<tr class="memitem:aea1ab1d83e0e58f454f07a46fc0d40dd"><td class="memItemLeft" align="right" valign="top"><a id="aea1ab1d83e0e58f454f07a46fc0d40dd"></a>
+uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#aea1ab1d83e0e58f454f07a46fc0d40dd">m_oElevation</a></td></tr>
+<tr class="memdesc:aea1ab1d83e0e58f454f07a46fc0d40dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elevation over the ground (0-255). <br /></td></tr>
+<tr class="separator:aea1ab1d83e0e58f454f07a46fc0d40dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0794d9865c56cddd3d051e6ea0c1c756"><td class="memItemLeft" align="right" valign="top"><a id="a0794d9865c56cddd3d051e6ea0c1c756"></a>
 uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>m_oOverrides</b></td></tr>
-<tr class="separator:a48c342e3a45af78d52a6e6e5d5f3baf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a0794d9865c56cddd3d051e6ea0c1c756"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bb5ea1aa1709b4530bbf5f931c1f277"><td class="memItemLeft" align="right" valign="top"><a id="a5bb5ea1aa1709b4530bbf5f931c1f277"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_graph.html#a5bb5ea1aa1709b4530bbf5f931c1f277">m_nHeight</a></td></tr>
 <tr class="memdesc:a5bb5ea1aa1709b4530bbf5f931c1f277"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the height of the map. <br /></td></tr>
@@ -155,45 +130,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <p>This class is used to check for constraints in the map (e.g. water basins, rivers and marsh, which cannot be traversed by the robot. The elevation data is used to model the acceleration of the rover. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0e01eaa240f5e4f5020df2d611ab1994"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e01eaa240f5e4f5020df2d611ab1994">&#9670;&nbsp;</a></span>Elevation() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t planner::cGraph::Elevation </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nX</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nY</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get elevation at provided location. </p>
-<p>From the read elevation.data the 8 bit value is returned. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_nX</td><td>X location of the elevation. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_nY</td><td>Y location of the elevation. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Elevation at (i_nX, i_nY). </dd></dl>
-
-</div>
-</div>
-<a id="a0e01eaa240f5e4f5020df2d611ab1994"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e01eaa240f5e4f5020df2d611ab1994">&#9670;&nbsp;</a></span>Elevation() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e01eaa240f5e4f5020df2d611ab1994">&#9670;&nbsp;</a></span>Elevation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -231,27 +168,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </div>
 </div>
 <a id="a5c163af76e19303794a908304f3b759e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c163af76e19303794a908304f3b759e">&#9670;&nbsp;</a></span>Height() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int planner::cGraph::Height </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Getter for the height of the map, stored in m_nHeight. </p>
-<dl class="section return"><dt>Returns</dt><dd>The total height of the map. </dd></dl>
-
-</div>
-</div>
-<a id="a5c163af76e19303794a908304f3b759e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c163af76e19303794a908304f3b759e">&#9670;&nbsp;</a></span>Height() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c163af76e19303794a908304f3b759e">&#9670;&nbsp;</a></span>Height()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -271,51 +188,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </div>
 </div>
 <a id="a6da6e6e269013628aef48245a7787cb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6da6e6e269013628aef48245a7787cb9">&#9670;&nbsp;</a></span>SetOverrides() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void planner::cGraph::SetOverrides </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nX</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nY</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>i_nValue</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets the provided overrides m_poOverrides 8 bit value i_nValue at the provided location while keeping the old value (or operation). </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_nX</td><td>X location of the overrides m_poOverrides that should be updated. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_nY</td><td>Y location of the overrides m_poOverrides that should be updated. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_nValue</td><td>The or operator is applied to this 8 bit mask value and the current overrides value at (i_nX, i_nY). </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a6da6e6e269013628aef48245a7787cb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6da6e6e269013628aef48245a7787cb9">&#9670;&nbsp;</a></span>SetOverrides() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6da6e6e269013628aef48245a7787cb9">&#9670;&nbsp;</a></span>SetOverrides()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -359,45 +232,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </div>
 </div>
 <a id="a97108b0e05fa547c006d76e749d52f27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97108b0e05fa547c006d76e749d52f27">&#9670;&nbsp;</a></span>Water() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool planner::cGraph::Water </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nX</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nY</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check if the position is on mainland or water. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_nX</td><td>X coordinate to be checked for water. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_nY</td><td>Y coordinate to be checked for water. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the provided position is on water, false otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="a97108b0e05fa547c006d76e749d52f27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97108b0e05fa547c006d76e749d52f27">&#9670;&nbsp;</a></span>Water() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a97108b0e05fa547c006d76e749d52f27">&#9670;&nbsp;</a></span>Water() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -435,57 +270,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </div>
 </div>
 <a id="a99935ff4c32d229e6006aaa843a685a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99935ff4c32d229e6006aaa843a685a9">&#9670;&nbsp;</a></span>Water() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool planner::cGraph::Water </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nX0</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nY0</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nX1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nY1</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check if the position between the two locations is on mainland or water or goes through it. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_nX</td><td>X coordinate to be checked for water. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_nY</td><td>Y coordinate to be checked for water. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the provided position is on or goes through water, false otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="a99935ff4c32d229e6006aaa843a685a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99935ff4c32d229e6006aaa843a685a9">&#9670;&nbsp;</a></span>Water() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a99935ff4c32d229e6006aaa843a685a9">&#9670;&nbsp;</a></span>Water() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -535,27 +320,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </div>
 </div>
 <a id="a25e3f4ee33c86a8a0c3a31c42dac7607"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25e3f4ee33c86a8a0c3a31c42dac7607">&#9670;&nbsp;</a></span>Width() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int planner::cGraph::Width </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Getter for the width of the map, stored in m_nWidth. </p>
-<dl class="section return"><dt>Returns</dt><dd>The total width of the map. </dd></dl>
-
-</div>
-</div>
-<a id="a25e3f4ee33c86a8a0c3a31c42dac7607"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25e3f4ee33c86a8a0c3a31c42dac7607">&#9670;&nbsp;</a></span>Width() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a25e3f4ee33c86a8a0c3a31c42dac7607">&#9670;&nbsp;</a></span>Width()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -575,8 +340,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/include/<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2graph_8h_source.html">graph.h</a></li>
-<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/src/graph.cpp</li>
+<li>/Users/fjp/git/bachelor/planner/include/<a class="el" href="graph_8h_source.html">graph.h</a></li>
+<li>/Users/fjp/git/bachelor/planner/src/graph.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

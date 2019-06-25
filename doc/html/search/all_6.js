@@ -1,22 +1,9 @@
 var searchData=
 [
-  ['f',['f',['../structplanner_1_1t_node.html#adc45202105ccc8b7fb040d557977dbd4',1,'planner::tNode::f()'],['../structplanner_1_1t_simple_node.html#a3411f599ba06ac5373746571ac5223e6',1,'planner::tSimpleNode::f()']]],
-  ['failedtest',['FailedTest',['../class_failed_test.html',1,'']]],
-  ['failingparamtest',['FailingParamTest',['../class_failing_param_test.html',1,'']]],
-  ['fatalfailureinfixtureconstructortest',['FatalFailureInFixtureConstructorTest',['../class_fatal_failure_in_fixture_constructor_test.html',1,'']]],
-  ['fatalfailureinsetuptest',['FatalFailureInSetUpTest',['../class_fatal_failure_in_set_up_test.html',1,'']]],
-  ['fcost',['fCost',['../structplanner_1_1t_action.html#a7bac43507f0daab4fb5850c66e1da9d2',1,'planner::tAction']]],
-  ['fileheader',['FileHeader',['../structvisualizer_1_1_file_header.html',1,'visualizer']]],
-  ['filepath',['FilePath',['../classtesting_1_1internal_1_1_file_path.html',1,'testing::internal']]],
-  ['finalsuccesschecker',['FinalSuccessChecker',['../classtesting_1_1internal_1_1_final_success_checker.html',1,'testing::internal']]],
-  ['flags',['Flags',['../structtesting_1_1_flags.html',1,'testing']]],
-  ['floatingpoint',['FloatingPoint',['../classtesting_1_1internal_1_1_floating_point.html',1,'testing::internal']]],
-  ['foo',['Foo',['../structtesting_1_1gtest__printers__test_1_1_foo.html',1,'testing::gtest_printers_test']]],
-  ['fooenvironment',['FooEnvironment',['../class_foo_environment.html',1,'']]],
-  ['footest',['FooTest',['../class_foo_test.html',1,'']]],
-  ['formatforcomparison',['FormatForComparison',['../classtesting_1_1internal_1_1_format_for_comparison.html',1,'testing::internal']]],
-  ['formatforcomparison_3c_20toprint_5bn_5d_2c_20otheroperand_20_3e',['FormatForComparison&lt; ToPrint[N], OtherOperand &gt;',['../classtesting_1_1internal_1_1_format_for_comparison_3_01_to_print[_n]_00_01_other_operand_01_4.html',1,'testing::internal']]],
-  ['fornode',['ForNode',['../classpump_1_1_for_node.html',1,'pump']]],
-  ['ftravellingtime',['fTravellingTime',['../structt_result.html#ab3934006c8a2a92c5622cb9d4b246eba',1,'tResult']]],
-  ['faq',['FAQ',['../md___users_fjp_git_bachelor_bachelor-master_updated_vfinal_googletest-1_88_80_googletest_docs__f_a_q.html',1,'']]]
+  ['g',['g',['../structplanner_1_1t_node.html#a3b6b0cf6cf79d00aa1725e656246ed47',1,'planner::tNode::g()'],['../structplanner_1_1t_simple_node.html#aa75a8701dd9f556dee00365465aa21b5',1,'planner::tSimpleNode::g()']]],
+  ['generateheuristic',['GenerateHeuristic',['../classplanner_1_1c_planner.html#a1a4650050656545744796296a653d388',1,'planner::cPlanner']]],
+  ['get',['get',['../structplanner_1_1_priority_queue.html#abdd3d392da157bb645b5720eace1200a',1,'planner::PriorityQueue']]],
+  ['goaltest',['GoalTest',['../classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f',1,'planner::cPlanner::GoalTest()'],['../classplanner_1_1c_planner_interface.html#afec836d58ce54c49046bf30ecdebbfec',1,'planner::cPlannerInterface::GoalTest()']]],
+  ['gradx',['GradX',['../classplanner_1_1c_planner.html#aa90d751ce544870e4c89494e06fdac6c',1,'planner::cPlanner']]],
+  ['grady',['GradY',['../classplanner_1_1c_planner.html#a6fd8e8632d78d85ce472322267ba7b36',1,'planner::cPlanner']]]
 ];

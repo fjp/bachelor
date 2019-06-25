@@ -18,7 +18,7 @@ A consistent heuristic is ensured with the chosen step cost and height cost mode
 
 \subsubsection*{Memory Leaks}
 
-I analyzed my previous implementation using valgrind which showed memory leaks when creating child nodes in \mbox{\hyperlink{classplanner_1_1c_planner_adbffc6ce05119c940a09369d7e61554e}{planner\+::c\+Planner\+::\+Child}}. Additionally because of not destructing the planner and audi rover objects correctly. To overcome these memory leaks I now use smart pointers which are a C++11 feature. The valgrind results for the planner and g\+Test project are shown in valgrind.\+xml and valgrind\+\_\+gtest.\+xml respectively. See also the memory usage in the Memory Usage section below.
+I analyzed my previous implementation using valgrind which showed memory leaks when creating child nodes in \mbox{\hyperlink{classplanner_1_1c_planner_adbffc6ce05119c940a09369d7e61554e}{planner\+::c\+Planner\+::\+Child}}. Additionally because of not destructing the planner and audi rover objects correctly. To overcome these memory leaks I now use smart pointers which are a C++11 feature. The valgrind results for the planner and g\+Test project are shown in \href{doc/valgrind.xml}{\tt doc/valgrind.\+xml} and \href{valgrind_gtest.xml}{\tt valgrind\+\_\+gtest.\+xml} respectively. See also the memory usage in the Memory Usage section below.
 
 \subsubsection*{Implementation Correctness}
 
@@ -32,7 +32,14 @@ Both use less memory than my previous implementation, which can still be found i
 
 \subsubsection*{g\+Tests using Simple Maps}
 
-The mentioned implementations are used in new g\+Tests which create and use two simple maps to test if the different implementations yield the same result (regarding travelling time given in island seconds).
+The mentioned implementations are used in new g\+Tests which create and use simple maps to test if the different implementations yield the same results (regarding travelling time given in island seconds).
+
+
+\begin{DoxyEnumerate}
+\item simple\+\_\+map creates a 330x330 map with elevation 1 to check if the implementations find a path from the start to the goal location.
+\end{DoxyEnumerate}
+
+
 
 
 \begin{DoxyEnumerate}
@@ -49,6 +56,8 @@ All the implementations find a shortest but but the implementation from Wikipedi
 \end{DoxyEnumerate}
 
 
+
+Additional test results can be seen in the image folder \href{doc/images/test}{\tt doc/images/test}.
 
 \subsection*{C++11 Features}
 

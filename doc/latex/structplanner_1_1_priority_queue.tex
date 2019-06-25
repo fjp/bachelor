@@ -14,9 +14,6 @@ Priority queue servers as frontier that stores the best nodes explored during \m
 \item 
 \mbox{\Hypertarget{structplanner_1_1_priority_queue_ae0445a3c85c4e139fcf28479a800f019}\label{structplanner_1_1_priority_queue_ae0445a3c85c4e139fcf28479a800f019}} 
 typedef std\+::pair$<$ priority\+\_\+t, T $>$ {\bfseries P\+Q\+Element}
-\item 
-\mbox{\Hypertarget{structplanner_1_1_priority_queue_ae0445a3c85c4e139fcf28479a800f019}\label{structplanner_1_1_priority_queue_ae0445a3c85c4e139fcf28479a800f019}} 
-typedef std\+::pair$<$ priority\+\_\+t, T $>$ {\bfseries P\+Q\+Element}
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -35,26 +32,11 @@ T \mbox{\hyperlink{structplanner_1_1_priority_queue_abba3d8fcc5729acc424b1fbc38c
 \begin{DoxyCompactList}\small\item\em Get the best element from the queue without removing it. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structplanner_1_1_priority_queue_aa98bde3a7a3256915f80e1e61572214b}\label{structplanner_1_1_priority_queue_aa98bde3a7a3256915f80e1e61572214b}} 
 void \mbox{\hyperlink{structplanner_1_1_priority_queue_aa98bde3a7a3256915f80e1e61572214b}{clear}} ()
-\begin{DoxyCompactList}\small\item\em Clear all elements by overriding the struct field o\+Elements. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structplanner_1_1_priority_queue_a459a18939cb4b02517d5a7db19fd829c}\label{structplanner_1_1_priority_queue_a459a18939cb4b02517d5a7db19fd829c}} 
-bool \mbox{\hyperlink{structplanner_1_1_priority_queue_a459a18939cb4b02517d5a7db19fd829c}{empty}} () const
-\begin{DoxyCompactList}\small\item\em Check if the queue is empty, which is used get new best nodes or resign because no path to the goal was found. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structplanner_1_1_priority_queue_afb6cb790e6a592d22a2f05441bfbf23b}\label{structplanner_1_1_priority_queue_afb6cb790e6a592d22a2f05441bfbf23b}} 
-void \mbox{\hyperlink{structplanner_1_1_priority_queue_afb6cb790e6a592d22a2f05441bfbf23b}{put}} (T item, priority\+\_\+t priority)
-\begin{DoxyCompactList}\small\item\em Adds new nodes to the priority queue, which is used when their path costs are lower than previously stored, see \mbox{\hyperlink{classplanner_1_1c_planner_a341e70531266f023ac9461d18979d1ef}{planner\+::c\+Planner\+::\+A\+Star()}}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structplanner_1_1_priority_queue_abdd3d392da157bb645b5720eace1200a}\label{structplanner_1_1_priority_queue_abdd3d392da157bb645b5720eace1200a}} 
-T \mbox{\hyperlink{structplanner_1_1_priority_queue_abdd3d392da157bb645b5720eace1200a}{get}} ()
-\begin{DoxyCompactList}\small\item\em Get the best element in the queue and remove it. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structplanner_1_1_priority_queue_abba3d8fcc5729acc424b1fbc38c94e84}\label{structplanner_1_1_priority_queue_abba3d8fcc5729acc424b1fbc38c94e84}} 
-T \mbox{\hyperlink{structplanner_1_1_priority_queue_abba3d8fcc5729acc424b1fbc38c94e84}{pop}} ()
-\begin{DoxyCompactList}\small\item\em Get the best element from the queue without removing it. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structplanner_1_1_priority_queue_aa98bde3a7a3256915f80e1e61572214b}\label{structplanner_1_1_priority_queue_aa98bde3a7a3256915f80e1e61572214b}} 
-void \mbox{\hyperlink{structplanner_1_1_priority_queue_aa98bde3a7a3256915f80e1e61572214b}{clear}} ()
 \begin{DoxyCompactList}\small\item\em Clear all elements by overriding the struct field o\+Elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structplanner_1_1_priority_queue_a17b97e9a14688c54abec4de74b4b790f}\label{structplanner_1_1_priority_queue_a17b97e9a14688c54abec4de74b4b790f}} 
+\mbox{\Hypertarget{structplanner_1_1_priority_queue_ac8dd7ed5a5d4b65eed6ccbe2b503dd3b}\label{structplanner_1_1_priority_queue_ac8dd7ed5a5d4b65eed6ccbe2b503dd3b}} 
 std\+::priority\+\_\+queue$<$ P\+Q\+Element, std\+::vector$<$ P\+Q\+Element $>$, std\+::greater$<$ P\+Q\+Element $>$ $>$ {\bfseries o\+Elements}
 \end{DoxyCompactItemize}
 
@@ -65,8 +47,17 @@ struct planner\+::\+Priority\+Queue$<$ T, priority\+\_\+t $>$}
 
 Priority queue servers as frontier that stores the best nodes explored during \mbox{\hyperlink{classplanner_1_1c_planner_a341e70531266f023ac9461d18979d1ef}{planner\+::c\+Planner\+::\+A\+Star()}}. 
 
-The priority queue is sorted by the evaluation function value $f(n)$. 
+The priority queue is sorted by the evaluation function value $f(n)$. Code from \href{https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus}{\tt https\+://www.\+redblobgames.\+com/pathfinding/a-\/star/implementation.\+html\#cplusplus}
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & element of the queue such as a node with location information. \\
+\hline
+{\em priority\+\_\+t} & specifies the importance of a node (f score value). \\
+\hline
+\end{DoxyTemplParams}
+
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/fjp/git/bachelor/bachelor-\/master\+\_\+updated\+\_\+vfinal/planner/include/priority\+\_\+queue.\+h\end{DoxyCompactItemize}
+/\+Users/fjp/git/bachelor/planner/include/priority\+\_\+queue.\+h\end{DoxyCompactItemize}

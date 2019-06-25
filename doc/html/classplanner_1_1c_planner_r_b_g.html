@@ -76,21 +76,27 @@ $(function() {
 <p>Extends the planner class to implement A* from Wikipedia.  
  <a href="classplanner_1_1c_planner_r_b_g.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2planner__rbg_8h_source.html">planner_rbg.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="planner__rbg_8h_source.html">planner_rbg.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for planner::cPlannerRBG:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classplanner_1_1c_planner_r_b_g.png" usemap="#planner::cPlannerRBG_map" alt=""/>
-  <map id="planner::cPlannerRBG_map" name="planner::cPlannerRBG_map">
-<area href="classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e..." alt="planner::cPlanner" shape="rect" coords="101,56,294,80"/>
-<area href="classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e..." alt="planner::cPlanner" shape="rect" coords="507,56,700,80"/>
-<area href="classplanner_1_1c_planner_interface.html" alt="planner::cPlannerInterface&lt; 8 &gt;" shape="rect" coords="0,0,193,24"/>
-<area href="classplanner_1_1c_planner_interface.html" alt="planner::cPlannerInterface&lt; 8 &gt;" shape="rect" coords="203,0,396,24"/>
-<area href="classplanner_1_1c_planner_interface.html" alt="planner::cPlannerInterface&lt; 8 &gt;" shape="rect" coords="406,0,599,24"/>
-<area href="classplanner_1_1c_planner_interface.html" alt="planner::cPlannerInterface&lt; 8 &gt;" shape="rect" coords="609,0,802,24"/>
+<div class="center"><img src="classplanner_1_1c_planner_r_b_g__inherit__graph.png" border="0" usemap="#planner_1_1c_planner_r_b_g_inherit__map" alt="Inheritance graph"/></div>
+<map name="planner_1_1c_planner_r_b_g_inherit__map" id="planner_1_1c_planner_r_b_g_inherit__map">
+<area shape="rect" id="node2" href="classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e..." alt="" coords="46,79,172,104"/>
+<area shape="rect" id="node3" href="classplanner_1_1c_planner_interface.html" title="planner::cPlannerInterface\&lt; 8 \&gt;" alt="" coords="5,5,213,31"/>
 </map>
- </div></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for planner::cPlannerRBG:</div>
+<div class="dyncontent">
+<div class="center"><img src="classplanner_1_1c_planner_r_b_g__coll__graph.png" border="0" usemap="#planner_1_1c_planner_r_b_g_coll__map" alt="Collaboration graph"/></div>
+<map name="planner_1_1c_planner_r_b_g_coll__map" id="planner_1_1c_planner_r_b_g_coll__map">
+<area shape="rect" id="node2" href="classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e..." alt="" coords="515,53,640,78"/>
+<area shape="rect" id="node3" href="classplanner_1_1c_planner_interface.html" title="planner::cPlannerInterface\&lt; 8 \&gt;" alt="" coords="183,6,391,31"/>
+<area shape="rect" id="node4" href="structt_result.html" title="Contains result information from the planner. " alt="" coords="5,6,68,31"/>
+<area shape="rect" id="node5" href="structplanner_1_1_priority_queue.html" title="planner::PriorityQueue\l\&lt; std::shared_ptr\&lt; planner\l::tNode \&gt;, double \&gt;" alt="" coords="198,55,376,107"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -108,23 +114,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1af74d398b286f1e05e6ade495efbbd0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_r_b_g.html#a1af74d398b286f1e05e6ade495efbbd0">ReconstructPath</a> (TCostSoFar &amp;&amp;i_cost_so_far, TCameFrom &amp;&amp;i_came_from)</td></tr>
 <tr class="memdesc:a1af74d398b286f1e05e6ade495efbbd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path.  <a href="#a1af74d398b286f1e05e6ade495efbbd0">More...</a><br /></td></tr>
 <tr class="separator:a1af74d398b286f1e05e6ade495efbbd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91296b98e64effc16f38e2430746d94d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_r_b_g.html#a91296b98e64effc16f38e2430746d94d">cPlannerRBG</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; 8 &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_oMap)</td></tr>
-<tr class="memdesc:a91296b98e64effc16f38e2430746d94d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes member variables m_poRover and m_oMap and calls <a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e" title="Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p) ...">CalculateConsistencyFactor()</a>.  <a href="#a91296b98e64effc16f38e2430746d94d">More...</a><br /></td></tr>
-<tr class="separator:a91296b98e64effc16f38e2430746d94d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad582fdf21ae0d86a23e9c25546b66f0e"><td class="memItemLeft" align="right" valign="top"><a id="ad582fdf21ae0d86a23e9c25546b66f0e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_r_b_g.html#ad582fdf21ae0d86a23e9c25546b66f0e">~cPlannerRBG</a> ()</td></tr>
-<tr class="memdesc:ad582fdf21ae0d86a23e9c25546b66f0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor to delete the allocated memory. <br /></td></tr>
-<tr class="separator:ad582fdf21ae0d86a23e9c25546b66f0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bbd752702da582a47dbd153c0065eb5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_r_b_g.html#a0bbd752702da582a47dbd153c0065eb5">Plan</a> () override</td></tr>
-<tr class="memdesc:a0bbd752702da582a47dbd153c0065eb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the AStar() search algorithm.  <a href="#a0bbd752702da582a47dbd153c0065eb5">More...</a><br /></td></tr>
-<tr class="separator:a0bbd752702da582a47dbd153c0065eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1af74d398b286f1e05e6ade495efbbd0"><td class="memTemplParams" colspan="2">template&lt;typename TCostSoFar , typename TCameFrom &gt; </td></tr>
-<tr class="memitem:a1af74d398b286f1e05e6ade495efbbd0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_r_b_g.html#a1af74d398b286f1e05e6ade495efbbd0">ReconstructPath</a> (TCostSoFar &amp;&amp;i_cost_so_far, TCameFrom &amp;&amp;i_came_from)</td></tr>
-<tr class="memdesc:a1af74d398b286f1e05e6ade495efbbd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path.  <a href="#a1af74d398b286f1e05e6ade495efbbd0">More...</a><br /></td></tr>
-<tr class="separator:a1af74d398b286f1e05e6ade495efbbd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classplanner_1_1c_planner"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classplanner_1_1c_planner')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classplanner_1_1c_planner.html">planner::cPlanner</a></td></tr>
 <tr class="memitem:a381d86c14532f65cf21cb80b4c64ce0e inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a381d86c14532f65cf21cb80b4c64ce0e">cPlanner</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; 8 &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_oMap)</td></tr>
-<tr class="memdesc:a381d86c14532f65cf21cb80b4c64ce0e inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes member variables m_poRover and m_oMap and calls <a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e" title="Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p) ...">CalculateConsistencyFactor()</a>.  <a href="classplanner_1_1c_planner.html#a381d86c14532f65cf21cb80b4c64ce0e">More...</a><br /></td></tr>
+<tr class="memdesc:a381d86c14532f65cf21cb80b4c64ce0e inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes member variables m_poRover and m_poMap and calls <a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e" title="Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p) ...">CalculateConsistencyFactor()</a>.  <a href="classplanner_1_1c_planner.html#a381d86c14532f65cf21cb80b4c64ce0e">More...</a><br /></td></tr>
 <tr class="separator:a381d86c14532f65cf21cb80b4c64ce0e inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9ae1109d3c4b7ac19aef2616547654e inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="aa9ae1109d3c4b7ac19aef2616547654e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#aa9ae1109d3c4b7ac19aef2616547654e">~cPlanner</a> ()</td></tr>
@@ -143,7 +135,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a1234d075676fcaa2c17b859d11b4638c inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the heuristic of node i_sNode is consistent.  <a href="classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c">More...</a><br /></td></tr>
 <tr class="separator:a1234d075676fcaa2c17b859d11b4638c inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16e8c156297fff49a6ba9b97073baffb inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb">UpdateCost</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; io_psNode) const</td></tr>
-<tr class="memdesc:a16e8c156297fff49a6ba9b97073baffb inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the node argument with its path cost <img class="formulaInl" alt="$g(n)$" src="form_1.png"/> with island seconds as its unit.  <a href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb">More...</a><br /></td></tr>
+<tr class="memdesc:a16e8c156297fff49a6ba9b97073baffb inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED Updates the node argument with its path cost <img class="formulaInl" alt="$g(n)$" src="form_1.png"/> with island seconds as its unit.  <a href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb">More...</a><br /></td></tr>
 <tr class="separator:a16e8c156297fff49a6ba9b97073baffb inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d57a0697bb0e4666f4fd45f77c4a1aa inherit pub_methods_classplanner_1_1c_planner"><td class="memTemplParams" colspan="2">template&lt;typename TLocation &gt; </td></tr>
 <tr class="memitem:a9d57a0697bb0e4666f4fd45f77c4a1aa inherit pub_methods_classplanner_1_1c_planner"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a9d57a0697bb0e4666f4fd45f77c4a1aa">HeightCost</a> (TLocation &amp;i_sCurrent, TLocation &amp;i_sNext, <a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;i_sAction) const</td></tr>
@@ -175,63 +167,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memitem:a4c99873ce64b214899d65eda6366455f inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f">NodeHash</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sNode) const</td></tr>
 <tr class="memdesc:a4c99873ce64b214899d65eda6366455f inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the node hash using its location and the width of the map.  <a href="classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f">More...</a><br /></td></tr>
 <tr class="separator:a4c99873ce64b214899d65eda6366455f inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a381d86c14532f65cf21cb80b4c64ce0e inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a381d86c14532f65cf21cb80b4c64ce0e">cPlanner</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; 8 &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_oMap)</td></tr>
-<tr class="memdesc:a381d86c14532f65cf21cb80b4c64ce0e inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes member variables m_poRover and m_poMap and calls <a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e" title="Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p) ...">CalculateConsistencyFactor()</a>.  <a href="classplanner_1_1c_planner.html#a381d86c14532f65cf21cb80b4c64ce0e">More...</a><br /></td></tr>
-<tr class="separator:a381d86c14532f65cf21cb80b4c64ce0e inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9ae1109d3c4b7ac19aef2616547654e inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="aa9ae1109d3c4b7ac19aef2616547654e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#aa9ae1109d3c4b7ac19aef2616547654e">~cPlanner</a> ()</td></tr>
-<tr class="memdesc:aa9ae1109d3c4b7ac19aef2616547654e inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor to delete the allocated memory. <br /></td></tr>
-<tr class="separator:aa9ae1109d3c4b7ac19aef2616547654e inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a4650050656545744796296a653d388 inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a1a4650050656545744796296a653d388">GenerateHeuristic</a> ()</td></tr>
-<tr class="memdesc:a1a4650050656545744796296a653d388 inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output distance heuristic map to file, which is used to generate the Matlab plot.  <a href="classplanner_1_1c_planner.html#a1a4650050656545744796296a653d388">More...</a><br /></td></tr>
-<tr class="separator:a1a4650050656545744796296a653d388 inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7cc7c2666de2e49f745901080aac147 inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147">UpdateHeuristic</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; i_psNode, const <a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> i_eHeuristic=OCTILE) const</td></tr>
-<tr class="memdesc:ab7cc7c2666de2e49f745901080aac147 inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the heuristic value of the node argument i_sNode.  <a href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147">More...</a><br /></td></tr>
-<tr class="separator:ab7cc7c2666de2e49f745901080aac147 inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77cefeae3d7a58a96c74b66f6be22611 inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a77cefeae3d7a58a96c74b66f6be22611">Heuristic</a> (const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;i_sLocation, const <a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> i_eHeuristic=OCTILE) const</td></tr>
-<tr class="memdesc:a77cefeae3d7a58a96c74b66f6be22611 inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the heuristic value of the node located at tlocation i_sLocation.  <a href="classplanner_1_1c_planner.html#a77cefeae3d7a58a96c74b66f6be22611">More...</a><br /></td></tr>
-<tr class="separator:a77cefeae3d7a58a96c74b66f6be22611 inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1234d075676fcaa2c17b859d11b4638c inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c">HeuristicCheck</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sNode)</td></tr>
-<tr class="memdesc:a1234d075676fcaa2c17b859d11b4638c inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the heuristic of node i_sNode is consistent.  <a href="classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c">More...</a><br /></td></tr>
-<tr class="separator:a1234d075676fcaa2c17b859d11b4638c inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16e8c156297fff49a6ba9b97073baffb inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb">UpdateCost</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; io_psNode) const</td></tr>
-<tr class="memdesc:a16e8c156297fff49a6ba9b97073baffb inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED Updates the node argument with its path cost <img class="formulaInl" alt="$g(n)$" src="form_1.png"/> with island seconds as its unit.  <a href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb">More...</a><br /></td></tr>
-<tr class="separator:a16e8c156297fff49a6ba9b97073baffb inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d57a0697bb0e4666f4fd45f77c4a1aa inherit pub_methods_classplanner_1_1c_planner"><td class="memTemplParams" colspan="2">template&lt;typename TLocation &gt; </td></tr>
-<tr class="memitem:a9d57a0697bb0e4666f4fd45f77c4a1aa inherit pub_methods_classplanner_1_1c_planner"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a9d57a0697bb0e4666f4fd45f77c4a1aa">HeightCost</a> (TLocation &amp;i_sCurrent, TLocation &amp;i_sNext, <a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;i_sAction) const</td></tr>
-<tr class="memdesc:a9d57a0697bb0e4666f4fd45f77c4a1aa inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the height cost which is added or subtracted from the step cost.  <a href="classplanner_1_1c_planner.html#a9d57a0697bb0e4666f4fd45f77c4a1aa">More...</a><br /></td></tr>
-<tr class="separator:a9d57a0697bb0e4666f4fd45f77c4a1aa inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5119e3243d9f6747f1da0ed6d356642 inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ac5119e3243d9f6747f1da0ed6d356642">WithinMap</a> (const <a class="el" href="structplanner_1_1t_location.html">tLocation</a> &amp;i_sLocation) const</td></tr>
-<tr class="memdesc:ac5119e3243d9f6747f1da0ed6d356642 inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if the provided location i_sLocation lies within the map.  <a href="classplanner_1_1c_planner.html#ac5119e3243d9f6747f1da0ed6d356642">More...</a><br /></td></tr>
-<tr class="separator:ac5119e3243d9f6747f1da0ed6d356642 inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7050795c7174d0ec427fc91f8756a3d8 inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a7050795c7174d0ec427fc91f8756a3d8">GoalTest</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sFirst, std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sSecond) const override</td></tr>
-<tr class="memdesc:a7050795c7174d0ec427fc91f8756a3d8 inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal.  <a href="classplanner_1_1c_planner.html#a7050795c7174d0ec427fc91f8756a3d8">More...</a><br /></td></tr>
-<tr class="separator:a7050795c7174d0ec427fc91f8756a3d8 inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab260cfcb0ad00d46b02148d19faf040d inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ab260cfcb0ad00d46b02148d19faf040d">Child</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sParent, const <a class="el" href="structplanner_1_1t_action.html">tAction</a> &amp;i_sAction) const override</td></tr>
-<tr class="memdesc:ab260cfcb0ad00d46b02148d19faf040d inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a successor node state given a node i_sParent and action i_sAction.  <a href="classplanner_1_1c_planner.html#ab260cfcb0ad00d46b02148d19faf040d">More...</a><br /></td></tr>
-<tr class="separator:ab260cfcb0ad00d46b02148d19faf040d inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab17c52bf6dd433b8f392a5bf2bc4b9a1 inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ab17c52bf6dd433b8f392a5bf2bc4b9a1">Traversable</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; i_sCurrent, std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; i_sNext) const</td></tr>
-<tr class="memdesc:ab17c52bf6dd433b8f392a5bf2bc4b9a1 inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the path from i_sCurrent to i_sNext is traversable.  <a href="classplanner_1_1c_planner.html#ab17c52bf6dd433b8f392a5bf2bc4b9a1">More...</a><br /></td></tr>
-<tr class="separator:ab17c52bf6dd433b8f392a5bf2bc4b9a1 inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8624cb2afb8f2fd216c38b4424013178 inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a8624cb2afb8f2fd216c38b4424013178">TraversePath</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_psNode)</td></tr>
-<tr class="memdesc:a8624cb2afb8f2fd216c38b4424013178 inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconstructs the best path, considers step size of rover.  <a href="classplanner_1_1c_planner.html#a8624cb2afb8f2fd216c38b4424013178">More...</a><br /></td></tr>
-<tr class="separator:a8624cb2afb8f2fd216c38b4424013178 inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa90d751ce544870e4c89494e06fdac6c inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="aa90d751ce544870e4c89494e06fdac6c"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#aa90d751ce544870e4c89494e06fdac6c">GradX</a> (int i_nX, int i_nY) const</td></tr>
-<tr class="memdesc:aa90d751ce544870e4c89494e06fdac6c inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the discrete gradient of the map m_poMap in x direction. <br /></td></tr>
-<tr class="separator:aa90d751ce544870e4c89494e06fdac6c inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fd8e8632d78d85ce472322267ba7b36 inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="a6fd8e8632d78d85ce472322267ba7b36"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a6fd8e8632d78d85ce472322267ba7b36">GradY</a> (int i_nX, int i_nY) const</td></tr>
-<tr class="memdesc:a6fd8e8632d78d85ce472322267ba7b36 inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the discrete gradient of the map m_poMap in y direction. <br /></td></tr>
-<tr class="separator:a6fd8e8632d78d85ce472322267ba7b36 inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c99873ce64b214899d65eda6366455f inherit pub_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f">NodeHash</a> (std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt; &amp;i_sNode) const</td></tr>
-<tr class="memdesc:a4c99873ce64b214899d65eda6366455f inherit pub_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the node hash using its location and the width of the map.  <a href="classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f">More...</a><br /></td></tr>
-<tr class="separator:a4c99873ce64b214899d65eda6366455f inherit pub_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classplanner_1_1c_planner_interface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classplanner_1_1c_planner_interface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classplanner_1_1c_planner_interface.html">planner::cPlannerInterface&lt; 8 &gt;</a></td></tr>
-<tr class="memitem:a2d99a6f9fe144a0406c040d8da2a6dd4 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a2d99a6f9fe144a0406c040d8da2a6dd4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a2d99a6f9fe144a0406c040d8da2a6dd4">cPlannerInterface</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_oMap)</td></tr>
-<tr class="memdesc:a2d99a6f9fe144a0406c040d8da2a6dd4 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of the interface which initializes its members m_poRover and m_oMap. <br /></td></tr>
-<tr class="separator:a2d99a6f9fe144a0406c040d8da2a6dd4 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae09e9120335fce8f331749f492255fca inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="ae09e9120335fce8f331749f492255fca"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#ae09e9120335fce8f331749f492255fca">cPlannerInterface</a> (std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt;&gt; i_poRover, std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt; i_poMap)</td></tr>
 <tr class="memdesc:ae09e9120335fce8f331749f492255fca inherit pub_methods_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of the interface which initializes its members m_poRover and m_oMap. <br /></td></tr>
@@ -240,57 +176,18 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#af7a88d017115e9bfee25c12091062641">Result</a> ()</td></tr>
 <tr class="memdesc:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter to obtain result struct member m_sResult that contains information about the found path. <br /></td></tr>
 <tr class="separator:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="af7a88d017115e9bfee25c12091062641"></a>
-<a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#af7a88d017115e9bfee25c12091062641">Result</a> ()</td></tr>
-<tr class="memdesc:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter to obtain result struct member m_sResult that contains information about the found path. <br /></td></tr>
-<tr class="separator:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_types_classplanner_1_1c_planner"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classplanner_1_1c_planner')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classplanner_1_1c_planner.html">planner::cPlanner</a></td></tr>
-<tr class="memitem:a7f6dc4cbb69dd1ede14a67b0a7bd425b inherit pub_types_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="a7f6dc4cbb69dd1ede14a67b0a7bd425b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> { <br />
-&#160;&#160;<b>MANHATTEN</b>, 
-<b>EUCLIDEAN</b>, 
-<b>OCTILE</b>, 
-<b>CHEBYSHEV</b>, 
-<br />
-&#160;&#160;<b>MANHATTEN</b>, 
+<tr class="memitem:a7f6dc4cbb69dd1ede14a67b0a7bd425b inherit pub_types_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="a7f6dc4cbb69dd1ede14a67b0a7bd425b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> { <b>MANHATTEN</b>, 
 <b>EUCLIDEAN</b>, 
 <b>OCTILE</b>, 
 <b>CHEBYSHEV</b>
-<br />
- }</td></tr>
-<tr class="memdesc:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of heuristics that can be calculated with <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> <br /></td></tr>
-<tr class="separator:a7f6dc4cbb69dd1ede14a67b0a7bd425b inherit pub_types_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f6dc4cbb69dd1ede14a67b0a7bd425b inherit pub_types_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="a7f6dc4cbb69dd1ede14a67b0a7bd425b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> { <br />
-&#160;&#160;<b>MANHATTEN</b>, 
-<b>EUCLIDEAN</b>, 
-<b>OCTILE</b>, 
-<b>CHEBYSHEV</b>, 
-<br />
-&#160;&#160;<b>MANHATTEN</b>, 
-<b>EUCLIDEAN</b>, 
-<b>OCTILE</b>, 
-<b>CHEBYSHEV</b>
-<br />
  }</td></tr>
 <tr class="memdesc:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of heuristics that can be calculated with <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> <br /></td></tr>
 <tr class="separator:a7f6dc4cbb69dd1ede14a67b0a7bd425b inherit pub_types_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classplanner_1_1c_planner"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classplanner_1_1c_planner')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classplanner_1_1c_planner.html">planner::cPlanner</a></td></tr>
-<tr class="memitem:a341e70531266f023ac9461d18979d1ef inherit pro_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef">AStar</a> ()</td></tr>
-<tr class="memdesc:a341e70531266f023ac9461d18979d1ef inherit pro_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">AStar algorithm implementation.  <a href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef">More...</a><br /></td></tr>
-<tr class="separator:a341e70531266f023ac9461d18979d1ef inherit pro_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e5a745f83f903662eff914d8beddb5e inherit pro_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e">CalculateConsistencyFactor</a> ()</td></tr>
-<tr class="memdesc:a2e5a745f83f903662eff914d8beddb5e inherit pro_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p)  <a href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e">More...</a><br /></td></tr>
-<tr class="separator:a2e5a745f83f903662eff914d8beddb5e inherit pro_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a236a68e02c7a99323f2d30b3097aa767 inherit pro_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="a236a68e02c7a99323f2d30b3097aa767"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a236a68e02c7a99323f2d30b3097aa767">Plot</a> ()</td></tr>
-<tr class="memdesc:a236a68e02c7a99323f2d30b3097aa767 inherit pro_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug method to plot intermediate paths during planning. Used in <a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e" title="Override of the base interface cPlannerInterface, which invokes the AStar() search algorithm...">Plan()</a>. <br /></td></tr>
-<tr class="separator:a236a68e02c7a99323f2d30b3097aa767 inherit pro_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8d82968444f958f1b7e7acdd9df2e64 inherit pro_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="ad8d82968444f958f1b7e7acdd9df2e64"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ad8d82968444f958f1b7e7acdd9df2e64">PrintTravelResult</a> ()</td></tr>
-<tr class="memdesc:ad8d82968444f958f1b7e7acdd9df2e64 inherit pro_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report travelling time in island seconds, minutes and hours. <br /></td></tr>
-<tr class="separator:ad8d82968444f958f1b7e7acdd9df2e64 inherit pro_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a341e70531266f023ac9461d18979d1ef inherit pro_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef">AStar</a> ()</td></tr>
 <tr class="memdesc:a341e70531266f023ac9461d18979d1ef inherit pro_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">AStar algorithm implementation.  <a href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef">More...</a><br /></td></tr>
 <tr class="separator:a341e70531266f023ac9461d18979d1ef inherit pro_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -314,23 +211,19 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ac9f4be1c679321a2f6bc5d1a1102b3c2">m_fConsistencyFactor</a></td></tr>
 <tr class="memdesc:ac9f4be1c679321a2f6bc5d1a1102b3c2 inherit pro_attribs_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">This value is calculated in the constructor of <a class="el" href="classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e...">planner::cPlanner</a> and used to scale the heuristic values to get consistency. <br /></td></tr>
 <tr class="separator:ac9f4be1c679321a2f6bc5d1a1102b3c2 inherit pro_attribs_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e99e496dd906f6f9db9dbb93cdb0d44 inherit pro_attribs_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="a6e99e496dd906f6f9db9dbb93cdb0d44"></a>
-<a class="el" href="structplanner_1_1_priority_queue.html">PriorityQueue</a>&lt; std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a6e99e496dd906f6f9db9dbb93cdb0d44">m_oFrontier</a></td></tr>
-<tr class="memdesc:a6e99e496dd906f6f9db9dbb93cdb0d44 inherit pro_attribs_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first. <br /></td></tr>
-<tr class="separator:a6e99e496dd906f6f9db9dbb93cdb0d44 inherit pro_attribs_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c212bac80800ef51aacaa63fce32a2a inherit pro_attribs_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="a1c212bac80800ef51aacaa63fce32a2a"></a>
+<a class="el" href="structplanner_1_1_priority_queue.html">PriorityQueue</a>&lt; std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a1c212bac80800ef51aacaa63fce32a2a">m_oFrontier</a></td></tr>
+<tr class="memdesc:a1c212bac80800ef51aacaa63fce32a2a inherit pro_attribs_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first. <br /></td></tr>
+<tr class="separator:a1c212bac80800ef51aacaa63fce32a2a inherit pro_attribs_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classplanner_1_1c_planner_interface"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classplanner_1_1c_planner_interface')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classplanner_1_1c_planner_interface.html">planner::cPlannerInterface&lt; 8 &gt;</a></td></tr>
 <tr class="memitem:a78389ea53bd3c9d5c57851a338ee91d8 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a78389ea53bd3c9d5c57851a338ee91d8"></a>
 <a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a78389ea53bd3c9d5c57851a338ee91d8">m_sResult</a></td></tr>
 <tr class="memdesc:a78389ea53bd3c9d5c57851a338ee91d8 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Information to store planning results such as travelling time and consistency of heuristic. <br /></td></tr>
 <tr class="separator:a78389ea53bd3c9d5c57851a338ee91d8 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ef4a42f9e26463899f7c54d06580d7f inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a4ef4a42f9e26463899f7c54d06580d7f"></a>
-std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a4ef4a42f9e26463899f7c54d06580d7f">m_poRover</a></td></tr>
-<tr class="memdesc:a4ef4a42f9e26463899f7c54d06580d7f inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference pointer to the interface of the rover class planner::cRoverInterface&lt;Directions&gt;. <br /></td></tr>
-<tr class="separator:a4ef4a42f9e26463899f7c54d06580d7f inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5145c31369e5092bfcfc836de75a5680 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a5145c31369e5092bfcfc836de75a5680"></a>
-std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a5145c31369e5092bfcfc836de75a5680">m_oMap</a></td></tr>
-<tr class="memdesc:a5145c31369e5092bfcfc836de75a5680 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the subclasses with important map information such as terrain and elevation maps. <br /></td></tr>
-<tr class="separator:a5145c31369e5092bfcfc836de75a5680 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f578c25bb96ea00fade4c87aac87dc inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a41f578c25bb96ea00fade4c87aac87dc"></a>
+std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; Directions &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#a41f578c25bb96ea00fade4c87aac87dc">m_poRover</a></td></tr>
+<tr class="memdesc:a41f578c25bb96ea00fade4c87aac87dc inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference pointer to the interface of the rover class planner::cRoverInterface&lt;Directions&gt;. <br /></td></tr>
+<tr class="separator:a41f578c25bb96ea00fade4c87aac87dc inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa75ba58312d9398785d541a5e580a665 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="aa75ba58312d9398785d541a5e580a665"></a>
 std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_interface.html#aa75ba58312d9398785d541a5e580a665">m_poMap</a></td></tr>
 <tr class="memdesc:aa75ba58312d9398785d541a5e580a665 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the subclasses with important map information such as terrain and elevation maps. <br /></td></tr>
@@ -340,38 +233,7 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 <div class="textblock"><p>Extends the planner class to implement A* from Wikipedia. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a91296b98e64effc16f38e2430746d94d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91296b98e64effc16f38e2430746d94d">&#9670;&nbsp;</a></span>cPlannerRBG() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">planner::cPlannerRBG::cPlannerRBG </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_rover_interface.html">cRoverInterface</a>&lt; 8 &gt;&gt;&#160;</td>
-          <td class="paramname"><em>i_poRover</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a> &gt;&#160;</td>
-          <td class="paramname"><em>i_oMap</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initializes member variables m_poRover and m_oMap and calls <a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e" title="Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p) ...">CalculateConsistencyFactor()</a>. </p>
-<p>The </p>
-
-</div>
-</div>
-<a id="a91296b98e64effc16f38e2430746d94d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91296b98e64effc16f38e2430746d94d">&#9670;&nbsp;</a></span>cPlannerRBG() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a91296b98e64effc16f38e2430746d94d">&#9670;&nbsp;</a></span>cPlannerRBG()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -403,37 +265,7 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0bbd752702da582a47dbd153c0065eb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bbd752702da582a47dbd153c0065eb5">&#9670;&nbsp;</a></span>Plan() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structt_result.html">tResult</a> planner::cPlannerRBG::Plan </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the AStar() search algorithm. </p>
-<dl class="section return"><dt>Returns</dt><dd>the time to travel from start to goal if it was found. Otherwise -1 is returned. </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e">planner::cPlanner</a>.</p>
-
-</div>
-</div>
-<a id="a0bbd752702da582a47dbd153c0065eb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bbd752702da582a47dbd153c0065eb5">&#9670;&nbsp;</a></span>Plan() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bbd752702da582a47dbd153c0065eb5">&#9670;&nbsp;</a></span>Plan()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -463,7 +295,7 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 </div>
 </div>
 <a id="a1af74d398b286f1e05e6ade495efbbd0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1af74d398b286f1e05e6ade495efbbd0">&#9670;&nbsp;</a></span>ReconstructPath() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1af74d398b286f1e05e6ade495efbbd0">&#9670;&nbsp;</a></span>ReconstructPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -497,52 +329,6 @@ template&lt;typename TCostSoFar , typename TCameFrom &gt; </div>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a1af74d398b286f1e05e6ade495efbbd0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1af74d398b286f1e05e6ade495efbbd0">&#9670;&nbsp;</a></span>ReconstructPath() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename TCostSoFar , typename TCameFrom &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void planner::cPlannerRBG::ReconstructPath </td>
-          <td>(</td>
-          <td class="paramtype">TCostSoFar &amp;&amp;&#160;</td>
-          <td class="paramname"><em>i_cost_so_far</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TCameFrom &amp;&amp;&#160;</td>
-          <td class="paramname"><em>i_came_from</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Given the node i_psNode the overrides map m_poOverrides is updated for displaying the path. </p>
-<p>Traversing a path takes place using the m_psParent field of the <a class="el" href="structplanner_1_1t_node.html" title="Node gets expanded while searching for the shortest path. ">tNode</a> struct. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_psNode</td><td>Goal node or any other which is traversed back </td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Reconstruct the path by going backward from the goal location</p>
-<p>Set the cost (time) it takes to get to the goal</p>
-<p>Update cumulative elevation</p>
-<p>Store path in overrides</p>
-<p>Check if the current node is the start node</p>
-<p>Move towards the start</p>
-<p>Update cumulative elevation</p>
-<p>Store path in overrides</p>
 <p>Reconstruct the path by going backward from the goal location</p>
 <p>Set the cost (time) it takes to get to the goal</p>
 <p>Update cumulative elevation</p>
@@ -555,8 +341,8 @@ template&lt;typename TCostSoFar , typename TCameFrom &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/include/<a class="el" href="bachelor-master__updated__vfinal_2planner_2include_2planner__rbg_8h_source.html">planner_rbg.h</a></li>
-<li>/Users/fjp/git/bachelor/bachelor-master_updated_vfinal/planner/src/planner_rbg.cpp</li>
+<li>/Users/fjp/git/bachelor/planner/include/<a class="el" href="planner__rbg_8h_source.html">planner_rbg.h</a></li>
+<li>/Users/fjp/git/bachelor/planner/src/planner_rbg.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
