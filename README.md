@@ -13,7 +13,7 @@ To verify the correctness of my implemented AStar algorithm, I added two more im
 
 Both use less memory than my previous implementation which can still be found in planner::cPlanner::AStar() because the used
 data structures require less memory. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode).
-Regarding the computation time, planner::cPlanner
+Regarding the computation time, planner::cPlannerWiki::AStar() is the fastest implementation preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.
 
 ## Changelog
 
