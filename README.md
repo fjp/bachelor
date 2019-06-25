@@ -7,6 +7,15 @@ The complete doxygen documentation can be found in the doc folder, see [index.ht
 
 ## Result
 
+The figure below shows the optimal path with the following planning results:
+
+```
+Travelling will take 1322.29 island seconds (22.0381 island minutes or 0.367302 island hours) on the fastest path. 
+Cumulative elevation: 42939
+Number of expanded nodes: 315920
+Heuristic was consistent
+```
+
 <img src="doc/images/solution_v2_island_rover_bachelor_wedding.bmp" alt="Planning result with AStar() implementation." width="800"/>
 
 ## Main New Features
@@ -67,7 +76,7 @@ the start to the goal location.
 
 <img src="doc/images/test/simple_map_with_water.bmp" alt="Simple Map with Water." width="300"/>
 
-All the implementations find a shortest but but the implementation from Wikipedia chooses the right side to pass the water obstacle.
+All the implementations find a shortest, passing the water obstacle.
 
 3. simple_map_with_elevation is a 4x4 map with elevation 1 except the diagonal is set to 255. The rover needs to find a path between the left top corner (x,y)=(0,0) and the bottom right corner (x,y)=(3,3). This test is used to check the step cost, which is combination of height cost and direction cost. Furthermore, the consistency of the heuristic is evaluated.
 
@@ -103,6 +112,11 @@ AStar             |  AStar Wikipedia | AStar Red Blob Games
 
 There exists a cyclic dependency between the rover interface and planner interface where the rover acts as a 
 [factory](https://en.wikipedia.org/wiki/Factory_method_pattern) to create different planners.
+
+The new implementations cPlannerWiki and cPlannerRBG inherit cPlanner which implements the interface.
+
+<img src="doc/html/inherit_graph_3.png" alt="planner inheritance" width="250" />
+
 
 ### Complete Changelog
 
