@@ -31,6 +31,11 @@ calculated octile heuristic value in planner::cPlanner::Heuristic().
 - Fixes calculation of consistency output: h(x) <= d(x,y) + h(y) with x as parent node and y as its successor.
 - In case of an inconsistent heuristic the boolean flag bConsistentHeuristic in the new member struct planner::tResult of cPlannerInterface is set to false. The heuristic bool flag is also tested in the gTests.
 
+### Memory Leaks
+
+I analyzed my previous implementation using valgrind which showed memory leaks when creating child nodes in planner::cPlanner::Child().
+
+
 ## Changelog
 
 - Fixes diagonal cost value: uses sqrt(2) for the diagonal cost instead of 1.4f.
