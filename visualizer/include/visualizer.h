@@ -68,7 +68,8 @@ namespace visualizer {
             , uint8_t* i_oOverrides
             , std::vector<TLocations> i_asLocation
             , int i_nImageDim = IMAGE_DIM
-            , int i_nVisualise = ALL)
+            , int i_nVisualise = ALL
+            , int i_nPenSize = 1)
     {
         std::ofstream of(i_strName, std::ofstream::binary);
         visualizer::writeBMP(
@@ -92,7 +93,7 @@ namespace visualizer {
                     /// Visualize the found path (enable using bitset)
                     if (i_nVisualise & PATH)
                     {
-                        if (visualizer::path(i_nX, i_nY, i_oOverrides, i_nImageDim))
+                        if (visualizer::path(i_nX, i_nY, i_oOverrides, i_nImageDim, i_nPenSize))
                         {
                             return uint8_t(visualizer::IPV_PATH);
                         }
@@ -123,7 +124,8 @@ namespace visualizer {
                 });
         of.flush();
 #if __APPLE__
-        auto res = system("open pic.bmp");
+        std::string strCommand("open " + i_strName);
+        auto res = system(strCommand.c_str());
         (void)res;
 #endif
     };
