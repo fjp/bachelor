@@ -67,6 +67,8 @@ Here preallocated vectors are used instead of a priority queue that needs to be 
 The mentioned implementations are used in new gTests which create and use simple maps to test if the different 
 implementations yield the same results (regarding travelling time given in island seconds).
 All test results are found in [doc/TestResults-testPlanner.html](doc/TestResults-testPlanner.html).
+Light red areas show the visited nodes, which is a new feature implemented in visualizer. 
+The island map results for all three implementations are stored in [doc/images/test/](doc/images/test/).
 
 1. simple_map creates a 330x330 map with elevation 1 to check if the implementations find a path from 
 the start to the goal location.
