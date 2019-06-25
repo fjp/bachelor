@@ -13,7 +13,7 @@ The figure below shows the optimal path with the following planning results:
 Travelling will take 1322.29 island seconds (22.0381 island minutes or 0.367302 island hours) on the fastest path. 
 Cumulative elevation: 42939
 Number of expanded nodes: 315920
-Heuristic was consistent
+Heuristic is consistent
 ```
 
 <img src="doc/images/solution_v2_island_rover_bachelor_wedding.bmp" alt="Planning result with AStar() implementation." width="800"/>

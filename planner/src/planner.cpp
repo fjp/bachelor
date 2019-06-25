@@ -360,7 +360,7 @@ namespace planner {
                       << " island hours) on the fastest path. " << std::endl;
             std::cout << "Cumulative elevation: " << m_sResult.nCumulativeElevation << std::endl;
             std::cout << "Number of expanded nodes: " << m_sResult.nNodesExpanded << std::endl;
-            std::cout << "Heuristic was " << (m_sResult.bConsistentHeuristic ? "consistent" : "NOT consistent") << "\n" << std::endl;
+            std::cout << "Heuristic is " << (m_sResult.bConsistentHeuristic ? "consistent" : "NOT consistent") << "\n" << std::endl;
         }
     }
 
