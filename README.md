@@ -34,8 +34,7 @@ To verify the correctness of my implemented AStar algorithm, I added two more im
 1. [Wikipedia A* Pseudocode](https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode) implemented in class planner::cPlannerWiki which inherits from planner::cPlanner.
 2. [Red Blob Games A*](https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus) implemented in class planner::cPlannerWiki which inherits from planner::cPlanner.
 
-Both use less memory than my previous implementation which can still be found in planner::cPlanner::AStar() because the used
-data structures require less memory. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode).
+Both use less memory than my previous implementation, which can still be found in planner::cPlanner::AStar(). Less memory is achieved using other data structures. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode).
 Regarding the computation time, planner::cPlannerWiki::AStar() is the fastest implementation preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.
 
 ### gTests using Simple Maps
