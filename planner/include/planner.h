@@ -162,7 +162,6 @@ namespace planner {
 
 
     protected:
-
         ///\brief AStar algorithm implementation.
         ///\details Initializes start, goal and intermediate nodes (sCurrent and sNext). The frontier m_oFrontier
         ///         is implemented as a priority queue PriorityQueue<tNode*> and initialized with the start node.
@@ -174,7 +173,7 @@ namespace planner {
         ///         to the start node, thereby following the fastest path and setting bit 1 of the overrides map, see
         ///         planner::cGraph::SetOverrides().
         ///\returns the time it took to find the fastest path in island seconds.
-        tResult AStar();
+        virtual tResult AStar();
 
 
         ///\brief Calculates a consistency factor to get a consistent heuristic h(n) <= c(p,n) + h(p)

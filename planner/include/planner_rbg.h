@@ -36,10 +36,8 @@ namespace planner {
         template<typename TCostSoFar, typename TCameFrom>
         void ReconstructPath(TCostSoFar&& i_cost_so_far, TCameFrom&& i_came_from);
 
-
-    private:
-
-        tResult AStar();
+    protected:
+        tResult AStar() override;
     };
 }
 

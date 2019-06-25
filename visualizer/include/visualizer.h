@@ -22,7 +22,7 @@ namespace visualizer {
         IPV_ELEVATION_BEGIN = 3     // 2-255
     };
 
-    ///\brief Used for the bitset to specify what to visualise in visualizer::write
+    ///\brief Used for the flags to specify what to visualise in visualizer::write
     enum tVisualise
     {
         LOCATIONS = 0x01,
@@ -79,7 +79,7 @@ namespace visualizer {
                 i_nImageDim,
                 [&] (size_t i_nX, size_t i_nY, uint8_t elevation) {
 
-                    /// Marks interesting positions on the map (enable using bitset)
+                    /// Marks interesting positions on the map (enable using flag)
                     if (i_nVisualise & LOCATIONS) {
                         for (auto sLocation : i_asLocation)
                         {
@@ -90,7 +90,7 @@ namespace visualizer {
                         }
                     }
 
-                    /// Visualize the found path (enable using bitset)
+                    /// Visualize the found path (enable using flag)
                     if (i_nVisualise & PATH)
                     {
                         if (visualizer::path(i_nX, i_nY, i_oOverrides, i_nImageDim, i_nPenSize))
@@ -106,7 +106,7 @@ namespace visualizer {
                         return uint8_t(visualizer::IPV_WATER);
                     }
 
-                    /// Signifies visited locations (enable using bitset)
+                    /// Signifies visited locations (enable using flag)
                     if (i_nVisualise & VISITED)
                     {
                         if (visualizer::visited(i_nX, i_nY, i_oOverrides, i_nImageDim))

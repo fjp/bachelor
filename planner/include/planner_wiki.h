@@ -38,7 +38,7 @@ namespace planner {
 
 
     protected:
-        tResult AStar();
+        tResult AStar() override;
     };
 }
 
