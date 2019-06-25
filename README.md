@@ -5,6 +5,15 @@ The readme of the previous version can be found [here](README_v0.md).
 For the problem description refer to the [AID Coding Challenge.pdf](AID_Coding_Challenge.pdf). 
 The complete doxygen documentation can be found in the doc folder, see [index.html](doc/html/index.html)
 
+## Main new features
+
+To verify the correctness of my implemented AStar algorithm, I added two more implementations.
+1. [Wikipedia A* Pseudocode](https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode) implemented in class planner::cPlannerWiki which inherits from planner::cPlanner.
+2. [Red Blob Games A*](https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus) implemented in class planner::cPlannerWiki which inherits from planner::cPlanner.
+
+Both use less memory than my previous implementation which can still be found in planner::cPlanner::AStar() because the used
+data structures require less memory. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode).
+Regarding the computation time, planner::cPlanner
 
 ## Changelog
 
@@ -12,7 +21,7 @@ The complete doxygen documentation can be found in the doc folder, see [index.ht
 - Fixes memory leaks caused by dangling pointers, mainly in the Child() method of planner.cpp.
     - Valgrind shows no memory leaks anymore with the use of smart pointers (C++11 feature)
     - Now using smart pointers for the nodes
-    - Uses [shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr), [std::weak_ptr](http://en.cppreference.com/w/cpp/memory/weak_ptr) and 
+    - Uses [shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr), [std::weak_ptr](http://en.cppreference.com/w/cpp/memory/weak_ptr), 
     [std::enable_shared_from_this](http://en.cppreference.com/w/cpp/memory/enable_shared_from_this) and [shared_from_this()](https://en.cppreference.com/w/cpp/memory/enable_shared_from_this/shared_from_this)
     for the cyclic dependency between rover interface and planner interface.
     - Use of smart pointers reduces memory consumption from approx 2 GB to 570 MB. This high memory is caused by creating
@@ -59,6 +68,8 @@ AStar memory usage.             |  AStar Wikipedia memory usage. | AStar Red Blo
 
 
 ## Class Design
+
+There exists a cyclic dependency between the rover interface and planner interface where the rover acts as a factory to create different planners.
 
 ## Possible improvements
 
