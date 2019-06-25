@@ -116,7 +116,7 @@ There exists a cyclic dependency between the rover interface and planner interfa
 
 The new implementations cPlannerWiki and cPlannerRBG inherit cPlanner which implements the interface.
 
-<img src="doc/html/inherit_graph_3.png" alt="planner inheritance" width="250" />
+<img src="doc/html/inherit_graph_3.png" alt="planner inheritance" width="500" />
 
 
 ### Complete Changelog
