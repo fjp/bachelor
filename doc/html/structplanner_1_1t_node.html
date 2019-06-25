@@ -106,7 +106,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a18891f54e73f974f1142fba95887de98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor of the node struct. <br /></td></tr>
 <tr class="separator:a18891f54e73f974f1142fba95887de98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5085f3fcf4a960ed9fe14068f1b5e950"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplanner_1_1t_node.html#a5085f3fcf4a960ed9fe14068f1b5e950">operator&lt;</a> (const <a class="el" href="structplanner_1_1t_node.html">tNode</a> &amp;i_rhs) const</td></tr>
-<tr class="memdesc:a5085f3fcf4a960ed9fe14068f1b5e950"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloads less than operator to provide hasing for this node.  <a href="#a5085f3fcf4a960ed9fe14068f1b5e950">More...</a><br /></td></tr>
+<tr class="memdesc:a5085f3fcf4a960ed9fe14068f1b5e950"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloads less than operator to provide hashing for this node.  <a href="#a5085f3fcf4a960ed9fe14068f1b5e950">More...</a><br /></td></tr>
 <tr class="separator:a5085f3fcf4a960ed9fe14068f1b5e950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -197,7 +197,7 @@ std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> 
 </table>
 </div><div class="memdoc">
 
-<p>Overloads less than operator to provide hasing for this node. </p>
+<p>Overloads less than operator to provide hashing for this node. </p>
 <p>The hash of a node is calculated using <a class="el" href="classplanner_1_1c_planner.html#a4c99873ce64b214899d65eda6366455f" title="Calculates the node hash using its location and the width of the map. ">cPlanner::NodeHash()</a>. Required for the path cost map std::map&lt;tNode&gt; oPathCost used in <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">cPlanner::AStar()</a>. </p>
 
 </div>

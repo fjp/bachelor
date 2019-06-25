@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['generateheuristic',['GenerateHeuristic',['../classplanner_1_1c_planner.html#a1a4650050656545744796296a653d388',1,'planner::cPlanner']]],
-  ['get',['get',['../structplanner_1_1_priority_queue.html#abdd3d392da157bb645b5720eace1200a',1,'planner::PriorityQueue']]],
-  ['goaltest',['GoalTest',['../classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f',1,'planner::cPlanner::GoalTest()'],['../classplanner_1_1c_planner_interface.html#afec836d58ce54c49046bf30ecdebbfec',1,'planner::cPlannerInterface::GoalTest()']]],
-  ['gradx',['GradX',['../classplanner_1_1c_planner.html#aa90d751ce544870e4c89494e06fdac6c',1,'planner::cPlanner']]],
-  ['grady',['GradY',['../classplanner_1_1c_planner.html#a6fd8e8632d78d85ce472322267ba7b36',1,'planner::cPlanner']]]
+  ['height',['Height',['../classplanner_1_1c_graph.html#a5c163af76e19303794a908304f3b759e',1,'planner::cGraph']]],
+  ['heightcost',['HeightCost',['../classplanner_1_1c_planner.html#a9d57a0697bb0e4666f4fd45f77c4a1aa',1,'planner::cPlanner']]],
+  ['heuristic',['Heuristic',['../classplanner_1_1c_planner.html#a77cefeae3d7a58a96c74b66f6be22611',1,'planner::cPlanner']]],
+  ['heuristiccheck',['HeuristicCheck',['../classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c',1,'planner::cPlanner']]]
 ];

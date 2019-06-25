@@ -67,7 +67,8 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>This is my updated solution for the AID Bachelor Coding Challenge. The readme of the previous version can be found here. For the problem description refer to the <a href="AID_Coding_Challenge.pdf">AID Coding Challenge.pdf</a>. The complete doxygen documentation can be found in the doc folder, see <a href="doc/html/index.html">index.html</a></p>
 <h2>Result</h2>
-<div class="image">
+<p>The figure below shows the optimal path with the following planning results:</p>
+<div class="fragment"><div class="line">Travelling will take 1322.29 island seconds (22.0381 island minutes or 0.367302 island hours) on the fastest path. </div><div class="line">Cumulative elevation: 42939</div><div class="line">Number of expanded nodes: 315920</div><div class="line">Heuristic is consistent</div></div><!-- fragment --><div class="image">
 <img src="doc/images/solution_v2_island_rover_bachelor_wedding.bmp" alt="Planning result with AStar() implementation." width="800"/>
 </div>
 <h2>Main New Features</h2>
@@ -83,9 +84,9 @@ $(function() {
 <li><a href="https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode">Wikipedia A* Pseudocode</a> implemented in class <a class="el" href="classplanner_1_1c_planner_wiki.html" title="Extends the planner class to implement A* from Wikipedia. ">planner::cPlannerWiki</a> which inherits from <a class="el" href="classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e...">planner::cPlanner</a>.</li>
 <li><a href="https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus">Red Blob Games A*</a> implemented in class <a class="el" href="classplanner_1_1c_planner_r_b_g.html" title="Extends the planner class to implement A* from Wikipedia. ">planner::cPlannerRBG</a> which inherits from <a class="el" href="classplanner_1_1c_planner.html" title="Implements the planner interface cPlannerInterface&lt;size_t Directions&gt; with an action vector of size e...">planner::cPlanner</a>.</li>
 </ol>
-<p>Both use less memory than my previous implementation, which can still be found in <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">planner::cPlanner::AStar</a>. Less memory usage is achieved with other data structures. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode). Regarding the computation time, <a class="el" href="classplanner_1_1c_planner_wiki.html#aa673ebc2b1b43af3b13fb0c958c5f2e4">planner::cPlannerWiki::AStar</a> is the fastest implementation. Here preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.</p>
+<p>Both use less memory than my previous implementation, which can still be found in <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef" title="AStar algorithm implementation. ">planner::cPlanner::AStar</a>. Less memory usage is achieved with other data structures. For example the node struct in Red Blob Games implementation uses less fields (see planner::tSimplifiedNode). Regarding the computation time, <a class="el" href="classplanner_1_1c_planner_wiki.html#a2652cf0e84d0a1fcd17e6c4288179955" title="AStar algorithm implementation. ">planner::cPlannerWiki::AStar</a> is the fastest implementation. Here preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.</p>
 <h3>gTests using Simple Maps</h3>
-<p>The mentioned implementations are used in new gTests which create and use simple maps to test if the different implementations yield the same results (regarding travelling time given in island seconds).</p>
+<p>The mentioned implementations are used in new gTests which create and use simple maps to test if the different implementations yield the same results (regarding travelling time given in island seconds). All test results are found in <a href="doc/TestResults-testPlanner.html">doc/TestResults-testPlanner.html</a>. Light red areas show the visited nodes, which is a new feature implemented in visualizer. The island map results for all three implementations are stored in <a href="doc/images/test/">doc/images/test/</a>.</p>
 <ol type="1">
 <li>simple_map creates a 330x330 map with elevation 1 to check if the implementations find a path from the start to the goal location.</li>
 </ol>
@@ -98,7 +99,7 @@ $(function() {
 <div class="image">
 <img src="doc/images/test/simple_map_with_water.bmp" alt="Simple Map with Water." width="300"/>
 </div>
-<p>All the implementations find a shortest but but the implementation from Wikipedia chooses the right side to pass the water obstacle.</p>
+<p>All the implementations find a shortest, passing the water obstacle.</p>
 <ol type="1">
 <li>simple_map_with_elevation is a 4x4 map with elevation 1 except the diagonal is set to 255. The rover needs to find a path between the left top corner (x,y)=(0,0) and the bottom right corner (x,y)=(3,3). This test is used to check the step cost, which is combination of height cost and direction cost. Furthermore, the consistency of the heuristic is evaluated.</li>
 </ol>
@@ -142,6 +143,10 @@ $(function() {
 </table>
 <h2>Class Design</h2>
 <p>There exists a cyclic dependency between the rover interface and planner interface where the rover acts as a <a href="https://en.wikipedia.org/wiki/Factory_method_pattern">factory</a> to create different planners.</p>
+<p>The new implementations cPlannerWiki and cPlannerRBG inherit cPlanner which implements the interface.</p>
+<div class="image">
+<img src="doc/html/inherit_graph_3.png" alt="planner inheritance" width="500"/>
+</div>
 <h3>Complete Changelog</h3>
 <ul>
 <li>Fixes diagonal cost value: uses sqrt(2) for the diagonal cost instead of 1.4f.</li>
@@ -161,7 +166,7 @@ $(function() {
 <li>In case of an inconsistent heuristic the boolean flag bConsistentHeuristic in the new member struct planner::tResult of cPlannerInterface is set to false.</li>
 <li>Adds gTests that use a simplified map, including water and elevation transitions. The result struct is used to check the expected results.</li>
 <li>Refactors visualizer<ul>
-<li>Encapsulates the <a class="el" href="namespacevisualizer.html#ab4e649cd7413a51ac1ae4b31a2994c3a">visualizer::writeBMP()</a> function including its lambda expression</li>
+<li>Encapsulates the visualizer::writeBMP() function including its lambda expression</li>
 <li>Adds option (flag) what to draw<ul>
 <li>locations such as start and goal passed as list of locations,</li>
 <li>path,</li>
@@ -176,7 +181,12 @@ $(function() {
 <ul>
 <li>Use std::filesystem C++17 features to read and write elevation and overrides data.</li>
 <li>std::chrono to time function calls.</li>
-<li>std::array&lt;int, size&gt; instead of std::vector for the optimized AStar version that allocates the closed set beforehand. </li>
+<li>std::array&lt;int, size&gt; instead of std::vector for the optimized AStar version that allocates the closed set beforehand.</li>
+</ul>
+<h2>Lessons Learned</h2>
+<ul>
+<li>Use gTests to spot bugs and wrong code changes early.</li>
+<li>Use new C++ features such as smart pointers to avoid memory leaks. </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->

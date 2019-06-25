@@ -2,6 +2,18 @@ This is my updated solution for the A\+ID Bachelor Coding Challenge. The readme 
 
 \subsection*{Result}
 
+The figure below shows the optimal path with the following planning results\+:
+
+
+\begin{DoxyCode}
+Travelling will take 1322.29 island seconds (22.0381 island minutes or 0.367302 island hours) on the
+       fastest path. 
+Cumulative elevation: 42939
+Number of expanded nodes: 315920
+Heuristic is consistent
+\end{DoxyCode}
+
+
 
 
 \subsection*{Main New Features}
@@ -28,11 +40,11 @@ To verify the correctness of my implemented A\+Star algorithm, I added two more 
 \item \href{https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus}{\tt Red Blob Games A$\ast$} implemented in class \mbox{\hyperlink{classplanner_1_1c_planner_r_b_g}{planner\+::c\+Planner\+R\+BG}} which inherits from \mbox{\hyperlink{classplanner_1_1c_planner}{planner\+::c\+Planner}}.
 \end{DoxyEnumerate}
 
-Both use less memory than my previous implementation, which can still be found in \mbox{\hyperlink{classplanner_1_1c_planner_a341e70531266f023ac9461d18979d1ef}{planner\+::c\+Planner\+::\+A\+Star}}. Less memory usage is achieved with other data structures. For example the node struct in Red Blob Games implementation uses less fields (see planner\+::t\+Simplified\+Node). Regarding the computation time, \mbox{\hyperlink{classplanner_1_1c_planner_wiki_aa673ebc2b1b43af3b13fb0c958c5f2e4}{planner\+::c\+Planner\+Wiki\+::\+A\+Star}} is the fastest implementation. Here preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.
+Both use less memory than my previous implementation, which can still be found in \mbox{\hyperlink{classplanner_1_1c_planner_a341e70531266f023ac9461d18979d1ef}{planner\+::c\+Planner\+::\+A\+Star}}. Less memory usage is achieved with other data structures. For example the node struct in Red Blob Games implementation uses less fields (see planner\+::t\+Simplified\+Node). Regarding the computation time, \mbox{\hyperlink{classplanner_1_1c_planner_wiki_a2652cf0e84d0a1fcd17e6c4288179955}{planner\+::c\+Planner\+Wiki\+::\+A\+Star}} is the fastest implementation. Here preallocated vectors are used instead of a priority queue that needs to be updated in the other implementations.
 
 \subsubsection*{g\+Tests using Simple Maps}
 
-The mentioned implementations are used in new g\+Tests which create and use simple maps to test if the different implementations yield the same results (regarding travelling time given in island seconds).
+The mentioned implementations are used in new g\+Tests which create and use simple maps to test if the different implementations yield the same results (regarding travelling time given in island seconds). All test results are found in \href{doc/TestResults-testPlanner.html}{\tt doc/\+Test\+Results-\/test\+Planner.\+html}. Light red areas show the visited nodes, which is a new feature implemented in visualizer. The island map results for all three implementations are stored in \href{doc/images/test/}{\tt doc/images/test/}.
 
 
 \begin{DoxyEnumerate}
@@ -48,7 +60,7 @@ The mentioned implementations are used in new g\+Tests which create and use simp
 
 
 
-All the implementations find a shortest but but the implementation from Wikipedia chooses the right side to pass the water obstacle.
+All the implementations find a shortest, passing the water obstacle.
 
 
 \begin{DoxyEnumerate}
@@ -100,6 +112,10 @@ The images below show the memory usage and runtime of the different A$\ast$ impl
 
 There exists a cyclic dependency between the rover interface and planner interface where the rover acts as a \href{https://en.wikipedia.org/wiki/Factory_method_pattern}{\tt factory} to create different planners.
 
+The new implementations c\+Planner\+Wiki and c\+Planner\+R\+BG inherit c\+Planner which implements the interface.
+
+
+
 \subsubsection*{Complete Changelog}
 
 
@@ -122,7 +138,7 @@ There exists a cyclic dependency between the rover interface and planner interfa
 \item Adds g\+Tests that use a simplified map, including water and elevation transitions. The result struct is used to check the expected results.
 \item Refactors visualizer
 \begin{DoxyItemize}
-\item Encapsulates the \mbox{\hyperlink{namespacevisualizer_ab4e649cd7413a51ac1ae4b31a2994c3a}{visualizer\+::write\+B\+M\+P()}} function including its lambda expression
+\item Encapsulates the visualizer\+::write\+B\+M\+P() function including its lambda expression
 \item Adds option (flag) what to draw
 \begin{DoxyItemize}
 \item locations such as start and goal passed as list of locations,
@@ -139,5 +155,13 @@ There exists a cyclic dependency between the rover interface and planner interfa
 \begin{DoxyItemize}
 \item Use std\+::filesystem C++17 features to read and write elevation and overrides data.
 \item std\+::chrono to time function calls.
-\item std\+::array$<$int, size$>$ instead of std\+::vector for the optimized A\+Star version that allocates the closed set beforehand. 
+\item std\+::array$<$int, size$>$ instead of std\+::vector for the optimized A\+Star version that allocates the closed set beforehand.
+\end{DoxyItemize}
+
+\subsection*{Lessons Learned}
+
+
+\begin{DoxyItemize}
+\item Use g\+Tests to spot bugs and wrong code changes early.
+\item Use new C++ features such as smart pointers to avoid memory leaks. 
 \end{DoxyItemize}

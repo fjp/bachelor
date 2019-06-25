@@ -11,8 +11,7 @@ Node gets expanded while searching for the shortest path.
 
 
 
-Collaboration diagram for planner\+:\+:t\+Node\+:
-\nopagebreak
+Collaboration diagram for planner\+:\+:t\+Node\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -34,7 +33,7 @@ Collaboration diagram for planner\+:\+:t\+Node\+:
 \mbox{\hyperlink{structplanner_1_1t_node_a18891f54e73f974f1142fba95887de98}{t\+Node}} (const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} \&i\+\_\+s\+Node)
 \begin{DoxyCompactList}\small\item\em Copy constructor of the node struct. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{structplanner_1_1t_node_a5085f3fcf4a960ed9fe14068f1b5e950}{operator$<$}} (const \mbox{\hyperlink{structplanner_1_1t_node}{t\+Node}} \&i\+\_\+rhs) const
-\begin{DoxyCompactList}\small\item\em Overloads less than operator to provide hasing for this node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Overloads less than operator to provide hashing for this node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -88,7 +87,7 @@ A start node has its parent ps\+Parent set to nullptr and the zero action associ
 
 
 
-Overloads less than operator to provide hasing for this node. 
+Overloads less than operator to provide hashing for this node. 
 
 The hash of a node is calculated using \mbox{\hyperlink{classplanner_1_1c_planner_a4c99873ce64b214899d65eda6366455f}{c\+Planner\+::\+Node\+Hash()}}. Required for the path cost map std\+::map$<$t\+Node$>$ o\+Path\+Cost used in \mbox{\hyperlink{classplanner_1_1c_planner_a341e70531266f023ac9461d18979d1ef}{c\+Planner\+::\+A\+Star()}}. 
 

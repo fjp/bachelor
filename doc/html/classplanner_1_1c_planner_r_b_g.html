@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classplanner_1_1c_planner_r_b_g-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">planner::cPlannerRBG Class Reference</div>  </div>
@@ -108,7 +109,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad582fdf21ae0d86a23e9c25546b66f0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor to delete the allocated memory. <br /></td></tr>
 <tr class="separator:ad582fdf21ae0d86a23e9c25546b66f0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bbd752702da582a47dbd153c0065eb5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_r_b_g.html#a0bbd752702da582a47dbd153c0065eb5">Plan</a> () override</td></tr>
-<tr class="memdesc:a0bbd752702da582a47dbd153c0065eb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the AStar() search algorithm.  <a href="#a0bbd752702da582a47dbd153c0065eb5">More...</a><br /></td></tr>
+<tr class="memdesc:a0bbd752702da582a47dbd153c0065eb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the <a class="el" href="classplanner_1_1c_planner_r_b_g.html#affd7011ef4df878a8e95ecf7f42c8e6f" title="AStar algorithm implementation. ">AStar()</a> search algorithm.  <a href="#a0bbd752702da582a47dbd153c0065eb5">More...</a><br /></td></tr>
 <tr class="separator:a0bbd752702da582a47dbd153c0065eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1af74d398b286f1e05e6ade495efbbd0"><td class="memTemplParams" colspan="2">template&lt;typename TCostSoFar , typename TCameFrom &gt; </td></tr>
 <tr class="memitem:a1af74d398b286f1e05e6ade495efbbd0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_r_b_g.html#a1af74d398b286f1e05e6ade495efbbd0">ReconstructPath</a> (TCostSoFar &amp;&amp;i_cost_so_far, TCameFrom &amp;&amp;i_came_from)</td></tr>
@@ -177,20 +178,12 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memdesc:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter to obtain result struct member m_sResult that contains information about the found path. <br /></td></tr>
 <tr class="separator:af7a88d017115e9bfee25c12091062641 inherit pub_methods_classplanner_1_1c_planner_interface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_classplanner_1_1c_planner"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classplanner_1_1c_planner')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classplanner_1_1c_planner.html">planner::cPlanner</a></td></tr>
-<tr class="memitem:a7f6dc4cbb69dd1ede14a67b0a7bd425b inherit pub_types_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="a7f6dc4cbb69dd1ede14a67b0a7bd425b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> { <b>MANHATTEN</b>, 
-<b>EUCLIDEAN</b>, 
-<b>OCTILE</b>, 
-<b>CHEBYSHEV</b>
- }</td></tr>
-<tr class="memdesc:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of heuristics that can be calculated with <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> <br /></td></tr>
-<tr class="separator:a7f6dc4cbb69dd1ede14a67b0a7bd425b inherit pub_types_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:affd7011ef4df878a8e95ecf7f42c8e6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner_r_b_g.html#affd7011ef4df878a8e95ecf7f42c8e6f">AStar</a> () override</td></tr>
+<tr class="memdesc:affd7011ef4df878a8e95ecf7f42c8e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">AStar algorithm implementation.  <a href="#affd7011ef4df878a8e95ecf7f42c8e6f">More...</a><br /></td></tr>
+<tr class="separator:affd7011ef4df878a8e95ecf7f42c8e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classplanner_1_1c_planner"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classplanner_1_1c_planner')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classplanner_1_1c_planner.html">planner::cPlanner</a></td></tr>
-<tr class="memitem:a341e70531266f023ac9461d18979d1ef inherit pro_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt_result.html">tResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef">AStar</a> ()</td></tr>
-<tr class="memdesc:a341e70531266f023ac9461d18979d1ef inherit pro_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">AStar algorithm implementation.  <a href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef">More...</a><br /></td></tr>
-<tr class="separator:a341e70531266f023ac9461d18979d1ef inherit pro_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e5a745f83f903662eff914d8beddb5e inherit pro_methods_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e">CalculateConsistencyFactor</a> ()</td></tr>
 <tr class="memdesc:a2e5a745f83f903662eff914d8beddb5e inherit pro_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a consistency factor to get a consistent heuristic h(n) &lt;= c(p,n) + h(p)  <a href="classplanner_1_1c_planner.html#a2e5a745f83f903662eff914d8beddb5e">More...</a><br /></td></tr>
 <tr class="separator:a2e5a745f83f903662eff914d8beddb5e inherit pro_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,6 +195,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#ad8d82968444f958f1b7e7acdd9df2e64">PrintTravelResult</a> ()</td></tr>
 <tr class="memdesc:ad8d82968444f958f1b7e7acdd9df2e64 inherit pro_methods_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report travelling time in island seconds, minutes and hours. <br /></td></tr>
 <tr class="separator:ad8d82968444f958f1b7e7acdd9df2e64 inherit pro_methods_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classplanner_1_1c_planner"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classplanner_1_1c_planner')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classplanner_1_1c_planner.html">planner::cPlanner</a></td></tr>
+<tr class="memitem:a7f6dc4cbb69dd1ede14a67b0a7bd425b inherit pub_types_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="a7f6dc4cbb69dd1ede14a67b0a7bd425b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a7f6dc4cbb69dd1ede14a67b0a7bd425b">tHeuristic</a> { <b>MANHATTEN</b>, 
+<b>EUCLIDEAN</b>, 
+<b>OCTILE</b>, 
+<b>CHEBYSHEV</b>
+ }</td></tr>
+<tr class="memdesc:a7f6dc4cbb69dd1ede14a67b0a7bd425b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of heuristics that can be calculated with <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> <br /></td></tr>
+<tr class="separator:a7f6dc4cbb69dd1ede14a67b0a7bd425b inherit pub_types_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classplanner_1_1c_planner"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classplanner_1_1c_planner')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classplanner_1_1c_planner.html">planner::cPlanner</a></td></tr>
 <tr class="memitem:af76b294d4e75b4e5d636bca4a795d2e4 inherit pro_attribs_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="af76b294d4e75b4e5d636bca4a795d2e4"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#af76b294d4e75b4e5d636bca4a795d2e4">m_nMaxGradient</a></td></tr>
@@ -213,7 +217,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 <tr class="separator:ac9f4be1c679321a2f6bc5d1a1102b3c2 inherit pro_attribs_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c212bac80800ef51aacaa63fce32a2a inherit pro_attribs_classplanner_1_1c_planner"><td class="memItemLeft" align="right" valign="top"><a id="a1c212bac80800ef51aacaa63fce32a2a"></a>
 <a class="el" href="structplanner_1_1_priority_queue.html">PriorityQueue</a>&lt; std::shared_ptr&lt; <a class="el" href="structplanner_1_1t_node.html">tNode</a> &gt;, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplanner_1_1c_planner.html#a1c212bac80800ef51aacaa63fce32a2a">m_oFrontier</a></td></tr>
-<tr class="memdesc:a1c212bac80800ef51aacaa63fce32a2a inherit pro_attribs_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority queue data structure, which is the basis of A star. Always deques the node with the best f score first. <br /></td></tr>
+<tr class="memdesc:a1c212bac80800ef51aacaa63fce32a2a inherit pro_attribs_classplanner_1_1c_planner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority queue data structure, which is the basis of A star. Always dequeues the node with the best f score first. <br /></td></tr>
 <tr class="separator:a1c212bac80800ef51aacaa63fce32a2a inherit pro_attribs_classplanner_1_1c_planner"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classplanner_1_1c_planner_interface"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classplanner_1_1c_planner_interface')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classplanner_1_1c_planner_interface.html">planner::cPlannerInterface&lt; 8 &gt;</a></td></tr>
 <tr class="memitem:a78389ea53bd3c9d5c57851a338ee91d8 inherit pro_attribs_classplanner_1_1c_planner_interface"><td class="memItemLeft" align="right" valign="top"><a id="a78389ea53bd3c9d5c57851a338ee91d8"></a>
@@ -264,6 +268,58 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="affd7011ef4df878a8e95ecf7f42c8e6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affd7011ef4df878a8e95ecf7f42c8e6f">&#9670;&nbsp;</a></span>AStar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt_result.html">tResult</a> planner::cPlannerRBG::AStar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>AStar algorithm implementation. </p>
+<p>Initializes start, goal and intermediate nodes (sCurrent and sNext). The frontier m_oFrontier is implemented as a priority queue PriorityQueue&lt;tNode*&gt; and initialized with the start node. All other expanded nodes are store in a std::map oPathCost with their currently best g score value. The algorithm makes use of <a class="el" href="classplanner_1_1c_planner.html#a6b7554394efd7ad10d76a49b370aa62f" title="Goal test to check if the two provided nodes i_sFirst, i_sSecond are equal. ">GoalTest()</a>, <a class="el" href="classplanner_1_1c_planner.html#adbffc6ce05119c940a09369d7e61554e" title="Generate a successor node state given a node i_sParent and action i_sAction. ">Child()</a> to generate successor nodes given an action, Traversable to check for the constraints imposed by the overrides.data file, cost methods <a class="el" href="classplanner_1_1c_planner.html#a16e8c156297fff49a6ba9b97073baffb" title="DEPRECATED Updates the node argument with its path cost  with island seconds as its unit...">UpdateCost()</a> for the step cost, <a class="el" href="classplanner_1_1c_planner.html#ab7cc7c2666de2e49f745901080aac147" title="Updates the heuristic value of the node argument i_sNode. ">UpdateHeuristic()</a> while checking for consistency <a class="el" href="classplanner_1_1c_planner.html#a1234d075676fcaa2c17b859d11b4638c" title="Check if the heuristic of node i_sNode is consistent. ">HeuristicCheck()</a>. In case the goal node is reached, the method <a class="el" href="classplanner_1_1c_planner.html#a8624cb2afb8f2fd216c38b4424013178" title="Reconstructs the best path, considers step size of rover. ">TraversePath()</a> is invoked to move from the goal back to the start node, thereby following the fastest path and setting bit 1 of the overrides map, see <a class="el" href="classplanner_1_1c_graph.html#a6da6e6e269013628aef48245a7787cb9" title="Sets the provided overrides m_poOverrides 8 bit value i_nValue at the provided location while keeping...">planner::cGraph::SetOverrides()</a>. </p><dl class="section return"><dt>Returns</dt><dd>the time it took to find the fastest path in island seconds. </dd></dl>
+<p>Start</p>
+<p>Initialize result struct</p>
+<p>Check if we reached the goal:</p>
+<p>Mark visited nodes</p>
+<p>Check that heuristic never overestimates the true distance: Priority of a new node should never be lower than the priority of its parent. <br />
+ Move from the current node back to the start node</p>
+<p>Define start node</p>
+<p>Create hash of the node using its position</p>
+<p>Get the goal node</p>
+<p>Create current node</p>
+<p>Serves as explored (closed) set and cost to reach a node</p>
+<p>Initialize start node with cost of zero because it does not cost anything to go to it</p>
+<p>Initialize result struct</p>
+<p>Resign if the frontier is empty, which means there are no nodes to expand and the goal has not been found</p>
+<p>Check if the node is already explored and if its path cost got smaller (found a better path to it).</p>
+<p>Check if the heuristic of the node is consistent h(n) &lt;= c(p,n) + h(p).</p>
+<p>Update the evaluation score value and put it on the frontier.</p>
+<p>Mark visited nodes</p>
+<p>Check that heuristic never overestimates the true distance: Priority of a new node should never be lower than the priority of its parent. <br />
+<br />
+ Move from the current node back to the start node</p>
+<p>Free memory </p>
+
+<p>Reimplemented from <a class="el" href="classplanner_1_1c_planner.html#a341e70531266f023ac9461d18979d1ef">planner::cPlanner</a>.</p>
+
+</div>
+</div>
 <a id="a0bbd752702da582a47dbd153c0065eb5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0bbd752702da582a47dbd153c0065eb5">&#9670;&nbsp;</a></span>Plan()</h2>
 
@@ -287,7 +343,7 @@ std::shared_ptr&lt; <a class="el" href="classplanner_1_1c_graph.html">cGraph</a>
 </table>
 </div><div class="memdoc">
 
-<p>Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the AStar() search algorithm. </p>
+<p>Override of the base interface <a class="el" href="classplanner_1_1c_planner_interface.html" title="cPlannerInterface is an abstract interface which can be implemented by concrete planner classes...">cPlannerInterface</a>, which invokes the <a class="el" href="classplanner_1_1c_planner_r_b_g.html#affd7011ef4df878a8e95ecf7f42c8e6f" title="AStar algorithm implementation. ">AStar()</a> search algorithm. </p>
 <dl class="section return"><dt>Returns</dt><dd>the time to travel from start to goal if it was found. Otherwise -1 is returned. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classplanner_1_1c_planner.html#a21230c015260b9fc34ad2f239592470e">planner::cPlanner</a>.</p>
