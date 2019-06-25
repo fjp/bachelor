@@ -69,55 +69,46 @@ namespace visualizer {
             , std::vector<TLocations> i_asLocation
             , int i_nImageDim = IMAGE_DIM
             , int i_nVisualise = ALL
-            , int i_nPenSize = 1)
-    {
+            , int i_nPenSize = 1) {
         std::ofstream of(i_strName, std::ofstream::binary);
         visualizer::writeBMP(
                 of,
                 i_oElevation,
                 i_nImageDim,
                 i_nImageDim,
-                [&] (size_t i_nX, size_t i_nY, uint8_t elevation) {
+                [&](size_t i_nX, size_t i_nY, uint8_t elevation) {
 
                     /// Marks interesting positions on the map (enable using flag)
                     if (i_nVisualise & LOCATIONS) {
-                        for (auto sLocation : i_asLocation)
-                        {
-                            if (visualizer::donut(i_nX, i_nY, sLocation.nX, sLocation.nY))
-                            {
+                        for (auto sLocation : i_asLocation) {
+                            if (visualizer::donut(i_nX, i_nY, sLocation.nX, sLocation.nY)) {
                                 return uint8_t(visualizer::IPV_PATH);
                             }
                         }
                     }
 
                     /// Visualize the found path (enable using flag)
-                    if (i_nVisualise & PATH)
-                    {
-                        if (visualizer::path(i_nX, i_nY, i_oOverrides, i_nImageDim, i_nPenSize))
-                        {
+                    if (i_nVisualise & PATH) {
+                        if (visualizer::path(i_nX, i_nY, i_oOverrides, i_nImageDim, i_nPenSize)) {
                             return uint8_t(visualizer::IPV_PATH);
                         }
                     }
 
                     /// Signifies water
                     if ((i_oOverrides[i_nY * i_nImageDim + i_nX] & (OF_WATER_BASIN | OF_RIVER_MARSH)) ||
-                        elevation == 0)
-                    {
+                        elevation == 0) {
                         return uint8_t(visualizer::IPV_WATER);
                     }
 
                     /// Signifies visited locations (enable using flag)
-                    if (i_nVisualise & VISITED)
-                    {
-                        if (visualizer::visited(i_nX, i_nY, i_oOverrides, i_nImageDim))
-                        {
+                    if (i_nVisualise & VISITED) {
+                        if (visualizer::visited(i_nX, i_nY, i_oOverrides, i_nImageDim)) {
                             return uint8_t(visualizer::IPV_VISITED);
                         }
                     }
 
                     /// Signifies normal ground color
-                    if (elevation < visualizer::IPV_ELEVATION_BEGIN)
-                    {
+                    if (elevation < visualizer::IPV_ELEVATION_BEGIN) {
                         elevation = visualizer::IPV_ELEVATION_BEGIN;
                     }
                     return elevation;
@@ -126,7 +117,7 @@ namespace visualizer {
 #if __APPLE__
         std::string strCommand("open " + i_strName);
         auto res = system(strCommand.c_str());
-        (void)res;
+        (void) res;
 #endif
     };
 
